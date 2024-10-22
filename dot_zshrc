@@ -24,7 +24,6 @@ plugins=(git
 	copybuffer
 	docker
 	docker-compose
-	dotenv
 	eza
 	fancy-ctrl-z
 	git
