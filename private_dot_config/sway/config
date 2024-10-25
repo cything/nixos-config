@@ -51,7 +51,7 @@ bindsym $mod+$alt+p exec pomatez
 bindsym $mod+$alt+y exec $youtube
 bindsym $mod+$alt+m exec $music
 bindsym $mod+$alt+r exec $rss
-bindsym $mod+$alt+e exec kmail
+bindsym $mod+$alt+e exec evolution
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
