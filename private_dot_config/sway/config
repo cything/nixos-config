@@ -180,10 +180,10 @@ input "type:keyboard" {
 exec wl-paste --watch cliphist store
 exec mako > /tmp/mako.log 2>&1
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec swayidle -w \
-	timeout 30 'pgrep swaylock && swaymsg "output * dpms off"' \
-	resume 'swaymsg "output * dpms on"' \
-	before-sleep '$lock -f'
+# exec swayidle -w \
+# 	timeout 30 'pgrep swaylock && swaymsg "output * dpms off"' \
+# 	resume 'swaymsg "output * dpms on"' \
+# 	before-sleep '$lock -f'
 
 
 
@@ -209,7 +209,7 @@ exec swayidle -w \
 
 #exec_always nm-applet --indicator
 exec dbus-update-activation-environment --all
-exec sway-audio-idle-inhibit
+# exec sway-audio-idle-inhibit
 
 include /etc/sway/config.d/*
 

@@ -83,6 +83,5 @@ local plugin_specs = {
 
 require("lazy").setup({
   spec = plugin_specs,
-  checker = { enabled = true },
   rocks = { enabled = true },
 })
