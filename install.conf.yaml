@@ -1,0 +1,21 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+
+- clean: ['~']
+
+- link:
+    ~/.config/tmux:
+    ~/.config/nvim:
+    ~/.config/sway:
+    ~/.config/kitty:
+    ~/.config/aerc:
+    ~/.config/mako:
+    ~/.config/git:
+    ~/.config/waybar:
+    ~/.config/i3status-rust:
+    ~/.zshrc:
+
+- shell:
+  - [git submodule update --init --recursive, installing submodules]
