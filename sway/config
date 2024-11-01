@@ -82,8 +82,9 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-# bindsym --whole-window BTN_EXTRA focus left
-# bindsym --whole-window BTN_SIDE focus right
+# my mouse is an anki remote
+bindsym --whole-window BTN_EXTRA exec wtype " "
+bindsym --whole-window BTN_SIDE exec wtype 1
 
 bindsym $mod+b splith
 bindsym $mod+v splitv
