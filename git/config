@@ -20,6 +20,3 @@
 
 [diff]
   colorMoved = default
-
-[commit]
-  gpgSign = true

@@ -11,10 +11,8 @@ set $screenshot grim -g "$(slurp)" - | wl-copy
 set $browser librewolf
 set $clipboard rofi -show clipboard -show-icons
 set $emoji rofimoji
-set $calc rofi -show calc -no-show-match -no-sort
 set $youtube $HOME/.config/sway/scripts/youtube.sh
 set $music chromium --profile-directory=Default --app-id=cinhimbnkkaeohfgghhklpknlkffjgod
-set $rss chromium --profile-directory=Default --app-id=ghncceofpdlcdigkealkgbemafcmicmh
 
 set $font_family DejaVu Sans Mono
 set $font_size 11
@@ -40,9 +38,8 @@ bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 bindsym Print exec $screenshot
-bindsym $mod+c exec $clipboard
+bindsym $mod+comma exec $clipboard
 bindsym $mod+period exec $emoji
-bindsym $mod+comma exec $calc
 
 bindsym $mod+$alt+b exec $browser
 bindsym $mod+$alt+a exec anki
@@ -50,8 +47,8 @@ bindsym $mod+$alt+f exec dolphin
 bindsym $mod+$alt+p exec pomatez
 bindsym $mod+$alt+y exec $youtube
 bindsym $mod+$alt+m exec $music
-bindsym $mod+$alt+r exec $rss
 bindsym $mod+$alt+e exec evolution
+bindsym $mod+$alt+c exec korganizer
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
