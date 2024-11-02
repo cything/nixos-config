@@ -172,7 +172,7 @@ input "type:touchpad" {
 input "type:keyboard" {
   xkb_layout us
   xkb_options ctrl:nocaps
-  xkb_numlock disabled
+  xkb_numlock enabled
 }
 
 exec wl-paste --watch cliphist store
