@@ -15,7 +15,9 @@
     ~/.config/git:
     ~/.config/waybar:
     ~/.config/i3status-rust:
+    ~/.config/rofi:
     ~/.zshrc:
+    ~/.p10k.zsh:
 
 - shell:
   - [git submodule update --init --recursive, installing submodules]

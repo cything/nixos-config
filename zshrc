@@ -10,8 +10,8 @@ ZSH_DISABLE_COMPFIX=true
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-prewview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-prewview 'ls $realpath'
 
 # bindings
 bindkey -e
@@ -103,10 +103,12 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light z-shell/zsh-eza
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::colored-man-pages
 
 # load completions
 autoload -U compinit && compinit
