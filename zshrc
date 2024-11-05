@@ -36,10 +36,9 @@ alias vim=nvim
 alias t=tmux
 alias se=sudoedit
 alias s=sudo
-alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
-alias cz=chezmoi
 
 export PATH=$PATH:/home/yt/.cargo/bin
+export EDITOR=nvim
 
 source <(fzf --zsh)
 export FZF_BASE=/usr/bin
