@@ -11,8 +11,6 @@ set $screenshot grim -g "$(slurp)" - | wl-copy
 set $browser librewolf
 set $clipboard rofi -show clipboard -show-icons
 set $emoji rofimoji
-set $youtube $HOME/.config/sway/scripts/youtube.sh
-set $music chromium --profile-directory=Default --app-id=cinhimbnkkaeohfgghhklpknlkffjgod
 
 set $font_family DejaVu Sans Mono
 set $font_size 11
@@ -45,8 +43,6 @@ bindsym $mod+$alt+b exec $browser
 bindsym $mod+$alt+a exec anki
 bindsym $mod+$alt+f exec dolphin
 bindsym $mod+$alt+p exec pomatez
-bindsym $mod+$alt+y exec $youtube
-bindsym $mod+$alt+m exec $music
 bindsym $mod+$alt+e exec evolution
 bindsym $mod+$alt+c exec korganizer
 
@@ -123,29 +119,14 @@ bindsym --locked XF86MonBrightnessDown exec brightnessctl set 1%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 1%+
 
 # lockscreen
-# (sleep before entering idle state to let the user lift keys)
-#bindsym --locked $mod+l exec "sleep 1; pkill -USR1 swayidle"
-bindsym $mod+Control+l exec "$lock -f; sleep 1; pkill -USR1 swayidle"
-
-bindsym --inhibited $mod+Escape seat - pointer_constraint escape, seat - shortcuts_inhibitor disable
-
-bindsym $mod+n mode notifications
-mode notifications {
-	bindsym Escape mode default
-	bindsym Return exec makoctl invoke; exec makoctl dismiss; mode default
-	bindsym d exec makoctl dismiss; mode default
-	bindsym Shift+d exec makoctl dismiss -a; mode default
-}
+bindsym $mod+Control+l exec $lock
 
 font pango:$font_family $font_size
-# class                 border bg   text indicator child_border
-#client.focused          $bg    $bg  $fg  $bga      #285577
-#client.focused_inactive $bg    $bg  $fgi $bg       #5f676a
-#client.unfocused        $bg    $bg  $fgu $bg       #222222
 
 for_window [app_id="^menu$"] floating enable, border none
 for_window [app_id=mpv] floating enable, sticky enable
 for_window [class="pomatez"] floating enable, sticky enable
+for_window [class="PacketTracer"] floating enable
 
 bar {
 	status_command i3status-rs
@@ -160,7 +141,6 @@ bar {
 		active_workspace $bg $bg $fg
 		inactive_workspace $bg $bg $fgi
 	}
-	# tray_output none
 }
 
 input "type:touchpad" {
@@ -176,38 +156,9 @@ input "type:keyboard" {
 }
 
 exec wl-paste --watch cliphist store
-exec mako > /tmp/mako.log 2>&1
+exec mako > $HOME/mako.log 2>&1
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-# exec swayidle -w \
-# 	timeout 30 'pgrep swaylock && swaymsg "output * dpms off"' \
-# 	resume 'swaymsg "output * dpms on"' \
-# 	before-sleep '$lock -f'
-
-
-
-
-
-
- # bar {
- #     position top
-
- #     # When the status_command prints a new line to stdout, swaybar updates.
- #     # The default just shows the current date and time.
- #     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
- #     colors {
- #         statusline #ffffff
- #         background #323232
- #         inactive_workspace #32323200 #32323200 #5c5c5c
- #     }
- # }
-#bar swaybar_command waybar
-
-
-
-#exec_always nm-applet --indicator
 exec dbus-update-activation-environment --all
-# exec sway-audio-idle-inhibit
 
 include /etc/sway/config.d/*
 
