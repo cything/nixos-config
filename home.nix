@@ -13,7 +13,9 @@
     pkgs.go
     pkgs.pass
     pkgs.zsh
-    pkgs.anki-bin
+    pkgs.delta
+    pkgs.borgbackup
+    pkgs.rclone
   ];
 
   home.file = {
