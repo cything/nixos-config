@@ -22,7 +22,7 @@
     ".config/sway".source = ./sway;
     ".config/nvim".source = ./nvim;
     ".config/aerc".source = ./aerc;
-    ".config/git".source = ./aerc;
+    ".config/git".source = ./git;
     ".config/i3status-rust".source = ./i3status-rust;
     ".config/kitty".source = ./kitty;
     ".config/mako".source = ./mako;
