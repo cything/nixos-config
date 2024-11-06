@@ -17,6 +17,18 @@
   ];
 
   home.file = {
+    ".zshrc".source = ./zshrc;
+    ".p10k.zsh".source = ./p10k.zsh;
+    ".config/sway".source = ./sway;
+    ".config/nvim".source = ./nvim;
+    ".config/aerc".source = ./aerc;
+    ".config/git".source = ./aerc;
+    ".config/i3status-rust".source = ./i3status-rust;
+    ".config/kitty".source = ./kitty;
+    ".config/mako".source = ./mako;
+    ".config/rofi".source = ./rofi;
+    ".config/tmux".source = ./tmux;
+    ".config/waybar".source = ./waybar;
   };
 
   home.sessionVariables = {
