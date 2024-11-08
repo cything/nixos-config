@@ -25,7 +25,7 @@ output * bg $wallpaper fill
 floating_modifier $mod normal
 default_border pixel
 smart_borders on
-focus_follows_mouse no
+focus_follows_mouse yes
 
 bindsym $mod+Return exec $term
 bindsym $mod+Control+q kill
