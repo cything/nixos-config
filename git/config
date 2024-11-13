@@ -20,5 +20,9 @@
 
 [diff]
   colorMoved = default
+
 [credential]
 	helper = store
+
+[commit]
+  gpgSign = true
