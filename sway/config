@@ -120,10 +120,11 @@ bindsym $mod+Control+l exec $lock
 
 font pango:$font_family $font_size
 
-for_window [app_id="^menu$"] floating enable, border none
-for_window [app_id=mpv] floating enable, sticky enable
+for_window [app_id=mpv] floating enable, sticky enable, inhibit_idle open
 for_window [class="pomatez"] floating enable, sticky enable
 for_window [class="PacketTracer"] floating enable, border normal
+for_window [app_id="LibreWolf" title="^Extension"] floating enable
+for_window [floating] border csd
 
 bar {
 	status_command i3status-rs
@@ -153,9 +154,15 @@ input "type:keyboard" {
 }
 
 exec wl-paste --watch cliphist store
-exec mako > $HOME/mako.log 2>&1
+exec mako >> $HOME/mako.log 2>&1
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec dbus-update-activation-environment --all
+
+exec swayidle -w \
+  timeout 300 'swaylock -f' \
+  timeout 305 'swaymsg "output * power off"' \
+  resume 'swaymsg "output * power on"' \
+  before-sleep 'playerctl pause; swaylock -f'
 
 include /etc/sway/config.d/*
 
