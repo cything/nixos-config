@@ -70,3 +70,5 @@ lspconfig.lua_ls.setup {
     Lua = {}
   }
 }
+
+lspconfig.nixd.setup { capabilities = capabilities }

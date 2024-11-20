@@ -36,6 +36,7 @@ alias vim=nvim
 alias t=tmux
 alias se=sudoedit
 alias s=sudo
+alias nrs="sudo nixos-rebuild switch"
 
 export PATH=$PATH:/home/yt/.cargo/bin
 export EDITOR=nvim
@@ -105,8 +106,6 @@ zinit light Aloxaf/fzf-tab
 zinit light z-shell/zsh-eza
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colored-man-pages
 
 # load completions
