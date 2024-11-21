@@ -106,7 +106,6 @@ zinit light z-shell/zsh-eza
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
-zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colored-man-pages
 
 # load completions
@@ -116,3 +115,5 @@ zinit cdreplay -q
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket

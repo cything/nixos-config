@@ -19,7 +19,7 @@ set $fg #ffffff
 set $fgi #888888
 
 set $wallpaper $HOME/wallpapers/nasamute.png
-set $lock swaylock -i $wallpaper
+set $lock swaylock -f -i $wallpaper
 output * bg $wallpaper fill
 
 floating_modifier $mod normal
@@ -28,7 +28,7 @@ smart_borders on
 focus_follows_mouse yes
 
 bindsym $mod+Return exec $term
-bindsym $mod+Control+q kill
+bindsym $mod+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -42,6 +42,7 @@ bindsym $mod+$alt+f exec dolphin
 bindsym $mod+$alt+p exec pomatez
 bindsym $mod+$alt+e exec evolution
 bindsym $mod+$alt+c exec korganizer
+bindsym $mod+p exec bitwarden-desktop
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -125,20 +126,11 @@ for_window [class="pomatez"] floating enable, sticky enable
 for_window [class="PacketTracer"] floating enable, border normal
 for_window [app_id="LibreWolf" title="^Extension"] floating enable
 for_window [floating] border csd
+for_window [app_id="org.keepassxc.KeePassXC"] floating enable
+for_window [class="Bitwarden"] floating enable
 
 bar {
-	status_command i3status-rs
-	position top
-	font pango:$font_family, FontAwesome $font_size
-	separator_symbol ""
-	colors {
-		statusline $fg
-		background $bg
-		focused_background $bg
-		focused_workspace $bg $bg $fg
-		active_workspace $bg $bg $fg
-		inactive_workspace $bg $bg $fgi
-	}
+	swaybar_command waybar
 }
 
 input "type:touchpad" {
@@ -159,8 +151,8 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec dbus-update-activation-environment --all
 
 exec swayidle -w \
-  timeout 300 'swaylock -f' \
-  timeout 305 'swaymsg "output * power off"' \
+  timeout 300 'swaymsg "output * power off"' \
+  timeout 305 $lock \
   resume 'swaymsg "output * power on"' \
   before-sleep 'playerctl pause; swaylock -f'
 
