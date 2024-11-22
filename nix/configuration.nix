@@ -139,4 +139,24 @@
       startAt = "hourly";
     };
   };
+
+  programs.steam.enable = true;
+
+  services.snapper.configs = {
+    home = {
+      SUBVOLUME = "/home";
+      ALLOW_USERS = [ "yt" ];
+      TIMELINE_CREATE = true;
+      TIMELINE_CLEANUP = true;
+      TIMELINE_LIMIT_HOURLY = 48;
+      TIMELINE_LIMIT_WEEKLY = 52;
+    };
+    root = {
+      SUBVOLUME = "/";
+      TIMELINE_CREATE = true;
+      TIMELINE_CLEANUP = true;
+      TIMELINE_LIMIT_HOURLY = 48;
+      TIMELINE_LIMIT_WEEKLY = 52;
+    };
+  };
 }
