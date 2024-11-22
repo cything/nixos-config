@@ -76,6 +76,7 @@
     bluetuith
     libimobiledevice
     networkmanagerapplet
+    pass-wayland
   ];
 
   system.stateVersion = "24.05";
@@ -83,10 +84,6 @@
   services.gnome.gnome-keyring.enable = true;
   programs.gnupg.agent.enable = true;
 
-  # programs.sway = {
-  #   enable = true;
-  #   wrapperFeatures.gtk = true;
-  # };
   services.displayManager.defaultSession = "hyprland";
   services.displayManager.sddm = {
     enable = true;
@@ -113,5 +110,33 @@
     enable = true;
     # withUWSM = true;
   };
-}
 
+  services.borgbackup.jobs = {
+    ytnixRsync = {
+      paths = [ "/root" "/home" "/var/lib" "/opt" "/etc" ];
+      exclude = [
+        ".git"
+        "**/.cache"
+        "**/node_modules"
+        "**/cache"
+        "**/Cache"
+        "/var/lib/docker"
+        "/home/**/Downloads"
+        "**/.steam"
+        "**/.rustup"
+        "**/.docker"
+      ];
+      repo = "de3911@de3911.rsync.net:borg/yt";
+      encryption = {
+        mode = "repokey-blake2";
+        passCommand = "cat /run/keys/borg_yt";
+      };
+      environment = {
+        BORG_RSH = "ssh -i /home/yt/.ssh/id_ed25519";
+        BORG_REMOTE_PATH = "borg1";
+      };
+      compression = "auto,zstd";
+      startAt = "hourly";
+    };
+  };
+}
