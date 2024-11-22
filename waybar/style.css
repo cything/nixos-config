@@ -1,102 +1,70 @@
-* {
-  border: none;
-  border-radius: 0;
-  font-family: RobotoMono Nerd Font;
-  font-size: 14px;
-  font-weight: 500;
+.module,
+#clock.date,
+#clock.time,
+#workspaces button {
+  background: transparent;
+  padding: 0 10px;
+  font-family: SpaceMono Nerd Font;
+  font-weight: 900;
+  font-size: 13pt;
+  color: #c0caf5;
 }
 
+/* main waybar */
 window#waybar {
-  background-color: #282828;
-  color: #ebdbb2;
-  transition-property: background-color;
-  transition-duration: 0.5s;
-  border-bottom: solid 0px #3c3836;
+  background: rgba(26, 27, 38, 0.75);
+	border: 2px solid #414868;
 }
 
-window#waybar.hidden {
-  opacity: 0.2;
+/* when hovering over modules */
+tooltip {
+  background: #1e1e2e;
+  border-radius: 0;
+}
+
+#workspaces {
+	padding-right: 0;
 }
 
 #workspaces button {
-  padding: 0 5px;
-  color: #ebdbb2;
-  border-radius: 5px;
+  padding: 2px;
 }
 
+#clock {
+	padding-right: 100px;
+}
+
+
+/* Sets active workspace to have a solid line on the bottom */
+#workspaces button.active {
+  border-bottom: 2px solid #7aa2f7;
+  border-radius: 0;
+	margin-top: 2px;
+  transition: none;
+}
+
+/* More workspace stuff for highlighting on hover */
 #workspaces button.focused {
-  background-color: #ebdbb2;
-  color: #282828;
-  border-bottom: none;
+  color: #a6adc8;
 }
 
 #workspaces button.urgent {
-  background-color: #cc241d;
+  color: #f7768e;
 }
 
-widget > * {
-  margin-top: 6px;
-  margin-bottom: 6px;
+#workspaces button:hover {
+  background: #11111b;
+  color: #cdd6f4;
 }
 
-.modules-left > widget > * {
-  margin-left: 12px;
-  margin-right: 12px;
+/* Hide window module when not focused on window or empty workspace */
+window#waybar.empty #window {
+  padding: 0;
+  margin: 0;
+  opacity: 0;
 }
 
-.modules-left > widget:first-child > * {
-  margin-left: 6px;
-}
-
-.modules-left > widget:last-child > * {
-  margin-right: 18px;
-}
-
-.modules-right > widget > * {
-  padding: 0 12px;
-  margin-left: 0;
-  margin-right: 0;
-  color: #282828;
-  background-color: #ebdbb2;
-}
-
-.modules-right > widget:first-child > * {
-  border-radius: 5px 0 0 5px;
-}
-
-.modules-right > widget:last-child > * {
-  border-radius: 0 5px 5px 0;
-  margin-right: 6px;
-}
-
-#mode {
-  background: transparent;
-  color: #fb4934;
-}
-
-@keyframes blink {
-  to {
-    color: #ebdbb2;
-  }
-}
-
-#battery.critical:not(.charging) {
-  animation-name: blink;
-  animation-duration: 1s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-label:focus {
-  background-color: #282828;
-}
-
-tooltip {
-  border-radius: 5px;
-  background: #504945;
-}
-
-tooltip label {
-  color: #ebdbb2;
+/* Set up rounding to make these modules look like separate pills */
+#tray {
+  margin-right: 4px;
 }

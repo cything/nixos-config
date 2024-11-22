@@ -18,7 +18,7 @@ set $bg #000000
 set $fg #ffffff
 set $fgi #888888
 
-set $wallpaper $HOME/wallpapers/nasamute.png
+set $wallpaper $HOME/wallpapers/animegirl.jpg
 set $lock swaylock -f -i $wallpaper
 output * bg $wallpaper fill
 
@@ -28,7 +28,7 @@ smart_borders on
 focus_follows_mouse yes
 
 bindsym $mod+Return exec $term
-bindsym $mod+q kill
+bindsym $mod+Ctrl+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -42,7 +42,7 @@ bindsym $mod+$alt+f exec dolphin
 bindsym $mod+$alt+p exec pomatez
 bindsym $mod+$alt+e exec evolution
 bindsym $mod+$alt+c exec korganizer
-bindsym $mod+p exec bitwarden-desktop
+bindsym $mod+p exec bitwarden
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
