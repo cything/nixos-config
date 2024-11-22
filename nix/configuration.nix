@@ -47,6 +47,8 @@
       zoxide
       eza
       fastfetch
+      discord
+      nwg-look
     ];
   };
 
