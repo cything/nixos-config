@@ -34,6 +34,8 @@ setopt hist_find_no_dups
 alias vi=nvim
 alias vim=nvim
 alias t=tmux
+alias tl="tmux list-sessions"
+alias ta="tmux attach-session -t"
 alias se=sudoedit
 alias s=sudo
 alias nrs="sudo nixos-rebuild switch"
