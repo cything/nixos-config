@@ -1,5 +1,5 @@
 configuration {
-    modes: "drun,run,calc,clipboard:/home/yt/.config/rofi/scripts/cliphist.sh";
+    modes: "drun,run,clipboard:/home/yt/.config/rofi/scripts/cliphist.sh";
     font: "hack 12";
 /*	location: 0;*/
 /*	yoffset: 0;*/

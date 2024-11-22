@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 focused_workspace=$(swaymsg -t get_workspaces | jq '.[] | select(.focused == true) | .num')
 
