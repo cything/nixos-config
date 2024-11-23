@@ -11,12 +11,12 @@
 
   networking.hostName = "ytnix";
   networking.networkmanager.enable = true;
-  # disable 2.4 GHz cause i have a shitty wireless card
-  # that interferes with bluetooth otherwise
   networking.wireless.iwd = {
     enable = true;
     settings = {
       Rank = {
+        # disable 2.4 GHz cause i have a shitty wireless card
+        # that interferes with bluetooth otherwise
         BandModifier2_4GHz = 0.0;
       };
     };
@@ -49,6 +49,8 @@
       fastfetch
       discord
       nwg-look
+      element-desktop-wayland
+      kdePackages.gwenview
     ];
   };
 
@@ -79,6 +81,8 @@
     libimobiledevice
     networkmanagerapplet
     pass-wayland
+    htop
+    file
   ];
 
   system.stateVersion = "24.05";
@@ -93,7 +97,7 @@
   };
   programs.waybar.enable = true;
   programs.zsh.enable = true;
-  security.sudo.wheelNeedsPassword = false;
+  # security.sudo.wheelNeedsPassword = false;
 
   fonts.packages = with pkgs; [
     nerdfonts
@@ -127,6 +131,7 @@
         "**/.steam"
         "**/.rustup"
         "**/.docker"
+        "**/.snapshots"
       ];
       repo = "de3911@de3911.rsync.net:borg/yt";
       encryption = {
@@ -141,24 +146,22 @@
       startAt = "hourly";
     };
   };
+  services.btrbk.instances.local.settings = {
+    snapshot_preserve = "14d 52w";
+    snapshot_preserve_min = "2d";
+    volume."/" = {
+      target = "/snapshots";
+      subvolume = {
+        home = {};
+        "/" = {};
+      };
+    };
+  };
 
   programs.steam.enable = true;
 
-  services.snapper.configs = {
-    home = {
-      SUBVOLUME = "/home";
-      ALLOW_USERS = [ "yt" ];
-      TIMELINE_CREATE = true;
-      TIMELINE_CLEANUP = true;
-      TIMELINE_LIMIT_HOURLY = 48;
-      TIMELINE_LIMIT_WEEKLY = 52;
-    };
-    root = {
-      SUBVOLUME = "/";
-      TIMELINE_CREATE = true;
-      TIMELINE_CLEANUP = true;
-      TIMELINE_LIMIT_HOURLY = 48;
-      TIMELINE_LIMIT_WEEKLY = 52;
-    };
+  services.logind = {
+    lidSwitch = "hibernate";
+    suspendKey = "hibernate";
   };
 }
