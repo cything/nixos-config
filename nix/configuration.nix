@@ -33,7 +33,7 @@
 
   users.users.yt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "libvirtd" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
@@ -87,6 +87,11 @@
     pass-wayland
     htop
     file
+    dnsutils
+    age
+    compsize
+    wgnord
+    wireguard-tools
   ];
 
   system.stateVersion = "24.05";
@@ -135,23 +140,23 @@
         "**/.steam"
         "**/.rustup"
         "**/.docker"
-        "**/.snapshots"
+        "**/borg"
       ];
       repo = "de3911@de3911.rsync.net:borg/yt";
       encryption = {
         mode = "repokey-blake2";
-        passCommand = "cat /run/keys/borg_yt";
+        passCommand = "cat /root/keys/borg_yt";
       };
       environment = {
         BORG_RSH = "ssh -i /home/yt/.ssh/id_ed25519";
         BORG_REMOTE_PATH = "borg1";
       };
       compression = "auto,zstd";
-      startAt = "hourly";
+      startAt = "daily";
     };
   };
   services.btrbk.instances.local.settings = {
-    snapshot_preserve = "14d 52w";
+    snapshot_preserve = "14d";
     snapshot_preserve_min = "2d";
     volume."/" = {
       target = "/snapshots";
@@ -188,4 +193,10 @@
   services.gvfs.enable = true;
   # thumbnails in thunar
   services.tumbler.enable =true;
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+  networking.wg-quick.interfaces.wgnord.configFile = "/etc/wireguard/wgnord.conf";
+  services.resolved.enable = true;
 }
