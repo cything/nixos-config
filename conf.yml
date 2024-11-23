@@ -17,6 +17,7 @@
     ~/.config/i3status-rust:
     ~/.config/rofi:
     ~/.config/hypr:
+    ~/.config/nixpkgs:
     ~/.zshrc:
     ~/.p10k.zsh:
 
