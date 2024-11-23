@@ -51,6 +51,11 @@
       nwg-look
       element-desktop-wayland
       kdePackages.gwenview
+      kdePackages.okular
+      kdePackages.qtwayland
+      mpv
+      yt-dlp
+      anki-bin
     ];
   };
 
@@ -76,7 +81,6 @@
     alsa-utils
     nixd
     veracrypt
-    kdePackages.dolphin
     bluetuith
     libimobiledevice
     networkmanagerapplet
@@ -164,4 +168,24 @@
     lidSwitch = "hibernate";
     suspendKey = "hibernate";
   };
+
+  xdg.mime.defaultApplications = {
+    "application/pdf" = "okular.desktop";
+    "image/*" = "gwenview.desktop";
+    "*/html" = "librewolf.desktop";
+  };
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  # preference changes don't work in thunar without this
+  programs.xfconf.enable = true;
+  # mount, trash and stuff in thunar
+  services.gvfs.enable = true;
+  # thumbnails in thunar
+  services.tumbler.enable =true;
 }

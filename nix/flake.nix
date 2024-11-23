@@ -1,8 +1,8 @@
 {
-  description = "A very basic flake";
+  description = "cy's flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
   };
 
   outputs = { self, nixpkgs }:
