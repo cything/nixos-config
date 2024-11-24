@@ -10,7 +10,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "ytnix";
-  networking.networkmanager.enable = true;
   networking.wireless.iwd = {
     enable = true;
     settings = {
@@ -21,7 +20,10 @@
       };
     };
   };
-  networking.networkmanager.wifi.backend = "iwd";
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
+  };
   time.timeZone = "America/Toronto";
 
   services.pipewire = {
@@ -56,6 +58,9 @@
       mpv
       yt-dlp
       anki-bin
+      signal-desktop
+      cosign
+      azure-cli
     ];
   };
 
@@ -92,6 +97,7 @@
     compsize
     wgnord
     wireguard-tools
+    traceroute
   ];
 
   system.stateVersion = "24.05";
@@ -153,6 +159,9 @@
       };
       compression = "auto,zstd";
       startAt = "daily";
+      extraCreateArgs = [ "--stats" ];
+      # warnings are often not that serious
+      failOnWarnings = false;
     };
   };
   services.btrbk.instances.local.settings = {
@@ -171,7 +180,8 @@
 
   services.logind = {
     lidSwitch = "hibernate";
-    suspendKey = "hibernate";
+    suspendKey = "ignore";
+    powerKey = "hibernate";
   };
 
   xdg.mime.defaultApplications = {
@@ -199,4 +209,15 @@
 
   networking.wg-quick.interfaces.wgnord.configFile = "/etc/wireguard/wgnord.conf";
   services.resolved.enable = true;
+
+  services.https-dns-proxy = {
+    enable = true;
+    provider = {
+      url = "https://dns.cy7.sh/dns-query/yt-linux";
+      kind = "custom";
+      ips = [ "1.1.1.1" "8.8.8.8" ];
+    };
+    # doesn't work otherwise :(
+    preferIPv4 = true;
+  };
 }
