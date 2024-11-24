@@ -6,6 +6,11 @@
       ./hardware-configuration.nix
     ];
 
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
+  sops.secrets."borg/yt" = { };
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -98,6 +103,7 @@
     wgnord
     wireguard-tools
     traceroute
+    sops
   ];
 
   system.stateVersion = "24.05";
@@ -151,7 +157,7 @@
       repo = "de3911@de3911.rsync.net:borg/yt";
       encryption = {
         mode = "repokey-blake2";
-        passCommand = "cat /root/keys/borg_yt";
+        passCommand = "cat /run/keys/borg_yt";
       };
       environment = {
         BORG_RSH = "ssh -i /home/yt/.ssh/id_ed25519";
