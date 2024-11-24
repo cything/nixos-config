@@ -15,6 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "ytnix";
+  networking.nftables.enable = true;
   networking.wireless.iwd = {
     enable = true;
     settings = {
@@ -157,7 +158,7 @@
       repo = "de3911@de3911.rsync.net:borg/yt";
       encryption = {
         mode = "repokey-blake2";
-        passCommand = "cat /run/keys/borg_yt";
+        passCommand = "cat /run/secrets/borg/yt";
       };
       environment = {
         BORG_RSH = "ssh -i /home/yt/.ssh/id_ed25519";
