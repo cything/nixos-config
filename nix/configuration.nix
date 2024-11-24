@@ -9,7 +9,11 @@
   sops.defaultSopsFile = ./secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
-  sops.secrets."borg/yt" = { };
+  sops.secrets = {
+    "borg/yt" = { };
+    "restic/azure-yt" = { };
+    "azure" = { };
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -32,9 +36,23 @@
   };
   time.timeZone = "America/Toronto";
 
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+  };
+  services.pipewire.wireplumber.extraConfig.bluetoothEnhancements = {
+    "wireplumber.settings" = {
+      "bluetooth.autoswitch-to-headset-profile" = false;
+    };
+    "monitor.bluez.properties" = {
+      "bluez5.enable-sbc-xq" = true;
+      "bluez5.enable-msbc" = true;
+      "bluez5.enable-hw-volume" = true;
+      "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+    };
   };
 
   services.libinput.enable = true;
@@ -67,6 +85,7 @@
       signal-desktop
       cosign
       azure-cli
+      pavucontrol
     ];
   };
 
@@ -105,6 +124,7 @@
     wireguard-tools
     traceroute
     sops
+    restic
   ];
 
   system.stateVersion = "24.05";
@@ -139,38 +159,69 @@
     # withUWSM = true;
   };
 
-  services.borgbackup.jobs = {
-    ytnixRsync = {
-      paths = [ "/root" "/home" "/var/lib" "/opt" "/etc" ];
-      exclude = [
-        ".git"
-        "**/.cache"
-        "**/node_modules"
-        "**/cache"
-        "**/Cache"
-        "/var/lib/docker"
-        "/home/**/Downloads"
-        "**/.steam"
-        "**/.rustup"
-        "**/.docker"
-        "**/borg"
-      ];
-      repo = "de3911@de3911.rsync.net:borg/yt";
-      encryption = {
-        mode = "repokey-blake2";
-        passCommand = "cat /run/secrets/borg/yt";
+  services.borgbackup.jobs.ytnixRsync = {
+    paths = [ "/root" "/home" "/var/lib" "/opt" "/etc" ];
+    exclude = [
+      ".git"
+      "**/.cache"
+      "**/node_modules"
+      "**/cache"
+      "**/Cache"
+      "/var/lib/docker"
+      "/home/**/Downloads"
+      "**/.steam"
+      "**/.rustup"
+      "**/.docker"
+      "**/borg"
+    ];
+    repo = "de3911@de3911.rsync.net:borg/yt";
+    encryption = {
+      mode = "repokey-blake2";
+      passCommand = "cat /run/secrets/borg/yt";
+    };
+    environment = {
+      BORG_RSH = "ssh -i /home/yt/.ssh/id_ed25519";
+      BORG_REMOTE_PATH = "borg1";
+    };
+    compression = "auto,zstd";
+    startAt = "daily";
+    extraCreateArgs = [ "--stats" ];
+    # warnings are often not that serious
+    failOnWarnings = false;
+  };
+  
+  services.restic.backups.ytazure = {
+    paths = [ "/root" "/home" "/var/lib" "/opt" "/etc" ];
+    exclude = [
+      ".git"
+      "**/.cache"
+      "**/node_modules"
+      "**/cache"
+      "**/Cache"
+      "/var/lib/docker"
+      "/home/**/Downloads"
+      "**/.steam"
+      "**/.rustup"
+      "**/.docker"
+      "**/borg"
+    ];
+    passwordFile = "/run/secrets/restic/azure-yt";
+    environmentFile = "/run/secrets/azure";
+    repository = "azure:yt-backup:/";
+    extraOptions = [
+      "azure.access-tier=Archive"
+    ];
+    package = pkgs.restic.overrideAttrs {
+      src = pkgs.fetchFromGitHub {
+        owner = "restic";
+        repo = "restic";
+        rev = "1133498ef80762608f959df41d303f7246fff04f";
+        hash = "sha256-RmCEZ5T99uNNDwrQ3CofXBf4UzNjelVzyZyvx5aZO0A=";
       };
-      environment = {
-        BORG_RSH = "ssh -i /home/yt/.ssh/id_ed25519";
-        BORG_REMOTE_PATH = "borg1";
-      };
-      compression = "auto,zstd";
-      startAt = "daily";
-      extraCreateArgs = [ "--stats" ];
-      # warnings are often not that serious
-      failOnWarnings = false;
+      vendorHash = "sha256-TstuI6KgAFEQH90PCZMN6s4dUab2GyPKqOtqMfIV8wA=";
     };
   };
+
   services.btrbk.instances.local.settings = {
     snapshot_preserve = "14d";
     snapshot_preserve_min = "2d";
@@ -214,9 +265,8 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  networking.wg-quick.interfaces.wgnord.configFile = "/etc/wireguard/wgnord.conf";
+  # https-dns-proxy doesn't work without this :(
   services.resolved.enable = true;
-
   services.https-dns-proxy = {
     enable = true;
     provider = {
