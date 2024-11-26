@@ -74,7 +74,7 @@
 
   users.users.yt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" ];
+    extraGroups = [ "wheel" "libvirtd" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
@@ -289,7 +289,10 @@
   # thumbnails in thunar
   services.tumbler.enable =true;
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    docker.enable = true;
+  };
   programs.virt-manager.enable = true;
 
   services.dnscrypt-proxy2 = {
