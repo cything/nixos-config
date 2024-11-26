@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -15,8 +15,14 @@
     "azure" = { };
   };
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    cleanTmpDir = true;
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 
   networking = {
     hostName = "ytnix";
@@ -300,5 +306,14 @@
         minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
       };
     };
+  };
+
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+
+  nix.gc = {
+    automatic = true;
+    dates = "19:00";
+    persistent = true;
+    options = "--delete-older-than 60d";
   };
 }

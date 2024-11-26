@@ -9,12 +9,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, sops-nix }:
+  outputs = { self, nixpkgs, sops-nix, ... }@inputs:
   let
     lib = nixpkgs.lib;
   in {
     nixosConfigurations = {
       ytnix = lib.nixosSystem {
+        specialArgs = { inherit inputs; };
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
