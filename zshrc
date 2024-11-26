@@ -38,7 +38,8 @@ alias tl="tmux list-sessions"
 alias ta="tmux new-session -A -s"
 alias se=sudoedit
 alias s=sudo
-alias nrs="sudo nixos-rebuild switch"
+alias nrs="sudo nixos-rebuild switch --flake ."
+alias nrt="sudo nixos-rebuild test --flake ."
 
 export PATH=$PATH:/home/yt/.cargo/bin
 export EDITOR=nvim
