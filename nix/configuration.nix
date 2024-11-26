@@ -96,7 +96,6 @@
       kdePackages.qtwayland
       mpv
       yt-dlp
-      anki-bin
       signal-desktop
       cosign
       azure-cli
@@ -110,6 +109,13 @@
       rofimoji
       cliphist
       jq
+      bash-language-server
+      (anki-bin.overrideAttrs {
+        src = pkgs.fetchurl {
+          url = "https://github.com/ankitects/anki/releases/download/24.11rc2/anki-24.11-linux-qt6.tar.zst";
+          hash = "sha256-JXn4oxhRODHh6b5hFFj393xMRlaJRVcbMJ5AyXr+jq8=";
+        };
+      })
     ];
   };
 
@@ -320,4 +326,6 @@
   };
 
   services.usbmuxd.enable = true;
+
+  programs.nix-ld.enable = true;
 }
