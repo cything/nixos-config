@@ -18,22 +18,31 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "ytnix";
-  networking.nftables.enable = true;
-  networking.wireless.iwd = {
-    enable = true;
-    settings = {
-      Rank = {
-        # disable 2.4 GHz cause i have a shitty wireless card
-        # that interferes with bluetooth otherwise
-        BandModifier2_4GHz = 0.0;
+  networking = {
+    hostName = "ytnix";
+    # nftables.enable = true;
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        Rank = {
+          # disable 2.4 GHz cause i have a shitty wireless card
+          # that interferes with bluetooth otherwise
+          BandModifier2_4GHz = 0.0;
+        };
       };
     };
+    networkmanager = {
+      enable = true;
+      dns = "none";
+      wifi.backend = "iwd";
+    };
+    nameservers = [ "127.0.0.1" "::1" ];
+    resolvconf.enable = true;
+    firewall = {
+      trustedInterfaces = [ "wgnord" ];
+    };
   };
-  networking.networkmanager = {
-    enable = true;
-    wifi.backend = "iwd";
-  };
+  programs.nm-applet.enable = true;
   time.timeZone = "America/Toronto";
 
   security.rtkit.enable = true;
@@ -42,16 +51,16 @@
     pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-  };
-  services.pipewire.wireplumber.extraConfig.bluetoothEnhancements = {
-    "wireplumber.settings" = {
-      "bluetooth.autoswitch-to-headset-profile" = false;
-    };
-    "monitor.bluez.properties" = {
-      "bluez5.enable-sbc-xq" = true;
-      "bluez5.enable-msbc" = true;
-      "bluez5.enable-hw-volume" = true;
-      "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+    wireplumber.extraConfig.bluetoothEnhancements = {
+      "wireplumber.settings" = {
+        "bluetooth.autoswitch-to-headset-profile" = false;
+      };
+      "monitor.bluez.properties" = {
+        "bluez5.enable-sbc-xq" = true;
+        "bluez5.enable-msbc" = true;
+        "bluez5.enable-hw-volume" = true;
+        "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+      };
     };
   };
 
@@ -86,6 +95,9 @@
       cosign
       azure-cli
       pavucontrol
+      btop
+      stockfish
+      cutechess
     ];
   };
 
@@ -113,7 +125,6 @@
     veracrypt
     bluetuith
     libimobiledevice
-    networkmanagerapplet
     pass-wayland
     htop
     file
@@ -125,7 +136,10 @@
     traceroute
     sops
     restic
+    nyx
   ];
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   system.stateVersion = "24.05";
 
@@ -144,7 +158,13 @@
   fonts.packages = with pkgs; [
     nerdfonts
   ];
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    chromium = {
+      enableWideVine = true;
+      commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland --force-dark-mode --enable-features=WebUIDarkMode";
+    };
+  };
 
   hardware.bluetooth = {
     enable = true;
@@ -160,7 +180,7 @@
   };
 
   services.borgbackup.jobs.ytnixRsync = {
-    paths = [ "/root" "/home" "/var/lib" "/opt" "/etc" ];
+    paths = [ "/root" "/home" "/var/lib" "/var/log" "/opt" "/etc" ];
     exclude = [
       ".git"
       "**/.cache"
@@ -191,7 +211,7 @@
   };
   
   services.restic.backups.ytazure = {
-    paths = [ "/root" "/home" "/var/lib" "/opt" "/etc" ];
+    paths = [ "/root" "/home" "/var/lib" "/var/log" "/opt" "/etc" ];
     exclude = [
       ".git"
       "**/.cache"
@@ -222,13 +242,14 @@
     };
   };
 
-  services.btrbk.instances.local.settings = {
-    snapshot_preserve = "14d";
-    snapshot_preserve_min = "2d";
-    volume."/" = {
-      target = "/snapshots";
+  services.btrbk.instances.local = {
+    onCalendar = "hourly";
+    settings = {
+      snapshot_preserve = "8w 12m";
+      snapshot_preserve_min = "2d";
+      snapshot_dir = "/snapshots";
       subvolume = {
-        home = {};
+        "/home" = {};
         "/" = {};
       };
     };
@@ -265,16 +286,19 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  # https-dns-proxy doesn't work without this :(
-  services.resolved.enable = true;
-  services.https-dns-proxy = {
+  services.dnscrypt-proxy2 = {
     enable = true;
-    provider = {
-      url = "https://dns.cy7.sh/dns-query/yt-linux";
-      kind = "custom";
-      ips = [ "1.1.1.1" "8.8.8.8" ];
+    settings = {
+      ipv6_servers = true;
+      require_dnssec = true;
+      sources.public-resolvers = {
+        urls = [
+          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
+          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
+        ];
+        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
+        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
+      };
     };
-    # doesn't work otherwise :(
-    preferIPv4 = true;
   };
 }
