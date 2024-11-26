@@ -104,6 +104,12 @@
       btop
       stockfish
       cutechess
+	    grim
+	    slurp
+      rofi-wayland
+      rofimoji
+      cliphist
+      jq
     ];
   };
 
@@ -114,17 +120,11 @@
     neovim
 	  git
 	  python3
-	  grim
-	  slurp
 	  wl-clipboard
 	  mako
     tree
     kitty
-    rofi-wayland
-    rofimoji
-    cliphist
     borgbackup
-    jq
     brightnessctl
     alsa-utils
     nixd
@@ -142,7 +142,6 @@
     traceroute
     sops
     restic
-    nyx
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -319,4 +318,6 @@
     persistent = true;
     options = "--delete-older-than 60d";
   };
+
+  services.usbmuxd.enable = true;
 }
