@@ -339,12 +339,4 @@
   services.usbmuxd.enable = true;
 
   programs.nix-ld.enable = true;
-
-  systemd.services.fix-crappy-bluetooth = {
-    wantedBy = [ "post-resume.target" ];
-    after = [ "post-resume.target" ];
-    script = builtins.readFile ./scripts/hack.usb.reset;
-    scriptArgs = "0bda:c831";
-    serviceConfig.Type = "oneshot";
-  };
 }
