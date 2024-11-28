@@ -22,6 +22,9 @@
     };
     cleanTmpDir = true;
     kernelPackages = pkgs.linuxPackages_latest;
+    extraModulePackages = with config.boot.kernelPackages; [
+      rtl8821ce
+    ];
   };
 
   networking = {
@@ -110,6 +113,13 @@
       cliphist
       jq
       bash-language-server
+      duckdb
+      sqlite
+      usbutils
+      llvmPackages_19.clang-tools
+      ghc
+      hyprpaper
+
       (anki-bin.overrideAttrs {
         src = pkgs.fetchurl {
           url = "https://github.com/ankitects/anki/releases/download/24.11rc2/anki-24.11-linux-qt6.tar.zst";
@@ -177,6 +187,7 @@
     };
   };
 
+  hardware.enableAllFirmware = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -328,4 +339,12 @@
   services.usbmuxd.enable = true;
 
   programs.nix-ld.enable = true;
+
+  systemd.services.fix-crappy-bluetooth = {
+    wantedBy = [ "post-resume.target" ];
+    after = [ "post-resume.target" ];
+    script = builtins.readFile ./scripts/hack.usb.reset;
+    scriptArgs = "0bda:c831";
+    serviceConfig.Type = "oneshot";
+  };
 }
