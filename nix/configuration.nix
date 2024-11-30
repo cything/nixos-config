@@ -20,7 +20,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce

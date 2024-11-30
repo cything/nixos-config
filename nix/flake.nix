@@ -16,7 +16,6 @@
     nixosConfigurations = {
       ytnix = lib.nixosSystem {
         specialArgs = { inherit inputs; };
-        system = "x86_64-linux";
         modules = [
           ./configuration.nix
           sops-nix.nixosModules.sops
