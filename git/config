@@ -23,6 +23,3 @@
 
 [credential]
 	helper = store
-
-[commit]
-  gpgSign = true
