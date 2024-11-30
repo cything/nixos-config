@@ -73,3 +73,10 @@ end
 
 keymap.set("i", "<C-A>", "<HOME>")
 keymap.set("i", "<C-E>", "<END>")
+
+-- copilot
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
