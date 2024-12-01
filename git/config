@@ -2,8 +2,8 @@
 	defaultBranch = main
 
 [user]
-	email = cy@cy7.sh
-	name = Cy Pokhrel
+	email = cy@cything.io
+	name = cy
 	signingkey = 1200FBE36C2ADE2E
 
 [core]
