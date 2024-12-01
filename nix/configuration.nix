@@ -122,6 +122,8 @@
       hyprpaper
       zola
       calibre
+      tor-browser
+      wtype
 
       (pkgs.callPackage ./anki.nix {})
     ];
