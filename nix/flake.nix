@@ -7,9 +7,13 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, sops-nix, ... }@inputs:
+  outputs = { self, nixpkgs, sops-nix, home-manager, ... }@inputs:
   let
     lib = nixpkgs.lib;
   in {
@@ -19,6 +23,13 @@
         modules = [
           ./configuration.nix
           sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.yt = import ./home.nix;
+            };
+          }
         ];
       };
     };

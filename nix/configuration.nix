@@ -13,6 +13,7 @@
     "borg/yt" = { };
     "restic/azure-yt" = { };
     "azure" = { };
+    "ntfy" = { };
   };
 
   boot = {
@@ -119,13 +120,10 @@
       llvmPackages_19.clang-tools
       ghc
       hyprpaper
+      zola
+      calibre
 
-      (anki-bin.overrideAttrs {
-        src = pkgs.fetchurl {
-          url = "https://github.com/ankitects/anki/releases/download/24.11rc2/anki-24.11-linux-qt6.tar.zst";
-          hash = "sha256-JXn4oxhRODHh6b5hFFj393xMRlaJRVcbMJ5AyXr+jq8=";
-        };
-      })
+      (pkgs.callPackage ./anki.nix {})
     ];
   };
 
@@ -177,7 +175,7 @@
   # security.sudo.wheelNeedsPassword = false;
 
   fonts.packages = with pkgs; [
-    nerdfonts
+    nerd-fonts.roboto-mono
   ];
   nixpkgs.config = {
     allowUnfree = true;
@@ -230,6 +228,11 @@
     extraCreateArgs = [ "--stats" ];
     # warnings are often not that serious
     failOnWarnings = false;
+    postHook = ''
+        ${pkgs.curl}/bin/curl -u $(cat /run/secrets/ntfy) -d "ytnixRsync: backup completed with exit code: $exitStatus
+        $(journalctl -u borgbackup-job-ytnixRsync.service|tail -n 5)" \
+        https://ntfy.cything.io/chunk
+      '';
   };
   
   services.restic.backups.ytazure = {
@@ -262,6 +265,11 @@
       };
       vendorHash = "sha256-TstuI6KgAFEQH90PCZMN6s4dUab2GyPKqOtqMfIV8wA=";
     };
+    backupCleanupCommand = ''
+      ${pkgs.curl}/bin/curl -u $(cat /run/secrets/ntfy) -d "ytazure: backup completed with exit code: $exitStatus
+      $(journalctl -u restic-backups-ytazure.service|tail -n 5)" \
+      https://ntfy.cything.io/chunk
+    '';
   };
 
   services.btrbk.instances.local = {
@@ -337,6 +345,14 @@
   };
 
   services.usbmuxd.enable = true;
-
   programs.nix-ld.enable = true;
+  programs.evolution.enable = true;
+
+  # this is true by default and mutually exclusive with
+  # programs.nix-index
+  programs.command-not-found.enable = false;
+  programs.nix-index = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }
