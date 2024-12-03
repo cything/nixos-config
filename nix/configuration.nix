@@ -124,6 +124,19 @@
       calibre
       tor-browser
       wtype
+      bat
+      yarn
+      rclone
+      go
+      rustc
+      cargo
+      clang_19
+      rust-analyzer
+      clippy
+      pwgen
+      lua-language-server
+      gnumake
+      foot
 
       (pkgs.callPackage ./anki.nix {})
     ];
