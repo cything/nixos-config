@@ -18,6 +18,7 @@
     ~/.config/rofi:
     ~/.config/hypr:
     ~/.config/nixpkgs:
+    ~/.config/foot:
     ~/.zshrc:
     ~/.p10k.zsh:
 
