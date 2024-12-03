@@ -1,36 +1,53 @@
 local cmp = require("cmp")
+local luasnip = require("luasnip");
 
 cmp.setup {
   snippet = {
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
-  mapping = cmp.mapping.preset.insert {
-    ["<Tab>"] = function(fallback)
+  mapping =  {
+    ["<C-e"] = cmp.mapping.abort(),
+
+    ["<C-k>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            if luasnip.expandable() then
+                luasnip.expand()
+            else
+                cmp.confirm({
+                    select = true,
+                })
+            end
+        else
+            fallback()
+        end
+    end),
+
+    ["<C-n>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
       else
         fallback()
       end
-    end,
-    ["<S-Tab"] = function(fallback)
+    end, { "i", "s" }),
+
+    ["<C-p>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
+      elseif luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
-    end,
-    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-d>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({ select = false }),
+    end, { "i", "s" }),
   },
-  sources = cmp.config.sources {
+  sources = cmp.config.sources ({
     { name = "nvim_lsp" },
-    { name = "ultisnips" },
+    { name = "luasnip" },
+  }, {
     { name = "buffer" },
-    { name = "path" },
-  }
+  })
 }

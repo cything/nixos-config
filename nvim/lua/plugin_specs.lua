@@ -41,16 +41,18 @@ local plugin_specs = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-omni",
       "hrsh7th/cmp-cmdline",
-      "quangnguyen30192/cmp-nvim-ultisnips",
+      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       require("config.nvim-cmp")
     end,
   },
 
-  { "SirVer/ultisnips", dependencies = {
-    "honza/vim-snippets",
-  }, event = "InsertEnter" },
+  {
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
+    build = "make install_jsregexp",
+  },
 
   { "stevearc/dressing.nvim", event = "VeryLazy" },
 
