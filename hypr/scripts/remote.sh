@@ -2,15 +2,19 @@
 
 active_window=$(hyprctl activewindow -j | jq -r ".class")
 
-if [ "$active_window" = "anki" ]; then
-  if [ "$1" = "space" ]; then
+if [ "$1" = "space" ]; then
+  if [ "$active_window" = "anki" ]; then
     wtype " "
+  elif [ "$active_window" = "foot" ]; then
+    wtype -M ctrl -M shift -k c
   else
-    wtype "1"
+    wtype -M ctrl -k c
   fi
 else
-  if [ "$1" = "space" ]; then
-    wtype -M ctrl -k c
+  if [ "$active_window" = "anki" ]; then
+    wtype "1"
+  elif [ "$active_window" = "foot" ]; then
+    wtype -M ctrl -M shift -k v
   else
     wtype -M ctrl -k v
   fi
