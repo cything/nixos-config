@@ -137,8 +137,12 @@
       lua-language-server
       gnumake
       foot
+      minisign
+      unzip
+      obsidian
+      lm_sensors
 
-      (pkgs.callPackage ./anki.nix {})
+      (callPackage ./anki-bin.nix {})
     ];
   };
 
