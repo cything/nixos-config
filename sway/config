@@ -10,7 +10,7 @@ set $menu rofi -show drun | xargs swaymsg exec --
 set $screenshot grim -g "$(slurp)" - | wl-copy
 set $browser librewolf
 set $clipboard rofi -show clipboard -show-icons
-set $emoji rofimoji
+set $emoji rofi -show emoji
 
 set $font_family DejaVu Sans Mono
 set $font_size 11
@@ -18,7 +18,7 @@ set $bg #000000
 set $fg #ffffff
 set $fgi #888888
 
-set $wallpaper $HOME/wallpapers/animegirl.jpg
+set $wallpaper $HOME/wallpapers/purple.jpeg
 set $lock swaylock -f -i $wallpaper
 output * bg $wallpaper fill
 
@@ -76,9 +76,9 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-# my mouse is an anki remote
-bindsym --whole-window BTN_EXTRA exec wtype " "
-bindsym --whole-window BTN_SIDE exec wtype 1
+# mouse side buttons
+bindsym --whole-window BTN_EXTRA exec ~/.config/sway/scripts/remote.sh btn1
+bindsym --whole-window BTN_SIDE exec ~/.config/sway/scripts/remote.sh
 
 bindsym $mod+b splith
 bindsym $mod+v splitv

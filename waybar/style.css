@@ -12,7 +12,7 @@
 
 /* main waybar */
 window#waybar {
-  background: rgba(26, 27, 38, 0.75);
+  background: rgba(26, 27, 38, 1);
 	border: 2px solid #414868;
 }
 
@@ -36,7 +36,7 @@ tooltip {
 
 
 /* Sets active workspace to have a solid line on the bottom */
-#workspaces button.active {
+#workspaces button.focused {
   border-bottom: 2px solid #7aa2f7;
   border-radius: 0;
 	margin-top: 0px;

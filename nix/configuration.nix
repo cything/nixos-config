@@ -119,7 +119,6 @@
       usbutils
       llvmPackages_19.clang-tools
       ghc
-      hyprpaper
       zola
       calibre
       tor-browser
@@ -184,7 +183,7 @@
   services.gnome.gnome-keyring.enable = true;
   programs.gnupg.agent.enable = true;
 
-  services.displayManager.defaultSession = "hyprland";
+  services.displayManager.defaultSession = "sway";
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -213,10 +212,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  programs.hyprland = {
-    enable = true;
-    # withUWSM = true;
-  };
+  programs.sway.enable = true;
 
   services.borgbackup.jobs.ytnixRsync = {
     paths = [ "/root" "/home" "/var/lib" "/var/log" "/opt" "/etc" ];

@@ -3,11 +3,11 @@
     "output": "eDP-1", // Set output to primary monitor
     "height": 40, // Set height to avoid jumping due to active workspace indicator
 		
-		"margin-left": 4,
-		"margin-right": 4,
+		"margin-left": 0,
+		"margin-right": 0,
 		"margin-top": 0,
-    "modules-left": ["hyprland/workspaces", "clock#time", "clock#date", "battery"], // Sets modules for the left of the bar
-    "modules-center": ["hyprland/window"], // Set modules for the center of the bar
+    "modules-left": ["sway/workspaces", "clock#time", "clock#date", "battery"], // Sets modules for the left of the bar
+    "modules-center": ["sway/window"], // Set modules for the center of the bar
     "modules-right": ["tray", "temperature", "cpu", "memory", "wireplumber"], // Set modules for the right of the bar
     "clock#time": {
     "format": "<span color=\"#7aa2f7\"> </span>{:%H:%M:%S}",
@@ -71,15 +71,11 @@
     "on-click": "pavucontrol",
 		"interval": 4,
   },
-  "hyprland/window": {
+  "sway/window": {
     "max-length": 64,
   },
   "tray": {
     "icon-size": 22,
     "spacing": 6,
-  },
-  "hyprland/workspaces": {
-    "disable-scroll": true,
-    "on-click": "activate",
   }
 }
