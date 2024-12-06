@@ -6,9 +6,9 @@ set $up k
 set $right l
 
 set $term $HOME/.config/sway/scripts/terminal.sh
-set $menu rofi -show drun | xargs swaymsg exec --
+set $menu rofi -show run
 set $screenshot grim -g "$(slurp)" - | wl-copy
-set $browser librewolf
+set $browser chromium
 set $clipboard rofi -show clipboard -show-icons
 set $emoji rofi -show emoji
 
@@ -25,7 +25,8 @@ output * bg $wallpaper fill
 floating_modifier $mod normal
 default_border pixel
 smart_borders on
-focus_follows_mouse yes
+focus_follows_mouse always
+mouse_warping container
 
 bindsym $mod+Return exec $term
 bindsym $mod+Ctrl+q kill
@@ -38,11 +39,12 @@ bindsym $mod+period exec $emoji
 
 bindsym $mod+$alt+b exec $browser
 bindsym $mod+$alt+a exec anki
-bindsym $mod+$alt+f exec dolphin
+bindsym $mod+$alt+f exec thunar
 bindsym $mod+$alt+p exec pomatez
 bindsym $mod+$alt+e exec evolution
 bindsym $mod+$alt+c exec korganizer
 bindsym $mod+p exec bitwarden
+bindsym $mod+$alt+m exec element-desktop
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -155,6 +157,9 @@ exec swayidle -w \
   timeout 305 $lock \
   resume 'swaymsg "output * power on"' \
   before-sleep 'playerctl pause; swaylock -f'
+
+exec aw-server
+exec aw-watcher-window-wayland
 
 include /etc/sway/config.d/*
 

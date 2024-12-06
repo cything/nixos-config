@@ -140,6 +140,11 @@
       unzip
       obsidian
       lm_sensors
+      obs-studio
+      activitywatch
+      aw-watcher-window-wayland
+      aw-qt
+      aw-watcher-afk
 
       (callPackage ./anki-bin.nix {})
     ];
@@ -199,7 +204,7 @@
     allowUnfree = true;
     chromium = {
       enableWideVine = true;
-      commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland --force-dark-mode --enable-features=WebUIDarkMode";
+      commandLineArgs = "--ozone-platform-hint=wayland --enable-features=WebUIDarkMode";
     };
   };
 
@@ -290,7 +295,7 @@
   services.btrbk.instances.local = {
     onCalendar = "hourly";
     settings = {
-      snapshot_preserve = "8w 12m";
+      snapshot_preserve = "2w";
       snapshot_preserve_min = "2d";
       snapshot_dir = "/snapshots";
       subvolume = {
@@ -369,5 +374,10 @@
   programs.nix-index = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
   };
 }

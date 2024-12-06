@@ -28,4 +28,8 @@
       name = "Adwaita";
     };
   };
+
+  home.sessionVariables = {
+    ANKI_WAYLAND = "1";
+  };
 }
