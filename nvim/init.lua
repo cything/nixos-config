@@ -43,10 +43,6 @@ keymap.set("n", "<space>s", require("nvim-tree.api").tree.toggle, {
 -- shortcut to command mode
 keymap.set({ "n", "x" }, ";", ":", { silent = true })
 
-keymap.set("n", [[\d]], "<cmd>close<cr>", {
-  silent = true,
-})
-
 keymap.set("n", "<space>o", "printf('m`%so<ESC>``', v:count1)", {
   expr = true,
   desc = "insert line below without moving cursor",

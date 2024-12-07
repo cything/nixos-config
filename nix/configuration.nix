@@ -11,7 +11,6 @@
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
     "borg/yt" = { };
-    "restic/azure-yt" = { };
     "azure" = { };
     "ntfy" = { };
   };
@@ -145,6 +144,8 @@
       aw-watcher-window-wayland
       aw-qt
       aw-watcher-afk
+      sshfs
+      nextcloud-client
 
       (callPackage ./anki-bin.nix {})
     ];
@@ -255,43 +256,6 @@
       '';
   };
   
-  services.restic.backups.ytazure = {
-    paths = [ "/root" "/home" "/var/lib" "/var/log" "/opt" "/etc" ];
-    exclude = [
-      ".git"
-      "**/.cache"
-      "**/node_modules"
-      "**/cache"
-      "**/Cache"
-      "/var/lib/docker"
-      "/home/**/Downloads"
-      "**/.steam"
-      "**/.rustup"
-      "**/.docker"
-      "**/borg"
-    ];
-    passwordFile = "/run/secrets/restic/azure-yt";
-    environmentFile = "/run/secrets/azure";
-    repository = "azure:yt-backup:/";
-    extraOptions = [
-      "azure.access-tier=Archive"
-    ];
-    package = pkgs.restic.overrideAttrs {
-      src = pkgs.fetchFromGitHub {
-        owner = "restic";
-        repo = "restic";
-        rev = "1133498ef80762608f959df41d303f7246fff04f";
-        hash = "sha256-RmCEZ5T99uNNDwrQ3CofXBf4UzNjelVzyZyvx5aZO0A=";
-      };
-      vendorHash = "sha256-TstuI6KgAFEQH90PCZMN6s4dUab2GyPKqOtqMfIV8wA=";
-    };
-    backupCleanupCommand = ''
-      ${pkgs.curl}/bin/curl -u $(cat /run/secrets/ntfy) -d "ytazure: backup completed with exit code: $exitStatus
-      $(journalctl -u restic-backups-ytazure.service|tail -n 5)" \
-      https://ntfy.cything.io/chunk
-    '';
-  };
-
   services.btrbk.instances.local = {
     onCalendar = "hourly";
     settings = {
@@ -380,4 +344,11 @@
     enable = true;
     wlr.enable = true;
   };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "03:45" ];
+  };
+
+  nix.settings.auto-optimise-store = true;
 }

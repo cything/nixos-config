@@ -83,6 +83,14 @@ local plugin_specs = {
   { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
   { "github/copilot.vim", lazy = false },
+
+  {
+    'smoka7/hop.nvim',
+    version = "*",
+    config = function()
+      require("config.hop")
+    end,
+  }
 }
 
 require("lazy").setup({
