@@ -182,7 +182,10 @@
     restic
   ];
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    ANKI_WAYLAND = "1";
+  };
 
   system.stateVersion = "24.05";
 
@@ -223,7 +226,6 @@
   services.borgbackup.jobs.ytnixRsync = {
     paths = [ "/root" "/home" "/var/lib" "/var/log" "/opt" "/etc" ];
     exclude = [
-      ".git"
       "**/.cache"
       "**/node_modules"
       "**/cache"
@@ -280,7 +282,7 @@
   xdg.mime.defaultApplications = {
     "application/pdf" = "okular.desktop";
     "image/*" = "gwenview.desktop";
-    "*/html" = "librewolf.desktop";
+    "*/html" = "chromium-browser.desktop";
   };
 
   programs.thunar = {
