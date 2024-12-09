@@ -139,13 +139,13 @@
       unzip
       obsidian
       lm_sensors
-      obs-studio
       activitywatch
       aw-watcher-window-wayland
       aw-qt
       aw-watcher-afk
       sshfs
       nextcloud-client
+      python312Packages.python-lsp-server
 
       (callPackage ./anki-bin.nix {})
     ];
@@ -353,4 +353,19 @@
   };
 
   nix.settings.auto-optimise-store = true;
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+    ];
+  };
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-media-sdk
+    ];
+  };
 }
