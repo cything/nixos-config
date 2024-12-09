@@ -10,7 +10,8 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
+    {
+      device = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
       fsType = "btrfs";
       options = [ "subvol=root" "compress=zstd" ];
     };
@@ -18,32 +19,36 @@
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/c6098a16-c8a6-4a97-8648-6f46ca919d13";
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
+    {
+      device = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
+    {
+      device = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
       fsType = "btrfs";
       options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/swap" =
-    { device = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
+    {
+      device = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
       fsType = "btrfs";
       options = [ "subvol=swap" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/29B7-F46D";
+    {
+      device = "/dev/disk/by-uuid/29B7-F46D";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices = [ {
+  swapDevices = [{
     device = "/swap/swapfile";
-  } ];
+  }];
 
   boot.resumeDevice = "/dev/disk/by-uuid/17870658-6118-46af-837f-70c9175e09c3";
   boot.kernelParams = [ "resume_offset=53224704" ];

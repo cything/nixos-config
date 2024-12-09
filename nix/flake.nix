@@ -14,24 +14,27 @@
   };
 
   outputs = { self, nixpkgs, sops-nix, home-manager, ... }@inputs:
-  let
-    lib = nixpkgs.lib;
-  in {
-    nixosConfigurations = {
-      ytnix = lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./configuration.nix
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.yt = import ./home.nix;
-            };
-          }
-        ];
+    let
+      lib = nixpkgs.lib;
+    in
+    {
+      nixosConfigurations = {
+        ytnix = lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./configuration.nix
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.yt = import ./home.nix;
+              };
+            }
+          ];
+        };
       };
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
     };
-  };
 }

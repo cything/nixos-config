@@ -106,8 +106,8 @@
       btop
       stockfish
       cutechess
-	    grim
-	    slurp
+      grim
+      slurp
       rofi-wayland
       rofimoji
       cliphist
@@ -147,7 +147,7 @@
       nextcloud-client
       python312Packages.python-lsp-server
 
-      (callPackage ./anki-bin.nix {})
+      (callPackage ./anki-bin.nix { })
     ];
   };
 
@@ -156,10 +156,10 @@
     vim
     wget
     neovim
-	  git
-	  python3
-	  wl-clipboard
-	  mako
+    git
+    python3
+    wl-clipboard
+    mako
     tree
     kitty
     borgbackup
@@ -252,12 +252,12 @@
     # warnings are often not that serious
     failOnWarnings = false;
     postHook = ''
-        ${pkgs.curl}/bin/curl -u $(cat /run/secrets/ntfy) -d "ytnixRsync: backup completed with exit code: $exitStatus
-        $(journalctl -u borgbackup-job-ytnixRsync.service|tail -n 5)" \
-        https://ntfy.cything.io/chunk
-      '';
+      ${pkgs.curl}/bin/curl -u $(cat /run/secrets/ntfy) -d "ytnixRsync: backup completed with exit code: $exitStatus
+      $(journalctl -u borgbackup-job-ytnixRsync.service|tail -n 5)" \
+      https://ntfy.cything.io/chunk
+    '';
   };
-  
+
   services.btrbk.instances.local = {
     onCalendar = "hourly";
     settings = {
@@ -265,8 +265,8 @@
       snapshot_preserve_min = "2d";
       snapshot_dir = "/snapshots";
       subvolume = {
-        "/home" = {};
-        "/" = {};
+        "/home" = { };
+        "/" = { };
       };
     };
   };
@@ -297,7 +297,7 @@
   # mount, trash and stuff in thunar
   services.gvfs.enable = true;
   # thumbnails in thunar
-  services.tumbler.enable =true;
+  services.tumbler.enable = true;
 
   virtualisation = {
     libvirtd.enable = true;
