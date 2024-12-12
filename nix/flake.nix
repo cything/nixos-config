@@ -11,6 +11,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    master.url = "github:NixOS/nixpkgs/2ab79c44f98391b6ee2edfb11f4c7a57ce1404b5";
   };
 
   outputs = { self, nixpkgs, sops-nix, home-manager, ... }@inputs:

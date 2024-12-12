@@ -81,7 +81,8 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
-      ungoogled-chromium
+      inputs.master.legacyPackages.${system}.ungoogled-chromium
+      # ungoogled-chromium
       librewolf
       bitwarden-desktop
       bitwarden-cli
@@ -146,6 +147,7 @@
       sshfs
       nextcloud-client
       python312Packages.python-lsp-server
+      gopls
 
       (callPackage ./anki-bin.nix { })
     ];
@@ -231,6 +233,7 @@
       "**/cache"
       "**/Cache"
       "/var/lib/docker"
+      "/var/lib/private/ollama"
       "/home/**/Downloads"
       "**/.steam"
       "**/.rustup"
@@ -275,7 +278,6 @@
 
   services.logind = {
     lidSwitch = "hibernate";
-    suspendKey = "ignore";
     powerKey = "hibernate";
   };
 
@@ -368,4 +370,6 @@
       intel-media-sdk
     ];
   };
+
+  services.ollama.enable = true;
 }
