@@ -1,12 +1,43 @@
-{ config, lib, pkgs, inputs, ... }:
-
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      experimental-features = "nix-command flakes";
+      auto-optimise-store = true;
+      flake-registry = "";
+    };
+    channel.enable = false;
+    optimise = {
+      automatic = true;
+      dates = [ "03:45" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "19:00";
+      persistent = true;
+      options = "--delete-older-than 60d";
+    };
+  };
+
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
@@ -79,78 +110,6 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" "docker" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      firefox
-      inputs.master.legacyPackages.${system}.ungoogled-chromium
-      # ungoogled-chromium
-      librewolf
-      bitwarden-desktop
-      bitwarden-cli
-      aerc
-      delta
-      fzf
-      zoxide
-      eza
-      fastfetch
-      discord
-      nwg-look
-      element-desktop-wayland
-      kdePackages.gwenview
-      kdePackages.okular
-      kdePackages.qtwayland
-      mpv
-      yt-dlp
-      signal-desktop
-      cosign
-      azure-cli
-      pavucontrol
-      btop
-      stockfish
-      cutechess
-      grim
-      slurp
-      rofi-wayland
-      rofimoji
-      cliphist
-      jq
-      bash-language-server
-      duckdb
-      sqlite
-      usbutils
-      llvmPackages_19.clang-tools
-      ghc
-      zola
-      calibre
-      tor-browser
-      wtype
-      bat
-      yarn
-      rclone
-      go
-      rustc
-      cargo
-      clang_19
-      rust-analyzer
-      clippy
-      pwgen
-      lua-language-server
-      gnumake
-      foot
-      minisign
-      unzip
-      obsidian
-      lm_sensors
-      activitywatch
-      aw-watcher-window-wayland
-      aw-qt
-      aw-watcher-afk
-      sshfs
-      nextcloud-client
-      python312Packages.python-lsp-server
-      gopls
-
-      (callPackage ./anki-bin.nix { })
-    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -206,13 +165,6 @@
   fonts.packages = with pkgs; [
     nerd-fonts.roboto-mono
   ];
-  nixpkgs.config = {
-    allowUnfree = true;
-    chromium = {
-      enableWideVine = true;
-      commandLineArgs = "--ozone-platform-hint=wayland --enable-features=WebUIDarkMode";
-    };
-  };
 
   hardware.enableAllFirmware = true;
   hardware.bluetooth = {
@@ -220,8 +172,6 @@
     powerOnBoot = true;
   };
   services.blueman.enable = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.sway.enable = true;
 
@@ -323,15 +273,6 @@
     };
   };
 
-  nix.registry.nixpkgs.flake = inputs.nixpkgs;
-
-  nix.gc = {
-    automatic = true;
-    dates = "19:00";
-    persistent = true;
-    options = "--delete-older-than 60d";
-  };
-
   services.usbmuxd.enable = true;
   programs.nix-ld.enable = true;
   programs.evolution.enable = true;
@@ -348,13 +289,6 @@
     enable = true;
     wlr.enable = true;
   };
-
-  nix.optimise = {
-    automatic = true;
-    dates = [ "03:45" ];
-  };
-
-  nix.settings.auto-optimise-store = true;
 
   programs.obs-studio = {
     enable = true;
