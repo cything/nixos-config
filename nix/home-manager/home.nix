@@ -129,4 +129,7 @@
 
     (callPackage ../pkgs/anki-bin.nix {})
   ];
+
+  programs.waybar.enable = true;
+  programs.feh.enable = true;
 }

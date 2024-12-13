@@ -158,7 +158,6 @@
     enable = true;
     wayland.enable = true;
   };
-  programs.waybar.enable = true;
   programs.zsh.enable = true;
   # security.sudo.wheelNeedsPassword = false;
 
