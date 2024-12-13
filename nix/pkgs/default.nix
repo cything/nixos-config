@@ -1,3 +1,3 @@
 pkgs: {
-  anki-bin = pkgs.callPackage ./anki-bin.nix { };
+  anki-bin = pkgs.callPackage ./anki-bin.nix {};
 }

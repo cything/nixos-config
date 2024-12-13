@@ -1,18 +1,16 @@
-{ fetchurl
-, stdenv
-, lib
-, buildFHSEnv
-, appimageTools
-, writeShellScript
-, anki
-, undmg
-, zstd
-, cacert
-, commandLineArgs ? [ ]
-,
-}:
-
-let
+{
+  fetchurl,
+  stdenv,
+  lib,
+  buildFHSEnv,
+  appimageTools,
+  writeShellScript,
+  anki,
+  undmg,
+  zstd,
+  cacert,
+  commandLineArgs ? [],
+}: let
   pname = "anki-bin";
   # Update hashes for both Linux and Darwin!
   version = "24.11";
@@ -37,7 +35,7 @@ let
   unpacked = stdenv.mkDerivation {
     inherit pname version;
 
-    nativeBuildInputs = [ zstd ];
+    nativeBuildInputs = [zstd];
     src = sources.linux;
 
     installPhase = ''
@@ -55,7 +53,8 @@ let
   };
 
   meta = with lib; {
-    inherit (anki.meta)
+    inherit
+      (anki.meta)
       license
       homepage
       description
@@ -67,7 +66,7 @@ let
       "x86_64-darwin"
       "aarch64-darwin"
     ];
-    maintainers = with maintainers; [ mahmoudk1000 ];
+    maintainers = with maintainers; [mahmoudk1000];
   };
 
   passthru = {
@@ -87,14 +86,12 @@ let
       '';
 
       # Dependencies of anki
-      targetPkgs =
-        pkgs:
-        (with pkgs; [
-          xorg.libxkbfile
-          xcb-util-cursor-HEAD
-          krb5
-          zstd
-        ]);
+      targetPkgs = pkgs: (with pkgs; [
+        xorg.libxkbfile
+        xcb-util-cursor-HEAD
+        krb5
+        zstd
+      ]);
 
       runScript = writeShellScript "anki-wrapper.sh" ''
         exec ${unpacked}/bin/anki ${lib.strings.escapeShellArgs commandLineArgs} "$@"
@@ -114,22 +111,24 @@ let
     }
   );
 in
+  if stdenv.hostPlatform.isLinux
+  then fhsEnvAnki
+  else
+    stdenv.mkDerivation {
+      inherit pname version passthru;
 
-if stdenv.hostPlatform.isLinux then
-  fhsEnvAnki
-else
-  stdenv.mkDerivation {
-    inherit pname version passthru;
+      src =
+        if stdenv.hostPlatform.isAarch64
+        then sources.darwin-aarch64
+        else sources.darwin-x86_64;
 
-    src = if stdenv.hostPlatform.isAarch64 then sources.darwin-aarch64 else sources.darwin-x86_64;
+      nativeBuildInputs = [undmg];
+      sourceRoot = ".";
 
-    nativeBuildInputs = [ undmg ];
-    sourceRoot = ".";
+      installPhase = ''
+        mkdir -p $out/Applications/
+        cp -a Anki.app $out/Applications/
+      '';
 
-    installPhase = ''
-      mkdir -p $out/Applications/
-      cp -a Anki.app $out/Applications/
-    '';
-
-    inherit meta;
-  }
+      inherit meta;
+    }

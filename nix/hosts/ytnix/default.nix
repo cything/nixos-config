@@ -19,7 +19,7 @@
     channel.enable = false;
     optimise = {
       automatic = true;
-      dates = [ "03:45" ];
+      dates = ["03:45"];
     };
     gc = {
       automatic = true;
@@ -33,9 +33,9 @@
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
-    "borg/yt" = { };
-    "azure" = { };
-    "ntfy" = { };
+    "borg/yt" = {};
+    "azure" = {};
+    "ntfy" = {};
   };
 
   boot = {
@@ -68,10 +68,10 @@
       dns = "none";
       wifi.backend = "iwd";
     };
-    nameservers = [ "127.0.0.1" "::1" ];
+    nameservers = ["127.0.0.1" "::1"];
     resolvconf.enable = true;
     firewall = {
-      trustedInterfaces = [ "wgnord" ];
+      trustedInterfaces = ["wgnord"];
     };
   };
   programs.nm-applet.enable = true;
@@ -91,7 +91,7 @@
         "bluez5.enable-sbc-xq" = true;
         "bluez5.enable-msbc" = true;
         "bluez5.enable-hw-volume" = true;
-        "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+        "bluez5.roles" = ["a2dp_sink" "a2dp_source"];
       };
     };
   };
@@ -100,7 +100,7 @@
 
   users.users.yt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" "docker" ];
+    extraGroups = ["wheel" "libvirtd" "docker"];
     shell = pkgs.zsh;
   };
 
@@ -167,7 +167,7 @@
   programs.sway.enable = true;
 
   services.borgbackup.jobs.ytnixRsync = {
-    paths = [ "/root" "/home" "/var/lib" "/var/log" "/opt" "/etc" ];
+    paths = ["/root" "/home" "/var/lib" "/var/log" "/opt" "/etc"];
     exclude = [
       "**/.cache"
       "**/node_modules"
@@ -192,7 +192,7 @@
     };
     compression = "auto,zstd";
     startAt = "daily";
-    extraCreateArgs = [ "--stats" ];
+    extraCreateArgs = ["--stats"];
     # warnings are often not that serious
     failOnWarnings = false;
     postHook = ''
@@ -209,8 +209,8 @@
       snapshot_preserve_min = "2d";
       snapshot_dir = "/snapshots";
       subvolume = {
-        "/home" = { };
-        "/" = { };
+        "/home" = {};
+        "/" = {};
       };
     };
   };
