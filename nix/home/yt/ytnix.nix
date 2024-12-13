@@ -116,6 +116,7 @@
     nextcloud-client
     python312Packages.python-lsp-server
     gopls
+    anki-bin
   ];
 
   programs.waybar.enable = true;
