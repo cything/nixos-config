@@ -32,4 +32,11 @@
   home.sessionVariables = {
     ANKI_WAYLAND = "1";
   };
+
+  programs.git = {
+    enable = true;
+    userName = "cy";
+    userEmail = "hi@cything.io";
+    delta.enable = true;
+  };
 }

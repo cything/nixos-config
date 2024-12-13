@@ -12,7 +12,6 @@
     ~/.config/kitty:
     ~/.config/aerc:
     ~/.config/mako:
-    ~/.config/git:
     ~/.config/waybar:
     ~/.config/i3status-rust:
     ~/.config/rofi:
