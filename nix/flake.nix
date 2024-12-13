@@ -17,34 +17,51 @@
   outputs = {
     self,
     nixpkgs,
-    sops-nix,
     home-manager,
     ...
     }@inputs: let
       lib = nixpkgs.lib;
-      system = "x86_64-linux";
       inherit (self) outputs;
+
+      systems = [ "x86_64-linux" ];
+      forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+      pkgsFor = lib.genAttrs systems (
+        system:
+          import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          }
+      );
     in
     {
-      packages = import ./pkgs nixpkgs.legacyPackages.${system};
-      formatter =  nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+      formatter =  forEachSystem (pkgs: pkgs.alejandra);
+      devShells = forEachSystem (pkgs: import ./shells { inherit pkgs; });
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
+      overlays = import ./overlays {inherit inputs outputs;};
 
-      nixosConfigurations = {
+      nixosConfigurations = let
+        pkgs = pkgsFor.x86_64-linux;
+      in {
         ytnix = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./nixos/configuration.nix
-            sops-nix.nixosModules.sops
+            {
+              nixpkgs = {inherit pkgs;};
+            }
+            ./hosts/ytnix
+            inputs.sops-nix.nixosModules.sops
           ];
         };
       };
 
       homeConfigurations = {
         "yt@ytnix" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = pkgsFor.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
-            ./home-manager/home.nix
+            ./home/yt/ytnix.nix
           ];
         };
       };

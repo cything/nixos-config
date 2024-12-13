@@ -126,8 +126,6 @@
     nextcloud-client
     python312Packages.python-lsp-server
     gopls
-
-    (callPackage ../pkgs/anki-bin.nix {})
   ];
 
   programs.waybar.enable = true;
