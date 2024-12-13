@@ -15,16 +15,6 @@
 
   systemd.user.startServices = "sd-switch";
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      chromium = {
-        enableWideVine = true;
-        commandLineArgs = "--ozone-platform-hint=wayland --enable-features=WebUIDarkMode";
-      };
-    };
-  };
-
   qt = {
     enable = true;
     platformTheme.name = "gtk";
