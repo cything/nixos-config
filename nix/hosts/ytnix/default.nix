@@ -18,6 +18,8 @@
     "borg/yt" = {};
     "azure" = {};
     "ntfy" = {};
+    "wireguard/private" = {};
+    "wireguard/psk" = {};
   };
 
   boot = {
@@ -34,7 +36,6 @@
 
   networking = {
     hostName = "ytnix";
-    # nftables.enable = true;
     wireless.iwd = {
       enable = true;
       settings = {
@@ -50,10 +51,11 @@
       dns = "none";
       wifi.backend = "iwd";
     };
-    nameservers = ["127.0.0.1" "::1"];
+    nameservers = ["31.59.129.225" "2a0f:85c1:840:2bfb::1"];
     resolvconf.enable = true;
     firewall = {
-      trustedInterfaces = ["wgnord"];
+      allowedUDPPorts = [ 51820 ]; # for wireguard
+      trustedInterfaces = [ "wg0" ];
     };
   };
   programs.nm-applet.enable = true;
@@ -110,7 +112,6 @@
     dnsutils
     age
     compsize
-    wgnord
     wireguard-tools
     traceroute
     sops
@@ -229,22 +230,6 @@
   };
   programs.virt-manager.enable = true;
 
-  services.dnscrypt-proxy2 = {
-    enable = true;
-    settings = {
-      ipv6_servers = true;
-      require_dnssec = true;
-      sources.public-resolvers = {
-        urls = [
-          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
-          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
-        ];
-        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
-        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
-      };
-    };
-  };
-
   services.usbmuxd.enable = true;
   programs.nix-ld.enable = true;
   programs.evolution.enable = true;
@@ -278,4 +263,19 @@
   };
 
   services.ollama.enable = true;
+
+  # wireguard setup
+  networking.wg-quick.interfaces.wg0 = {
+    address = [ "10.0.0.2/24" "fdc9:281f:04d7:9ee9::2/64" ];
+    privateKeyFile = "/run/secrets/wireguard/private";
+    peers = [
+      {
+        publicKey = "a16/F/wP7HQIUtFywebqPSXQAktPsLgsMLH9ZfevMy0=";
+        allowedIPs = [ "0.0.0.0/0" "::/0" ];
+        endpoint = "31.59.129.225:51820";
+        persistentKeepalive = 25;
+        presharedKeyFile = "/run/secrets/wireguard/psk";
+      }
+    ];
+  };
 }
