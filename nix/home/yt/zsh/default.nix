@@ -58,6 +58,7 @@
       "s" = "sudo";
       "nrs" = "sudo nixos-rebuild switch --flake .";
       "nrt" = "sudo nixos-rebuild test --flake .";
+      "hrs" = "home-manager switch --flake .";
     };
     sessionVariables = {
       "FZF_DEFAULT_COMMAND" = "rg";
