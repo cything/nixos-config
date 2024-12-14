@@ -79,6 +79,14 @@
           ./home/yt/ytnix.nix
         ];
       };
+
+      "yt@chunk" = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./home/yt/chunk.nix
+        ];
+      };
     };
   };
 }
