@@ -58,6 +58,17 @@
           inputs.sops-nix.nixosModules.sops
         ];
       };
+
+      chunk = lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          {
+            nixpkgs = {inherit pkgs;};
+          }
+          ./hosts/chunk
+          inputs.sops-nix.nixosModules.sops
+        ];
+      };
     };
 
     homeConfigurations = {
