@@ -18,7 +18,7 @@ set $bg #000000
 set $fg #ffffff
 set $fgi #888888
 
-set $wallpaper $HOME/wallpapers/market.jpg
+set $wallpaper $HOME/wallpapers/nixos-c-book-large.png
 set $lock swaylock -f -i $wallpaper
 output * bg $wallpaper fill
 
