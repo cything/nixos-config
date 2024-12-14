@@ -11,7 +11,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # it's not really "master"
     master.url = "github:NixOS/nixpkgs/2ab79c44f98391b6ee2edfb11f4c7a57ce1404b5";
+    # this has the caddy module with environmentFile option
+    testpkgs.url = "github:NixOS/nixpkgs/248081c4729259c3add830d502779c5d04cbe074";
   };
 
   outputs = {
