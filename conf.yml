@@ -6,20 +6,11 @@
 - clean: ['~']
 
 - link:
-    ~/.config/tmux:
     ~/.config/nvim:
     ~/.config/sway:
-    ~/.config/kitty:
-    ~/.config/aerc:
-    ~/.config/mako:
     ~/.config/waybar:
-    ~/.config/i3status-rust:
     ~/.config/rofi:
-    ~/.config/hypr:
-    ~/.config/nixpkgs:
     ~/.config/foot:
-    ~/.zshrc:
-    ~/.p10k.zsh:
 
 - shell:
   - [git submodule update --init --recursive, installing submodules]
