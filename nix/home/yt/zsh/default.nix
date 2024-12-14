@@ -20,9 +20,7 @@
         "zsh-users/zsh-completions"
         "romkatv/powerlevel10k"
         "Aloxaf/fzf-tab"
-        "z-shell/zsh-eza"
         "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
-        "ohmyzsh/ohmyzsh path:plugins/git"
       ];
     };
     history = {
@@ -56,6 +54,25 @@
       "nrs" = "sudo nixos-rebuild switch --flake .";
       "nrt" = "sudo nixos-rebuild test --flake .";
       "hrs" = "home-manager switch --flake .";
+      "g" = "git";
+      "ga" = "git add";
+      "gaa" = "git add --all";
+      "gb" = "git branch";
+      "gc" = "git commit --verbose";
+      "gcmsg" = "git commit --message";
+      "gd" = "git diff";
+      "gdca" = "git diff --cached";
+      "gds" = "git diff --staged";
+      "gl" = "git log --stat";
+      "glg" = "git log --graph";
+      "glga" = "git log --graph --decorate --all";
+      "glo" = "git log --oneline --decorate";
+      "gp" = "git push";
+      "gr" = "git remote";
+      "gra" = "git remote add";
+      "grv" = "git remote --verbose";
+      "gs" = "git status --short";
+      "gss" = "git status";
     };
     sessionVariables = {
       "FZF_DEFAULT_COMMAND" = "rg";
@@ -71,5 +88,10 @@
     enable = true;
     enableZshIntegration = true;
     options = [ "--cmd cd" ];
+  };
+
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }
