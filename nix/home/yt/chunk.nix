@@ -28,10 +28,6 @@
   programs.neovim.enable = true;
 
   home.packages = with pkgs; [
-    fzf
-    eza
-    zoxide
-    delta
     lua-language-server
     vim-language-server
     python312Packages.python-lsp-server

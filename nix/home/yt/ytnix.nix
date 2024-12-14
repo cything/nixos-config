@@ -63,9 +63,6 @@
     bitwarden-desktop
     bitwarden-cli
     aerc
-    delta
-    fzf
-    eza
     fastfetch
     discord
     nwg-look
@@ -76,12 +73,9 @@
     mpv
     yt-dlp
     signal-desktop
-    cosign
     azure-cli
     pavucontrol
     btop
-    stockfish
-    cutechess
     grim
     slurp
     rofi-wayland
@@ -89,12 +83,9 @@
     cliphist
     jq
     bash-language-server
-    duckdb
     sqlite
     usbutils
     llvmPackages_19.clang-tools
-    ghc
-    zola
     calibre
     tor-browser
     wtype
@@ -113,7 +104,6 @@
     foot
     minisign
     unzip
-    obsidian
     lm_sensors
     sshfs
     nextcloud-client
