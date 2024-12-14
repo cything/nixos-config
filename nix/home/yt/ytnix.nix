@@ -6,6 +6,9 @@
   outputs,
   ...
 }: {
+  imports = [
+    ./zsh
+  ];
   home = {
     username = "yt";
     homeDirectory = "/home/yt";
