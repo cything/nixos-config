@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    ./zsh
+    ./common.nix
   ];
   home = {
     username = "yt";
@@ -64,7 +64,6 @@
     aerc
     delta
     fzf
-    zoxide
     eza
     fastfetch
     discord

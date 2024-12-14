@@ -1,7 +1,4 @@
 {
-  config,
-  lib,
-  inputs,
   ...
 }: {
   programs.zsh = {

@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    ./zsh
+    ./common.nix
   ];
   home = {
     username = "yt";
