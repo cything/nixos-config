@@ -25,6 +25,7 @@ in {
     "hedgedoc" = { };
     "wireguard/private" = { };
     "wireguard/psk" = { };
+    "wireguard/pskphone" = { };
   };
 
   boot.loader.grub.enable = true;
@@ -297,6 +298,11 @@ in {
         publicKey = "qUhWoTPVC7jJdDEJLYY92OeiwPkaf8I5pv5kkMcSW3g=";
         allowedIPs = [ "10.0.0.2/32" "fdc9:281f:04d7:9ee9::2/128" ];
         presharedKeyFile = "/run/secrets/wireguard/psk";
+      }
+      {
+        publicKey = "JIGi60wzLw717Cim1dSFoLCdJz5rePa5AIFfuisJI0k=";
+        allowedIPs = [ "10.0.0.3/32" "fdc9:281f:04d7:9ee9::3/128" ];
+        presharedKeyFile = "/run/secrets/wireguard/pskphone";
       }
     ];
   };
