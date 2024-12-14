@@ -23,6 +23,7 @@ in {
     "vaultwarden" = { };
     "caddy" = { };
     "hedgedoc" = { };
+    "wireguard" = { };
   };
 
   boot.loader.grub.enable = true;
@@ -32,14 +33,10 @@ in {
 
   networking.hostName = "chunk";
   networking.networkmanager.enable = true;
-  networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 80 443 ];
-    allowedUDPPorts = [ 443 ];
-    extraInputRules = ''
-      ip saddr 172.18.0.0/16 tcp dport 5432 accept
-    '';
+    allowedTCPPorts = [ 22 80 443 53 853 ];
+    allowedUDPPorts = [ 443 51820 53 853 ]; # 51820 is wireguard
   };
   networking.interfaces.ens18 = {
     ipv6.addresses = [{
@@ -262,6 +259,31 @@ in {
       REDLIB_ENABLE_RSS = "on";
       REDLIB_ROBOTS_DISABLE_INDEXING = "on";
     };
+  };
+
+  # wireguard stuff
+  networking.nat = {
+    enable = true;
+    externalInterface = "ens18";
+    internalInterfaces = [ "wg0" ];
+  };
+
+  networking.wireguard.interfaces.wg0 = {
+    ips = [ "10.100.0.1/24" ];
+    listenPort = 51820;
+    privateKeyFile = "/run/secrets/wireguard";
+    postSetup = ''
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ens18 -j MASQUERADE
+    '';
+    postShutdown = ''
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ens18 -j MASQUERADE
+    '';
+    peers = [
+      {
+        publicKey = "qUhWoTPVC7jJdDEJLYY92OeiwPkaf8I5pv5kkMcSW3g=";
+        allowedIPs = [ "10.100.0.2/32" ];
+      }
+    ];
   };
 }
 
