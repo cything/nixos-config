@@ -128,7 +128,7 @@ in {
 
   services.caddy = {
     enable = true;
-    configFile = ../Caddyfile;
+    configFile = ./Caddyfile;
     environmentFile = "/run/secrets/caddy";
     logFormat = lib.mkForce "level INFO";
   };
