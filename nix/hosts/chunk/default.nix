@@ -11,6 +11,7 @@ in {
     [
       ./hardware-configuration.nix
       "${inputs.testpkgs}/nixos/modules/services/web-servers/caddy"
+      ../common.nix
     ];
 
   sops.defaultSopsFile = ./secrets.yaml;
@@ -181,8 +182,6 @@ in {
     };
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   services.vaultwarden = {
     enable = true;
     dbBackend = "postgresql";
@@ -236,12 +235,6 @@ in {
   };
 
   programs.fuse.userAllowOther = true;
-
-  nix.optimise = {
-    automatic = true;
-    dates = [ "03:45" ];
-  };
-  nix.settings.auto-optimise-store = true;
 
   services.hedgedoc = {
     enable = true;
