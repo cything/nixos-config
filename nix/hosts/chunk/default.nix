@@ -64,23 +64,6 @@ in {
     extraGroups = [ "wheel" "networkmanager" "docker"];
     openssh.authorizedKeys.keys =
       [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdhAQYy0+vS+QmyCd0MAbqbgzyMGcsuuFyf6kg2yKge yt@ytlinux" ];
-    packages = with pkgs; [
-      fzf
-      eza
-      zoxide
-      delta
-      lua-language-server
-      vim-language-server
-      python312Packages.python-lsp-server
-      nixd
-      gopls
-      bash-language-server
-      llvmPackages_19.clang-tools
-      rust-analyzer
-      yt-dlp
-      gnumake
-      hedgedoc
-    ];
     shell = pkgs.zsh;
   };
   users.users.root.openssh.authorizedKeys.keys =
@@ -94,7 +77,6 @@ in {
 
   environment.systemPackages = with pkgs; [
     vim
-    neovim
     wget
     curl
     tree
@@ -102,9 +84,6 @@ in {
     tmux
     borgbackup
     rclone
-    restic
-    htop
-    btop
     file
     sops
     age
