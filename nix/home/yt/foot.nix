@@ -11,7 +11,7 @@
       bell = {
         urgent = "no";
         notify = "no";
-        visual = "yes";
+        visual = "no";
       };
       cursor = {
         style = "beam";
