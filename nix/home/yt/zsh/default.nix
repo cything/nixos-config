@@ -9,7 +9,7 @@
     };
     syntaxHighlighting = {
       enable = true;
-      highlighters = [ "brackets" "cursor" ];
+      highlighters = [ "brackets" ];
     };
     autocd = true;
     defaultKeymap = "emacs";
