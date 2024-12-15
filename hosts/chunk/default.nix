@@ -21,6 +21,7 @@
     ./vaultwarden.nix
     ./wireguard.nix
     ./grafana.nix
+    ./tor.nix
   ];
 
   sops.defaultSopsFile = ./secrets.yaml;
