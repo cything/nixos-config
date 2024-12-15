@@ -1,15 +1,13 @@
-{
-  ...
-}: {
+{...}: {
   programs.zsh = {
     enable = true;
     autosuggestion = {
       enable = true;
-      strategy = [ "history" "completion" ];
+      strategy = ["history" "completion"];
     };
     syntaxHighlighting = {
       enable = true;
-      highlighters = [ "brackets" ];
+      highlighters = ["brackets"];
     };
     autocd = true;
     defaultKeymap = "emacs";
@@ -31,7 +29,7 @@
       size = 50000;
       append = true;
     };
-    historySubstringSearch= {
+    historySubstringSearch = {
       enable = true;
       searchUpKey = "^p";
       searchDownKey = "^n";
@@ -87,7 +85,7 @@
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-    options = [ "--cmd cd" ];
+    options = ["--cmd cd"];
   };
 
   programs.eza = {
