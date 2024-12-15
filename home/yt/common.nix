@@ -1,7 +1,7 @@
 {...}: {
   imports = [
-    ./tmux.nix
-    ./zsh
+    ../tmux.nix
+    ../zsh
   ];
 
   home.sessionVariables = {

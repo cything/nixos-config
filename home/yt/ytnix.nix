@@ -8,7 +8,7 @@
 }: {
   imports = [
     ./common.nix
-    ./foot.nix
+    ../foot.nix
   ];
   home = {
     username = "yt";
