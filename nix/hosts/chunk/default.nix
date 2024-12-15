@@ -1,11 +1,5 @@
 { config, lib, pkgs, inputs, ... }:
-
-let
-  fake-gitea = pkgs.writeShellScriptBin "gitea" ''
-ssh -p 2222 -o StrictHostKeyChecking=no git@127.0.0.1 "SSH_ORIGINAL_COMMAND=\"$SSH_ORIGINAL_COMMAND\" /usr/local/bin/gitea $@"
-  '';
-
-in {
+{
   disabledModules = [ "services/web-servers/caddy/default.nix" ];
   imports =
     [
@@ -28,24 +22,24 @@ in {
     "wireguard/pskphone" = { };
     "miniflux" = { };
     "gitlab/root" = {
-      owner = config.users.users.gitlab.name;
-      group = config.users.users.gitlab.group;
+      owner = config.users.users.git.name;
+      group = config.users.users.git.group;
     };
     "gitlab/secret" = {
-      owner = config.users.users.gitlab.name;
-      group = config.users.users.gitlab.group;
+      owner = config.users.users.git.name;
+      group = config.users.users.git.group;
     };
     "gitlab/jws" = {
-      owner = config.users.users.gitlab.name;
-      group = config.users.users.gitlab.group;
+      owner = config.users.users.git.name;
+      group = config.users.users.git.group;
     };
     "gitlab/db" = {
-      owner = config.users.users.gitlab.name;
-      group = config.users.users.gitlab.group;
+      owner = config.users.users.git.name;
+      group = config.users.users.git.group;
     };
     "gitlab/otp" = {
-      owner = config.users.users.gitlab.name;
-      group = config.users.users.gitlab.group;
+      owner = config.users.users.git.name;
+      group = config.users.users.git.group;
     };
   };
 
@@ -93,11 +87,6 @@ in {
   users.users.root.openssh.authorizedKeys.keys =
       [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdhAQYy0+vS+QmyCd0MAbqbgzyMGcsuuFyf6kg2yKge yt@ytlinux" ];
 
-  users.users.git = {
-    isNormalUser = true;
-    packages = [ fake-gitea ];
-  };
-
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -144,28 +133,7 @@ in {
     package = pkgs.postgresql_17;
     enableTCPIP = true;
     ensureDatabases = [
-      "forgejo"
-      "freshrss"
       "hedgedoc"
-      "linkwarden"
-    ];
-    ensureUsers = [
-      {
-        name = "forgejo";
-        ensureDBOwnership = true;
-      }
-      {
-        name = "linkwarden";
-        ensureDBOwnership = true;
-      }
-      {
-        name = "freshrss";
-        ensureDBOwnership = true;
-      }
-      {
-        name = "hedgedoc";
-        ensureDBOwnership = true;
-      }
     ];
     authentication = lib.mkForce ''
       local all all trust
@@ -357,8 +325,13 @@ in {
   services.gitlab = {
     enable = true;
     https = true;
-    host = "gitlab.cything.io";
-    port = 443;
+    host = "git.cything.io";
+    user = "git"; # so that you can ssh with git@git.cything.io
+    group = "git";
+    port = 443; # this *not* the port gitlab will run on
+    puma.workers = 0; # https://docs.gitlab.com/omnibus/settings/memory_constrained_envs.html#optimize-puma
+    sidekiq.concurrency = 10;
+    databaseUsername = "git"; # needs to be same as user
     initialRootEmail = "hi@cything.io";
     initialRootPasswordFile = "/run/secrets/gitlab/root";
     secrets = {

@@ -11,7 +11,7 @@ anki.cy7.sh {
 }
 
 git.cy7.sh, git.cything.io {
-  reverse_proxy localhost:3000
+  reverse_proxy unix//run/gitlab/gitlab-workhorse.socket
 }
 
 rss.cything.io {
@@ -59,8 +59,4 @@ pad.cything.io {
 
 red.cything.io {
   reverse_proxy localhost:8087
-}
-
-gitlab.cything.io {
-  reverse_proxy unix//run/gitlab/gitlab-workhorse.socket
 }
