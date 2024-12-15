@@ -57,8 +57,7 @@
         "chromium": "chromium",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "sops-nix": "sops-nix",
-        "testpkgs": "testpkgs"
+        "sops-nix": "sops-nix"
       }
     },
     "sops-nix": {
@@ -78,22 +77,6 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
-        "type": "github"
-      }
-    },
-    "testpkgs": {
-      "locked": {
-        "lastModified": 1733788258,
-        "narHash": "sha256-1vwUQvcs/pzRIg7Mo+QcE6ZavQWyjJP502n43b4VsGQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "248081c4729259c3add830d502779c5d04cbe074",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "248081c4729259c3add830d502779c5d04cbe074",
         "type": "github"
       }
     }

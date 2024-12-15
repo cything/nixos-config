@@ -5,10 +5,8 @@
   inputs,
   ...
 }: {
-  disabledModules = ["services/web-servers/caddy/default.nix"];
   imports = [
     ./hardware-configuration.nix
-    "${inputs.testpkgs}/nixos/modules/services/web-servers/caddy"
     ../common.nix
     ./gitlab.nix
     ./borg.nix

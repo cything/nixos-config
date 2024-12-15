@@ -12,8 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chromium.url = "github:NixOS/nixpkgs/314e12ba369ccdb9b352a4db26ff419f7c49fa84";
-    # this has the caddy module with environmentFile option
-    testpkgs.url = "github:NixOS/nixpkgs/248081c4729259c3add830d502779c5d04cbe074";
   };
 
   outputs = {
