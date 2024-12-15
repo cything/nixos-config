@@ -330,6 +330,7 @@ in {
     config = {
       PORT = 8080;
       BASE_URL = "https://rss.cything.io";
+      FORCE_REFRESH_INTERVAL = 0;
     };
   };
 }
