@@ -129,4 +129,10 @@
       border-color=#ff0000
     '';
   };
+
+  xdg.configFile = {
+    sway.source = ../sway;
+    rofi.source = ../rofi;
+    waybar.source = ../waybar;
+  };
 }

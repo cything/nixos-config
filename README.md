@@ -1,1 +1,1 @@
-this is my dotfiles managed with [dotbot](https://github.com/anishathalye/dotbot/). you should be able to replicate it with just `./install`.
+there are my dotfiles; managed with [home-manager](https://github.com/nix-community/home-manager/)
