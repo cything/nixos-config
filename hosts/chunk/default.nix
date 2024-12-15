@@ -20,6 +20,7 @@
     ./redlib.nix
     ./vaultwarden.nix
     ./wireguard.nix
+    ./grafana.nix
   ];
 
   sops.defaultSopsFile = ./secrets.yaml;
@@ -79,9 +80,19 @@
         prefixLength = 64;
       }
     ];
+    ipv4.addresses = [
+      {
+        address = "31.59.129.225";
+        prefixLength = 24;
+      }
+    ];
   };
   networking.defaultGateway6 = {
     address = "2a0f:85c1:840::1";
+    interface = "ens18";
+  };
+  networking.defaultGateway = {
+    address = "31.59.129.1";
     interface = "ens18";
   };
   networking.nameservers = ["127.0.0.1" "::1"];
