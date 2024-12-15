@@ -27,6 +27,26 @@ in {
     "wireguard/psk" = { };
     "wireguard/pskphone" = { };
     "miniflux" = { };
+    "gitlab/root" = {
+      owner = config.users.users.gitlab.name;
+      group = config.users.users.gitlab.group;
+    };
+    "gitlab/secret" = {
+      owner = config.users.users.gitlab.name;
+      group = config.users.users.gitlab.group;
+    };
+    "gitlab/jws" = {
+      owner = config.users.users.gitlab.name;
+      group = config.users.users.gitlab.group;
+    };
+    "gitlab/db" = {
+      owner = config.users.users.gitlab.name;
+      group = config.users.users.gitlab.group;
+    };
+    "gitlab/otp" = {
+      owner = config.users.users.gitlab.name;
+      group = config.users.users.gitlab.group;
+    };
   };
 
   boot.loader.grub.enable = true;
@@ -331,6 +351,21 @@ in {
       PORT = 8080;
       BASE_URL = "https://rss.cything.io";
       FORCE_REFRESH_INTERVAL = 0;
+    };
+  };
+
+  services.gitlab = {
+    enable = true;
+    https = true;
+    host = "gitlab.cything.io";
+    port = 443;
+    initialRootEmail = "hi@cything.io";
+    initialRootPasswordFile = "/run/secrets/gitlab/root";
+    secrets = {
+      secretFile = "/run/secrets/gitlab/secret";
+      otpFile = "/run/secrets/gitlab/otp";
+      jwsFile = "/run/secrets/gitlab/jws";
+      dbFile = "/run/secrets/gitlab/db";
     };
   };
 }
