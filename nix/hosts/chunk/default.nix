@@ -26,6 +26,7 @@ in {
     "wireguard/private" = { };
     "wireguard/psk" = { };
     "wireguard/pskphone" = { };
+    "miniflux" = { };
   };
 
   boot.loader.grub.enable = true;
@@ -111,7 +112,7 @@ in {
     enable = true;
     configFile = ./Caddyfile;
     environmentFile = "/run/secrets/caddy";
-    logFormat = lib.mkForce "level INFO";
+    logFormat = lib.mkForce "level DEBUG";
   };
   # systemd.services.caddy.serviceConfig = {
   #   EnvironmentFile = "/run/secrets/caddy";
@@ -320,6 +321,15 @@ in {
           password = "$2y$10$BZy2zYJj5z4e8LZCq/GwuuhWUafL/MNFO.YcsAMmpDS.2krPxi7KC";
         }
       ];
+    };
+  };
+
+  services.miniflux = {
+    enable = true;
+    adminCredentialsFile = "/run/secrets/miniflux";
+    config = {
+      PORT = 8080;
+      BASE_URL = "https://rss.cything.io";
     };
   };
 }

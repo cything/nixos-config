@@ -14,7 +14,7 @@ git.cy7.sh, git.cything.io {
   reverse_proxy localhost:3000
 }
 
-rss.cy7.sh {
+rss.cything.io {
   reverse_proxy localhost:8080
 }
 
