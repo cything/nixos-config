@@ -1,8 +1,0 @@
-cything.io {
-  uri strip_prefix /blog
-  reverse_proxy localhost:8084
-}
-
-www.cything.io {
-  redir https://cything.io{uri} permanent
-}

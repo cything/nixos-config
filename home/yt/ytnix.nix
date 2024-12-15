@@ -57,7 +57,8 @@
 
   home.packages = with pkgs; [
     firefox
-    ungoogled-chromium
+    inputs.chromium.legacyPackages.${system}.ungoogled-chromium
+    # ungoogled-chromium
     librewolf
     bitwarden-desktop
     bitwarden-cli

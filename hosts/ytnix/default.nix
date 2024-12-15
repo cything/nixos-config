@@ -51,12 +51,10 @@
       dns = "none";
       wifi.backend = "iwd";
     };
-    # nameservers = ["31.59.129.225" "2a0f:85c1:840:2bfb::1"];
-    nameservers = ["1.1.1.1"];
+    nameservers = ["31.59.129.225" "2a0f:85c1:840:2bfb::1"];
     resolvconf.enable = true;
     firewall = {
-      allowedUDPPorts = [51820 443]; # for wireguard
-      allowedTCPPorts = [80 443];
+      allowedUDPPorts = [51820]; # for wireguard
       trustedInterfaces = ["wg0"];
     };
   };
@@ -267,23 +265,17 @@
   services.ollama.enable = true;
 
   # wireguard setup
-  # networking.wg-quick.interfaces.wg0 = {
-  #   address = ["10.0.0.2/24" "fdc9:281f:04d7:9ee9::2/64"];
-  #   privateKeyFile = "/run/secrets/wireguard/private";
-  #   peers = [
-  #     {
-  #       publicKey = "a16/F/wP7HQIUtFywebqPSXQAktPsLgsMLH9ZfevMy0=";
-  #       allowedIPs = ["0.0.0.0/0" "::/0"];
-  #       endpoint = "31.59.129.225:51820";
-  #       persistentKeepalive = 25;
-  #       presharedKeyFile = "/run/secrets/wireguard/psk";
-  #     }
-  #   ];
-  # };
-
-  services.caddy = {
-    enable = true;
-    configFile = ./Caddyfile;
-    logFormat = lib.mkForce "level INFO";
+  networking.wg-quick.interfaces.wg0 = {
+    address = ["10.0.0.2/24" "fdc9:281f:04d7:9ee9::2/64"];
+    privateKeyFile = "/run/secrets/wireguard/private";
+    peers = [
+      {
+        publicKey = "a16/F/wP7HQIUtFywebqPSXQAktPsLgsMLH9ZfevMy0=";
+        allowedIPs = ["0.0.0.0/0" "::/0"];
+        endpoint = "31.59.129.225:51820";
+        persistentKeepalive = 25;
+        presharedKeyFile = "/run/secrets/wireguard/psk";
+      }
+    ];
   };
 }
