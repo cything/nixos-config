@@ -9,7 +9,7 @@
     settings = {
       ORPort = 9001;
       Nickname = "chunk";
-      MaxAdvertisedBandwidth = "10 MBytes";
+      MaxAdvertisedBandwidth = "10MBytes";
     };
   };
 }
