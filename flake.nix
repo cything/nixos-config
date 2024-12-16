@@ -11,6 +11,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    chromium.url = "github:NixOS/nixpkgs/314e12ba369ccdb9b352a4db26ff419f7c49fa84";
   };
 
   outputs = {
