@@ -131,6 +131,8 @@
     traceroute
     sops
     restic
+    haskell-language-server
+    ghc
   ];
 
   environment.sessionVariables = {

@@ -73,3 +73,4 @@ lspconfig.lua_ls.setup {
 
 lspconfig.nixd.setup { capabilities = capabilities }
 lspconfig.sqls.setup { capabilities = capabilities }
+lspconfig.hls.setup { capabilities = capabilities }
