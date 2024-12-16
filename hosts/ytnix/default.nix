@@ -85,12 +85,12 @@
             "node.name" = "bluez_output.*";
           }
         ];
-       };
-       actions = {
+      };
+      actions = {
         update-props = {
           "session.suspend-timeout-seconds" = 0;
         };
-       };
+      };
     };
   };
 
