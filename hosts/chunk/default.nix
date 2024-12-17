@@ -21,6 +21,9 @@
     ./wireguard.nix
     ./grafana.nix
     ./tor.nix
+    ./ghost.nix
+    ./conduit.nix
+    ./immich.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -126,7 +129,7 @@
 
   users.users.yt = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "docker"];
+    extraGroups = ["wheel" "networkmanager" "podman"];
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdhAQYy0+vS+QmyCd0MAbqbgzyMGcsuuFyf6kg2yKge yt@ytlinux"];
     shell = pkgs.zsh;
   };
@@ -170,5 +173,17 @@
     logFormat = lib.mkForce "level INFO";
   };
 
-  virtualisation.docker.enable = true;
+  # container stuff
+  virtualisation.containers.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    # create 'docker' alias for podman, to use as
+    # drop-in replacement
+    dockerCompat = true;
+    defaultNetwork.settings = {
+      dns_enabled = true;
+      ipv6_enabled = true;
+    };
+  };
+  virtualisation.oci-containers.backend = "podman";
 }
