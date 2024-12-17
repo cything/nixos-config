@@ -15,10 +15,9 @@ creation_rules:
       - age:
         - *chunk
         - *yt
-  - path_regex: secrets/restic/*.yaml
+  - path_regex: secrets/restic/yt-azure.yaml
     key_groups:
       - age:
-        # only yt uses restic
         - *yt
   - path_regex: secrets/borg/yt-rsyncnet.yaml
     key_groups:
