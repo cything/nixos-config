@@ -12,7 +12,7 @@
     serviceConfig = {
       Type = "notify";
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/photos";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --transfers=32 --dir-cache-time 72h --poll-interval 0 --vfs-cache-mode writes photos: /mnt/photos ";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --transfers=32 --dir-cache-time 72h --vfs-cache-mode writes --vfs-cache-max-size 2G photos: /mnt/photos ";
       ExecStop = "/bin/fusermount -u /mnt/photos";
       EnvironmentFile = config.sops.secrets."rclone/env".path;
     };
@@ -42,7 +42,7 @@
     serviceConfig = {
       Type = "notify";
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/jellyfin";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --allow-other --transfers=32 --vfs-cache-mode writes jellyfin: /mnt/jellyfin";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --allow-other --transfers=32 --dir-cache-time 72h --vfs-cache-mode writes --vfs-cache-max-size 2G jellyfin: /mnt/jellyfin";
       ExecStop = "/bin/fusermount -u /mnt/jellyfin";
       EnvironmentFile = config.sops.secrets."rclone/env".path;
     };
