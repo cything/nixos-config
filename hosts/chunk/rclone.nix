@@ -6,14 +6,14 @@
   systemd.services.immich-mount = {
     enable = true;
     description = "Mount the immich data remote";
-    after = ["network-online.target" "podman-immich-server.service"];
+    after = ["network-online.target"];
     requires = ["network-online.target"];
     requiredBy = ["podman-immich-server.service"];
     serviceConfig = {
       Type = "notify";
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/photos";
       ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --transfers=32 --dir-cache-time 72h --vfs-cache-mode writes --vfs-cache-max-size 2G photos: /mnt/photos ";
-      ExecStop = "/bin/fusermount -u /mnt/photos";
+      ExecStop = "${pkgs.fuse}/bin/fusermount -u /mnt/photos";
       EnvironmentFile = config.sops.secrets."rclone/env".path;
     };
   };
@@ -35,15 +35,15 @@
 
   systemd.services.jellyfin-mount = {
     enable = true;
-    description = "Mount the nextcloud data remote";
-    after = ["network-online.target" "jellyfin.service"];
+    description = "Mount the jellyfin data remote";
+    after = ["network-online.target"];
     requires = ["network-online.target"];
     requiredBy = ["jellyfin.service"];
     serviceConfig = {
       Type = "notify";
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/jellyfin";
       ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --allow-other --transfers=32 --dir-cache-time 72h --vfs-cache-mode writes --vfs-cache-max-size 2G jellyfin: /mnt/jellyfin";
-      ExecStop = "/bin/fusermount -u /mnt/jellyfin";
+      ExecStop = "${pkgs.fuse}/bin/fusermount -u /mnt/jellyfin";
       EnvironmentFile = config.sops.secrets."rclone/env".path;
     };
   };
