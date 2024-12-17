@@ -24,6 +24,8 @@
     ./ghost.nix
     ./conduit.nix
     ./immich.nix
+    ./jellyfin.nix
+    ./deluge.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";

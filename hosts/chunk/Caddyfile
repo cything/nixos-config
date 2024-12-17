@@ -73,3 +73,13 @@ grafana.cything.io {
   import common
   reverse_proxy localhost:8088
 }
+
+warez.cything.io {
+  import common
+  reverse_proxy localhost:8096
+}
+
+t.cything.io {
+  import common
+  reverse_proxy localhost:8112
+}
