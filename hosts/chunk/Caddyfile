@@ -6,39 +6,48 @@
   }
 }
 
-anki.cy7.sh {
-  reverse_proxy localhost:27701
+(common) {
+  encode zstd gzip
+  header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
 }
 
 git.cy7.sh, git.cything.io {
+  import common
   reverse_proxy unix//run/gitlab/gitlab-workhorse.socket
 }
 
 rss.cything.io {
+  import common
   reverse_proxy localhost:8080
 }
 
 photos.cy7.sh {
+  import common
   reverse_proxy localhost:2283
 }
 
 matrix.cy7.sh, chat.cything.io {
+  import common
   reverse_proxy localhost:8448
 }
 
 pass.cy7.sh {
+  import common
   reverse_proxy localhost:8081
 }
 
 dns.cything.io {
+  import common
   reverse_proxy localhost:8082
 }
 
 ntfy.cything.io {
+  import common
   reverse_proxy localhost:8083
 }
 
 cything.io {
+  import common
   uri strip_prefix /blog
   reverse_proxy /.well-known/matrix/* localhost:8448
   reverse_proxy /_matrix/* localhost:8448
@@ -46,21 +55,21 @@ cything.io {
 }
 
 www.cything.io {
+  import common
   redir https://cything.io{uri} permanent
 }
 
-cloud.cything.io {
-  reverse_proxy localhost:11000
-}
-
 pad.cything.io {
+  import common
   reverse_proxy localhost:8085
 }
 
 red.cything.io {
+  import common
   reverse_proxy localhost:8087
 }
 
 grafana.cything.io {
+  import common
   reverse_proxy localhost:8088
 }
