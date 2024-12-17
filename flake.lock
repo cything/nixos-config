@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "chromium": {
-      "locked": {
-        "lastModified": 1734083684,
-        "narHash": "sha256-5fNndbndxSx5d+C/D0p/VF32xDiJCJzyOqorOYW4JEo=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "314e12ba369ccdb9b352a4db26ff419f7c49fa84",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "314e12ba369ccdb9b352a4db26ff419f7c49fa84",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -54,7 +38,6 @@
     },
     "root": {
       "inputs": {
-        "chromium": "chromium",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "sops-nix": "sops-nix"
