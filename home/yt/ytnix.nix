@@ -1,9 +1,6 @@
 {
-  config,
   pkgs,
-  lib,
   inputs,
-  outputs,
   ...
 }: {
   imports = [
@@ -57,8 +54,7 @@
 
   home.packages = with pkgs; [
     firefox
-    inputs.chromium.legacyPackages.${system}.ungoogled-chromium
-    # ungoogled-chromium
+    ungoogled-chromium
     librewolf
     bitwarden-desktop
     bitwarden-cli
