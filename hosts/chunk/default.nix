@@ -22,6 +22,7 @@
     ./grafana.nix
     ./tor.nix
     ./ghost.nix
+    ./conduit.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
