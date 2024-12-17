@@ -93,7 +93,7 @@
     enable = true;
     allowedTCPPorts = [22 80 443 53 853];
     allowedUDPPorts = [443 51820 53 853]; # 51820 is wireguard
-    trustedInterfaces = ["wg0" "br-2a019a56bbcc"]; # the second one is docker, idk if this changes
+    trustedInterfaces = ["wg0"];
   };
   networking.interfaces.ens18 = {
     ipv6.addresses = [
