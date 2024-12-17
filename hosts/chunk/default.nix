@@ -172,13 +172,16 @@
   };
 
   # container stuff
-  virtualisation.container.enable = true;
-  vrtualisation.podman = {
+  virtualisation.containers.enable = true;
+  virtualisation.podman = {
     enable = true;
     # create 'docker' alias for podman, to use as
     # drop-in replacement
     dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
+    defaultNetwork.settings = {
+      dns_enabled = true;
+      ipv6_enabled = true;
+    };
   };
   virtualisation.oci-containers.backend = "podman";
 }
