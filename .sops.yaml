@@ -15,15 +15,15 @@ creation_rules:
       - age:
         - *chunk
         - *yt
-  - path_regex: secrets/restic/yt-azure.yaml
+  - path_regex: secrets/restic/yt.yaml
     key_groups:
       - age:
         - *yt
-  - path_regex: secrets/borg/yt-rsyncnet.yaml
+  - path_regex: secrets/borg/yt.yaml
     key_groups:
       - age:
         - *yt
-  - path_regex: secrets/borg/crash-rsyncnet.yaml
+  - path_regex: secrets/borg/chunk.yaml
     key_groups:
       - age:
         - *chunk
