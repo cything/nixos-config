@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   services.gitlab = {
     enable = true;
     https = true;
@@ -10,12 +10,12 @@
     sidekiq.concurrency = 10;
     databaseUsername = "git"; # needs to be same as user
     initialRootEmail = "hi@cything.io";
-    initialRootPasswordFile = "/run/secrets/gitlab/root";
+    initialRootPasswordFile = config.sops.secrets."gitlab/root".path;
     secrets = {
-      secretFile = "/run/secrets/gitlab/secret";
-      otpFile = "/run/secrets/gitlab/otp";
-      jwsFile = "/run/secrets/gitlab/jws";
-      dbFile = "/run/secrets/gitlab/db";
+      secretFile = config.sops.secrets."gitlab/secret".path;
+      otpFile = config.sops.secrets."gitlab/otp".path;
+      jwsFile = config.sops.secrets."gitlab/jws".path;
+      dbFile = config.sops.secrets."gitlab/db".path;
     };
   };
 }

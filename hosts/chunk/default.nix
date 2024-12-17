@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [
@@ -24,36 +23,57 @@
     ./tor.nix
   ];
 
+  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
-    "borg/crash" = {};
-    "ntfy" = {};
-    "rclone" = {};
-    "vaultwarden" = {};
-    "caddy" = {};
-    "hedgedoc" = {};
-    "wireguard/private" = {};
-    "wireguard/psk" = {};
-    "wireguard/pskphone" = {};
-    "miniflux" = {};
+    "borg/rsyncnet" = {
+      sopsFile = ../../secrets/borg/chunk.yaml;
+    };
+    "services/ntfy" = {
+      sopsFile = ../../secrets/services/ntfy.yaml;
+    };
+    "rclone/env" = {
+      sopsFile = ../../secrets/rclone/chunk.yaml;
+    };
+    "vaultwarden/env" = {
+      sopsFile = ../../secrets/services/vaultwarden.yaml;
+    };
+    "caddy/env" = {
+      sopsFile = ../../secrets/services/caddy.yaml;
+    };
+    "hedgedoc/env" = {
+      sopsFile = ../../secrets/services/hedgedoc.yaml;
+    };
+    "wireguard/private" = {
+      sopsFile = ../../secrets/wireguard/chunk.yaml;
+    };
+    "wireguard/psk-yt" = {
+      sopsFile = ../../secrets/wireguard/chunk.yaml;
+    };
+    "wireguard/psk-phone" = {
+      sopsFile = ../../secrets/wireguard/chunk.yaml;
+    };
+    "miniflux/env" = {
+      sopsFile = ../../secrets/services/miniflux.yaml;
+    };
     "gitlab/root" = {
+      sopsFile = ../../secrets/services/gitlab.yaml;
       owner = config.users.users.git.name;
-      group = config.users.users.git.group;
     };
     "gitlab/secret" = {
+      sopsFile = ../../secrets/services/gitlab.yaml;
       owner = config.users.users.git.name;
-      group = config.users.users.git.group;
     };
     "gitlab/jws" = {
+      sopsFile = ../../secrets/services/gitlab.yaml;
       owner = config.users.users.git.name;
-      group = config.users.users.git.group;
     };
     "gitlab/db" = {
+      sopsFile = ../../secrets/services/gitlab.yaml;
       owner = config.users.users.git.name;
-      group = config.users.users.git.group;
     };
     "gitlab/otp" = {
+      sopsFile = ../../secrets/services/gitlab.yaml;
       owner = config.users.users.git.name;
-      group = config.users.users.git.group;
     };
   };
 
@@ -146,7 +166,7 @@
   services.caddy = {
     enable = true;
     configFile = ./Caddyfile;
-    environmentFile = "/run/secrets/caddy";
+    environmentFile = config.sops.secrets."caddy/env".path;
     logFormat = lib.mkForce "level INFO";
   };
 
