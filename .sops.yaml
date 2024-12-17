@@ -1,0 +1,61 @@
+keys:
+  - &chunk age1eg6sxflw6l44fp20sl068sampwd95fm0mnh4ssegrhtktgm50ptqcuspyn
+  - &yt age1sy0at69err83qyml2vqu8xvwjccfws447aaadfvacj2qluw3p45s2mtrw8
+creation_rules:
+  - path_regex: secrets/de3911/yt.yaml
+    key_groups:
+      - age:
+        - *yt
+  - path_regex: secrets/de3911/chunk.yaml
+    key_groups:
+      - age:
+        - *chunk
+  - path_regex: secrets/services/ntfy.yaml
+    key_groups:
+      - age:
+        - *chunk
+        - *yt
+  - path_regex: secrets/restic/yt.yaml
+    key_groups:
+      - age:
+        - *yt
+  - path_regex: secrets/borg/yt.yaml
+    key_groups:
+      - age:
+        - *yt
+  - path_regex: secrets/borg/chunk.yaml
+    key_groups:
+      - age:
+        - *chunk
+  - path_regex: secrets/wireguard/yt.yaml
+    key_groups:
+      - age:
+        - *yt
+  - path_regex: secrets/wireguard/chunk.yaml
+    key_groups:
+      - age:
+        - *chunk
+  - path_regex: secrets/services/caddy.yaml
+    key_groups:
+      - age:
+        - *chunk
+  - path_regex: secrets/services/hedgedoc.yaml
+    key_groups:
+      - age:
+        - *chunk
+  - path_regex: secrets/services/miniflux.yaml
+    key_groups:
+      - age:
+        - *chunk
+  - path_regex: secrets/services/gitlab.yaml
+    key_groups:
+      - age:
+        - *chunk
+  - path_regex: secrets/services/vaultwarden.yaml
+    key_groups:
+      - age:
+        - *chunk
+  - path_regex: secrets/rclone/chunk.yaml
+    key_groups:
+      - age:
+        - *chunk

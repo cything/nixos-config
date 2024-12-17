@@ -1,8 +1,8 @@
-{...}: {
+{config, ...}: {
   services.vaultwarden = {
     enable = true;
     dbBackend = "postgresql";
-    environmentFile = "/run/secrets/vaultwarden";
+    environmentFile = config.sops.secrets."vaultwarden/env".path;
     config = {
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = "8081";

@@ -1,7 +1,7 @@
-{...}: {
+{config, ...}: {
   services.miniflux = {
     enable = true;
-    adminCredentialsFile = "/run/secrets/miniflux";
+    adminCredentialsFile = config.sops.secrets."miniflux/env".path;
     config = {
       PORT = 8080;
       BASE_URL = "https://rss.cything.io";

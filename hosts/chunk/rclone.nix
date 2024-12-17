@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   systemd.services.immich-mount = {
     enable = true;
     description = "Mount the immich data remote";
@@ -10,7 +14,7 @@
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/photos";
       ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --transfers=32 --dir-cache-time 720h --poll-interval 0 --vfs-cache-mode writes photos: /mnt/photos ";
       ExecStop = "/bin/fusermount -u /mnt/photos";
-      EnvironmentFile = "/run/secrets/rclone";
+      EnvironmentFile = config.sops.secrets."rclone/env".path;
     };
   };
 
@@ -24,7 +28,7 @@
       Type = "notify";
       ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --uid 33 --gid 0 --allow-other --file-perms 0770 --dir-perms 0770 --transfers=32 rsyncnet:nextcloud /mnt/nextcloud";
       ExecStop = "/bin/fusermount -u /mnt/nextcloud";
-      EnvironmentFile = "/run/secrets/rclone";
+      EnvironmentFile = config.sops.secrets."rclone/env".path;
     };
   };
   programs.fuse.userAllowOther = true;

@@ -1,7 +1,7 @@
-{...}: {
+{config, ...}: {
   services.hedgedoc = {
     enable = true;
-    environmentFile = "/run/secrets/hedgedoc";
+    environmentFile = config.sops.secrets."hedgedoc/env".path;
     settings = {
       db = {
         username = "hedgedoc";
