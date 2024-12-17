@@ -1,7 +1,4 @@
 {
-  inputs,
-  outputs,
-  lib,
   config,
   pkgs,
   ...
@@ -11,17 +8,18 @@
     ../common.nix
   ];
 
+  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
-    "services/borg/yt" = {
-      sopsFile = ../../secrets/services/borg/yt.yaml;
+    "borg/rsyncnet" = {
+      sopsFile = ../../secrets/borg/yt.yaml;
     };
     "services/ntfy" = {
       sopsFile = ../../secrets/services/ntfy.yaml;
     };
-    "wireguard/yt/private" = {
+    "wireguard/private" = {
       sopsFile = ../../secrets/wireguard/yt.yaml;
     };
-    "wireguard/yt/psk" = {
+    "wireguard/psk" = {
       sopsFile = ../../secrets/wireguard/yt.yaml;
     };
   };
@@ -187,7 +185,7 @@
     repo = "de3911@de3911.rsync.net:borg/yt";
     encryption = {
       mode = "repokey-blake2";
-      passCommand = ''cat ${config.sops.secrets."borg/yt/rsyncnet".path}"'';
+      passCommand = ''cat ${config.sops.secrets."borg/rsyncnet".path}'';
     };
     environment = {
       BORG_RSH = "ssh -i /home/yt/.ssh/id_ed25519";
@@ -199,7 +197,7 @@
     # warnings are often not that serious
     failOnWarnings = false;
     postHook = ''
-      ${pkgs.curl}/bin/curl -u $(cat ${config.sops.secrets."services/ntfy/ntfy".path}) -d "ytnixRsync: backup completed with exit code: $exitStatus
+      ${pkgs.curl}/bin/curl -u $(cat ${config.sops.secrets."services/ntfy".path}) -d "ytnixRsync: backup completed with exit code: $exitStatus
       $(journalctl -u borgbackup-job-ytnixRsync.service|tail -n 5)" \
       https://ntfy.cything.io/chunk
     '';
@@ -288,14 +286,14 @@
   # wireguard setup
   networking.wg-quick.interfaces.wg0 = {
     address = ["10.0.0.2/24" "fdc9:281f:04d7:9ee9::2/64"];
-    privateKeyFile = config.sops.secrets."wireguard/yt/private".path;
+    privateKeyFile = config.sops.secrets."wireguard/private".path;
     peers = [
       {
         publicKey = "a16/F/wP7HQIUtFywebqPSXQAktPsLgsMLH9ZfevMy0=";
         allowedIPs = ["0.0.0.0/0" "::/0"];
         endpoint = "31.59.129.225:51820";
         persistentKeepalive = 25;
-        presharedKeyFile = config.sops.secrets."wireguard/yt/psk".path;
+        presharedKeyFile = config.sops.secrets."wireguard/psk".path;
       }
     ];
   };

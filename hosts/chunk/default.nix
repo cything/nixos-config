@@ -24,8 +24,6 @@
     ./tor.nix
   ];
 
-  sops.defaultSopsFile = ./secrets.yaml;
-  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
     "borg/crash" = {};
     "ntfy" = {};
