@@ -181,6 +181,7 @@
       "**/.rustup"
       "**/.docker"
       "**/borg"
+      "/home/yt/fun/nixpkgs"
     ];
     repo = "de3911@de3911.rsync.net:borg/yt";
     encryption = {
