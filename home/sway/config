@@ -40,9 +40,7 @@ bindsym $mod+period exec $emoji
 bindsym $mod+$alt+b exec $browser
 bindsym $mod+$alt+a exec anki
 bindsym $mod+$alt+f exec thunar
-bindsym $mod+$alt+p exec pomatez
 bindsym $mod+$alt+e exec evolution
-bindsym $mod+$alt+c exec korganizer
 bindsym $mod+p exec bitwarden
 bindsym $mod+$alt+m exec element-desktop
 
@@ -149,7 +147,6 @@ input "type:keyboard" {
 
 exec wl-paste --watch cliphist store
 exec mako >> $HOME/mako.log 2>&1
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec dbus-update-activation-environment --all
 
 exec swayidle -w \
@@ -157,10 +154,5 @@ exec swayidle -w \
   timeout 305 $lock \
   resume 'swaymsg "output * power on"' \
   before-sleep 'playerctl pause; swaylock -f'
-
-exec aw-server
-exec aw-watcher-window-wayland
-
-include /etc/sway/config.d/*
 
 exec system-dnotify --ready
