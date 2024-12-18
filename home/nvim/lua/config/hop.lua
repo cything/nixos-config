@@ -7,10 +7,10 @@ hop.setup {
   quit_key = "<Esc",
 }
 
-keymap.set({ 'n', 'v', 'o' }, 'F', "", {
+keymap.set({ 'n', 'v', 'o' }, 't', "", {
   silent = true;
   noremap = true;
   callback = function()
-    hop.hint_char2()
+    hop.hint_char1()
   end,
 })
