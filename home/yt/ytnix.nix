@@ -119,8 +119,9 @@
     borderRadius = 10;
     font = "DejaVu Sans Mono 11";
     padding = "10";
-    textColor = "#777777";
+    textColor = "#ffffff";
     extraConfig = ''
+      [urgency=high]
       background-color=#c00000
       border-color=#ff0000
     '';
