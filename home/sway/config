@@ -123,7 +123,7 @@ bindsym $mod+Control+l exec $lock
 
 font pango:$font_family $font_size
 
-for_window [app_id=mpv] floating enable, sticky enable, inhibit_idle open
+for_window [app_id=mpv] floating enable, inhibit_idle open
 for_window [class="pomatez"] floating enable, sticky enable
 for_window [class="PacketTracer"] floating enable, border normal
 for_window [app_id="LibreWolf" title="^Extension"] floating enable
