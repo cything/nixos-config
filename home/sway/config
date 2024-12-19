@@ -8,7 +8,7 @@ set $right l
 set $term $HOME/.config/sway/scripts/terminal.sh
 set $menu rofi -show run
 set $screenshot grim -g "$(slurp)" - | wl-copy
-set $browser chromium
+set $browser librewolf
 set $clipboard rofi -show clipboard -show-icons
 set $emoji rofi -show emoji
 
