@@ -2,11 +2,12 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   virtualisation.oci-containers.containers.conduit = {
     image = "matrixconduit/matrix-conduit:latest";
     autoStart = true;
-    ports = ["127.0.0.1:8448:8448"];
+    ports = [ "127.0.0.1:8448:8448" ];
     pull = "newer";
     environment = {
       CONDUIT_SERVER_NAME = "cything.io";
@@ -24,7 +25,7 @@
     volumes = [
       "/opt/conduit/db:/var/lib/matrix-conduit/"
     ];
-    networks = ["conduit-net"];
+    networks = [ "conduit-net" ];
   };
 
   systemd.services.create-conduit-net = {

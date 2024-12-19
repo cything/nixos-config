@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.gitlab = {
     enable = true;
     https = true;

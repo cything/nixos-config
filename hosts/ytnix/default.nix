@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ../common.nix
@@ -53,11 +54,14 @@
       dns = "none";
       wifi.backend = "iwd";
     };
-    nameservers = ["31.59.129.225" "2a0f:85c1:840:2bfb::1"];
+    nameservers = [
+      "31.59.129.225"
+      "2a0f:85c1:840:2bfb::1"
+    ];
     resolvconf.enable = true;
     firewall = {
-      allowedUDPPorts = [51820]; # for wireguard
-      trustedInterfaces = ["wg0"];
+      allowedUDPPorts = [ 51820 ]; # for wireguard
+      trustedInterfaces = [ "wg0" ];
     };
   };
   programs.nm-applet.enable = true;
@@ -76,7 +80,10 @@
         "bluez5.enable-sbc-xq" = true;
         "bluez5.enable-msbc" = true;
         "bluez5.enable-hw-volume" = true;
-        "bluez5.roles" = ["a2dp_sink" "a2dp_source"];
+        "bluez5.roles" = [
+          "a2dp_sink"
+          "a2dp_source"
+        ];
       };
     };
     # https://wiki.archlinux.org/title/Bluetooth_headset#Connecting_works,_sound_plays_fine_until_headphones_become_idle,_then_stutters
@@ -100,7 +107,11 @@
 
   users.users.yt = {
     isNormalUser = true;
-    extraGroups = ["wheel" "libvirtd" "docker"];
+    extraGroups = [
+      "wheel"
+      "libvirtd"
+      "docker"
+    ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
@@ -168,7 +179,14 @@
   programs.sway.enable = true;
 
   services.borgbackup.jobs.ytnixRsync = {
-    paths = ["/root" "/home" "/var/lib" "/var/log" "/opt" "/etc"];
+    paths = [
+      "/root"
+      "/home"
+      "/var/lib"
+      "/var/log"
+      "/opt"
+      "/etc"
+    ];
     exclude = [
       "**/.cache"
       "**/node_modules"
@@ -194,11 +212,13 @@
     };
     compression = "auto,zstd";
     startAt = "daily";
-    extraCreateArgs = ["--stats"];
+    extraCreateArgs = [ "--stats" ];
     # warnings are often not that serious
     failOnWarnings = false;
     postHook = ''
-      ${pkgs.curl}/bin/curl -u $(cat ${config.sops.secrets."services/ntfy".path}) -d "ytnixRsync: backup completed with exit code: $exitStatus
+      ${pkgs.curl}/bin/curl -u $(cat ${
+        config.sops.secrets."services/ntfy".path
+      }) -d "ytnixRsync: backup completed with exit code: $exitStatus
       $(journalctl -u borgbackup-job-ytnixRsync.service|tail -n 5)" \
       https://ntfy.cything.io/chunk
     '';
@@ -211,8 +231,8 @@
       snapshot_preserve_min = "2d";
       snapshot_dir = "/snapshots";
       subvolume = {
-        "/home" = {};
-        "/" = {};
+        "/home" = { };
+        "/" = { };
       };
     };
   };
@@ -286,12 +306,18 @@
 
   # wireguard setup
   networking.wg-quick.interfaces.wg0 = {
-    address = ["10.0.0.2/24" "fdc9:281f:04d7:9ee9::2/64"];
+    address = [
+      "10.0.0.2/24"
+      "fdc9:281f:04d7:9ee9::2/64"
+    ];
     privateKeyFile = config.sops.secrets."wireguard/private".path;
     peers = [
       {
         publicKey = "a16/F/wP7HQIUtFywebqPSXQAktPsLgsMLH9ZfevMy0=";
-        allowedIPs = ["0.0.0.0/0" "::/0"];
+        allowedIPs = [
+          "0.0.0.0/0"
+          "::/0"
+        ];
         endpoint = "31.59.129.225:51820";
         persistentKeepalive = 25;
         presharedKeyFile = config.sops.secrets."wireguard/psk".path;

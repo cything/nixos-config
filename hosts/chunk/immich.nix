@@ -2,18 +2,20 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   uploadLocation = "/mnt/photos/immich";
   thumbsLocation = "/opt/immich/thumbs";
   profileLocation = "/opt/immich/profile";
   dbDataLocation = "/opt/immich/postgres";
   modelCache = "/opt/immich-ml";
-in {
+in
+{
   virtualisation.oci-containers.containers = {
     immich-server = {
       image = "ghcr.io/immich-app/immich-server:release";
       autoStart = true;
-      ports = ["127.0.0.1:2283:2283"];
+      ports = [ "127.0.0.1:2283:2283" ];
       pull = "newer";
       volumes = [
         "${uploadLocation}:/usr/src/app/upload"
@@ -24,15 +26,18 @@ in {
         REDIS_HOSTNAME = "immich-redis";
         DB_HOSTNAME = "immich-db";
       };
-      networks = ["immich-net"];
-      dependsOn = ["immich-db" "immich-redis"];
+      networks = [ "immich-net" ];
+      dependsOn = [
+        "immich-db"
+        "immich-redis"
+      ];
     };
 
     immich-redis = {
       image = "redis:6.2-alpine";
       autoStart = true;
       pull = "newer";
-      networks = ["immich-net"];
+      networks = [ "immich-net" ];
     };
 
     immich-db = {
@@ -45,17 +50,23 @@ in {
         POSTGRES_DB = "immich";
         POSTGRES_INITDB_ARGS = "--data-checksums";
       };
-      volumes = ["${dbDataLocation}:/var/lib/postgresql/data"];
+      volumes = [ "${dbDataLocation}:/var/lib/postgresql/data" ];
       cmd = [
         "postgres"
-        "-c" "shared_preload_libraries=vectors.so"
-        "-c" ''search_path="$$user", public, vectors''
-        "-c" "logging_collector=on"
-        "-c" "max_wal_size=2GB"
-        "-c" "shared_buffers=512MB"
-        "-c" "wal_compression=on"
+        "-c"
+        "shared_preload_libraries=vectors.so"
+        "-c"
+        ''search_path="$$user", public, vectors''
+        "-c"
+        "logging_collector=on"
+        "-c"
+        "max_wal_size=2GB"
+        "-c"
+        "shared_buffers=512MB"
+        "-c"
+        "wal_compression=on"
       ];
-      networks = ["immich-net"];
+      networks = [ "immich-net" ];
     };
 
     immich-ml = {
@@ -66,8 +77,8 @@ in {
         REDIS_HOSTNAME = "immich-redis";
         DB_HOSTNAME = "immich-db";
       };
-      volumes = ["${modelCache}:/cache"];
-      networks = ["immich-net"];
+      volumes = [ "${modelCache}:/cache" ];
+      networks = [ "immich-net" ];
     };
   };
 

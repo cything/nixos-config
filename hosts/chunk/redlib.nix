@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.redlib = {
     enable = true;
     port = 8087;

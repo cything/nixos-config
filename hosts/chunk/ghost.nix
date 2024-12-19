@@ -2,11 +2,12 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   virtualisation.oci-containers.containers.ghost = {
     image = "ghost:5-alpine";
     autoStart = true;
-    ports = ["127.0.0.1:8084:2368"];
+    ports = [ "127.0.0.1:8084:2368" ];
     pull = "newer";
     environment = {
       database__client = "mysql";
@@ -20,8 +21,8 @@
     volumes = [
       "/opt/ghost/data:/var/lib/ghost/content"
     ];
-    networks = ["ghost-net"];
-    dependsOn = ["ghost-db"];
+    networks = [ "ghost-net" ];
+    dependsOn = [ "ghost-db" ];
   };
 
   virtualisation.oci-containers.containers.ghost-db = {
@@ -34,7 +35,7 @@
     volumes = [
       "/opt/ghost/db:/var/lib/mysql"
     ];
-    networks = ["ghost-net"];
+    networks = [ "ghost-net" ];
   };
 
   systemd.services.create-ghost-net = {

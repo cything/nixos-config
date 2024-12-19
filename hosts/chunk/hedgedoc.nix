@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.hedgedoc = {
     enable = true;
     environmentFile = config.sops.secrets."hedgedoc/env".path;

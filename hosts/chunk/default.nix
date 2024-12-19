@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ../common.nix
@@ -91,9 +92,20 @@
   networking.networkmanager.enable = true;
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 80 443 53 853];
-    allowedUDPPorts = [443 51820 53 853]; # 51820 is wireguard
-    trustedInterfaces = ["wg0"];
+    allowedTCPPorts = [
+      22
+      80
+      443
+      53
+      853
+    ];
+    allowedUDPPorts = [
+      443
+      51820
+      53
+      853
+    ]; # 51820 is wireguard
+    trustedInterfaces = [ "wg0" ];
   };
   networking.interfaces.ens18 = {
     ipv6.addresses = [
@@ -117,7 +129,10 @@
     address = "31.59.129.1";
     interface = "ens18";
   };
-  networking.nameservers = ["127.0.0.1" "::1"];
+  networking.nameservers = [
+    "127.0.0.1"
+    "::1"
+  ];
 
   time.timeZone = "America/Toronto";
 
@@ -129,12 +144,20 @@
 
   users.users.yt = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "podman"];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdhAQYy0+vS+QmyCd0MAbqbgzyMGcsuuFyf6kg2yKge yt@ytlinux"];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "podman"
+    ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdhAQYy0+vS+QmyCd0MAbqbgzyMGcsuuFyf6kg2yKge yt@ytlinux"
+    ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
-  users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdhAQYy0+vS+QmyCd0MAbqbgzyMGcsuuFyf6kg2yKge yt@ytlinux"];
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdhAQYy0+vS+QmyCd0MAbqbgzyMGcsuuFyf6kg2yKge yt@ytlinux"
+  ];
 
   environment.systemPackages = with pkgs; [
     vim

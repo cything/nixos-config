@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
@@ -8,7 +9,7 @@
     channel.enable = false;
     optimise = {
       automatic = true;
-      dates = ["03:45"];
+      dates = [ "03:45" ];
     };
     gc = {
       automatic = true;

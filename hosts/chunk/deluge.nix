@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.deluge = {
     enable = true;
     web = {
