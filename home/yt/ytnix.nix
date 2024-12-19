@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 {
@@ -107,6 +106,8 @@
     python312Packages.python-lsp-server
     gopls
     anki-bin
+    trezorctl
+    trezor-agent
   ];
 
   programs.waybar.enable = true;

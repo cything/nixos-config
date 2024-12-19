@@ -324,4 +324,6 @@
       }
     ];
   };
+
+  services.trezord.enable = true;
 }
