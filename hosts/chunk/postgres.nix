@@ -19,5 +19,8 @@
       host  all all 172.18.0.0/16 trust
     '';
   };
-  services.postgresqlBackup.enable = true;
+  services.postgresqlBackup = {
+    enable = true;
+    startAt = "hourly";
+  };
 }
