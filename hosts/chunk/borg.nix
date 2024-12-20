@@ -31,13 +31,16 @@
         passCommand = "cat ${config.sops.secrets."borg/rsyncnet".path}";
       };
       environment = {
-        BORG_RSH = ''ssh -i ${config.sops.secrets."rsyncnet/id_ed25519"}'';
+        BORG_RSH = ''ssh -i ${config.sops.secrets."rsyncnet/id_ed25519".path}'';
         BORG_REMOTE_PATH = "borg1";
         BORG_EXIT_CODES = "modern";
       };
       compression = "auto,zstd";
       startAt = "hourly";
-      extraCreateArgs = [ "--stats" "-x" ];
+      extraCreateArgs = [
+        "--stats"
+        "-x"
+      ];
       # warnings are often not that serious
       failOnWarnings = false;
       postHook = ''

@@ -216,7 +216,10 @@
     };
     compression = "auto,zstd";
     startAt = "daily";
-    extraCreateArgs = [ "--stats" "-x" ];
+    extraCreateArgs = [
+      "--stats"
+      "-x"
+    ];
     # warnings are often not that serious
     failOnWarnings = false;
     postHook = ''
