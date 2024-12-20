@@ -209,6 +209,7 @@
     environment = {
       BORG_RSH = "ssh -i /home/yt/.ssh/id_ed25519";
       BORG_REMOTE_PATH = "borg1";
+      BORG_EXIT_CODES = "modern";
     };
     compression = "auto,zstd";
     startAt = "daily";
