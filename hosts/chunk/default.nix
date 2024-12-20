@@ -79,6 +79,9 @@
       sopsFile = ../../secrets/services/gitlab.yaml;
       owner = config.users.users.git.name;
     };
+    "rsyncnet/id_ed25519" = {
+      sopsFile = ../../secrets/de3911/chunk.yaml;
+    };
   };
 
   boot.loader.grub.enable = true;
