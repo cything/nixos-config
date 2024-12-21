@@ -32,6 +32,7 @@ opt.undofile = true
 opt.termguicolors = true
 opt.showmode = false
 opt.mouse = ""
+opt.wrap = false
 
 vim.cmd.colorscheme "tokyonight-night"
 
