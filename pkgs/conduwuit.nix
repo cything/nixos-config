@@ -37,12 +37,19 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "girlbossceo";
     repo = "conduwuit";
-    rev = "58be22e69557f7045ad3fd433a438b33150ecd83";
-    hash = "sha256-pHMD8JRCHO0vRp7M5SPy2Ag6YbvHubwwRCjdskriN8I=";
+    rev = "7f645ff0e9111cc6e05e3abc1abad7d0b1f6a5a9";
+    hash = "sha256-GgpdkQzJH4uu396DurvaxqrvJe3F25wm2gMqT35z45A=";
   };
 
-  useFetchCargoVendor = true;
-  cargoHash = "sha256-T55avmRKq3j6G+WxlTCEqTzF5Lbh0qsk9WVxocVhtIM=";
+  cargoLock = {
+    lockFile = ./Cargo.lock;
+    allowBuiltinFetchGit = true;
+    # outputHashes = {
+    #   "ruma-0.10.1" = lib.fakeHash;
+    #   "rust-librocksdb-sys-0.31.0+9.9.3" = lib.fakeHash;
+    #   "rustyline-async-0.4.3" = lib.fakeHash;
+    # };
+  };
 
   nativeBuildInputs = [
     pkg-config
