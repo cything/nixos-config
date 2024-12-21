@@ -18,5 +18,11 @@
       jwsFile = config.sops.secrets."gitlab/jws".path;
       dbFile = config.sops.secrets."gitlab/db".path;
     };
+    backup = {
+      startAt = "daily";
+      # we already postgresqlbackup.service
+      skip = [ "db" ];
+      keepTime = 48; # hours
+    };
   };
 }
