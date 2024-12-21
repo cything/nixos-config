@@ -44,6 +44,9 @@
       zstyle ':completion:*' menu no
       zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
       zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-prewview 'ls $realpath'
+
+      #disable control+s to pause terminal
+      unsetopt FLOW_CONTROL
     '';
     shellAliases = {
       "vi" = "nvim";
