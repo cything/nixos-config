@@ -20,7 +20,7 @@
     ];
     prefix = "C-f";
     sensibleOnTop = true;
-    terminal = "tmux-256color";
+    terminal = "foot";
     extraConfig = ''
       bind h select-pane -L
       bind j select-pane -D

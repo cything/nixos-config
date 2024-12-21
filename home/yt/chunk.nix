@@ -40,5 +40,6 @@
     yt-dlp
     gnumake
     btop
+    foot.terminfo
   ];
 }
