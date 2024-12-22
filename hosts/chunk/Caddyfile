@@ -49,9 +49,11 @@ ntfy.cything.io {
 cything.io {
   import common
   uri strip_prefix /blog
-  reverse_proxy /.well-known/matrix/* localhost:8448
   reverse_proxy /_matrix/* localhost:8448
   reverse_proxy localhost:8084
+
+  respond /.well-known/matrix/server {"m.server":"chat.cything.io:443"}
+  respond /.well-known/matrix/client {"m.server":{"base_url":"https://chat.cything.io"},"m.homeserver":{"base_url":"https://chat.cything.io"},"org.matrix.msc3575.proxy":{"url":"https://chat.cything.io"}}
 }
 
 www.cything.io {

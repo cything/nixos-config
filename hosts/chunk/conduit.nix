@@ -5,25 +5,24 @@
 }:
 {
   virtualisation.oci-containers.containers.conduit = {
-    image = "matrixconduit/matrix-conduit:latest";
+    image = "ghcr.io/girlbossceo/conduwuit:main";
     autoStart = true;
     ports = [ "127.0.0.1:8448:8448" ];
     pull = "newer";
     environment = {
-      CONDUIT_SERVER_NAME = "cything.io";
-      CONDUIT_DATABASE_PATH = "/var/lib/matrix-conduit/";
-      CONDUIT_DATABASE_BACKEND = "rocksdb";
-      CONDUIT_PORT = "8448";
-      CONDUIT_MAX_REQUEST_SIZE = "20000000"; # in bytes ~20MB
-      CONDUIT_ALLOW_REGISTRATION = "false";
-      CONDUIT_ALLOW_FEDERATION = "true";
-      CONDUIT_ALLOW_CHECK_FOR_UPDATES = "true";
-      CONDUIT_TRUSTED_SERVERS = ''["matrix.org"]'';
-      CONDUIT_ADDRESS = "0.0.0.0";
-      CONDUIT_CONFIG = "";
+      CONDUWUIT_SERVER_NAME = "cything.io";
+      CONDUWUIT_DATABASE_PATH = "/var/lib/conduwuit";
+      CONDUWUIT_PORT = "8448";
+      CONDUWUIT_MAX_REQUEST_SIZE = "20000000"; # in bytes ~20MB
+      CONDUWUIT_ALLOW_REGISTRATION = "false";
+      CONDUWUIT_ALLOW_FEDERATION = "true";
+      CONDUWUIT_ALLOW_CHECK_FOR_UPDATES = "true";
+      CONDUWUIT_TRUSTED_SERVERS = ''["matrix.org"]'';
+      CONDUWUIT_ADDRESS = "0.0.0.0";
+      # CONDUIT_CONFIG = "";
     };
     volumes = [
-      "/opt/conduit/db:/var/lib/matrix-conduit/"
+      "/opt/conduit/db:/var/lib/conduwuit/"
     ];
     networks = [ "conduit-net" ];
   };
