@@ -17,32 +17,30 @@
         blink = "yes";
         blink-rate = 500;
         beam-thickness = 1.5;
-        color= "002b36 93a1a1";
       };
       mouse = {
         hide-when-typing = "yes";
       };
       # tokyonight: https://codeberg.org/dnkl/foot/src/branch/master/themes/tokyonight-night
       colors = {
-        background = "002b36";
-        foreground = "839496";
-        regular0 =   "073642";
-        regular1 =   "dc322f";
-        regular2 =   "859900";
-        regular3 =   "b58900";
-        regular4 =   "268bd2";
-        regular5 =   "d33682";
-        regular6 =   "2aa198";
-        regular7 =   "eee8d5";
-
-        bright0 = "08404f";
-        bright1 = "e35f5c";
-        bright2 = "9fb700";
-        bright3 = "d9a400";
-        bright4 = "4ba1de";
-        bright5 = "dc619d";
-        bright6 = "32c1b6";
-        bright7 = "ffffff";
+        background = "1a1b26";
+        foreground = "c0caf5";
+        regular0 = "15161E";
+        regular1 = "f7768e";
+        regular2 = "9ece6a";
+        regular3 = "e0af68";
+        regular4 = "7aa2f7";
+        regular5 = "bb9af7";
+        regular6 = "7dcfff";
+        regular7 = "a9b1d6";
+        bright0 = "414868";
+        bright1 = "f7768e";
+        bright2 = "9ece6a";
+        bright3 = "e0af68";
+        bright4 = "7aa2f7";
+        bright5 = "bb9af7";
+        bright6 = "7dcfff";
+        bright7 = "c0caf5";
       };
 
       key-bindings = {
