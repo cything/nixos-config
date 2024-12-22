@@ -89,11 +89,8 @@
     yarn
     rclone
     go
-    rustc
-    cargo
+    rustup
     clang_19
-    rust-analyzer
-    clippy
     pwgen
     lua-language-server
     gnumake
@@ -102,7 +99,6 @@
     unzip
     lm_sensors
     sshfs
-    nextcloud-client
     python312Packages.python-lsp-server
     gopls
     anki
