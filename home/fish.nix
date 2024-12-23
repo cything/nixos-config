@@ -1,17 +1,7 @@
-{pkgs, ...}: {
+{ ... }:
+{
   programs.fish = {
     enable = true;
-    plugins = [
-    {
-      name = "colored-man-pages";
-      src = pkgs.fetchFromGitHub {
-        owner = "PatrickF1";
-        repo = "colored_man_pages.fish";
-        rev = "f885c2507128b70d6c41b043070a8f399988bc7a";
-        hash = "sha256-ii9gdBPlC1/P1N9xJzqomrkyDqIdTg+iCg0mwNVq2EU=";
-      };
-    }
-    ];
     shellAliases = {
       "vi" = "nvim";
       "vim" = "nvim";
@@ -45,15 +35,7 @@
     };
   };
 
-  programs.fzf = {
-    enableFishIntegration = true;
-  };
-
-  programs.zoxide = {
-    enableFishIntegration = true;
-  };
-
-  programs.eza = {
-    enableFishIntegration = true;
-  };
+  programs.fzf.enableFishIntegration = true;
+  programs.zoxide.enableFishIntegration = true;
+  programs.eza.enableFishIntegration = true;
 }
