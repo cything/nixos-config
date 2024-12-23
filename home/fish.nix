@@ -33,6 +33,10 @@
       "gs" = "git status --short";
       "gss" = "git status";
     };
+
+    shellInit = ''
+      set fish_greeting
+    '';
   };
 
   programs.fzf.enableFishIntegration = true;
