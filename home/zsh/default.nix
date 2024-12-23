@@ -87,4 +87,5 @@
   programs.fzf.enableZshIntegration = true;
   programs.zoxide.enableZshIntegration = true;
   programs.eza.enableZshIntegration = true;
+  programs.nix-index.enableZshIntegration = true;
 }

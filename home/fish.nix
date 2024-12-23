@@ -42,4 +42,5 @@
   programs.fzf.enableFishIntegration = true;
   programs.zoxide.enableFishIntegration = true;
   programs.eza.enableFishIntegration = true;
+  programs.nix-index.enableFishIntegration = true;
 }

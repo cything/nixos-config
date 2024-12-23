@@ -1,4 +1,4 @@
-{ ... }:
+{pkgs, ... }:
 {
   nix = {
     settings = {
@@ -24,9 +24,8 @@
   # this is true by default and mutually exclusive with
   # programs.nix-index
   programs.command-not-found.enable = false;
-  programs.nix-index = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.nix-index.enable = true;
 
+  users.users.yt.shell = pkgs.fish;
+  programs.fish.enable = true;
 }

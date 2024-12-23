@@ -115,9 +115,7 @@
       "libvirtd"
       "docker"
     ];
-    shell = pkgs.fish;
   };
-  programs.fish.enable = true;
 
   environment.systemPackages = with pkgs; [
     tmux
