@@ -15,7 +15,7 @@
       automatic = true;
       dates = "19:00";
       persistent = true;
-      options = "--delete-older-than 60d";
+      options = "--delete-older-than 14d";
     };
   };
   time.timeZone = "America/Toronto";
