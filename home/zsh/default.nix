@@ -84,19 +84,8 @@
     };
   };
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-    options = [ "--cmd cd" ];
-  };
-
-  programs.eza = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.fzf.enableZshIntegration = true;
+  programs.zoxide.enableZshIntegration = true;
+  programs.eza.enableZshIntegration = true;
+  programs.nix-index.enableZshIntegration = true;
 }

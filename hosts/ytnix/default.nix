@@ -115,9 +115,7 @@
       "libvirtd"
       "docker"
     ];
-    shell = pkgs.zsh;
   };
-  programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
     tmux
@@ -280,14 +278,6 @@
   services.usbmuxd.enable = true;
   programs.nix-ld.enable = true;
   programs.evolution.enable = true;
-
-  # this is true by default and mutually exclusive with
-  # programs.nix-index
-  programs.command-not-found.enable = false;
-  programs.nix-index = {
-    enable = true;
-    enableZshIntegration = true;
-  };
 
   xdg.portal = {
     enable = true;

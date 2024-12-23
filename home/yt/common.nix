@@ -2,7 +2,7 @@
 {
   imports = [
     ../tmux.nix
-    ../zsh
+    ../fish.nix
   ];
 
   home.sessionVariables = {
@@ -19,4 +19,9 @@
     man
     man-db
   ];
+
+  programs.zoxide.options = [ "--cmd cd" ];
+  programs.fzf.enable = true;
+  programs.zoxide.enable = true;
+  programs.eza.enable = true;
 }
