@@ -20,4 +20,13 @@
   };
   time.timeZone = "America/Toronto";
   networking.firewall.logRefusedConnections = false;
+
+  # this is true by default and mutually exclusive with
+  # programs.nix-index
+  programs.command-not-found.enable = false;
+  programs.nix-index = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
 }
