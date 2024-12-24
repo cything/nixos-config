@@ -25,6 +25,7 @@
     ./ghost.nix
     ./conduit.nix
     ./immich.nix
+    ./element.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";

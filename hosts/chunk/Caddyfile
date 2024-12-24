@@ -75,3 +75,8 @@ grafana.cything.io {
   import common
   reverse_proxy localhost:8088
 }
+
+element.cything.io {
+  import common
+  reverse_proxy localhost:8089
+}
