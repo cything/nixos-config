@@ -154,5 +154,3 @@ configuration {
       sorting-method:    "name";
   }
 }
-
-@theme "/nix/store/nkjjc70cidfc3wbpas7kqr7agasma59c-rofi-1.7.5+wayland3/share/rofi/themes/gruvbox-dark.rasi"
