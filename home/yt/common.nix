@@ -24,4 +24,11 @@
   programs.fzf.enable = true;
   programs.zoxide.enable = true;
   programs.eza.enable = true;
+  programs.neovim.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "cy";
+    userEmail = "hi@cything.io";
+    delta.enable = true;
+  };
 }

@@ -1,9 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
-  inputs,
-  outputs,
   ...
 }:
 {
@@ -18,15 +14,6 @@
   programs.home-manager.enable = true;
 
   systemd.user.startServices = "sd-switch";
-
-  programs.git = {
-    enable = true;
-    userName = "cy";
-    userEmail = "hi@cything.io";
-    delta.enable = true;
-  };
-
-  programs.neovim.enable = true;
 
   home.packages = with pkgs; [
     lua-language-server

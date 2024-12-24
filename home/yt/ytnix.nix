@@ -43,22 +43,12 @@
     ANKI_WAYLAND = "1";
   };
 
-  programs.git = {
-    enable = true;
-    userName = "cy";
-    userEmail = "hi@cything.io";
-    delta.enable = true;
-  };
-
-  programs.neovim.enable = true;
-
   home.packages = with pkgs; [
     firefox
     ungoogled-chromium
     librewolf
     bitwarden-desktop
     bitwarden-cli
-    aerc
     fastfetch
     discord
     nwg-look
