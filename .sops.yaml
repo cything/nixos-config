@@ -74,3 +74,8 @@ creation_rules:
       - age:
         - *chunk
         - *cy
+  - path_regex: secrets/newsboat.yaml
+    key_groups:
+      - age:
+        - *yt
+        - *cy

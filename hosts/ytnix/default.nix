@@ -26,6 +26,10 @@
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/de3911/yt.yaml;
     };
+    "newsboat/miniflux" = {
+      sopsFile = ../../secrets/newsboat.yaml;
+      owner = "yt";
+    };
   };
 
   boot = {

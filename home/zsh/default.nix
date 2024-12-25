@@ -37,13 +37,25 @@
       searchDownKey = "^n";
     };
     initExtra = ''
-      #disable control+s to pause terminal
+      # disable control+s to pause terminal
       unsetopt FLOW_CONTROL
       # manually integrate fzf cause we need to make sure zsh-vi-mode
       # won't override C-r
       function zvm_after_init() {
         eval "$(${pkgs.fzf}/bin/fzf --zsh)"
       }
+
+      # fzf-tab stuff
+      # set description format to enable group support
+      zstyle ':completion:*:descriptions' format '[%d]'
+      # set list-colors to enable filename colorizing
+      zstyle ':completion:*' list-colors ''\${(s.:.)LS_COLORS}
+      # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+      zstyle ':completion:*' menu no
+      # preview directory's content with eza when completing cd
+      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+      # switch group using `<` and `>`
+      zstyle ':fzf-tab:*' switch-group '<' '>'
 
       source ${./p10k.zsh}
     '';
@@ -57,6 +69,11 @@
         name = "powerlevel10k";
         src = pkgs.zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.zsh";
       }
     ];
     shellAliases = {

@@ -120,4 +120,14 @@
     rofi.source = ../rofi;
     waybar.source = ../waybar;
   };
+
+  programs.newsboat = {
+    enable = true;
+    extraConfig = ''
+      urls-source "miniflux"
+      miniflux-url "https://rss.cything.io/"
+      miniflux-login "cy"
+      miniflux-passwordfile /run/secrets/newsboat/miniflux
+    '';
+  };
 }
