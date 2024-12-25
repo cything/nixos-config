@@ -88,7 +88,9 @@ local plugin_specs = {
     config = function()
       require("config.hop")
     end,
-  }
+  },
+
+  { "EdenEast/nightfox.nvim" }
 }
 
 require("lazy").setup({
