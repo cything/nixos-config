@@ -90,7 +90,7 @@ local plugin_specs = {
     end,
   },
 
-  { "EdenEast/nightfox.nvim" }
+  { "cocopon/iceberg.vim" }
 }
 
 require("lazy").setup({

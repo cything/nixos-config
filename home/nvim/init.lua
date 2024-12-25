@@ -34,7 +34,7 @@ opt.showmode = false
 opt.mouse = ""
 opt.wrap = false
 
-vim.cmd.colorscheme "nightfox"
+vim.cmd.colorscheme "iceberg"
 
 keymap.set("n", "<space>s", require("nvim-tree.api").tree.toggle, {
   desc = "toggle nvim-tree",
