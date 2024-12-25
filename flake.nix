@@ -39,10 +39,6 @@
     {
       packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
       formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
-      devShells = forEachSystem (pkgs: import ./shells { inherit pkgs; });
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
-      overlays = import ./overlays { inherit inputs outputs; };
 
       nixosConfigurations =
         let
