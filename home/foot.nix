@@ -21,26 +21,30 @@
       mouse = {
         hide-when-typing = "yes";
       };
-      # tokyonight: https://codeberg.org/dnkl/foot/src/branch/master/themes/tokyonight-night
+      # rose pine: https://codeberg.org/dnkl/foot/src/branch/master/themes/rose-pine
       colors = {
-        background = "1a1b26";
-        foreground = "c0caf5";
-        regular0 = "15161E";
-        regular1 = "f7768e";
-        regular2 = "9ece6a";
-        regular3 = "e0af68";
-        regular4 = "7aa2f7";
-        regular5 = "bb9af7";
-        regular6 = "7dcfff";
-        regular7 = "a9b1d6";
-        bright0 = "414868";
-        bright1 = "f7768e";
-        bright2 = "9ece6a";
-        bright3 = "e0af68";
-        bright4 = "7aa2f7";
-        bright5 = "bb9af7";
-        bright6 = "7dcfff";
-        bright7 = "c0caf5";
+        background = "191724";
+        foreground = "e0def4";
+
+        regular0 = "26233a"; # black (Overlay)
+        regular1 = "eb6f92"; # red (Love)
+        regular2 = "9ccfd8"; # green (Foam)
+        regular3 = "f6c177"; # yellow (Gold)
+        regular4 = "31748f"; # blue (Pine)
+        regular5 = "c4a7e7"; # magenta (Iris)
+        regular6 = "ebbcba"; # cyan (Rose)
+        regular7 = "e0def4"; # white (Text)
+
+        bright0 = "47435d"; # bright black (lighter Overlay)
+        bright1 = "ff98ba"; # bright red (lighter Love)
+        bright2 = "c5f9ff"; # bright green (lighter Foam)
+        bright3 = "ffeb9e"; # bright yellow (lighter Gold)
+        bright4 = "5b9ab7"; # bright blue (lighter Pine)
+        bright5 = "eed0ff"; # bright magenta (lighter Iris)
+        bright6 = "ffe5e3"; # bright cyan (lighter Rose)
+        bright7 = "fefcff"; # bright white (lighter Text)
+
+        flash = "f6c177"; # yellow (Gold)
       };
 
       key-bindings = {
