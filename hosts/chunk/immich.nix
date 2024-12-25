@@ -84,12 +84,13 @@ in
 
   systemd.services.create-immich-net = {
     serviceConfig.Type = "oneshot";
-    wantedBy = with config.virtualisation.oci-containers; [
+    requiredBy = with config.virtualisation.oci-containers; [
       "${backend}-immich.service"
       "${backend}-immich-db.service"
       "${backend}-immich-redis.service"
       # "${backend}-immich-ml.service"
     ];
+    before = config.systemd.services.create-immich-net.requiredBy;
     script = ''
       ${pkgs.podman}/bin/podman network exists immich-net || \
       ${pkgs.podman}/bin/podman network create immich-net

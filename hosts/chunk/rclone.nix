@@ -9,6 +9,7 @@
     description = "Mount the immich data remote";
     requires = [ "network-online.target" ];
     requiredBy = [ "podman-immich-server.service" ];
+    before = [ "podman-immich-server.service" ];
     serviceConfig = {
       Type = "notify";
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/photos";

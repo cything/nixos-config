@@ -26,7 +26,7 @@ photos.cy7.sh {
   reverse_proxy localhost:2283
 }
 
-matrix.cy7.sh, chat.cything.io {
+chat.cything.io {
   import common
   reverse_proxy localhost:8448
 }
