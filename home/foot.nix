@@ -21,29 +21,36 @@
       mouse = {
         hide-when-typing = "yes";
       };
-      # rose pine: https://codeberg.org/dnkl/foot/src/branch/master/themes/rose-pine
       colors = {
-        # Nightfox colors for Xresources
-        # Style: nightfox
-        # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nightfox/nightfox.Xresources
-        background = "192330";
-        foreground = "cdcecf";
-        regular0 =  "393b44";
-        regular1 =  "c94f6d";
-        regular2 =  "81b29a";
-        regular3 =  "dbc074";
-        regular4 =  "719cd6";
-        regular5 =  "9d79d6";
-        regular6 =  "63cdcf";
-        regular7 =  "dfdfe0";
-        bright0 =  "575860";
-        bright1 =  "d16983";
-        bright2 = "8ebaa4";
-        bright3 = "e0c989";
-        bright4 = "86abdc";
-        bright5 = "baa1e2";
-        bright6 = "7ad5d6";
-        bright7 = "e4e4e5";
+        background = "161821";
+        foreground = "c6c8d1";
+
+        selection-background = "1e2132";
+        selection-foreground = "c6c8d1";
+
+        regular0 = "161821";
+        bright0 = "6b7089";
+
+        regular1 = "e27878";
+        bright1 = "e98989";
+
+        regular2 = "b4be82";
+        bright2 = "c0ca8e";
+
+        regular3 = "e2a478";
+        bright3 = "e9b189";
+
+        regular4 = "84a0c6";
+        bright4 = "91acd1";
+
+        regular5 = "a093c7";
+        bright5 = "ada0d3";
+
+        regular6 = "89b8c2";
+        bright6 = "95c4ce";
+
+        regular7 = "c6c8d1";
+        bright7 = "d2d4de";
       };
 
       key-bindings = {
