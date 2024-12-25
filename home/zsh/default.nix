@@ -17,7 +17,11 @@
     autocd = true;
     defaultKeymap = "emacs";
 
-    initExtraFirst = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    initExtraFirst = ''
+      if [[ -r "''\${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''\${(%):-%n}.zsh" ]]; then
+        source "''\${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''\${(%):-%n}.zsh"
+      fi
+    '';
 
     history = {
       ignoreDups = true;
@@ -33,11 +37,22 @@
       searchDownKey = "^n";
     };
     initExtra = ''
-      source ${./p10k.zsh}
-
       #disable control+s to pause terminal
       unsetopt FLOW_CONTROL
+      source ${./p10k.zsh}
     '';
+    plugins = [
+      {
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
     shellAliases = {
       "vi" = "nvim";
       "vim" = "nvim";
