@@ -24,7 +24,7 @@
   # this is true by default and mutually exclusive with
   # programs.nix-index
   programs.command-not-found.enable = false;
-  programs.nix-index.enable = true;
+  programs.nix-index.enable = false;
 
   users.users.yt.shell = pkgs.zsh;
   programs.zsh.enable = true;
