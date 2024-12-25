@@ -26,6 +26,9 @@
   programs.command-not-found.enable = false;
   programs.nix-index.enable = true;
 
-  users.users.yt.shell = pkgs.fish;
-  programs.fish.enable = true;
+  users.users.yt.shell = pkgs.zsh;
+  programs.zsh.enable = true;
+
+  # needed for zsh.enableCompletion to work
+  environment.pathsToLink = [ "/share/zsh" ];
 }
