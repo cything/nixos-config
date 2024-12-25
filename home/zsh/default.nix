@@ -39,6 +39,12 @@
     initExtra = ''
       #disable control+s to pause terminal
       unsetopt FLOW_CONTROL
+      # manually integrate fzf cause we need to make sure zsh-vi-mode
+      # won't override C-r
+      function zvm_after_init() {
+        eval "$(${pkgs.fzf}/bin/fzf --zsh)"
+      }
+
       source ${./p10k.zsh}
     '';
     plugins = [
@@ -89,8 +95,8 @@
     };
   };
 
-  programs.fzf.enableZshIntegration = true;
+  programs.fzf.enableZshIntegration = false;
   programs.zoxide.enableZshIntegration = true;
   programs.eza.enableZshIntegration = true;
-  programs.nix-index.enableZshIntegration = true;
+  programs.nix-index.enableZshIntegration = false;
 }
