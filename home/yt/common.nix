@@ -2,7 +2,7 @@
 {
   imports = [
     ../tmux.nix
-    ../fish.nix
+    ../zsh
   ];
 
   home.sessionVariables = {

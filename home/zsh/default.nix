@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -9,28 +9,22 @@
         "completion"
       ];
     };
+    enableCompletion = true;
     syntaxHighlighting = {
       enable = true;
       highlighters = [ "brackets" ];
     };
     autocd = true;
     defaultKeymap = "emacs";
-    antidote = {
-      enable = true;
-      useFriendlyNames = true; # why not?
-      plugins = [
-        "zsh-users/zsh-completions"
-        "romkatv/powerlevel10k"
-        "Aloxaf/fzf-tab"
-        "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
-      ];
-    };
+
+    initExtraFirst = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+
     history = {
       ignoreDups = true;
       ignoreAllDups = true;
       ignoreSpace = true;
-      save = 50000;
-      size = 50000;
+      save = 10000;
+      size = 10000;
       append = true;
     };
     historySubstringSearch = {
@@ -40,10 +34,6 @@
     };
     initExtra = ''
       source ${./p10k.zsh}
-      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-      zstyle ':completion:*' menu no
-      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
-      zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-prewview 'ls $realpath'
 
       #disable control+s to pause terminal
       unsetopt FLOW_CONTROL
