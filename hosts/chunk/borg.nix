@@ -53,10 +53,11 @@
 
       prune.keep = {
         within = "1d";
-        daily = "7d";
+        daily = 7;
         weekly = 4;
         monthly = -1;
       };
+      extraPruneArgs = ["--stats"];
     };
   };
 }

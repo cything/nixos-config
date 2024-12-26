@@ -59,20 +59,20 @@
 
       source ${./p10k.zsh}
     '';
-    plugins = [
+    plugins = with pkgs; [
       {
         name = "vi-mode";
-        src = pkgs.zsh-vi-mode;
+        src = zsh-vi-mode;
         file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
       {
         name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
+        src = zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
       {
         name = "fzf-tab";
-        src = pkgs.zsh-fzf-tab;
+        src = zsh-fzf-tab;
         file = "share/fzf-tab/fzf-tab.zsh";
       }
     ];
