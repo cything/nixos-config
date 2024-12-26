@@ -109,6 +109,7 @@
     };
     sessionVariables = {
       "FZF_DEFAULT_COMMAND" = "rg";
+      "MANPAGER" = "nvim +Man!";
     };
   };
 

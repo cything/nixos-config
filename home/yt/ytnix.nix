@@ -52,7 +52,7 @@
     fastfetch
     discord
     nwg-look
-    element-desktop-wayland
+    element-desktop
     kdePackages.gwenview
     kdePackages.okular
     kdePackages.qtwayland
