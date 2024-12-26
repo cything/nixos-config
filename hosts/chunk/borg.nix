@@ -50,6 +50,13 @@
         $(journalctl -u borgbackup-job-crashRsync.service|tail -n 5)" \
         https://ntfy.cything.io/chunk
       '';
+
+      prune.keep = {
+        within = "1d";
+        daily = "7d";
+        weekly = 4;
+        monthly = -1;
+      };
     };
   };
 }
