@@ -35,7 +35,7 @@
         BORG_REMOTE_PATH = "borg1";
         BORG_EXIT_CODES = "modern";
       };
-      compression = "auto,zstd";
+      compression = "auto,zstd,19";
       startAt = "hourly";
       extraCreateArgs = [
         "--stats"

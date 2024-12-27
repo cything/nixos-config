@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -215,7 +216,7 @@
       BORG_REMOTE_PATH = "borg1";
       BORG_EXIT_CODES = "modern";
     };
-    compression = "auto,zstd";
+    compression = "auto,zstd,19";
     startAt = "daily";
     extraCreateArgs = [
       "--stats"
@@ -245,6 +246,10 @@
     settings = {
       snapshot_preserve = "2w";
       snapshot_preserve_min = "2d";
+      target_preserve = "7d 8w *m";
+      target_preserve_min = "no";
+      target = "/mnt/external/btr_backup/ytnix";
+      stream_compress = "zstd";
       snapshot_dir = "/snapshots";
       subvolume = {
         "/home" = { };
@@ -252,6 +257,8 @@
       };
     };
   };
+  # only create snapshots automatically. backups are triggered manually
+  systemd.services."btrbk-local".serviceConfig.ExecStart = lib.mkForce "${pkgs.btrbk}/bin/btrbk -c /etc/btrbk/local.conf snapshot";
 
   programs.steam.enable = true;
 
