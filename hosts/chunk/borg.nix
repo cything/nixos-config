@@ -57,7 +57,7 @@
         weekly = 4;
         monthly = -1;
       };
-      extraPruneArgs = ["--stats"];
+      extraPruneArgs = [ "--stats" ];
     };
   };
 }

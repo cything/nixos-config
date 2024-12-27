@@ -232,13 +232,13 @@
       https://ntfy.cything.io/chunk
     '';
 
-      prune.keep = {
-        within = "1d";
-        daily = 7;
-        weekly = 4;
-        monthly = -1;
-      };
-      extraPruneArgs = ["--stats"];
+    prune.keep = {
+      within = "1d";
+      daily = 7;
+      weekly = 4;
+      monthly = -1;
+    };
+    extraPruneArgs = [ "--stats" ];
   };
 
   services.btrbk.instances.local = {
@@ -258,7 +258,8 @@
     };
   };
   # only create snapshots automatically. backups are triggered manually
-  systemd.services."btrbk-local".serviceConfig.ExecStart = lib.mkForce "${pkgs.btrbk}/bin/btrbk -c /etc/btrbk/local.conf snapshot";
+  systemd.services."btrbk-local".serviceConfig.ExecStart =
+    lib.mkForce "${pkgs.btrbk}/bin/btrbk -c /etc/btrbk/local.conf snapshot";
 
   programs.steam.enable = true;
 
