@@ -36,7 +36,7 @@
     "services/ntfy" = {
       sopsFile = ../../secrets/services/ntfy.yaml;
     };
-    "rclone/env" = {
+    "rclone/config" = {
       sopsFile = ../../secrets/rclone/chunk.yaml;
     };
     "vaultwarden/env" = {

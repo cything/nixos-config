@@ -13,9 +13,8 @@
     serviceConfig = {
       Type = "notify";
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/photos";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount --config /home/yt/.config/rclone/rclone.conf --cache-dir /var/cache/rclone --transfers=32 --dir-cache-time 72h --vfs-cache-mode writes --vfs-cache-max-size 2G photos: /mnt/photos ";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount --config ${config.sops.secrets."rclone/config".path} --cache-dir /var/cache/rclone --transfers=32 --dir-cache-time 72h --vfs-cache-mode writes --vfs-cache-max-size 2G photos: /mnt/photos ";
       ExecStop = "${pkgs.fuse}/bin/fusermount -u /mnt/photos";
-      EnvironmentFile = config.sops.secrets."rclone/env".path;
     };
   };
 
