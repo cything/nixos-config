@@ -221,7 +221,7 @@
       BORG_EXIT_CODES = "modern";
     };
     compression = "auto,zstd,8";
-    startAt = "daily";
+    startAt = "hourly";
     extraCreateArgs = [
       "--stats"
       "-x"
@@ -238,9 +238,7 @@
 
     prune.keep = {
       within = "1d";
-      daily = 7;
-      weekly = 4;
-      monthly = -1;
+      daily = 365;
     };
     extraPruneArgs = [ "--stats" ];
   };
