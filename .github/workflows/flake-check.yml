@@ -1,4 +1,4 @@
-name: "nix build and flake check"
+name: "nix flake and fmt check"
 on:
   pull_request:
   push:
@@ -6,20 +6,8 @@ jobs:
   flake-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: cachix/install-nix-action@v30
-      with:
-        github_access_token: ${{ secrets.github_token }}
-    - run: nix flake check
-
-  nixfmt:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: cachix/install-nix-action@v30
-      with:
-        github_access_token: ${{ secrets.github_token }}
-    - name: install nixfmt
-      run: nix-env -f <nixpkgs> -iAP nixfmt-rfc-style
-    - name: check that nix files are formatted correctly
-      run : nixfmt --check
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v30
+        with:
+          github_access_token: ${{ secrets.github_token }}
+      - run: nix flake check
