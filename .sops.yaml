@@ -6,76 +6,76 @@ creation_rules:
   - path_regex: secrets/de3911/yt.yaml
     key_groups:
       - age:
-        - *yt
-        - *cy
+          - *yt
+          - *cy
   - path_regex: secrets/de3911/chunk.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/services/ntfy.yaml
     key_groups:
       - age:
-        - *chunk
-        - *yt
-        - *cy
+          - *chunk
+          - *yt
+          - *cy
   - path_regex: secrets/restic/yt.yaml
     key_groups:
       - age:
-        - *yt
-        - *cy
+          - *yt
+          - *cy
   - path_regex: secrets/borg/yt.yaml
     key_groups:
       - age:
-        - *yt
-        - *cy
+          - *yt
+          - *cy
   - path_regex: secrets/borg/chunk.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/wireguard/yt.yaml
     key_groups:
       - age:
-        - *yt
-        - *cy
+          - *yt
+          - *cy
   - path_regex: secrets/wireguard/chunk.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/services/caddy.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/services/hedgedoc.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/services/miniflux.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/services/gitlab.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/services/vaultwarden.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/rclone/chunk.yaml
     key_groups:
       - age:
-        - *chunk
-        - *cy
+          - *chunk
+          - *cy
   - path_regex: secrets/newsboat.yaml
     key_groups:
       - age:
-        - *yt
-        - *cy
+          - *yt
+          - *cy

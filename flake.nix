@@ -71,6 +71,9 @@
           projectRootFile = "flake.nix";
           programs.nixfmt.enable = true;
           programs.stylua.enable = true;
+          programs.yamlfmt.enable = true;
+          # sops does its own formatting
+          settings.formatter.yamlfmt.excludes = [ "secrets/*" ];
         }
       );
     in
