@@ -265,7 +265,12 @@
   systemd.services."btrbk-local".serviceConfig.ExecStart =
     lib.mkForce "${pkgs.btrbk}/bin/btrbk -c /etc/btrbk/local.conf snapshot";
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extest.enable = true;
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
+  };
+  hardware.steam-hardware.enable = true;
 
   services.logind = {
     lidSwitch = "hibernate";
