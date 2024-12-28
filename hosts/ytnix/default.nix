@@ -2,12 +2,17 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
   imports = [
     ./hardware-configuration.nix
     ../common.nix
+    {
+      disabledModules = [ "services/backup/borgbackup.nix"];
+    }
+    (inputs.nixpkgs-borg + "/nixos/modules/services/backup/borgbackup.nix")
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -224,8 +229,6 @@
     ];
     # warnings are often not that serious
     failOnWarnings = false;
-    # anything other than exit code 1 is considered failure and BORG_EXIT_CODES=modern uses a whole lot more codes for warning
-    appendFailedSuffix = false;
     postHook = ''
       ${pkgs.curl}/bin/curl -u $(cat ${
         config.sops.secrets."services/ntfy".path

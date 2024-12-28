@@ -43,8 +43,6 @@
       ];
       # warnings are often not that serious
       failOnWarnings = false;
-      # anything other than exit code 1 is considered failure and BORG_EXIT_CODES=modern uses a whole lot more codes for warning
-      appendFailedSuffix = false;
       postHook = ''
         ${pkgs.curl}/bin/curl -u $(cat ${
           config.sops.secrets."services/ntfy".path

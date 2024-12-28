@@ -11,6 +11,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-borg.url = "github:cything/nixpkgs/borg";
   };
 
   outputs =
