@@ -52,29 +52,13 @@
         "type": "github"
       }
     },
-    "nixpkgs-evolution": {
-      "locked": {
-        "lastModified": 1735386098,
-        "narHash": "sha256-/u2GGYOo6I11WfBo0MddUIk+lnzGI/lMaBv+iBiFC6E=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "a49023bcb550bcd84e1fa8afcbe7aa8bc0850bf4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "a49023bcb550bcd84e1fa8afcbe7aa8bc0850bf4",
-        "type": "github"
-      }
-    },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1735398492,
-        "narHash": "sha256-qLIa7DOJjjezoRNyPVBHynN4wh7+Nq1ICTv5ofd0WSQ=",
+        "lastModified": 1735404075,
+        "narHash": "sha256-WSb3ispVh+JYaHOPkWhGCrEpY85vkuSjHNKU6Xqect8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f56cbb9a85e5f5a6d41f25cfc0286fc8eba54a2a",
+        "rev": "3e46a15febeeb086ea3092f4363e3a0155b5c31b",
         "type": "github"
       },
       "original": {
@@ -105,7 +89,6 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-borg": "nixpkgs-borg",
-        "nixpkgs-evolution": "nixpkgs-evolution",
         "nixpkgs-master": "nixpkgs-master",
         "sops-nix": "sops-nix",
         "treefmt": "treefmt"

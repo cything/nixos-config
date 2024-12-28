@@ -14,7 +14,6 @@
     treefmt.url = "github:numtide/treefmt-nix";
     nixpkgs-borg.url = "github:cything/nixpkgs/borg";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    nixpkgs-evolution.url = "github:nixos/nixpkgs/a49023bcb550bcd84e1fa8afcbe7aa8bc0850bf4";
   };
 
   outputs =
@@ -52,8 +51,6 @@
       overlays = [
         (overlayPkgsFromFlake inputs.nixpkgs-master [
           "zsh-fzf-tab" # https://github.com/NixOS/nixpkgs/pull/368738
-        ])
-        (overlayPkgsFromFlake inputs.nixpkgs-evolution [
           "evolution" # https://github.com/NixOS/nixpkgs/pull/368797
         ])
       ];
