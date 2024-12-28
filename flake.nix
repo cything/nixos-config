@@ -12,6 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs-borg.url = "github:cything/nixpkgs/borg";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-evolution.url = "github:nixos/nixpkgs/a49023bcb550bcd84e1fa8afcbe7aa8bc0850bf4";
   };
 
   outputs =
@@ -27,10 +29,37 @@
 
       systems = [ "x86_64-linux" ];
       forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
+
+      overridePkgsFromFlake =
+        pkgs: flake: pkgNames:
+        let
+          pkgs' = import flake { inherit (pkgs) system config; };
+          pkgNames' = builtins.map (lib.splitString ".") pkgNames;
+          pkgVals = builtins.map (
+            path:
+            let
+              package = lib.getAttrFromPath path pkgs';
+            in
+            lib.setAttrByPath path package
+          ) pkgNames';
+        in
+        lib.foldl' lib.recursiveUpdate { } pkgVals;
+      overlayPkgsFromFlake =
+        flake: pkgNames: final: prev:
+        overridePkgsFromFlake prev flake pkgNames;
+      overlays = [
+        (overlayPkgsFromFlake inputs.nixpkgs-master [
+          "zsh-fzf-tab" # https://github.com/NixOS/nixpkgs/pull/368738
+        ])
+        (overlayPkgsFromFlake inputs.nixpkgs-evolution [
+          "evolution" # https://github.com/NixOS/nixpkgs/pull/368797
+        ])
+      ];
+
       pkgsFor = lib.genAttrs systems (
         system:
         import nixpkgs {
-          inherit system;
+          inherit system overlays;
           config = {
             allowUnfree = true;
           };

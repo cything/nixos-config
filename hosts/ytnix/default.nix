@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
     ../common.nix
     {
-      disabledModules = [ "services/backup/borgbackup.nix"];
+      disabledModules = [ "services/backup/borgbackup.nix" ];
     }
     (inputs.nixpkgs-borg + "/nixos/modules/services/backup/borgbackup.nix")
   ];
@@ -142,7 +142,6 @@
     brightnessctl
     alsa-utils
     nixd
-    veracrypt
     bluetuith
     libimobiledevice
     pass-wayland

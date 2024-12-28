@@ -28,7 +28,7 @@
     ./immich.nix
     ./element.nix
     {
-      disabledModules = [ "services/backup/borgbackup.nix"];
+      disabledModules = [ "services/backup/borgbackup.nix" ];
     }
     (inputs.nixpkgs-borg + "/nixos/modules/services/backup/borgbackup.nix")
   ];
