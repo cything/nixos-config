@@ -11,6 +11,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt.url = "github:numtide/treefmt-nix";
     nixpkgs-borg.url = "github:cything/nixpkgs/borg";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-evolution.url = "github:nixos/nixpkgs/a49023bcb550bcd84e1fa8afcbe7aa8bc0850bf4";
@@ -21,6 +22,7 @@
       self,
       nixpkgs,
       home-manager,
+      treefmt,
       ...
     }@inputs:
     let
@@ -65,10 +67,22 @@
           };
         }
       );
+
+      treefmtEval = forEachSystem (
+        pkgs:
+        treefmt.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          programs.nixfmt.enable = true;
+          programs.stylua.enable = true;
+        }
+      );
     in
     {
       packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
-      formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
+      formatter = forEachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+      checks = forEachSystem (pkgs: {
+        formatting = treefmtEval.${pkgs.system}.config.build.check self;
+      });
 
       nixosConfigurations =
         let
