@@ -8,13 +8,13 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 require("nvim-tree").setup()
 
-require("lualine").setup {
-  options = {
-    theme = "auto",
-    icons_enabled = true,
-    globalstatus = true,
-  }
-}
+require("lualine").setup({
+	options = {
+		theme = "auto",
+		icons_enabled = true,
+		globalstatus = true,
+	},
+})
 
 require("gitsigns").setup()
 
@@ -34,24 +34,24 @@ opt.showmode = false
 opt.mouse = ""
 opt.wrap = false
 
-vim.cmd.colorscheme "iceberg"
+vim.cmd.colorscheme("iceberg")
 
 keymap.set("n", "<space>s", require("nvim-tree.api").tree.toggle, {
-  desc = "toggle nvim-tree",
-  silent = true,
+	desc = "toggle nvim-tree",
+	silent = true,
 })
 
 -- shortcut to command mode
 keymap.set({ "n", "x" }, ";", ":", { silent = true })
 
 keymap.set("n", "<space>o", "printf('m`%so<ESC>``', v:count1)", {
-  expr = true,
-  desc = "insert line below without moving cursor",
+	expr = true,
+	desc = "insert line below without moving cursor",
 })
 
 keymap.set("n", "<space>O", "printf('m`%sO<ESC>``', v:count1)", {
-  expr = true,
-  desc = "insert line above without moving cursor",
+	expr = true,
+	desc = "insert line above without moving cursor",
 })
 
 keymap.set("n", "/", [[/\v]])
@@ -65,7 +65,7 @@ keymap.set("x", "p", '"_c<Esc>p')
 -- Break inserted text into smaller undo units when we insert some punctuation chars.
 local undo_ch = { ",", ".", "!", "?", ";", ":" }
 for _, ch in ipairs(undo_ch) do
-  keymap.set("i", ch, ch .. "<c-g>u")
+	keymap.set("i", ch, ch .. "<c-g>u")
 end
 
 keymap.set("i", "<C-A>", "<HOME>")
