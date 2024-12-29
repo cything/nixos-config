@@ -329,6 +329,7 @@
 
   # wireguard setup
   networking.wg-quick.interfaces.wg0 = {
+    autostart = false;
     address = [
       "10.0.0.2/24"
       "fdc9:281f:04d7:9ee9::2/64"
