@@ -206,12 +206,13 @@
       "/var/lib/systemd"
       "/home/**/Downloads"
       "**/.rustup"
+      "**/.cargo"
       "**/.docker"
       "**/borg"
       "/home/yt/fun"
       "/home/yt/.local/share/Steam"
       "/var/log"
-      "/home/yt/.wine"
+      "**/.wine"
       "/home/yt/Games"
     ];
     repo = "de3911@de3911.rsync.net:borg/yt";
