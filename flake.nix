@@ -12,6 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt.url = "github:numtide/treefmt-nix";
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs-borg.url = "github:cything/nixpkgs/borg";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
   };
@@ -22,6 +27,7 @@
       nixpkgs,
       home-manager,
       treefmt,
+      disko,
       ...
     }@inputs:
     let
@@ -108,6 +114,17 @@
               }
               ./hosts/chunk
               inputs.sops-nix.nixosModules.sops
+            ];
+          };
+
+          titan = lib.nixosSystem {
+            specialArgs = { inherit inputs outputs; };
+            modules = [
+              {
+                nixpkgs = { inherit pkgs; };
+              }
+              ./hosts/titan
+              disko.nixosModules.disko
             ];
           };
         };
