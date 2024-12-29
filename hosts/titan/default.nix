@@ -1,4 +1,4 @@
-{ modulesPath, lib, pkgs, ...}:
+{ modulesPath, config, lib, pkgs, ...}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -7,6 +7,13 @@
     ./disk-config.nix
     ./hardware-configuration.nix
   ];
+
+  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
+  sops.secrets = {
+    "caddy/env" = {
+      sopsFile = ../../secrets/services/caddy.yaml;
+    };
+  };
 
   boot = {
     loader = {
@@ -61,5 +68,26 @@
     allowedUDPPorts = [
       443
     ];
+  };
+
+  # container stuff
+  virtualisation.containers.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    # create 'docker' alias for podman, to use as
+    # drop-in replacement
+    dockerCompat = true;
+    defaultNetwork.settings = {
+      dns_enabled = true;
+      ipv6_enabled = true;
+    };
+  };
+  virtualisation.oci-containers.backend = "podman";
+
+  services.caddy = {
+    enable = true;
+    configFile = ./Caddyfile;
+    environmentFile = config.sops.secrets."caddy/env".path;
+    logFormat = lib.mkForce "level INFO";
   };
 }

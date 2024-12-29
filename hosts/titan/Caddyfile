@@ -1,0 +1,25 @@
+{
+  acme_ca https://acme.zerossl.com/v2/DV90
+  acme_eab {
+    key_id {$EAB_KEY_ID}
+    mac_key {$EAB_MAC_KEY}
+  }
+}
+
+(common) {
+  encode zstd gzip
+  header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+}
+
+cything.io {
+  import common
+  reverse_proxy localhost:8084
+
+  respond /.well-known/matrix/server {"m.server":"chat.cything.io:443"}
+  respond /.well-known/matrix/client {"m.server":{"base_url":"https://chat.cything.io"},"m.homeserver":{"base_url":"https://chat.cything.io"},"org.matrix.msc3575.proxy":{"url":"https://chat.cything.io"}}
+}
+
+www.cything.io {
+  import common
+  redir https://cything.io{uri} permanent
+}
