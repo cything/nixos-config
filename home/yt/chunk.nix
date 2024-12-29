@@ -16,16 +16,7 @@
   systemd.user.startServices = "sd-switch";
 
   home.packages = with pkgs; [
-    lua-language-server
-    vim-language-server
-    python312Packages.python-lsp-server
-    nixd
-    gopls
-    bash-language-server
-    llvmPackages_19.clang-tools
-    rust-analyzer
-    yt-dlp
-    gnumake
+    bottom
     btop
     foot.terminfo
   ];

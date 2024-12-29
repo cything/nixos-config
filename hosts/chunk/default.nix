@@ -172,13 +172,9 @@
     wget
     curl
     tree
-    python3Full
     tmux
-    borgbackup
-    rclone
     file
     sops
-    age
   ];
 
   environment.variables = {
