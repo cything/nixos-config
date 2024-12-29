@@ -203,6 +203,7 @@
       "/var/lib/docker"
       "/var/lib/private/ollama"
       "/var/lib/libvirt"
+      "/var/lib/systemd"
       "/home/**/Downloads"
       "**/.rustup"
       "**/.docker"

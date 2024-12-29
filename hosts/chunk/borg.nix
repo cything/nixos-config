@@ -23,6 +23,7 @@
         "/var/lib/docker"
         "/var/lib/containers/cache"
         "/var/lib/containers/overlay*"
+        "/var/lib/systemd"
       ];
       repo = "de3911@de3911.rsync.net:borg/crash";
       encryption = {
