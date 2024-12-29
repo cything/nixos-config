@@ -125,6 +125,7 @@
               }
               ./hosts/titan
               disko.nixosModules.disko
+              inputs.sops-nix.nixosModules.sops
             ];
           };
         };
