@@ -31,4 +31,7 @@
 
   # needed for zsh.enableCompletion to work
   environment.pathsToLink = [ "/share/zsh" ];
+
+  # see journald.conf(5)
+  services.journald.extraConfig = "MaxRetentionSec=2d";
 }
