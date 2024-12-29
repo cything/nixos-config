@@ -18,7 +18,7 @@
     };
 
     nixpkgs-borg.url = "github:cything/nixpkgs/borg";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-master.url = "github:nixos/nixpkgs/42b2d9e78979c3df637916721e6373d99016503d";
   };
 
   outputs =
