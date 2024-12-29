@@ -11,7 +11,6 @@
         "/home"
         "/var/backup"
         "/var/lib"
-        "/var/log"
         "/opt"
         "/etc"
         "/vw-data"

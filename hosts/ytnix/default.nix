@@ -192,7 +192,6 @@
       "/root"
       "/home"
       "/var/lib"
-      "/var/log"
       "/opt"
       "/etc"
     ];
@@ -203,6 +202,7 @@
       "**/Cache"
       "/var/lib/docker"
       "/var/lib/private/ollama"
+      "/var/lib/libvirt"
       "/home/**/Downloads"
       "**/.rustup"
       "**/.docker"
