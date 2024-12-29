@@ -47,4 +47,19 @@
   };
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
+
+  # network stuff
+  networking.hostName = "titan";
+  networking.networkmanager.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      22
+      80
+      443
+    ];
+    allowedUDPPorts = [
+      443
+    ];
+  };
 }
