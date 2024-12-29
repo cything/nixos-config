@@ -208,9 +208,11 @@
       "**/.rustup"
       "**/.docker"
       "**/borg"
-      "/home/yt/fun/nixpkgs"
+      "/home/yt/fun"
       "/home/yt/.local/share/Steam"
       "/var/log"
+      "/home/yt/.wine"
+      "/home/yt/Games"
     ];
     repo = "de3911@de3911.rsync.net:borg/yt";
     encryption = {
