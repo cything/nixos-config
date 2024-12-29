@@ -211,7 +211,6 @@
       "**/borg"
       "/home/yt/fun"
       "/home/yt/.local/share/Steam"
-      "/var/log"
       "**/.wine"
       "/home/yt/Games"
     ];
