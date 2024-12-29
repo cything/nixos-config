@@ -23,7 +23,6 @@
     ./wireguard.nix
     ./grafana.nix
     ./tor.nix
-    ./ghost.nix
     ./conduit.nix
     ./immich.nix
     ./element.nix
