@@ -204,11 +204,11 @@
       "/var/lib/docker"
       "/var/lib/private/ollama"
       "/home/**/Downloads"
-      "**/.steam"
       "**/.rustup"
       "**/.docker"
       "**/borg"
       "/home/yt/fun/nixpkgs"
+      "/home/yt/.local/share/Steam"
     ];
     repo = "de3911@de3911.rsync.net:borg/yt";
     encryption = {
