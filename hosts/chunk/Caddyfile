@@ -41,11 +41,6 @@ dns.cything.io {
   reverse_proxy localhost:8082
 }
 
-ntfy.cything.io {
-  import common
-  reverse_proxy localhost:8083
-}
-
 pad.cything.io {
   import common
   reverse_proxy localhost:8085

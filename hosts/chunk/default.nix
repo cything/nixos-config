@@ -17,7 +17,6 @@
     ./adguard.nix
     ./hedgedoc.nix
     ./miniflux.nix
-    ./ntfy.nix
     ./redlib.nix
     ./vaultwarden.nix
     ./wireguard.nix

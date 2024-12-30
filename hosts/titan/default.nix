@@ -13,6 +13,7 @@
     ./disk-config.nix
     ./hardware-configuration.nix
     ./ghost.nix
+    ./ntfy.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";

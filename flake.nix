@@ -18,8 +18,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-borg.url = "github:cything/nixpkgs/borg";
-    nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk";
+    nixpkgs-borg.url = "github:cything/nixpkgs/borg"; # unmerged PR
+    nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
   };
 
   outputs =
@@ -78,8 +78,7 @@
           programs.nixfmt.enable = true;
           programs.stylua.enable = true;
           programs.yamlfmt.enable = true;
-          # sops does its own formatting
-          settings.formatter.yamlfmt.excludes = [ "secrets/*" ];
+          settings.formatter.yamlfmt.excludes = [ "secrets/*" ]; # sops does its own formatting
         }
       );
     in

@@ -25,3 +25,8 @@ www.cything.io {
   import common
   redir https://cything.io{uri} permanent
 }
+
+ntfy.cything.io {
+  import common
+  reverse_proxy localhost:8083
+}
