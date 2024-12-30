@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
     ./ghost.nix
     ./ntfy.nix
+    ./uptime-kuma.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";

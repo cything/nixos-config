@@ -30,3 +30,8 @@ ntfy.cything.io {
   import common
   reverse_proxy localhost:8083
 }
+
+status.cything.io {
+  import common
+  reverse_proxy localhost:3001
+}
