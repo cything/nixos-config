@@ -71,10 +71,11 @@ creation_rules:
       - age:
           - *chunk
           - *cy
-  - path_regex: secrets/rclone/chunk.yaml
+  - path_regex: secrets/rclone.yaml
     key_groups:
       - age:
           - *chunk
+          - *yt
           - *cy
   - path_regex: secrets/newsboat.yaml
     key_groups:

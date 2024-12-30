@@ -4,7 +4,7 @@
   ...
 }:
 {
-  services.borgbackup.crashRsync = {
+  services.borgbackup.jobs.crashRsync = {
     # systemd.timer(5)
     persistentTimer = true;
     paths = [

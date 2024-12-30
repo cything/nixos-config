@@ -21,7 +21,6 @@
     ./redlib.nix
     ./vaultwarden.nix
     ./wireguard.nix
-    ./grafana.nix
     ./tor.nix
     ./conduit.nix
     ./immich.nix
@@ -41,7 +40,7 @@
       sopsFile = ../../secrets/services/ntfy.yaml;
     };
     "rclone/config" = {
-      sopsFile = ../../secrets/rclone/chunk.yaml;
+      sopsFile = ../../secrets/rclone.yaml;
     };
     "vaultwarden/env" = {
       sopsFile = ../../secrets/services/vaultwarden.yaml;
