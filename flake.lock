@@ -59,11 +59,11 @@
     },
     "nixpkgs-borg": {
       "locked": {
-        "lastModified": 1735350950,
+        "lastModified": 1735547260,
         "narHash": "sha256-ScKuaBbUXNqS9c6Y+N647BAQx7SvKywpu5MxBV3Y5pk=",
         "owner": "cything",
         "repo": "nixpkgs",
-        "rev": "0f656a84fafcf8a0fee41be2acf31cb3e493575e",
+        "rev": "53add6c0c30200663cd21beb06672ec2c8afc176",
         "type": "github"
       },
       "original": {
