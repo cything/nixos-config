@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ../common.nix
+    ../yt.nix
     {
       disabledModules = [
         "services/backup/borgbackup.nix"
@@ -121,14 +122,11 @@
 
   services.libinput.enable = true;
 
-  users.users.yt = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "libvirtd"
-      "docker"
-    ];
-  };
+  users.users.yt.extraGroups = [
+    "wheel"
+    "libvirtd"
+    "docker"
+  ];
 
   environment.systemPackages = with pkgs; [
     tmux

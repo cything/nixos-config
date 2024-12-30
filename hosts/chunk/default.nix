@@ -7,8 +7,9 @@
 }:
 {
   imports = [
-    ./hardware-configuration.nix
     ../common.nix
+    ../yt.nix
+    ./hardware-configuration.nix
     ./gitlab.nix
     ./borg.nix
     ./rclone.nix
@@ -150,7 +151,6 @@
   };
 
   users.users.yt = {
-    isNormalUser = true;
     extraGroups = [
       "wheel"
       "networkmanager"

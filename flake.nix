@@ -145,14 +145,6 @@
             ./home/yt/chunk.nix
           ];
         };
-
-        "yt@titan" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/yt/titan.nix
-          ];
-        };
       };
     };
 }

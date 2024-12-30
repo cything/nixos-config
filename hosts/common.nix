@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   nix = {
     settings = {
@@ -24,13 +24,7 @@
   # this is true by default and mutually exclusive with
   # programs.nix-index
   programs.command-not-found.enable = false;
-  programs.nix-index.enable = false;
-
-  users.users.yt.shell = pkgs.zsh;
-  programs.zsh.enable = true;
-
-  # needed for zsh.enableCompletion to work
-  environment.pathsToLink = [ "/share/zsh" ];
+  programs.nix-index.enable = false; # set above to false to use this
 
   # see journald.conf(5)
   services.journald.extraConfig = "MaxRetentionSec=2d";
