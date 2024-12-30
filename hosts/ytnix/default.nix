@@ -250,9 +250,9 @@
   services.btrbk.instances.local = {
     onCalendar = "hourly";
     settings = {
-      snapshot_preserve = "2w";
+      snapshot_preserve = "7d";
       snapshot_preserve_min = "2d";
-      target_preserve = "7d 8w *m";
+      target_preserve = "*d";
       target_preserve_min = "no";
       target = "/mnt/external/btr_backup/ytnix";
       stream_compress = "zstd";
