@@ -30,5 +30,10 @@
     userName = "cy";
     userEmail = "hi@cything.io";
     delta.enable = true;
+    extraConfig = {
+      init = {
+        "defaultBranch" = "main";
+      };
+    };
   };
 }

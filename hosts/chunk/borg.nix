@@ -55,7 +55,7 @@
       '';
 
       prune.keep = {
-        within = "1d";
+        within = "2d";
         daily = 365;
       };
       extraPruneArgs = [ "--stats" ];
