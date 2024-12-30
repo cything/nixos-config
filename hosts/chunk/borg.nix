@@ -5,6 +5,8 @@
 }:
 {
   services.borgbackup.jobs = {
+    # systemd.timer(5)
+    persistentTimer = true;
     crashRsync = {
       paths = [
         "/root"

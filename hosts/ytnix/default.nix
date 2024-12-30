@@ -188,6 +188,8 @@
   programs.sway.enable = true;
 
   services.borgbackup.jobs.ytnixRsync = {
+    # systemd.timer(5)
+    persistentTimer = true;
     paths = [
       "/root"
       "/home"
