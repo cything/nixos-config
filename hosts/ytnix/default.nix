@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   inputs,
   ...
 }:
@@ -10,9 +9,13 @@
     ./hardware-configuration.nix
     ../common.nix
     {
-      disabledModules = [ "services/backup/borgbackup.nix" ];
+      disabledModules = [
+        "services/backup/borgbackup.nix"
+        "services/backup/btrbk.nix"
+      ];
     }
     (inputs.nixpkgs-borg + "/nixos/modules/services/backup/borgbackup.nix")
+    (inputs.nixpkgs-btrbk + "/nixos/modules/services/backup/btrbk.nix")
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -251,7 +254,9 @@
 
   services.btrbk.instances.local = {
     onCalendar = "hourly";
+    snapshotOnly = true;
     settings = {
+      # only create snapshots automatically. backups are triggered manually with `btrbk resume`
       snapshot_preserve = "7d";
       snapshot_preserve_min = "2d";
       target_preserve = "*d";
@@ -265,9 +270,6 @@
       };
     };
   };
-  # only create snapshots automatically. backups are triggered manually
-  systemd.services."btrbk-local".serviceConfig.ExecStart =
-    lib.mkForce "${pkgs.btrbk}/bin/btrbk -c /etc/btrbk/local.conf snapshot";
 
   programs.steam = {
     enable = true;

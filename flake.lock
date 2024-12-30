@@ -73,19 +73,19 @@
         "type": "github"
       }
     },
-    "nixpkgs-master": {
+    "nixpkgs-btrbk": {
       "locked": {
-        "lastModified": 1735418999,
-        "narHash": "sha256-nFnQAzDqYhPsAdrcFRZMSnH0Tuj0gjKhSAJAep08Szc=",
-        "owner": "nixos",
+        "lastModified": 1735587871,
+        "narHash": "sha256-BXVJ4yIrBPJgReaQi3IdFvRhVg4wGPYGUBR/Id0hvWo=",
+        "owner": "cything",
         "repo": "nixpkgs",
-        "rev": "42b2d9e78979c3df637916721e6373d99016503d",
+        "rev": "9fd33c2070cfc3df4296eed81e041a3e313cea5f",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
+        "owner": "cything",
+        "ref": "btrbk",
         "repo": "nixpkgs",
-        "rev": "42b2d9e78979c3df637916721e6373d99016503d",
         "type": "github"
       }
     },
@@ -111,7 +111,7 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-borg": "nixpkgs-borg",
-        "nixpkgs-master": "nixpkgs-master",
+        "nixpkgs-btrbk": "nixpkgs-btrbk",
         "sops-nix": "sops-nix",
         "treefmt": "treefmt"
       }
