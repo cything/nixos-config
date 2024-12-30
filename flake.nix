@@ -55,10 +55,6 @@
         flake: pkgNames: final: prev:
         overridePkgsFromFlake prev flake pkgNames;
       overlays = [
-        (overlayPkgsFromFlake inputs.nixpkgs-master [
-          "zsh-fzf-tab" # https://github.com/NixOS/nixpkgs/pull/368738
-          "evolution" # https://github.com/NixOS/nixpkgs/pull/368797
-        ])
       ];
 
       pkgsFor = lib.genAttrs systems (
