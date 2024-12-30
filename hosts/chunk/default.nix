@@ -21,6 +21,7 @@
     ./redlib.nix
     ./vaultwarden.nix
     ./wireguard.nix
+    ./grafana.nix
     ./tor.nix
     ./conduit.nix
     ./immich.nix

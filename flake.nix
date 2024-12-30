@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,6 +56,9 @@
         flake: pkgNames: final: prev:
         overridePkgsFromFlake prev flake pkgNames;
       overlays = [
+        (overlayPkgsFromFlake inputs.nixpkgs-small [
+          "prometheus" # fails to build on unstable
+        ])
       ];
 
       pkgsFor = lib.genAttrs systems (

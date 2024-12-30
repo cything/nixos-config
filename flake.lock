@@ -89,6 +89,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-small": {
+      "locked": {
+        "lastModified": 1735581264,
+        "narHash": "sha256-q4ocr/efe8RXw7/SPpTZVqw6GNRWTEMdOUMt66QephQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "98f9d01a955f7d568df2d1d362481f5423318216",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1733097829,
@@ -112,6 +128,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-borg": "nixpkgs-borg",
         "nixpkgs-btrbk": "nixpkgs-btrbk",
+        "nixpkgs-small": "nixpkgs-small",
         "sops-nix": "sops-nix",
         "treefmt": "treefmt"
       }
