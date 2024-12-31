@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,7 +56,7 @@
         flake: pkgNames: final: prev:
         overridePkgsFromFlake prev flake pkgNames;
       overlays = [
-        (overlayPkgsFromFlake inputs.nixpkgs-small [
+        (overlayPkgsFromFlake inputs.nixpkgs-stable [
           "prometheus" # fails to build on unstable
         ])
       ];
