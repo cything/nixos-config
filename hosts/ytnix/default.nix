@@ -8,7 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ../common.nix
-    ../yt.nix
+    ../zsh.nix
     {
       disabledModules = [
         "services/backup/btrbk.nix"

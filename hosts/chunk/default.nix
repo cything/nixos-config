@@ -7,7 +7,7 @@
 {
   imports = [
     ../common.nix
-    ../yt.nix
+    ../zsh.nix
     ./hardware-configuration.nix
     ./gitlab.nix
     ./backup.nix
