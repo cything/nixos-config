@@ -15,12 +15,22 @@
     ./ghost.nix
     ./ntfy.nix
     ./uptime-kuma.nix
+    ./backup.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
     "caddy/env" = {
       sopsFile = ../../secrets/services/caddy.yaml;
+    };
+    "services/ntfy" = {
+      sopsFile = ../../secrets/services/ntfy.yaml;
+    };
+    "borg/rsyncnet" = {
+      sopsFile = ../../secrets/borg/titan.yaml;
+    };
+    "rsyncnet/id_ed25519" = {
+      sopsFile = ../../secrets/de3911/titan.yaml;
     };
   };
 

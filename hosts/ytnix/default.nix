@@ -11,11 +11,9 @@
     ../yt.nix
     {
       disabledModules = [
-        "services/backup/borgbackup.nix"
         "services/backup/btrbk.nix"
       ];
     }
-    (inputs.nixpkgs-borg + "/nixos/modules/services/backup/borgbackup.nix")
     (inputs.nixpkgs-btrbk + "/nixos/modules/services/backup/btrbk.nix")
   ];
 
@@ -188,7 +186,7 @@
 
   programs.sway.enable = true;
 
-  my.backup= {
+  my.backup = {
     enable = true;
     jobName = "ytnixRsync";
     exclude = [

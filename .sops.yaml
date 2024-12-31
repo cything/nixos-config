@@ -14,11 +14,17 @@ creation_rules:
       - age:
           - *chunk
           - *cy
+  - path_regex: secrets/de3911/titan.yaml
+    key_groups:
+      - age:
+          - *titan
+          - *cy
   - path_regex: secrets/services/ntfy.yaml
     key_groups:
       - age:
           - *chunk
           - *yt
+          - *titan
           - *cy
   - path_regex: secrets/restic/yt.yaml
     key_groups:
@@ -34,6 +40,11 @@ creation_rules:
     key_groups:
       - age:
           - *chunk
+          - *cy
+  - path_regex: secrets/borg/titan.yaml
+    key_groups:
+      - age:
+          - *titan
           - *cy
   - path_regex: secrets/wireguard/yt.yaml
     key_groups:
