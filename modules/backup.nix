@@ -1,4 +1,11 @@
-{ config, lib, pkgs, ... }: let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+let
   cfg = config.my.backup;
   hostname = config.networking.hostName;
   defaultPaths = [
@@ -22,17 +29,25 @@
     "**/.docker"
     "**/borg"
   ];
-in {
+in
+{
+  imports = [
+    {
+      disabledModules = [ "services/backup/borgbackup.nix" ];
+    }
+    (inputs.nixpkgs-borg + "/nixos/modules/services/backup/borgbackup.nix")
+  ];
+
   options.my.backup = {
     enable = lib.mkEnableOption "backup";
     paths = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = "Paths to backup. Appended to the list of defaultPaths";
     };
     exclude = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = "Paths to exclude. Appended to the list of defaultExclude";
     };
     repo = lib.mkOption {
@@ -94,9 +109,7 @@ in {
         title="${hostname}: backup completed with exit code: $exitStatus"
         msg=$(journalctl -o cat _SYSTEMD_INVOCATION_ID=$invocationId)
 
-        ${pkgs.curl}/bin/curl -sL -u $(cat ${
-          config.sops.secrets."services/ntfy".path
-        }) \
+        ${pkgs.curl}/bin/curl -sL -u $(cat ${config.sops.secrets."services/ntfy".path}) \
         -H "Title: $title" \
         -d "$msg" \
         https://ntfy.cything.io/backups > /dev/null
