@@ -11,7 +11,7 @@
     ../yt.nix
     ./hardware-configuration.nix
     ./gitlab.nix
-    ./borg.nix
+    ./backup.nix
     ./rclone.nix
     ./postgres.nix
     ./wireguard.nix
