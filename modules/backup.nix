@@ -22,6 +22,7 @@ let
     "**/cache"
     "**/Cache"
     "/var/lib/docker"
+    "/var/lib/containers" # podman
     "/var/lib/systemd"
     "/var/lib/libvirt"
     "**/.rustup"
