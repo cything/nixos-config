@@ -102,6 +102,7 @@
               }
               ./hosts/ytnix
               inputs.sops-nix.nixosModules.sops
+              ./modules
             ];
           };
 
@@ -113,6 +114,7 @@
               }
               ./hosts/chunk
               inputs.sops-nix.nixosModules.sops
+              ./modules
             ];
           };
 
@@ -125,6 +127,7 @@
               ./hosts/titan
               disko.nixosModules.disko
               inputs.sops-nix.nixosModules.sops
+              ./modules
             ];
           };
         };

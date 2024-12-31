@@ -188,66 +188,20 @@
 
   programs.sway.enable = true;
 
-  services.borgbackup.jobs.ytnixRsync = {
-    # systemd.timer(5)
-    persistentTimer = true;
-    paths = [
-      "/root"
-      "/home"
-      "/var/lib"
-      "/opt"
-      "/etc"
-    ];
+  my.backup= {
+    enable = true;
+    jobName = "ytnixRsync";
     exclude = [
-      "**/.cache"
-      "**/node_modules"
-      "**/cache"
-      "**/Cache"
-      "/var/lib/docker"
       "/var/lib/private/ollama"
-      "/var/lib/libvirt"
-      "/var/lib/systemd"
       "/home/**/Downloads"
-      "**/.rustup"
-      "**/.cargo"
-      "**/.docker"
-      "**/borg"
       "/home/yt/fun"
       "/home/yt/.local/share/Steam"
       "**/.wine"
       "/home/yt/Games"
     ];
-    repo = "de3911@de3911.rsync.net:borg/yt";
-    encryption = {
-      mode = "repokey-blake2";
-      passCommand = ''cat ${config.sops.secrets."borg/rsyncnet".path}'';
-    };
-    environment = {
-      BORG_RSH = ''ssh -i ${config.sops.secrets."rsyncnet/id_ed25519".path}'';
-      BORG_REMOTE_PATH = "borg1";
-      BORG_EXIT_CODES = "modern";
-    };
-    compression = "auto,zstd,8";
-    startAt = "hourly";
-    extraCreateArgs = [
-      "--stats"
-      "-x"
-    ];
-    # warnings are often not that serious
-    failOnWarnings = false;
-    postHook = ''
-      ${pkgs.curl}/bin/curl -u $(cat ${
-        config.sops.secrets."services/ntfy".path
-      }) -d "ytnixRsync: backup completed with exit code: $exitStatus
-      $(journalctl -u borgbackup-job-ytnixRsync.service|tail -n 5)" \
-      https://ntfy.cything.io/chunk
-    '';
-
-    prune.keep = {
-      within = "2d";
-      daily = 365;
-    };
-    extraPruneArgs = [ "--stats" ];
+    repo = "yt";
+    passFile = config.sops.secrets."borg/rsyncnet".path;
+    sshKeyFile = config.sops.secrets."rsyncnet/id_ed25519".path;
   };
 
   services.btrbk.instances.local = {

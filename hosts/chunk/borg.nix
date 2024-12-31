@@ -48,11 +48,11 @@
     # warnings are often not that serious
     failOnWarnings = false;
     postHook = ''
-      ${pkgs.curl}/bin/curl -u $(cat ${
+      ${pkgs.curl}/bin/curl -O /dev/null -u $(cat ${
         config.sops.secrets."services/ntfy".path
       }) -d "chunk: backup completed with exit code: $exitStatus
-      $(journalctl -u borgbackup-job-crashRsync.service|tail -n 5)" \
-      https://ntfy.cything.io/chunk
+      $(journalctl --output-fields=MESSAGE -o cat -qu borgbackup-job-crashRsync.service |tail -n 10)
+      " https://ntfy.cything.io/ytnix
     '';
 
     prune.keep = {
