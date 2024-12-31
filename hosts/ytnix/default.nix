@@ -47,9 +47,17 @@
     };
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest;
+
+    # fix bluetooth
     extraModulePackages = with config.boot.kernelPackages; [
-      rtl8821ce
+      rtw88
     ];
+    # see https://bugzilla.kernel.org/show_bug.cgi?id=215496#c22
+    # and https://github.com/lwfinger/rtw88/issues/61
+    extraModprobeConfig = ''
+      options rtw88_core disable_lps_deep=y
+      options rtw88_pci disable_aspm=y
+    '';
   };
 
   networking = {
@@ -67,7 +75,10 @@
     networkmanager = {
       enable = true;
       dns = "none";
-      wifi.backend = "iwd";
+      wifi = {
+        backend = "iwd";
+        powersave = false; # fixes bluetooth; see above
+      };
     };
     nameservers = [
       "31.59.129.225"
