@@ -8,6 +8,7 @@
     enable = true;
     description = "Mount the immich data remote";
     requires = [ "network-online.target" ];
+    after = [ "network-online.target" ];
     requiredBy = [ "podman-immich-server.service" ];
     before = [ "podman-immich-server.service" ];
     serviceConfig = {
