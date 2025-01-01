@@ -64,6 +64,7 @@
       enable = true;
       pkiBundle = "/var/lib/sbctl";
     };
+    kernel.sysctl."kernel.sysrq" = 1;
   };
 
   networking = {
