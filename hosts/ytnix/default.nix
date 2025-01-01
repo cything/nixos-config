@@ -50,6 +50,14 @@
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
     ];
+    kernelParams = [
+      # see https://github.com/tomaspinho/rtl8821ce#pcie-active-state-power-management
+      "pcie_aspm=off"
+    ];
+    # see https://github.com/tomaspinho/rtl8821ce#wi-fi-not-working-for-kernel--59
+    extraModprobeConfig = ''
+      blacklist rtw88_8821ce
+    '';
   };
 
   networking = {
