@@ -14,7 +14,6 @@ let
     "/var/lib"
     "/opt"
     "/etc"
-    "/var/backup"
   ];
   defaultExclude = [
     "**/.cache"

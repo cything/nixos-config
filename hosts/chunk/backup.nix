@@ -8,6 +8,7 @@
     jobName = "crashRsync";
     paths = [
       "/vw-data"
+      "/var/backup"
     ];
     repo = "crash";
     passFile = config.sops.secrets."borg/rsyncnet".path;
