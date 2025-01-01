@@ -34,9 +34,9 @@
     userEmail = "hi@cything.io";
     delta.enable = true;
     extraConfig = {
-      init = {
-        "defaultBranch" = "main";
-      };
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true; # assume -u on first push
+      pull.ff = "only";
     };
   };
   programs.ripgrep.enable = true;
