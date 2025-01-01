@@ -32,10 +32,6 @@
       bind v split-window -c "#{pane_current_path}" -h
       bind s split-window -c "#{pane_current_path}" -v
 
-      # confirm before killing a window or the server
-      bind-key k confirm kill-window
-      bind-key K confirm kill-server
-
       set -g renumber-windows on
       set -g mouse on
       # don't yank immediately when selecting text
