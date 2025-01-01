@@ -33,6 +33,7 @@ opt.termguicolors = true
 opt.showmode = false
 opt.mouse = ""
 opt.wrap = false
+opt.clipboard:append("unnamedplus")
 
 vim.cmd.colorscheme("iceberg")
 
