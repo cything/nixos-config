@@ -45,7 +45,7 @@
     loader = {
       # lanzaboote replaces systemd-boot
       systemd-boot.enable = lib.mkForce false;
-      efi.canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = false; # toggle when installing
     };
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest;
@@ -191,6 +191,7 @@
     nerd-fonts.roboto-mono
     ibm-plex
   ];
+  fonts.enableDefaultPackages = true;
 
   hardware.enableAllFirmware = true;
   hardware.bluetooth = {
