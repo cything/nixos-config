@@ -32,11 +32,31 @@
     enable = true;
     userName = "cy";
     userEmail = "hi@cything.io";
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        navigate = true;
+      };
+    };
     extraConfig = {
       init.defaultBranch = "main";
       push.autoSetupRemote = true; # assume -u on first push
-      pull.ff = "only";
+      pull = {
+        rebase = true;
+        autostash = true;
+      };
+      merge.tool = "vimdiff";
+      rebase = {
+        stat = true;
+        autoStash = true;
+        autoSquash = true;
+        updateRefs = true;
+      };
+      help.autocorrect = 1;
+      mergetool = {
+        prompt = false;
+        path = "nvim-open";
+      };
     };
   };
   programs.ripgrep.enable = true;
