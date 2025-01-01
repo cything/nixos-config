@@ -17,6 +17,10 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs-borg.url = "github:cything/nixpkgs/borg"; # unmerged PR
     nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
@@ -103,6 +107,7 @@
               ./hosts/ytnix
               inputs.sops-nix.nixosModules.sops
               ./modules
+              inputs.lanzaboote.nixosModules.lanzaboote
             ];
           };
 

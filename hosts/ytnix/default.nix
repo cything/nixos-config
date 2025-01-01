@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 {
@@ -42,7 +43,8 @@
 
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      # lanzaboote replaces systemd-boot
+      systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
     };
     tmp.cleanOnBoot = true;
@@ -58,6 +60,10 @@
     extraModprobeConfig = ''
       blacklist rtw88_8821ce
     '';
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+    };
   };
 
   networking = {
@@ -163,6 +169,7 @@
     restic
     haskell-language-server
     ghc
+    sbctl # secure boot
   ];
 
   environment.sessionVariables = {
