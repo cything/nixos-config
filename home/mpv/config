@@ -1,0 +1,5 @@
+save-position-on-quit
+keep-open
+hwdec=auto-safe
+vo=gpu
+gpu-context=wayland
