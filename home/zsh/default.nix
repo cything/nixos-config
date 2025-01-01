@@ -107,13 +107,9 @@
       "gs" = "git status --short";
       "gss" = "git status";
     };
-    sessionVariables = {
-      "FZF_DEFAULT_COMMAND" = "rg";
-      "MANPAGER" = "nvim +Man!";
-    };
   };
 
-  programs.fzf.enableZshIntegration = false;
+  programs.fzf.enableZshIntegration = false; # manually integrated see above
   programs.zoxide.enableZshIntegration = true;
   programs.eza.enableZshIntegration = true;
   programs.nix-index.enableZshIntegration = false;

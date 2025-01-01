@@ -21,7 +21,10 @@
   ];
 
   programs.zoxide.options = [ "--cmd cd" ];
-  programs.fzf.enable = true;
+  programs.fzf = {
+    enable = true;
+    defaultCommand = "rg";
+  };
   programs.zoxide.enable = true;
   programs.eza.enable = true;
   programs.neovim.enable = true;
@@ -36,4 +39,6 @@
       };
     };
   };
+  programs.ripgrep.enable = true;
+  programs.man.generateCaches = true;
 }

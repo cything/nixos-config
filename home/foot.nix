@@ -4,7 +4,7 @@
     enable = true;
     settings = {
       main = {
-        font = "RobotoMono Nerd Font:size=8";
+        font = "IBM Plex Mono:size=8";
         dpi-aware = "yes";
       };
       bell = {

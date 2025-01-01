@@ -186,6 +186,7 @@
 
   fonts.packages = with pkgs; [
     nerd-fonts.roboto-mono
+    ibm-plex
   ];
 
   hardware.enableAllFirmware = true;
