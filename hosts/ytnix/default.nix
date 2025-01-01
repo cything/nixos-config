@@ -181,12 +181,10 @@
   services.gnome.gnome-keyring.enable = true;
   programs.gnupg.agent.enable = true;
 
-  services.displayManager.defaultSession = "sway";
-  services.displayManager.sddm = {
+  services.displayManager = {
     enable = true;
-    wayland.enable = true;
+    autoLogin.user = "yt";
   };
-  # security.sudo.wheelNeedsPassword = false;
 
   fonts.packages = with pkgs; [
     nerd-fonts.roboto-mono
@@ -200,7 +198,10 @@
   };
   services.blueman.enable = true;
 
-  programs.sway.enable = true;
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
 
   my.backup = {
     enable = true;
