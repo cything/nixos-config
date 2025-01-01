@@ -6,6 +6,9 @@
     historyLimit = 50000;
     keyMode = "emacs";
     mouse = false;
+    newSession = true;
+    # address vim mode switching delay (http://superuser.com/a/252717/65504)
+    escapeTime = 0;
     plugins = with pkgs.tmuxPlugins; [
       yank
       {
@@ -28,6 +31,12 @@
       bind u attach-session -c "#{pane_current_path}"
       bind v split-window -c "#{pane_current_path}" -h
       bind s split-window -c "#{pane_current_path}" -v
+
+      # confirm before killing a window or the server
+      bind-key k confirm kill-window
+      bind-key K confirm kill-server
+
+      set -g renumber-windows on
 
       # FILE: iceberg.tmux.conf
       # REPO: https://github.com/gkeep/iceberg-dark
