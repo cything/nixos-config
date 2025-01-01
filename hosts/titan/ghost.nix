@@ -14,7 +14,7 @@
       database__connection__host = "ghost-db";
       database__connection__user = "root";
       database__connection__password = "example";
-      database__connection__databse = "ghost";
+      database__connection__database = "ghost";
       url = "https://cything.io";
       NODE_ENV = "production";
     };

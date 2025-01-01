@@ -70,7 +70,7 @@ in
     };
     sshKeyFile = lib.mkOption {
       type = lib.types.str;
-      description = "Path to the file containg the SSH identity key";
+      description = "Path to the file containing the SSH identity key";
     };
   };
 

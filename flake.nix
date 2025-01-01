@@ -57,7 +57,7 @@
         in
         lib.foldl' lib.recursiveUpdate { } pkgVals;
       overlayPkgsFromFlake =
-        flake: pkgNames: final: prev:
+        flake: pkgNames: _final: prev:
         overridePkgsFromFlake prev flake pkgNames;
       overlays = [
         (overlayPkgsFromFlake inputs.nixpkgs-stable [
@@ -82,12 +82,15 @@
           programs.nixfmt.enable = true;
           programs.stylua.enable = true;
           programs.yamlfmt.enable = true;
-          settings.formatter.yamlfmt.excludes = [ "secrets/*" ]; # sops does its own formatting
+          programs.typos.enable = true;
+          programs.shellcheck.enable = true;
+          programs.deadnix.enable = true;
+
+          settings.global.excludes = [ "secrets/*" ];
         }
       );
     in
     {
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
       formatter = forEachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
       checks = forEachSystem (pkgs: {
         formatting = treefmtEval.${pkgs.system}.config.build.check self;

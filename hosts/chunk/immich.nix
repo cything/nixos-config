@@ -8,7 +8,6 @@ let
   thumbsLocation = "/opt/immich/thumbs";
   profileLocation = "/opt/immich/profile";
   dbDataLocation = "/opt/immich/postgres";
-  modelCache = "/opt/immich-ml";
 in
 {
   virtualisation.oci-containers.containers = {
