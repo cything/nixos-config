@@ -94,6 +94,7 @@
     anki
     trezorctl
     trezor-agent
+    q
   ];
 
   programs.waybar.enable = true;

@@ -37,11 +37,11 @@
       bind-key K confirm kill-server
 
       set -g renumber-windows on
+      set -g mouse on
+      # don't yank immediately when selecting text
+      set -g @yank_with_mouse off
 
-      # FILE: iceberg.tmux.conf
-      # REPO: https://github.com/gkeep/iceberg-dark
-      # MAINTAINER: gkeep <gkeep77@protonmail.com>
-
+      # from https://github.com/gkeep/iceberg-dark
       set -g status-justify "centre"
       set -g status "on"
       set -g status-left-style "none"
