@@ -7,7 +7,6 @@
     enable = true;
     jobName = "crashRsync";
     paths = [
-      "/vw-data"
       "/var/backup"
     ];
     repo = "crash";
