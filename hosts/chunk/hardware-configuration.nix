@@ -22,9 +22,10 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
+  fileSystems."/persistent" = {
     device = "/dev/disk/by-uuid/6fff5dd4-8d7a-43fa-85be-eec74ef2089e";
     fsType = "ext4";
+    neededForBoot = true;
   };
 
   swapDevices = [ ];
