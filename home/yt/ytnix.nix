@@ -95,6 +95,8 @@
     trezorctl
     trezor-agent
     q
+    opentofu
+    terraform-ls
   ];
 
   programs.waybar.enable = true;
