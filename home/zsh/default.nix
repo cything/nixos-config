@@ -15,7 +15,7 @@
       highlighters = [ "brackets" ];
     };
     autocd = true;
-    defaultKeymap = "emacs";
+    defaultKeymap = "viins";
 
     initExtraFirst = ''
       if [[ -r "''\${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''\${(%):-%n}.zsh" ]]; then
@@ -45,6 +45,11 @@
         eval "$(${pkgs.fzf}/bin/fzf --zsh)"
       }
 
+      # useful emacs mode bindings
+      bindkey -M viins "^E" end-of-line
+      bindkey -M viins "^A" beginning-of-line
+      bindkey -M viins "^B" backward-char
+
       # fzf-tab stuff
       # set description format to enable group support
       zstyle ':completion:*:descriptions' format '[%d]'
@@ -60,11 +65,6 @@
       source ${./p10k.zsh}
     '';
     plugins = with pkgs; [
-      {
-        name = "vi-mode";
-        src = zsh-vi-mode;
-        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-      }
       {
         name = "powerlevel10k";
         src = zsh-powerlevel10k;
@@ -109,7 +109,7 @@
     };
   };
 
-  programs.fzf.enableZshIntegration = false; # manually integrated see above
+  programs.fzf.enableZshIntegration = true;
   programs.zoxide.enableZshIntegration = true;
   programs.eza.enableZshIntegration = true;
   programs.nix-index.enableZshIntegration = false;
