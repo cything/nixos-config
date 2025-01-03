@@ -50,6 +50,9 @@
       bindkey -M viins "^A" beginning-of-line
       bindkey -M viins "^B" backward-char
 
+      # accept one word completion
+      bindkey -M viins "^S" forward-word
+
       # fzf-tab stuff
       # set description format to enable group support
       zstyle ':completion:*:descriptions' format '[%d]'
