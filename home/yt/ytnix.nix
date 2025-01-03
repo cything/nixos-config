@@ -71,7 +71,7 @@
     bash-language-server
     sqlite
     usbutils
-    llvmPackages_19.clang-tools
+    clang-tools
     calibre
     tor-browser
     wtype
@@ -80,7 +80,6 @@
     rclone
     go
     rustup
-    clang_19
     pwgen
     lua-language-server
     gnumake
@@ -97,6 +96,8 @@
     q
     opentofu
     terraform-ls
+    gdb
+    gcc
   ];
 
   programs.waybar.enable = true;
