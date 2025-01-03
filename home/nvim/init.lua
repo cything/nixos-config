@@ -39,9 +39,9 @@ vim.cmd.colorscheme("iceberg")
 
 -- restore terminal cursor on exit
 vim.api.nvim_create_autocmd("VimLeave", {
-  callback = function ()
-    opt.guicursor = "a:ver25-blinkon500-blinkon500"
-  end
+	callback = function()
+		opt.guicursor = "a:ver25-blinkon500-blinkon500"
+	end,
 })
 
 -- blinking cursor in insert mode
