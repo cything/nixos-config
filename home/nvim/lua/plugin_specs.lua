@@ -91,6 +91,8 @@ local plugin_specs = {
 	},
 
 	{ "cocopon/iceberg.vim" },
+
+  { "farmergreg/vim-lastplace" },
 }
 
 require("lazy").setup({
