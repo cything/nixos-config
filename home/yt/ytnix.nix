@@ -98,6 +98,7 @@
     terraform-ls
     gdb
     gcc
+    seahorse
   ];
 
   programs.waybar.enable = true;
@@ -135,4 +136,6 @@
       miniflux-passwordfile /run/secrets/newsboat/miniflux
     '';
   };
+
+  services.gnome-keyring.enable = true;
 }
