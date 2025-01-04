@@ -23,3 +23,4 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           title: update lazy plugins
+          commit-message: update neovim plugins
