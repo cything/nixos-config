@@ -18,6 +18,9 @@
     man-pages-posix
     man
     man-db
+    attic-client
+    bottom
+    btop
   ];
 
   programs.zoxide.options = [ "--cmd cd" ];

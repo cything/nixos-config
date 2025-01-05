@@ -14,17 +14,15 @@
       database.url = "postgresql:///atticd?host=/run/postgresql";
 
       storage = {
-        type = "s3";
-        region = "auto";
-        bucket = "cy7";
-        endpoint = "https://e3e97aac307d106a7becea43cef8fcbd.r2.cloudflarestorage.com";
+        type = "local";
+        path = "/mnt/attic";
       };
 
       chunking = {
-        nar-size-threshold = 64 * 1024; # 64 KiB
-        min-size = 16 * 1024; # 16 KiB
-        avg-size = 64 * 1024; # 64 KiB
-        max-size = 256 * 1024; # 256 KiB
+        nar-size-threshold = 128 * 1024 * 1024;
+        min-size = 64 * 1024 * 1024;
+        avg-size = 128 * 1024 * 1024;
+        max-size = 256 * 1024 * 1024;
       };
     };
   };
