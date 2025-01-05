@@ -98,4 +98,3 @@ creation_rules:
       - age:
           - *chunk
           - *cy
-          - *yt

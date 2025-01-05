@@ -19,7 +19,7 @@
         bucket = "cy7";
         endpoint = "https://e3e97aac307d106a7becea43cef8fcbd.r2.cloudflarestorage.com";
       };
-      database.url = "postgresql://localhost/atticd";
+      database.url = "postgresql:///atticd?host=/run/postgresql";
 
       chunking = {
         nar-size-threshold = 64 * 1024; # 64 KiB
