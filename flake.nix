@@ -36,9 +36,9 @@
     extra-substituters = [
       "https://cache.cything.io/central"
     ];
-    # extra-trusted-public-keys = [
-    #   ""
-    # ];
+    extra-trusted-public-keys = [
+      "central:zOr/tVH4EqkIgnClJJzYkHYHbCTtG1aUsA2OZjObAt0="
+    ];
     builders-use-substitutes = true;
   };
 
