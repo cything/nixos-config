@@ -222,15 +222,15 @@
 
   services.btrbk.instances.local = {
     onCalendar = "hourly";
+    # only create snapshots automatically. backups are triggered manually with `btrbk resume`
     snapshotOnly = true;
     settings = {
-      # only create snapshots automatically. backups are triggered manually with `btrbk resume`
-      snapshot_preserve = "7d";
-      snapshot_preserve_min = "2d";
+      snapshot_preserve_min = "latest";
       target_preserve = "*d";
       target_preserve_min = "no";
       target = "/mnt/external/btr_backup/ytnix";
       stream_compress = "zstd";
+      stream_compress_level = "8";
       snapshot_dir = "/snapshots";
       subvolume = {
         "/home" = { };
