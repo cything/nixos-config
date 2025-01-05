@@ -22,7 +22,7 @@
     ./wireguard.nix
     ./grafana.nix
     ./tor.nix
-    ./conduit.nix
+    ./conduwuit.nix
     ./immich.nix
     ./element.nix
   ];
