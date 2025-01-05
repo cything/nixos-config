@@ -10,13 +10,6 @@
     enableTCPIP = true;
     ensureDatabases = [
       "hedgedoc"
-      "atticd"
-    ];
-    ensureUsers = [
-      {
-        name = "atticd";
-        ensureDBOwnership = true;
-      }
     ];
   };
   services.postgresqlBackup = {

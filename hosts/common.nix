@@ -6,8 +6,8 @@
       auto-optimise-store = true;
       flake-registry = "";
       trusted-users = [ "root" "@wheel" ];
-      trusted-public-keys = [ "central:cuiJMi+5BFUGeBPNMNWiKO6dlVTOHbHizFY+t7UW12w=" ];
-      substituters = [ "https://cache.cything.io/central" ];
+      trusted-public-keys = [ "cache.cything.io:4NhyCpZuroY7+JP18m1wkAgJGb6WL0jrtx2Bgrvdtow=" ];
+      substituters = [ "https://cache.cything.io/" ];
     };
     channel.enable = false;
     optimise = {

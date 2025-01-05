@@ -24,7 +24,7 @@
     ./conduwuit.nix
     ./immich.nix
     ./element.nix
-    ./attic.nix
+    ./harmonia.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -82,8 +82,8 @@
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/de3911/chunk.yaml;
     };
-    "attic/env" = {
-      sopsFile = ../../secrets/services/attic.yaml;
+    "harmonia/key" = {
+      sopsFile = ../../secrets/services/harmonia.yaml;
     };
   };
 

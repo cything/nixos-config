@@ -23,10 +23,6 @@
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    attic = {
-      url = "github:zhaofengli/attic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nixpkgs-borg.url = "github:cything/nixpkgs/borg"; # unmerged PR
     nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
@@ -34,10 +30,13 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://cache.cything.io/central"
+      # "https://cache.cything.io/"
+      "https://nix-community.cachix.org"
+      "https://cache.nixos.org/"
     ];
     extra-trusted-public-keys = [
-      "central:cuiJMi+5BFUGeBPNMNWiKO6dlVTOHbHizFY+t7UW12w="
+      "cache.cything.io:4NhyCpZuroY7+JP18m1wkAgJGb6WL0jrtx2Bgrvdtow="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
     builders-use-substitutes = true;
   };
@@ -135,12 +134,10 @@
             modules = [
               {
                 nixpkgs = { inherit pkgs; };
-                disabledModules = [ "services/networking/atticd.nix" ];
               }
               ./hosts/chunk
               inputs.sops-nix.nixosModules.sops
               ./modules
-              inputs.attic.nixosModules.atticd
             ];
           };
 

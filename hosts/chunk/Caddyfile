@@ -63,5 +63,5 @@ element.cything.io {
 
 cache.cything.io {
   import common
-  reverse_proxy localhost:8090
+  reverse_proxy localhost:5000
 }

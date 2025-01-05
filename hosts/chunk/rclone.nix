@@ -22,20 +22,20 @@
     };
   };
 
-  systemd.services.attic-mount = {
+  systemd.services.harmonia-mount = {
     enable = true;
-    description = "Mount the attic data remote";
+    description = "Mount the harmonia data remote";
     requires = [ "network-online.target" ];
     after = [ "network-online.target" ];
-    requiredBy = [ "atticd.service" ];
-    before = [ "atticd.service" ];
+    requiredBy = [ "harmonia.service" ];
+    before = [ "harmonia.service" ];
     serviceConfig = {
       Type = "notify";
-      ExecStartPre = "/usr/bin/env mkdir -p /mnt/attic";
+      ExecStartPre = "/usr/bin/env mkdir -p /mnt/harmonia";
       ExecStart = "${lib.getExe pkgs.rclone} mount --config ${
         config.sops.secrets."rclone/config".path
-      } --cache-dir /var/cache/rclone --transfers=32 --allow-other rsyncnet:attic /mnt/attic ";
-      ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/photos";
+      } --cache-dir /var/cache/rclone --transfers=32 --allow-other rsyncnet:harmonia /mnt/harmonia ";
+      ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/harmonia";
     };
   };
   programs.fuse.userAllowOther = true;
