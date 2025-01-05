@@ -5,7 +5,7 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
       flake-registry = "";
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users = [ "root" "@wheel" "harmonia" ];
       trusted-public-keys = [ "cache.cything.io:4NhyCpZuroY7+JP18m1wkAgJGb6WL0jrtx2Bgrvdtow=" ];
       substituters = [ "https://cache.cything.io/" ];
     };
