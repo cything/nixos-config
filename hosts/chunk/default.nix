@@ -21,10 +21,10 @@
     ./vaultwarden.nix
     ./wireguard.nix
     ./grafana.nix
-    ./tor.nix
     ./conduwuit.nix
     ./immich.nix
     ./element.nix
+    ./attic.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -81,6 +81,9 @@
     };
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/de3911/chunk.yaml;
+    };
+    "attic/env" = {
+      sopsFile = ../../secrets/services/attic.yaml;
     };
   };
 

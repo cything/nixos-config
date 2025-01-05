@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }:
 {
@@ -11,13 +10,15 @@
     enableTCPIP = true;
     ensureDatabases = [
       "hedgedoc"
+      "atticd"
     ];
-    authentication = lib.mkForce ''
-      local all all trust
-      host  all all 127.0.0.1/32 trust
-      host  all all ::1/128 trust
-      host  all all 172.18.0.0/16 trust
-    '';
+    ensureUsers = [
+      {
+        name = "atticd";
+        ensureDBOwnership = true;
+      }
+    ]
+    ;
   };
   services.postgresqlBackup = {
     enable = true;

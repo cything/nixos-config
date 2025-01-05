@@ -93,3 +93,9 @@ creation_rules:
       - age:
           - *yt
           - *cy
+  - path_regex: secrets/services/attic.yaml
+    key_groups:
+      - age:
+          - *chunk
+          - *cy
+          - *yt

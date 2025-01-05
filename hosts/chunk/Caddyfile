@@ -60,3 +60,8 @@ element.cything.io {
   import common
   reverse_proxy localhost:8089
 }
+
+cache.cything.io {
+  import common
+  reverse_proxy localhost:8090
+}
