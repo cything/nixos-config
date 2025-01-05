@@ -34,7 +34,7 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://cache.cything.io"
+      "https://cache.cything.io/central"
     ];
     # extra-trusted-public-keys = [
     #   ""
