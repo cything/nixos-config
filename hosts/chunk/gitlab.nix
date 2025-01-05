@@ -8,7 +8,7 @@
     group = "git";
     port = 443; # this *not* the port gitlab will run on
     puma.workers = 0; # https://docs.gitlab.com/omnibus/settings/memory_constrained_envs.html#optimize-puma
-    sidekiq.concurrency = 10;
+    sidekiq.concurrency = 5;
     databaseUsername = "git"; # needs to be same as user
     initialRootEmail = "hi@cything.io";
     initialRootPasswordFile = config.sops.secrets."gitlab/root".path;
@@ -23,6 +23,10 @@
       # we already postgresqlbackup.service
       skip = [ "db" ];
       keepTime = 48; # hours
+    };
+    extraConfig = {
+      gitlab.default_theme = 11;
+      prometheus.enabled = false;
     };
   };
 }
