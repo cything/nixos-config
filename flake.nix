@@ -79,30 +79,7 @@
         (overlayPkgsFromFlake inputs.nixpkgs-stable [
           # "prometheus" # fails to build on unstable
         ])
-        (_final: prev: {
-          conduwuit = prev.conduwuit.override (old: {
-            rustPlatform = old.rustPlatform // {
-              buildRustPackage =
-                args:
-                old.rustPlatform.buildRustPackage (
-                  args
-                  // {
-                    version = "0.5.0-rc2";
-                    src = prev.fetchFromGitHub {
-                      owner = "girlbossceo";
-                      repo = "conduwuit";
-                      rev = "33d9e8d304a5fe6928fe0c479a5ad9dc87fe09e4";
-                      hash = "sha256-WThyGzZtADuMQhUzkt+9559jo8hGPyyVxRTXdWHQ+0I=";
-                    };
-                    doCheck = false;
-                    cargoHash = "sha256-ZenMTCEJrALKQnW7/eXqrhFj+BedE9i/rQZMsPHl8K0=";
-                    meta.mainProgram = "conduwuit";
-                  }
-                );
-            };
-          });
-        })
-      ];
+      ] ++ import ./overlay;
 
       pkgsFor = lib.genAttrs systems (
         system:
