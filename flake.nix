@@ -30,13 +30,10 @@
 
   nixConfig = {
     extra-substituters = [
-      # "https://cache.cything.io/"
-      "https://nix-community.cachix.org"
-      "https://cache.nixos.org/"
+      "https://cache.cything.io/"
     ];
     extra-trusted-public-keys = [
       "cache.cything.io:4NhyCpZuroY7+JP18m1wkAgJGb6WL0jrtx2Bgrvdtow="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
     builders-use-substitutes = true;
   };
