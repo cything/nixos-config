@@ -37,7 +37,7 @@
       "https://cache.cything.io/central"
     ];
     extra-trusted-public-keys = [
-      "central:zOr/tVH4EqkIgnClJJzYkHYHbCTtG1aUsA2OZjObAt0="
+      "central:cuiJMi+5BFUGeBPNMNWiKO6dlVTOHbHizFY+t7UW12w="
     ];
     builders-use-substitutes = true;
   };
