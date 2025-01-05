@@ -7,7 +7,7 @@
       flake-registry = "";
       trusted-users = [ "root" "@wheel" ];
       trusted-public-keys = [ "central:zOr/tVH4EqkIgnClJJzYkHYHbCTtG1aUsA2OZjObAt0=" ];
-      substituters = [ "https://cache.cything.io" ];
+      substituters = [ "https://cache.cything.io/central" ];
     };
     channel.enable = false;
     optimise = {
