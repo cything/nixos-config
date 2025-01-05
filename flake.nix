@@ -32,6 +32,16 @@
     nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
   };
 
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.cything.io"
+    ];
+    # extra-trusted-public-keys = [
+    #   ""
+    # ];
+    builders-use-substitutes = true;
+  };
+
   outputs =
     {
       self,

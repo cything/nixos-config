@@ -9,17 +9,16 @@
       listen = "[::]:8090";
       api-endpoint = "https://cache.cything.io/";
       allowed-hosts = [ "cache.cything.io" ];
-
-      jwt = { };
-
+      require-proof-of-possession = false;
       compression.type = "zstd";
+      database.url = "postgresql:///atticd?host=/run/postgresql";
+
       storage = {
         type = "s3";
         region = "default";
         bucket = "cy7";
         endpoint = "https://e3e97aac307d106a7becea43cef8fcbd.r2.cloudflarestorage.com";
       };
-      database.url = "postgresql:///atticd?host=/run/postgresql";
 
       chunking = {
         nar-size-threshold = 64 * 1024; # 64 KiB
