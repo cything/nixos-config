@@ -65,6 +65,23 @@
         (overlayPkgsFromFlake inputs.nixpkgs-stable [
           # "prometheus" # fails to build on unstable
         ])
+        (final: prev: {
+          conduwuit = prev.conduwuit.override (old: {
+            rustPlatform = old.rustPlatform // {
+              buildRustPackage = args: old.rustPlatform.buildRustPackage (args // {
+                version = "0.4.6";
+                src = prev.fetchFromGitHub {
+                  owner = "girlbossceo";
+                  repo = "conduwuit";
+                  rev = "c7ae9516767dff6767a725be3d144164c0d1ad56";
+                  hash = "sha256-llE6EPE70iV7gGz2c2uhRAQIhRe57cYaXfA4NnbRtrM=";
+                };
+                cargoHash = "sha256-5KXFei6A12QrFattkbDZM2LuLueV+aKunDgy6ZAaF7E=";
+                doCheck = false;
+              });
+            };
+          });
+        })
       ];
 
       pkgsFor = lib.genAttrs systems (
