@@ -1,4 +1,4 @@
-{config, ...}:
+{ config, ... }:
 {
   services.atticd = {
     enable = true;

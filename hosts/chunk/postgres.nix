@@ -17,8 +17,7 @@
         name = "atticd";
         ensureDBOwnership = true;
       }
-    ]
-    ;
+    ];
   };
   services.postgresqlBackup = {
     enable = true;
