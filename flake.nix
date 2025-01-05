@@ -87,15 +87,16 @@
                 old.rustPlatform.buildRustPackage (
                   args
                   // {
-                    version = "0.4.6";
+                    version = "0.5.0-rc2";
                     src = prev.fetchFromGitHub {
                       owner = "girlbossceo";
                       repo = "conduwuit";
-                      rev = "c7ae9516767dff6767a725be3d144164c0d1ad56";
-                      hash = "sha256-llE6EPE70iV7gGz2c2uhRAQIhRe57cYaXfA4NnbRtrM=";
+                      rev = "33d9e8d304a5fe6928fe0c479a5ad9dc87fe09e4";
+                      hash = "sha256-WThyGzZtADuMQhUzkt+9559jo8hGPyyVxRTXdWHQ+0I=";
                     };
-                    cargoHash = "sha256-5KXFei6A12QrFattkbDZM2LuLueV+aKunDgy6ZAaF7E=";
                     doCheck = false;
+                    cargoHash = "sha256-ZenMTCEJrALKQnW7/eXqrhFj+BedE9i/rQZMsPHl8K0=";
+                    meta.mainProgram = "conduwuit";
                   }
                 );
             };
