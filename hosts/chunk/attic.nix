@@ -15,7 +15,7 @@
 
       storage = {
         type = "s3";
-        region = "default";
+        region = "auto";
         bucket = "cy7";
         endpoint = "https://e3e97aac307d106a7becea43cef8fcbd.r2.cloudflarestorage.com";
       };

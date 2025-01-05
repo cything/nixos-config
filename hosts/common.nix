@@ -5,6 +5,9 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
       flake-registry = "";
+      trusted-users = [ "root" "@wheel" ];
+      trusted-public-keys = [ "central:zOr/tVH4EqkIgnClJJzYkHYHbCTtG1aUsA2OZjObAt0=" ];
+      substituters = [ "https://cache.cything.io" ];
     };
     channel.enable = false;
     optimise = {
@@ -17,6 +20,10 @@
       persistent = true;
       options = "--delete-older-than 14d";
     };
+    extraOptions = ''
+	    builders-use-substitutes = true
+	  '';
+
   };
   time.timeZone = "America/Toronto";
   networking.firewall.logRefusedConnections = false;
