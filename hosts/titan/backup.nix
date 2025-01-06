@@ -4,7 +4,7 @@
 }:
 {
   my.backup = {
-    enable = false;
+    enable = true;
     jobName = "titanRsync";
     repo = "titan";
     passFile = config.sops.secrets."borg/rsyncnet".path;

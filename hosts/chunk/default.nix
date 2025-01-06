@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ./gitlab.nix
     ./backup.nix
+    ./rclone.nix
     ./postgres.nix
     ./wireguard.nix
     ./adguard.nix
@@ -21,7 +22,9 @@
     ./wireguard.nix
     ./grafana.nix
     ./conduwuit.nix
+    ./immich.nix
     ./element.nix
+    ./attic.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";

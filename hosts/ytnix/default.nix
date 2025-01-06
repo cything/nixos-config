@@ -205,7 +205,7 @@
   };
 
   my.backup = {
-    enable = false;
+    enable = true;
     jobName = "ytnixRsync";
     exclude = [
       "/var/lib/private/ollama"
