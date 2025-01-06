@@ -19,7 +19,7 @@
       };
 
       garbage-collection = {
-        default-retention-period = "1 minute";
+        default-retention-period = "3 months";
       };
 
       chunking = {
