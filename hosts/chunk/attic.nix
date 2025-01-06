@@ -18,6 +18,10 @@
         path = "/mnt/attic";
       };
 
+      garbage-collection = {
+        default-retention-period = "3 months";
+      };
+
       chunking = {
         nar-size-threshold = 128 * 1024 * 1024;
         min-size = 64 * 1024 * 1024;

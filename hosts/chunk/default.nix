@@ -172,6 +172,7 @@
     tmux
     file
     sops
+    attic-server
   ];
 
   environment.variables = {
