@@ -23,7 +23,7 @@
       };
 
       chunking = {
-        nar-size-threshold = 128 * 1024 * 1024;
+        nar-size-threshold = 0; # disables chunking
         min-size = 64 * 1024 * 1024;
         avg-size = 128 * 1024 * 1024;
         max-size = 256 * 1024 * 1024;
