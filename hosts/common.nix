@@ -23,7 +23,6 @@
     extraOptions = ''
 	    builders-use-substitutes = true
 	  '';
-
   };
   time.timeZone = "America/Toronto";
   networking.firewall.logRefusedConnections = false;
