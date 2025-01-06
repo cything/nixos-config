@@ -34,8 +34,8 @@
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/attic";
       ExecStart = "${lib.getExe pkgs.rclone} mount --config ${
         config.sops.secrets."rclone/config".path
-      } --cache-dir /var/cache/rclone --transfers=32 --allow-other rsyncnet:attic /mnt/attic ";
-      ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/photos";
+      } --cache-dir /var/cache/rclone --transfers=32 --allow-other --cache-dir /var/cache/rclone --dir-cache-time 72h --vfs-cache-mode writes --vfs-cache-max-size 2G rsyncnet:attic /mnt/attic ";
+      ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/attic";
     };
   };
   programs.fuse.userAllowOther = true;
