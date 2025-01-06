@@ -19,14 +19,14 @@
       };
 
       garbage-collection = {
-        default-retention-period = "3 months";
+        default-retention-period = "1 minute";
       };
 
       chunking = {
         nar-size-threshold = 0; # disables chunking
-        min-size = 64 * 1024 * 1024;
-        avg-size = 128 * 1024 * 1024;
-        max-size = 256 * 1024 * 1024;
+        min-size = 0;
+        avg-size = 0;
+        max-size = 0;
       };
     };
   };
