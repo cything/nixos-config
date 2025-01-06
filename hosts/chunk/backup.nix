@@ -4,7 +4,7 @@
 }:
 {
   my.backup = {
-    enable = true;
+    enable = false;
     jobName = "crashRsync";
     paths = [
       "/var/backup"
