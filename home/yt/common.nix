@@ -9,7 +9,6 @@
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
-      flake-registry = "";
       trusted-users = [ "root" "@wheel" ];
       trusted-public-keys = [ "central:uWhjva6m6dhC2hqNisjn2hXGvdGBs19vPkA1dPEuwFg=" ];
       substituters = [ "https://cache.cything.io/central" ];
