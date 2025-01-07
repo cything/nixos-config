@@ -52,7 +52,7 @@ in
     };
     repo = lib.mkOption {
       type = lib.types.str;
-      description = "Borg repository to backup to. This is appended to `de3911@de3911.rsync.net:borg/`.";
+      description = "Borg repository to backup to. This is appended to `zh5061@zh5061.rsync.net:borg/`.";
     };
     startAt = lib.mkOption {
       type = lib.types.str;
@@ -76,7 +76,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.ssh.knownHostsFiles = [
       (pkgs.writeText "rsyncnet-keys" ''
-        de3911.rsync.net ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIObQN4P/deJ/k4P4kXh6a9K4Q89qdyywYetp9h3nwfPo
+        zh5061.rsync.net ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJtclizeBy1Uo3D86HpgD3LONGVH0CJ0NT+YfZlldAJd
       '')
     ]; # needs to be a list
 
@@ -87,7 +87,7 @@ in
       persistentTimer = true;
       paths = defaultPaths ++ cfg.paths;
       exclude = defaultExclude ++ cfg.exclude;
-      repo = "de3911@de3911.rsync.net:borg/" + cfg.repo;
+      repo = "zh5061@zh5061.rsync.net:borg/" + cfg.repo;
       encryption = {
         mode = "repokey-blake2";
         passCommand = "cat ${cfg.passFile}";
@@ -96,6 +96,7 @@ in
         BORG_RSH = "ssh -i ${cfg.sshKeyFile}";
         BORG_REMOTE_PATH = "borg1";
         BORG_EXIT_CODES = "modern";
+        BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes";
       };
       compression = "auto,zstd,8";
       extraCreateArgs = [

@@ -30,7 +30,7 @@
       sopsFile = ../../secrets/borg/titan.yaml;
     };
     "rsyncnet/id_ed25519" = {
-      sopsFile = ../../secrets/de3911/titan.yaml;
+      sopsFile = ../../secrets/zh5061/titan.yaml;
     };
   };
 

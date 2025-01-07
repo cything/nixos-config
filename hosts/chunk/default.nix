@@ -80,7 +80,7 @@
       owner = config.users.users.git.name;
     };
     "rsyncnet/id_ed25519" = {
-      sopsFile = ../../secrets/de3911/chunk.yaml;
+      sopsFile = ../../secrets/zh5061/chunk.yaml;
     };
     "attic/env" = {
       sopsFile = ../../secrets/services/attic.yaml;

@@ -33,7 +33,7 @@
       sopsFile = ../../secrets/wireguard/yt.yaml;
     };
     "rsyncnet/id_ed25519" = {
-      sopsFile = ../../secrets/de3911/yt.yaml;
+      sopsFile = ../../secrets/zh5061/yt.yaml;
     };
     "newsboat/miniflux" = {
       sopsFile = ../../secrets/newsboat.yaml;
