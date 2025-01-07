@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     attic = {
-      url = "github:zhaofengli/attic";
+      url = "github:cything/attic/32";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -76,8 +76,9 @@
         flake: pkgNames: _final: prev:
         overridePkgsFromFlake prev flake pkgNames;
       overlays = [
-        (overlayPkgsFromFlake inputs.nixpkgs-stable [
-          # "prometheus" # fails to build on unstable
+        (overlayPkgsFromFlake inputs.attic [
+          "attic-server"
+          "attic-client"
         ])
       ] ++ import ./overlay;
 
