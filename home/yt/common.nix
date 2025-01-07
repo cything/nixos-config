@@ -5,26 +5,6 @@
     ../zsh
   ];
 
-  nix = {
-    settings = {
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-      trusted-users = [ "root" "@wheel" ];
-      trusted-public-keys = [ "central:uWhjva6m6dhC2hqNisjn2hXGvdGBs19vPkA1dPEuwFg=" ];
-      substituters = [ "https://cache.cything.io/central" ];
-    };
-    gc = {
-      automatic = true;
-      frequency = "19:00";
-      persistent = true;
-      options = "--delete-older-than 14d";
-    };
-    extraOptions = ''
-	    builders-use-substitutes = true
-	  '';
-    package = pkgs.nix;
-  };
-
   home.sessionVariables = {
     "EDITOR" = "nvim";
   };
