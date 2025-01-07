@@ -77,8 +77,9 @@
         overridePkgsFromFlake prev flake pkgNames;
       overlays = [
         (overlayPkgsFromFlake inputs.attic [
-          "attic-server"
-          "attic-client"
+          # home-manager doesn't like these
+          # "attic-server"
+          # "attic-client"
         ])
       ] ++ import ./overlay;
 

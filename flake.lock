@@ -12,11 +12,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1736211977,
-        "narHash": "sha256-Bzt7ZnmR1Dj0j0S/gwCwFt5n1aRdx1zZgFUtNE0R++k=",
+        "lastModified": 1736241594,
+        "narHash": "sha256-Sf6MWdljMgvzpzEMIAvA8nJqncIY+qGHUjDTQLl6BlA=",
         "owner": "cything",
         "repo": "attic",
-        "rev": "e6175ad2434c6c8eab576b5544bb0bad13cc14e6",
+        "rev": "81c2370c17c724935902732cfe3433f8562511fc",
         "type": "github"
       },
       "original": {
