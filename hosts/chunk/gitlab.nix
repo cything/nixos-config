@@ -25,7 +25,10 @@
       keepTime = 48; # hours
     };
     extraConfig = {
-      gitlab.default_theme = 11;
+      gitlab = {
+        # NOTE: default_syntax_highlighting_theme needs to be set in the application_settings table in the database
+        default_color_mode = 2;
+      };
       prometheus.enabled = false;
     };
   };
