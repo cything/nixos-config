@@ -26,6 +26,13 @@
   };
   time.timeZone = "America/Toronto";
   networking.firewall.logRefusedConnections = false;
+  networking.nameservers = [
+    # quad9
+    "2620:fe::fe"
+    "2620:fe::9"
+    "9.9.9.9"
+    "149.112.112.112"
+  ];
 
   # this is true by default and mutually exclusive with
   # programs.nix-index

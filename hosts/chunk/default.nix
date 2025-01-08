@@ -135,12 +135,6 @@
     address = "31.59.129.1";
     interface = "ens18";
   };
-  networking.nameservers = [
-    "127.0.0.1"
-    "::1"
-  ];
-
-  time.timeZone = "America/Toronto";
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {

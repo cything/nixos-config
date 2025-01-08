@@ -84,10 +84,6 @@
       dns = "none";
       wifi.backend = "iwd";
     };
-    nameservers = [
-      "31.59.129.225"
-      "2a0f:85c1:840:2bfb::1"
-    ];
     resolvconf.enable = true;
     firewall = {
       allowedUDPPorts = [ 51820 ]; # for wireguard
