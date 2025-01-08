@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     attic = {
-      url = "github:cything/attic/32";
+      url = "github:cything/attic/9df5db35697a3a3eedcb2ef79b09f50bc62da81f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

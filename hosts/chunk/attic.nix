@@ -27,6 +27,7 @@
         min-size = 0;
         avg-size = 0;
         max-size = 0;
+        concurrent-chunk-uploads = 32;
       };
     };
   };
