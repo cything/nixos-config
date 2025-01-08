@@ -65,3 +65,13 @@ cache.cything.io {
   import common
   reverse_proxy localhost:8090
 }
+
+s3.cything.io {
+  import common
+  reverse_proxy localhost:3900
+}
+
+admin.s3.cything.io {
+  import common
+  reverse_proxy localhost:3903
+}

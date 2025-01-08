@@ -38,5 +38,22 @@
       ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/attic";
     };
   };
+  systemd.services.garage-mount = {
+    enable = true;
+    description = "Mount the garage data remote";
+    requires = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    requiredBy = [ "garage.service" ];
+    before = [ "garage.service" ];
+    serviceConfig = {
+      Type = "notify";
+      ExecStartPre = "/usr/bin/env mkdir -p /mnt/garage";
+      ExecStart = "${lib.getExe pkgs.rclone} mount --config ${
+        config.sops.secrets."rclone/config".path
+      } --cache-dir /var/cache/rclone --transfers=32 --checkers=32 --vfs-cache-mode writes --vfs-cache-max-size 5G --allow-other rsyncnet:garage /mnt/garage ";
+      ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/garage";
+    };
+  };
+
   programs.fuse.userAllowOther = true;
 }
