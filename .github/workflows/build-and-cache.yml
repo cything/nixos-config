@@ -6,6 +6,13 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        package:
+          - github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic
+          - github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic-server
+          - github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic-client
+
     runs-on: ubuntu-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
@@ -23,6 +30,4 @@ jobs:
           cache: ${{ vars.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
 
-      - run: nix build github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic
-      - run: nix build github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic-server
-      - run: nix build github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic-client
+      - run: nix build '${{ matrix.package }}'
