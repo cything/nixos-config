@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     attic = {
-      url = "github:cything/attic/configurable-concurrency";
+      url = "github:cything/attic/compression";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -35,9 +35,13 @@
   nixConfig = {
     extra-substituters = [
       "https://cache.cything.io/central"
+      "https://cache.cything.io/infra-ci"
+      "https://cache.cything.io/attic"
     ];
     extra-trusted-public-keys = [
       "central:uWhjva6m6dhC2hqNisjn2hXGvdGBs19vPkA1dPEuwFg="
+      "infra-ci:xG5f5tddUBcvToYjlpHD5OY/puYQkKmgKeIQCshNs38="
+      "attic:HL3hVpqXxwcF7Q1R+IvU2i0+YxIjQA2xxKM5EJMXLLs="
     ];
     builders-use-substitutes = true;
   };
@@ -137,12 +141,10 @@
             modules = [
               {
                 nixpkgs = { inherit pkgs; };
-                disabledModules = [ "services/networking/atticd.nix" ];
               }
               ./hosts/chunk
               inputs.sops-nix.nixosModules.sops
               ./modules
-              inputs.attic.nixosModules.atticd
             ];
           };
 

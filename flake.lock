@@ -12,16 +12,16 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1736353000,
-        "narHash": "sha256-PzglFIpNjoFLR5u0NO2+vrI2LACT9ZCRXk4zqYwEv+M=",
+        "lastModified": 1736394512,
+        "narHash": "sha256-dIrCD0rLXlW1XsNiF50vTeHi1l4xHYh0m+aCdHNcMfU=",
         "owner": "cything",
         "repo": "attic",
-        "rev": "cdb032600405c3db0ef76ea837ab34afdc97c3e3",
+        "rev": "e91261dc9a22d267700ab9095155f5581ac3b06c",
         "type": "github"
       },
       "original": {
         "owner": "cything",
-        "ref": "configurable-concurrency",
+        "ref": "compression",
         "repo": "attic",
         "type": "github"
       }
@@ -210,11 +210,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736204492,
-        "narHash": "sha256-CoBPRgkUex9Iz6qGSzi/BFVUQjndB0PmME2B6eEyeCs=",
+        "lastModified": 1736366465,
+        "narHash": "sha256-Fo68EF6p/N9GJyHiAUbXtiE7IJlb3IMjK86LuxFMsRU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "20665c6efa83d71020c8730f26706258ba5c6b2a",
+        "rev": "7e00856596891850ba5ad4c5ecd2ed74468c08c5",
         "type": "github"
       },
       "original": {
