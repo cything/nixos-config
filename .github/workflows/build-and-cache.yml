@@ -12,6 +12,7 @@ jobs:
           - .#attic-client
           - .#attic-server
           - .#eza
+          - .#conduwuit
 
     runs-on: ubuntu-latest
     steps:
