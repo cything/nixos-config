@@ -23,4 +23,6 @@ jobs:
           cache: ${{ vars.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
 
-      - run: nix build github:nixos/nixpkgs/e12eb3ea24df94fe90bf1661d1f711fe6fe80202#vault-tasks
+      - run: nix build github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic
+      - run: nix build github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic-server
+      - run: nix build github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic-client
