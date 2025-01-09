@@ -23,10 +23,6 @@
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    attic = {
-      url = "github:cything/attic/compression";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nixpkgs-borg.url = "github:cything/nixpkgs/borg"; # unmerged PR
     nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
