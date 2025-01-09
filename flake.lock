@@ -42,6 +42,22 @@
         "type": "github"
       }
     },
+    "eza": {
+      "locked": {
+        "lastModified": 1736397430,
+        "narHash": "sha256-l00P7P3zcx8rzYOOQMNUwBqK/yz/4Cv8G8+pYbfyQ5Y=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d722e8ce81cf103280ce1ff65accb3fc25cbd2ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d722e8ce81cf103280ce1ff65accb3fc25cbd2ba",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -260,6 +276,7 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "eza": "eza",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",

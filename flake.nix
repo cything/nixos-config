@@ -26,6 +26,7 @@
 
     nixpkgs-borg.url = "github:cything/nixpkgs/borg"; # unmerged PR
     nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
+    eza.url = "github:nixos/nixpkgs/d722e8ce81cf103280ce1ff65accb3fc25cbd2ba";
   };
 
   nixConfig = {
@@ -76,10 +77,8 @@
         flake: pkgNames: _final: prev:
         overridePkgsFromFlake prev flake pkgNames;
       overlays = [
-        (overlayPkgsFromFlake inputs.attic [
-          # home-manager doesn't like these
-          # "attic-server"
-          # "attic-client"
+        (overlayPkgsFromFlake inputs.eza [
+          "eza"
         ])
       ] ++ import ./overlay;
 

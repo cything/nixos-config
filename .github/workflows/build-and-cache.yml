@@ -11,6 +11,7 @@ jobs:
         package:
           - .#attic-client
           - .#attic-server
+          - .#eza
 
     runs-on: ubuntu-latest
     steps:
