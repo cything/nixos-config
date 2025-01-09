@@ -117,6 +117,8 @@
       checks = forEachSystem (pkgs: {
         formatting = treefmtEval.${pkgs.system}.config.build.check self;
       });
+      # lets us build overlayed packages with `nix build .#<package>`
+      packages = pkgsFor;
 
       nixosConfigurations =
         let

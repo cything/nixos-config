@@ -10,11 +10,11 @@ final: prev: {
             src = final.fetchFromGitHub {
               owner = "cything";
               repo = "attic";
-              rev = "3e0c381aa1b4f41234284b5491aa818c24af5983";
-              hash = "sha256-kw7zeQH+mg0bCTzfr6MqlqAHzYfPSlNj2Fk+lRqVO7A=";
+              rev = "e91261dc9a22d267700ab9095155f5581ac3b06c";
+              hash = "sha256-dIrCD0rLXlW1XsNiF50vTeHi1l4xHYh0m+aCdHNcMfU=";
             };
             cargoLock = null;
-            cargoHash = "sha256-0z7cFMMltJQt3zBQ0L+t8MLKPE+HtduWJnNXED7rEHc=";
+            cargoHash = "sha256-AbpWnYfBMrR6oOfy2LkQvIPYsClCWE89bJav+iHTtLM=";
             useFetchCargoVendor = true;
           }
         );
