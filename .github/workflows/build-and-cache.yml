@@ -14,8 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           logger: pretty
@@ -33,5 +31,7 @@ jobs:
           endpoint: ${{ vars.ATTIC_ENDPOINT }}
           cache: ${{ vars.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
+
+      - uses: actions/checkout@v4
 
       - run: nix build '${{ matrix.package }}'
