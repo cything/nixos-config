@@ -9,9 +9,9 @@ jobs:
     strategy:
       matrix:
         package:
-          - github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic
-          - github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic-server
-          - github:cything/attic/4938bf3584258e74d6f2036198eef81d7cdb4c85#attic-client
+          - github:cything/attic/e91261dc9a22d267700ab9095155f5581ac3b06c#attic
+          - github:cything/attic/e91261dc9a22d267700ab9095155f5581ac3b06c#attic-server
+          - github:cything/attic/e91261dc9a22d267700ab9095155f5581ac3b06c#attic-client
 
     runs-on: ubuntu-latest
     steps:
