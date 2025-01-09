@@ -25,7 +25,7 @@ final: prev: {
               "brotli_compression"
               "element_hacks"
               "gzip_compression"
-              # "release_max_log_level" # without this feature to enable debug logging
+              "release_max_log_level" # without this feature to enable debug logging
               "sentry_telemetry"
               "systemd"
               "zstd_compression"
