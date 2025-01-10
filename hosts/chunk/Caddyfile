@@ -17,7 +17,8 @@ git.cything.io {
   # wrap in route so things are evaluated in the order written
   route {
     # rewrite gitlab URIs to make it work with forgejo
-    uri path_regexp \/-\/ /
+    uri path_regexp /-/ /
+    uri replace /blob/ /src/
     redir https://git.cy7.sh{uri} permanent
   }
 }
