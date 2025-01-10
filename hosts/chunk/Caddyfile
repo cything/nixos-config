@@ -13,7 +13,13 @@
 
 git.cything.io {
   import common
-  redir https://git.cy7.sh{uri} permanent
+
+  # wrap in route so things are evaluated in the order written
+  route {
+    # rewrite gitlab URIs to make it work with forgejo
+    uri path_regexp \/-\/ /
+    redir https://git.cy7.sh{uri} permanent
+  }
 }
 
 git.cy7.sh {
