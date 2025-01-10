@@ -11,9 +11,14 @@
   header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
 }
 
-git.cy7.sh, git.cything.io {
+git.cything.io {
   import common
-  reverse_proxy unix//run/gitlab/gitlab-workhorse.socket
+  redir https://git.cy7.sh{uri} permanent
+}
+
+git.cy7.sh {
+  import common
+  reverse_proxy localhost:3000
 }
 
 rss.cything.io {
