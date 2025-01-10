@@ -139,7 +139,8 @@
   ];
   # for forgejo
   users.users.git = {
-    isSystemUser = true;
+    isNormalUser = true;
+    home = "/var/lib/forgejo";
     group = "git";
   };
   users.groups.git = {};
