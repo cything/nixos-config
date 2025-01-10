@@ -17,6 +17,7 @@
         AMBIGUOUS_UNICODE_DETECTION = false;
         DEFAULT_THEME = "gitea-dark";
       };
+      actions.ENABLED = false;
     };
     database = {
       type = "postgres";
