@@ -98,6 +98,7 @@
     gdb
     clang
     seahorse
+    github-cli
   ];
 
   programs.waybar.enable = true;
