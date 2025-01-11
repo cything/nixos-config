@@ -3,14 +3,11 @@
   imports = [
     ../tmux.nix
     ../zsh
+    ../nixvim
   ];
 
   home.sessionVariables = {
     "EDITOR" = "nvim";
-  };
-
-  xdg.configFile = {
-    nvim.source = ../nvim;
   };
 
   home.packages = with pkgs; [
@@ -30,7 +27,6 @@
   };
   programs.zoxide.enable = true;
   programs.eza.enable = true;
-  programs.neovim.enable = true;
   programs.git = {
     enable = true;
     userName = "cy";

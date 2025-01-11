@@ -96,7 +96,7 @@
     opentofu
     terraform-ls
     gdb
-    gcc
+    clang
     seahorse
   ];
 

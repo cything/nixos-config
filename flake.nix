@@ -23,6 +23,10 @@
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs-borg.url = "github:cything/nixpkgs/borg"; # unmerged PR
     nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
@@ -165,6 +169,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/yt/ytnix.nix
+            inputs.nixvim.homeManagerModules.nixvim
           ];
         };
 
