@@ -10,6 +10,7 @@
         HTTP_PORT = 3000;
         HTTP_ADDR = "127.0.0.1";
         DOMAIN = "git.cy7.sh";
+        LANDING_PAGE = "/cy";
       };
       session.COOKIE_SECURE = true;
       service.DISABLE_REGISTRATION = true;
@@ -18,6 +19,7 @@
         DEFAULT_THEME = "gitea-dark";
       };
       actions.ENABLED = false;
+      repository.ENABLE_PUSH_CREATE_USER = true;
     };
     database = {
       type = "postgres";
