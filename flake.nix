@@ -178,6 +178,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/yt/chunk.nix
+            inputs.nixvim.homeManagerModules.nixvim
           ];
         };
       };
