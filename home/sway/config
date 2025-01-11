@@ -26,7 +26,7 @@ floating_modifier $mod normal
 default_border pixel
 smart_borders on
 focus_follows_mouse always
-mouse_warping container
+# mouse_warping container
 
 bindsym $mod+Return exec $term
 bindsym $mod+Ctrl+q kill
