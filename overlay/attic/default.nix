@@ -10,8 +10,8 @@ final: prev: {
             src = final.fetchFromGitHub {
               owner = "cything";
               repo = "attic";
-              rev = "d660c85bdb6bb10499a23a846a13107ea0c72769";
-              hash = "sha256-E22d2OLV02L2QdiSeK58flveehR8z8WIKkcN/njAMdg=";
+              rev = "ef9a067d84dcf02e280bb82796a2e0ee6177a34d";
+              hash = "sha256-BLY/RiyQfSgzxu6TDIzkE2mRT3YI5llJc35j57C8Os4=";
             };
             cargoLock = null;
             cargoHash = "sha256-AbpWnYfBMrR6oOfy2LkQvIPYsClCWE89bJav+iHTtLM=";
