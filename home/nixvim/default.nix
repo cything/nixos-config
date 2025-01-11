@@ -72,41 +72,68 @@
 
     plugins.cmp = {
       enable = true;
-      settings.sources = [
-        { name = "nvim_lsp"; }
-        { name = "luasnip"; }
-        { name = "buffer"; }
-        { name = "nvim_lua"; }
-        { name = "path"; }
-      ];
-
-      settings.mappings = {
-        "<C-h>" = "cmp.mapping.abort()";
-        "<C-n>" = "cmp.mapping.select_next_item()";
-        "<C-p>" = "cmp.mapping.select_prev_item()";
-        "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-        "<C-u>" = "cmp.mapping.scroll_docs(4)";
-        "<C-k>" = "cmp.mapping.confirm({ select = true })";
-        "<Tab>" = ''
-          cmp.mapping(function(fallback)
-            if require("luasnip").expand_or_jumpable() then
-              require("luasnip").expand_or_jump()
-            else
-              fallback()
-            end
-          end,{"i","s"})
+      settings = {
+        formatting.fields = [
+          "abbr"
+          "kind"
+          "menu"
+        ];
+        experimental = {
+          ghost_text = true;
+        };
+        snippet.expand = ''
+          function(args) require('luasnip').lsp_expand(args.body) end
         '';
-        "<S-Tab>" = ''
-          cmp.mapping(function(fallback)
-            if require("luasnip").jumpable(-1) then
-              require("luasnip").jump(-1)
-            else
-              fallback()
-            end
-          end,{"i","s"})
-        '';
+        sources = [
+          { name = "nvim_lsp"; }
+          { name = "emoji"; }
+          { name = "luasnip"; }
+          { name = "buffer"; }
+          { name = "path"; }
+        ];
+        mapping = {
+          "<C-h>" = "cmp.mapping.abort()";
+          "<C-n>" = "cmp.mapping.select_next_item()";
+          "<C-p>" = "cmp.mapping.select_prev_item()";
+          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-u>" = "cmp.mapping.scroll_docs(4)";
+          "<C-k>" = ''
+            cmp.mapping(function(fallback)
+              if cmp.visible() then
+                if require("luasnip").expandable() then
+                  require("luasnip").expand()
+                else
+                  cmp.confirm({
+                    select = true,
+                  })
+                end
+              else
+                fallback()
+              end
+            end)
+          '';
+          "<Tab>" = ''
+            cmp.mapping(function(fallback)
+              if require("luasnip").jumpable(1) then
+                require("luasnip").jump(1)
+              else
+                fallback()
+              end
+            end,{"i","s"})
+          '';
+          "<S-Tab>" = ''
+            cmp.mapping(function(fallback)
+              if require("luasnip").jumpable(-1) then
+                require("luasnip").jump(-1)
+              else
+                fallback()
+              end
+            end,{"i","s"})
+          '';
+        };
       };
     };
+
     plugins.lsp = {
       enable = true;
       keymaps.lspBuf = {
