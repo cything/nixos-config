@@ -143,7 +143,7 @@
     home = "/var/lib/forgejo";
     group = "git";
   };
-  users.groups.git = {};
+  users.groups.git = { };
 
   environment.systemPackages = with pkgs; [
     vim

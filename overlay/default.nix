@@ -5,4 +5,4 @@ let
   ];
   importedOverlays = map (m: import m) overlays;
 in
-  importedOverlays
+importedOverlays

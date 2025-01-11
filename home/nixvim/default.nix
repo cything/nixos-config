@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 {
   programs.nixvim = {
     enable = true;
@@ -37,7 +37,10 @@
         # shortcut to command mode
         action = ":";
         key = ";";
-        mode = ["n" "x"];
+        mode = [
+          "n"
+          "x"
+        ];
         options.silent = true;
       }
       {
