@@ -422,6 +422,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-garage": {
+      "locked": {
+        "lastModified": 1736655158,
+        "narHash": "sha256-1ZVtf+4BvqJrGGXBQEjAxjKWSaoySVt46un4pN1zH5g=",
+        "owner": "cything",
+        "repo": "nixpkgs",
+        "rev": "b7bc158e553db4031ce6242e341e64e1023ec86a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cything",
+        "ref": "garage-module",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1710695816,
@@ -525,6 +541,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-borg": "nixpkgs-borg",
         "nixpkgs-btrbk": "nixpkgs-btrbk",
+        "nixpkgs-garage": "nixpkgs-garage",
         "nixvim": "nixvim",
         "sops-nix": "sops-nix",
         "treefmt": "treefmt"

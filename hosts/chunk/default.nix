@@ -25,6 +25,7 @@
     ./element.nix
     ./attic.nix
     ./forgejo.nix
+    ./garage.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -64,6 +65,10 @@
     };
     "attic/env" = {
       sopsFile = ../../secrets/services/attic.yaml;
+    };
+
+    "garage/env" = {
+      sopsFile = ../../secrets/services/garage.yaml;
     };
   };
 

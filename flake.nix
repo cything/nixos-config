@@ -31,6 +31,7 @@
     nixpkgs-borg.url = "github:cything/nixpkgs/borg"; # unmerged PR
     nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
     eza.url = "github:nixos/nixpkgs/d722e8ce81cf103280ce1ff65accb3fc25cbd2ba";
+    nixpkgs-garage.url = "github:cything/nixpkgs/garage-module";
   };
 
   nixConfig = {
@@ -142,10 +143,14 @@
             modules = [
               {
                 nixpkgs = { inherit pkgs; };
+                disabledModules = [
+                  "services/web-servers/garage.nix"
+                ];
               }
               ./hosts/chunk
               inputs.sops-nix.nixosModules.sops
               ./modules
+              (inputs.nixpkgs-garage + "/nixos/modules/services/web-servers/garage.nix")
             ];
           };
 
