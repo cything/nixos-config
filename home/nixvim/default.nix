@@ -140,7 +140,8 @@
         "K" = "hover";
         "gd" = "definition";
         "gD" = "references";
-        "gt" = "type_definition";
+        # "gt" = "type_definition"; # conflicts with switch tab
+        "gI" = "type_definition";
         "gi" = "implementation";
       };
       servers = {
