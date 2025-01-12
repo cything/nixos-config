@@ -80,10 +80,10 @@ cache.cything.io {
 
 s3.cy7.sh {
   import common
-  reverse_proxy localhost:3900
+  reverse_proxy localhost:9000
 }
 
 admin.s3.cy7.sh {
   import common
-  reverse_proxy localhost:3903
+  reverse_proxy localhost:9001
 }

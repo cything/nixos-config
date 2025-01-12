@@ -56,5 +56,22 @@
     };
   };
 
+  systemd.services.minio-mount = {
+    enable = true;
+    description = "Mount the minio data remote";
+    requires = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    requiredBy = [ "minio.service" ];
+    before = [ "minio.service" ];
+    serviceConfig = {
+      Type = "notify";
+      ExecStartPre = "/usr/bin/env mkdir -p /mnt/minio";
+      ExecStart = "${lib.getExe pkgs.rclone} mount --config ${
+        config.sops.secrets."rclone/config".path
+      } --cache-dir /var/cache/rclone --transfers=32 --checkers=32 --vfs-cache-mode writes --vfs-cache-max-size 5G --allow-other rsyncnet:minio /mnt/minio ";
+      ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/minio";
+    };
+  };
+
   programs.fuse.userAllowOther = true;
 }
