@@ -424,11 +424,11 @@
     },
     "nixpkgs-garage": {
       "locked": {
-        "lastModified": 1736655158,
-        "narHash": "sha256-1ZVtf+4BvqJrGGXBQEjAxjKWSaoySVt46un4pN1zH5g=",
+        "lastModified": 1736656100,
+        "narHash": "sha256-Y/r6cOYW4UsFj55gp0FTdxDmrrccn6wXQo/zll2Yx8g=",
         "owner": "cything",
         "repo": "nixpkgs",
-        "rev": "b7bc158e553db4031ce6242e341e64e1023ec86a",
+        "rev": "9a35d495d2f49eee003b57265228844bb48c933e",
         "type": "github"
       },
       "original": {
