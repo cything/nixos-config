@@ -98,3 +98,8 @@ creation_rules:
       - age:
           - *chunk
           - *cy
+  - path_regex: secrets/services/garage.yaml
+    key_groups:
+      - age:
+          - *chunk
+          - *cy
