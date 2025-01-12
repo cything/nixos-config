@@ -63,22 +63,6 @@
         "type": "github"
       }
     },
-    "eza": {
-      "locked": {
-        "lastModified": 1736397430,
-        "narHash": "sha256-l00P7P3zcx8rzYOOQMNUwBqK/yz/4Cv8G8+pYbfyQ5Y=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "d722e8ce81cf103280ce1ff65accb3fc25cbd2ba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "d722e8ce81cf103280ce1ff65accb3fc25cbd2ba",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -390,22 +374,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-borg": {
-      "locked": {
-        "lastModified": 1735547260,
-        "narHash": "sha256-ScKuaBbUXNqS9c6Y+N647BAQx7SvKywpu5MxBV3Y5pk=",
-        "owner": "cything",
-        "repo": "nixpkgs",
-        "rev": "53add6c0c30200663cd21beb06672ec2c8afc176",
-        "type": "github"
-      },
-      "original": {
-        "owner": "cything",
-        "ref": "borg",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-btrbk": {
       "locked": {
         "lastModified": 1735945390,
@@ -535,11 +503,9 @@
     "root": {
       "inputs": {
         "disko": "disko",
-        "eza": "eza",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-borg": "nixpkgs-borg",
         "nixpkgs-btrbk": "nixpkgs-btrbk",
         "nixpkgs-garage": "nixpkgs-garage",
         "nixvim": "nixvim",
