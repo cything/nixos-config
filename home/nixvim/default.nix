@@ -147,7 +147,7 @@
       servers = {
         bashls.enable = true;
         lua_ls.enable = true;
-        nil_ls.enable = true;
+        nixd.enable = true;
         rust_analyzer = {
           enable = true;
           installRustc = true;
@@ -170,7 +170,8 @@
 
     plugins.neo-tree = {
       enable = true;
-      closeIfLastWindow = true;
+      buffers.followCurrentFile.enabled = true;
+      window.width = 30;
     };
 
     plugins.cmp-buffer.enable = true;
