@@ -1,4 +1,5 @@
-{config, pkgs, ...}: {
+{ config, pkgs, ... }:
+{
   services.garage = {
     enable = true;
     package = pkgs.garage;

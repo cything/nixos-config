@@ -61,24 +61,6 @@
 
       systems = [ "x86_64-linux" ];
       forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-
-      overridePkgsFromFlake =
-        pkgs: flake: pkgNames:
-        let
-          pkgs' = import flake { inherit (pkgs) system config; };
-          pkgNames' = builtins.map (lib.splitString ".") pkgNames;
-          pkgVals = builtins.map (
-            path:
-            let
-              package = lib.getAttrFromPath path pkgs';
-            in
-            lib.setAttrByPath path package
-          ) pkgNames';
-        in
-        lib.foldl' lib.recursiveUpdate { } pkgVals;
-      overlayPkgsFromFlake =
-        flake: pkgNames: _final: prev:
-        overridePkgsFromFlake prev flake pkgNames;
       overlays = [
         # (overlayPkgsFromFlake inputs.eza [
         # ])
