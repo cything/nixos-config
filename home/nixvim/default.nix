@@ -163,7 +163,7 @@
     plugins.fzf-lua = {
       enable = true;
       keymaps = {
-        "<leader>ff" = "git_files";
+        "<leader>ff" = "files";
         "<leader>fg" = "live_grep";
       };
     };
@@ -172,6 +172,11 @@
       enable = true;
       buffers.followCurrentFile.enabled = true;
       window.width = 30;
+    };
+
+    plugins.gitsigns = {
+      enable = true;
+      settings.current_line_blame = true;
     };
 
     plugins.cmp-buffer.enable = true;
@@ -183,6 +188,7 @@
     plugins.nvim-autopairs.enable = true;
     plugins.rainbow-delimiters.enable = true;
     plugins.web-devicons.enable = true;
-    plugins.gitsigns.enable = true;
+    plugins.auto-save.enable = true;
+    plugins.indent-blankline.enable = true;
   };
 }
