@@ -165,6 +165,15 @@
             inputs.nixvim.homeManagerModules.nixvim
           ];
         };
+
+        "codespace@codespace" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/yt/codespace.nix
+            inputs.nixvim.homeManagerModules.nixvim
+          ];
+        };
       };
     };
 }
