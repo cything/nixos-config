@@ -95,8 +95,8 @@
           "<C-h>" = "cmp.mapping.abort()";
           "<C-n>" = "cmp.mapping.select_next_item()";
           "<C-p>" = "cmp.mapping.select_prev_item()";
-          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-u>" = "cmp.mapping.scroll_docs(4)";
+          "<C-u>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-d>" = "cmp.mapping.scroll_docs(4)";
           "<C-k>" = ''
             cmp.mapping(function(fallback)
               if cmp.visible() then
