@@ -30,7 +30,7 @@
   programs.git = {
     enable = true;
     userName = "cy";
-    userEmail = "hi@cything.io";
+    userEmail = "cy@cy7.sh";
     delta = {
       enable = true;
       options = {

@@ -10,7 +10,7 @@
         HTTP_PORT = 3000;
         HTTP_ADDR = "127.0.0.1";
         DOMAIN = "git.cy7.sh";
-        LANDING_PAGE = "/cy";
+        LANDING_PAGE = "explore";
       };
       session.COOKIE_SECURE = true;
       service.DISABLE_REGISTRATION = true;

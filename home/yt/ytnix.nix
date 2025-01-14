@@ -6,7 +6,6 @@
   imports = [
     ./common.nix
     ../foot.nix
-    ../vscode.nix
   ];
   home = {
     username = "yt";
