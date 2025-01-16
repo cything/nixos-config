@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  inputs,
   lib,
   ...
 }:
@@ -10,12 +9,6 @@
     ./hardware-configuration.nix
     ../common.nix
     ../zsh.nix
-    {
-      disabledModules = [
-        "services/backup/btrbk.nix"
-      ];
-    }
-    (inputs.nixpkgs-btrbk + "/nixos/modules/services/backup/btrbk.nix")
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";

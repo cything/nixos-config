@@ -27,21 +27,21 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nixpkgs-btrbk.url = "github:cything/nixpkgs/btrbk"; # unmerged PR
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
   };
 
   nixConfig = {
     extra-substituters = [
       "https://cache.cything.io/central"
-      "https://cache.cything.io/infra-ci"
-      "https://cache.cything.io/attic"
     ];
     extra-trusted-public-keys = [
       "central:uWhjva6m6dhC2hqNisjn2hXGvdGBs19vPkA1dPEuwFg="
-      "infra-ci:xG5f5tddUBcvToYjlpHD5OY/puYQkKmgKeIQCshNs38="
-      "attic:HL3hVpqXxwcF7Q1R+IvU2i0+YxIjQA2xxKM5EJMXLLs="
     ];
     builders-use-substitutes = true;
   };
@@ -53,127 +53,131 @@
       home-manager,
       treefmt,
       disko,
+      flake-parts,
       ...
     }@inputs:
-    let
-      lib = nixpkgs.lib;
-      inherit (self) outputs;
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { ... }:
+      {
+        imports = [
+          inputs.git-hooks.flakeModule
+        ];
+        debug = true;
+        systems = [
+          "x86_64-linux"
+        ];
+        perSystem =
+          {
+            pkgs,
+            system,
+            ...
+          }:
+          {
+            # make pkgs available to `perSystem`
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
+              config = {
+                allowUnfree = true;
+              };
+            };
 
-      systems = [ "x86_64-linux" ];
-      forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-      overlays = [
-        # (overlayPkgsFromFlake inputs.eza [
-        # ])
-      ] ++ import ./overlay;
+            pre-commit = {
+              check.enable = true;
+              settings.hooks = {
+                nixfmt-rfc-style.enable = true;
+              };
+            };
 
-      pkgsFor = lib.genAttrs systems (
-        system:
-        import nixpkgs {
-          inherit system overlays;
-          config = {
-            allowUnfree = true;
-          };
-        }
-      );
-
-      treefmtEval = forEachSystem (
-        pkgs:
-        treefmt.lib.evalModule pkgs {
-          projectRootFile = "flake.nix";
-          programs.nixfmt.enable = true;
-          programs.stylua.enable = true;
-          programs.yamlfmt.enable = true;
-          programs.typos.enable = true;
-          programs.shellcheck.enable = true;
-          programs.deadnix.enable = true;
-
-          settings.global.excludes = [ "secrets/*" ];
-        }
-      );
-    in
-    {
-      formatter = forEachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
-      checks = forEachSystem (pkgs: {
-        formatting = treefmtEval.${pkgs.system}.config.build.check self;
-      });
-      # lets us build overlaid packages with `nix build .#<package>`
-      packages = pkgsFor;
-
-      nixosConfigurations =
-        let
-          pkgs = pkgsFor.x86_64-linux;
-        in
-        {
-          ytnix = lib.nixosSystem {
-            specialArgs = { inherit inputs outputs; };
-            modules = [
-              {
-                nixpkgs = { inherit pkgs; };
-              }
-              ./hosts/ytnix
-              inputs.sops-nix.nixosModules.sops
-              ./modules
-              inputs.lanzaboote.nixosModules.lanzaboote
-            ];
+            formatter = pkgs.nixfmt-rfc-style;
           };
 
-          chunk = lib.nixosSystem {
-            specialArgs = { inherit inputs outputs; };
-            modules = [
-              {
-                nixpkgs = { inherit pkgs; };
-                disabledModules = [
-                  "services/web-servers/garage.nix"
+        flake = {
+          nixosConfigurations =
+            let
+              pkgs = import nixpkgs {
+                config.allowUnfree = true;
+                system = "x86_64-linux";
+              };
+              lib = nixpkgs.lib;
+            in
+            {
+              ytnix = lib.nixosSystem {
+                modules = [
+                  {
+                    nixpkgs = { inherit pkgs; };
+                  }
+                  ./hosts/ytnix
+                  inputs.sops-nix.nixosModules.sops
+                  ./modules
+                  inputs.lanzaboote.nixosModules.lanzaboote
                 ];
-              }
-              ./hosts/chunk
-              inputs.sops-nix.nixosModules.sops
-              ./modules
-              (inputs.nixpkgs-garage + "/nixos/modules/services/web-servers/garage.nix")
-            ];
-          };
+              };
+              chunk = lib.nixosSystem {
+                specialArgs = { inherit inputs; };
+                modules = [
+                  {
+                    nixpkgs = { inherit pkgs; };
+                    disabledModules = [
+                      "services/web-servers/garage.nix"
+                    ];
+                  }
+                  ./hosts/chunk
+                  inputs.sops-nix.nixosModules.sops
+                  ./modules
+                  (inputs.nixpkgs-garage + "/nixos/modules/services/web-servers/garage.nix")
+                ];
+              };
 
-          titan = lib.nixosSystem {
-            specialArgs = { inherit inputs outputs; };
-            modules = [
-              {
-                nixpkgs = { inherit pkgs; };
-              }
-              ./hosts/titan
-              disko.nixosModules.disko
-              inputs.sops-nix.nixosModules.sops
-              ./modules
-            ];
-          };
-        };
+              titan = lib.nixosSystem {
+                specialArgs = { inherit inputs; };
+                modules = [
+                  {
+                    nixpkgs = { inherit pkgs; };
+                  }
+                  ./hosts/titan
+                  disko.nixosModules.disko
+                  inputs.sops-nix.nixosModules.sops
+                  ./modules
+                ];
+              };
+            };
+          homeConfigurations =
+            let
+              pkgs = import nixpkgs {
+                config.allowUnfree = true;
+                system = "x86_64-linux";
+              };
+              lib = home-manager.lib;
+            in
+            {
+              "yt@ytnix" = lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = { inherit inputs; };
+                modules = [
+                  ./home/yt/ytnix.nix
+                  inputs.nixvim.homeManagerModules.nixvim
+                ];
+              };
 
-      homeConfigurations = {
-        "yt@ytnix" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/yt/ytnix.nix
-            inputs.nixvim.homeManagerModules.nixvim
-          ];
-        };
+              "yt@chunk" = lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = { inherit inputs; };
+                modules = [
+                  ./home/yt/chunk.nix
+                  inputs.nixvim.homeManagerModules.nixvim
+                ];
+              };
 
-        "yt@chunk" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/yt/chunk.nix
-            inputs.nixvim.homeManagerModules.nixvim
-          ];
+              "codespace@codespace" = lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = { inherit inputs; };
+                modules = [
+                  ./home/yt/codespace.nix
+                  inputs.nixvim.homeManagerModules.nixvim
+                ];
+              };
+            };
         };
-
-        "codespace@codespace" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/yt/codespace.nix
-            inputs.nixvim.homeManagerModules.nixvim
-          ];
-        };
-      };
-    };
+      }
+    );
 }
