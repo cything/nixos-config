@@ -116,4 +116,5 @@
   programs.zoxide.enableZshIntegration = true;
   programs.eza.enableZshIntegration = true;
   programs.nix-index.enableZshIntegration = false;
+  programs.direnv.enableZshIntegration = false;
 }

@@ -190,5 +190,6 @@
     plugins.web-devicons.enable = true;
     plugins.auto-save.enable = true;
     plugins.indent-blankline.enable = true;
+    plugins.undotree.enable = true;
   };
 }
