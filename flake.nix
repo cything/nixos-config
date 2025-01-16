@@ -28,10 +28,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
   };
@@ -51,7 +47,6 @@
       self,
       nixpkgs,
       home-manager,
-      treefmt,
       disko,
       flake-parts,
       ...
@@ -60,7 +55,7 @@
       { ... }:
       {
         imports = [
-          inputs.git-hooks.flakeModule
+          inputs.treefmt.flakeModule
         ];
         debug = true;
         systems = [
@@ -68,7 +63,6 @@
         ];
         perSystem =
           {
-            pkgs,
             system,
             ...
           }:
@@ -81,14 +75,16 @@
               };
             };
 
-            pre-commit = {
-              check.enable = true;
-              settings.hooks = {
-                nixfmt-rfc-style.enable = true;
-              };
-            };
+            treefmt = {
+              projectRootFile = "flake.nix";
+              programs.nixfmt.enable = true;
+              programs.stylua.enable = true;
+              programs.yamlfmt.enable = true;
+              programs.typos.enable = true;
+              programs.shellcheck.enable = true;
 
-            formatter = pkgs.nixfmt-rfc-style;
+              settings.global.excludes = [ "secrets/*" ];
+            };
           };
 
         flake = {
