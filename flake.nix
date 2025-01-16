@@ -97,6 +97,7 @@
               pkgs = import nixpkgs {
                 config.allowUnfree = true;
                 system = "x86_64-linux";
+                overlays = import ./overlay;
               };
               lib = nixpkgs.lib;
             in
