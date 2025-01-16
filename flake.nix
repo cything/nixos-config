@@ -87,14 +87,17 @@
             };
           };
 
-        flake = {
+        flake =
+          let
+            pkgs = import nixpkgs {
+              config.allowUnfree = true;
+              system = "x86_64-linux";
+              overlays = import ./overlay;
+            };
+          in
+          {
           nixosConfigurations =
             let
-              pkgs = import nixpkgs {
-                config.allowUnfree = true;
-                system = "x86_64-linux";
-                overlays = import ./overlay;
-              };
               lib = nixpkgs.lib;
             in
             {
@@ -140,10 +143,6 @@
             };
           homeConfigurations =
             let
-              pkgs = import nixpkgs {
-                config.allowUnfree = true;
-                system = "x86_64-linux";
-              };
               lib = home-manager.lib;
             in
             {
