@@ -7,9 +7,9 @@ jobs:
     strategy:
       matrix:
         package:
-          - .#attic-client
-          - .#attic-server
-          - .#conduwuit
+          # - .#attic-client
+          # - .#attic-server
+          # - .#conduwuit
           - "github:cything/nixpkgs/9a35d495d2f49eee003b57265228844bb48c933e#nixosTests.garage.with-3node-replication1_x"
           - ".#nixosConfigurations.ytnix.config.system.build.images.iso"
     runs-on: ubuntu-latest
