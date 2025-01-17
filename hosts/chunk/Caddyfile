@@ -28,7 +28,7 @@ git.cy7.sh {
   reverse_proxy localhost:3000
 }
 
-rss.cything.io {
+rss.cy7.sh {
   import common
   reverse_proxy localhost:8080
 }
