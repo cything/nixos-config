@@ -147,7 +147,13 @@
       servers = {
         bashls.enable = true;
         lua_ls.enable = true;
-        nixd.enable = true;
+        nil_ls = {
+          enable = true;
+          settings = {
+            formatting.command = [ "nix" "fmt" ];
+            nix.flake.autoArchive = true;
+          };
+        };
         rust_analyzer = {
           enable = true;
           installRustc = true;
