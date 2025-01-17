@@ -7,10 +7,7 @@ jobs:
     strategy:
       matrix:
         package:
-          - .#attic-client
-          - .#attic-server
-          - .#conduwuit
-          - "github:cything/nixpkgs/9a35d495d2f49eee003b57265228844bb48c933e#nixosTests.garage.with-3node-replication1_x"
+          - github:nixos/nixpkgs/nixos-unstable-small#ollama
     runs-on: ubuntu-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
