@@ -7,11 +7,7 @@ jobs:
     strategy:
       matrix:
         package:
-          - github:cything/nixpkgs/a9c7c4c52da181e7c66156c61b65c39f567efb41#gollum
-          - github:cything/nixpkgs/a9c7c4c52da181e7c66156c61b65c39f567efb41#gollum.tests.gollum
-          - github:cything/nixpkgs/e1e065c4bd58bef677474a828c4673c643f99545#schismtracker
-          - github:cything/nixpkgs/d23ce3cde5a3d6ad84b4726f12391c39c04a0601#museum
-          - github:cything/nixpkgs/b4f2fc5c507a60d92503a2def27cfebdfb1942d5#ente-auth
+          - github:nixos/nixpkgs#hello
         os:
           - ubuntu-latest
           - macos-latest
