@@ -8,6 +8,7 @@ jobs:
       matrix:
         package:
           - github:cything/nixpkgs/3bbe764179eb980831392a8dc76ad63722420737#gollum
+          - github:cything/nixpkgs/3bbe764179eb980831392a8dc76ad63722420737#gollum.tests.gollum
     runs-on: ubuntu-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
