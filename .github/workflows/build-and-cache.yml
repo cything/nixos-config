@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         package:
-          - github:nixos/nixpkgs#hello
+          - github:cything/nixpkgs/fd06e41125350bc3db5628df49d3b84e4652a59d#lact
         os:
           - ubuntu-latest
           - macos-latest
@@ -18,15 +18,10 @@ jobs:
         with:
           logger: pretty
       - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: cachix/cachix-action@v15
-        with:
-          name: cything
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - name: Setup Attic cache
         uses: ryanccn/attic-action@v0
         with:
           endpoint: ${{ vars.ATTIC_ENDPOINT }}
           cache: ${{ vars.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
-      - uses: actions/checkout@v4
-      - run: nix build '${{ matrix.package }}'
+      - run: nix build -L '${{ matrix.package }}'
