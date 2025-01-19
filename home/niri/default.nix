@@ -46,7 +46,11 @@ in
 
     window-rules = [
       {
-        matches = [{ app-id = "anki"; title = "Add"; }];
+        matches = [
+          { app-id = "anki"; title = "Add"; }
+          { app-id = "mpv"; }
+          { app-id = "Bitwarden"; }
+        ];
         open-floating = true;
       }
       {
@@ -54,16 +58,15 @@ in
         default-column-width.proportion = .25;
       }
       {
-        matches = [{ app-id = "foot"; }];
+        matches = [
+          { app-id = "foot"; }
+          { app-id = "anki"; title = "^Browse"; }
+        ];
         default-column-width.proportion = .5;
       }
       {
-        matches = [{ app-id = "Bitwarden"; }];
-        open-floating = true;
-      }
-      {
-        matches = [{ app-id = "mpv"; }];
-        open-floating = true;
+        matches = [{ app-id = "librewolf"; }];
+        default-column-width.proportion = .75;
       }
     ];
   };
