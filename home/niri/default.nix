@@ -2,10 +2,10 @@
 let
   wallpaper = "${./nixos-c-book.png}";
   terminal = "foot";
-  menu = "fuzzel";
+  menu = [ "fuzzel" "-w" "100" ];
   browser = "librewolf";
   file-manager = "thunar";
-  clipboard = "cliphist list | ${menu} --dmenu | cliphist decode | wl-copy";
+  clipboard = "cliphist list | ${lib.concatStringsSep " " menu} --dmenu | cliphist decode | wl-copy";
 in
 {
   programs.niri.settings =
