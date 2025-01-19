@@ -16,5 +16,6 @@ in
   config = lib.mkIf cfg.enable {
     programs.niri.package = cfg.package;
     programs.niri.enable = true;
+    programs.xwayland.enable = true;
   };
 }

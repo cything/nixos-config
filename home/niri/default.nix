@@ -8,13 +8,13 @@ let
   clipboard = "cliphist list | ${lib.concatStringsSep " " menu} --dmenu | cliphist decode | wl-copy";
 in
 {
-  programs.niri.settings =
-  {
+  programs.niri.settings = {
     prefer-no-csd = true;
     input.keyboard.xkb.options = "ctrl:nocaps";
     spawn-at-startup = [
       { command = [ "${lib.getExe pkgs.waybar}" ]; }
       { command = [ "${lib.getExe pkgs.swaybg}" "-m" "fill" "-i" wallpaper ]; }
+      { command = [ "${lib.getExe pkgs.xwayland-satellite}" ]; }
     ];
     hotkey-overlay.skip-at-startup = true;
 
@@ -27,6 +27,10 @@ in
       };
       warp-mouse-to-focus = true;
       focus-follows-mouse.enable = true;
+    };
+
+    environment = {
+      DISPLAY = ":0"; # for xwayland-satellite
     };
 
     layout = {
