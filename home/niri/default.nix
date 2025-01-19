@@ -39,6 +39,25 @@ in
       always-center-single-column = true;
       border.enable = false;
     };
+
+    window-rules = [
+      {
+        matches = [{ app-id = "anki"; title = "Add"; }];
+        open-floating = true;
+      }
+      {
+        matches = [{ app-id = "foot"; }];
+        default-column-width.proportion = .5;
+      }
+      {
+        matches = [{ app-id = "Bitwarden"; }];
+        open-floating = true;
+      }
+      {
+        matches = [{ app-id = "mpv"; }];
+        open-floating = true;
+      }
+    ];
   };
 
   programs.niri.settings.binds =
@@ -112,5 +131,8 @@ in
       "Mod+Alt+E".action = spawn "evolution";
       "Mod+P".action = spawn "bitwarden";
       "Mod+Comma".action = sh clipboard;
+
+      "MouseForward".action = spawn "sh" "${./scripts/remote.sh}" "btn1";
+      "MouseBack".action = spawn "sh" "${./scripts/remote.sh}";
     };
 }
