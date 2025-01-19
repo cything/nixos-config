@@ -50,6 +50,10 @@ in
         open-floating = true;
       }
       {
+        matches = [{ app-id = "anki"; }];
+        default-column-width.proportion = .25;
+      }
+      {
         matches = [{ app-id = "foot"; }];
         default-column-width.proportion = .5;
       }
@@ -103,12 +107,20 @@ in
       "Mod+Shift+R".action = switch-preset-window-height;
       "Mod+Ctrl+R".action = reset-window-height;
       "Mod+F".action = fullscreen-window;
+      "Mod+WheelScrollDown" = {
+        cooldown-ms = 150;
+        action = focus-column-right;
+      };
+      "Mod+WheelScrollUp" = {
+        cooldown-ms = 150;
+        action = focus-column-left;
+      };
 
-      "XF86AudioRaiseVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
-      "XF86AudioLowerVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+      "XF86AudioRaiseVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
+      "XF86AudioLowerVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
       "XF86AudioMute".action = sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-      "XF86MonBrightnessUp".action = sh "brightnessctl set 10%+";
-      "XF86MonBrightnessDown".action = sh "brightnessctl set 10%-";
+      "XF86MonBrightnessUp".action = sh "brightnessctl set 1%+";
+      "XF86MonBrightnessDown".action = sh "brightnessctl set 1%-";
 
       "Mod+1".action = focus-workspace 1;
       "Mod+2".action = focus-workspace 2;
