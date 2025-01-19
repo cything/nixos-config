@@ -1,20 +1,26 @@
-{ config, ... }:
+{ config, pkgs, lib, ... }:
+let
+  wallpaper = "${./nixos-c-book.png}";
+  terminal = "foot";
+  menu = "fuzzel";
+  browser = "librewolf";
+  file-manager = "thunar";
+in
 {
-  programs.niri.settings = {
+  programs.niri.settings =
+  {
     prefer-no-csd = true;
     input.keyboard.xkb.options = "ctrl:nocaps";
     spawn-at-startup = [
       { command = [ "waybar" ]; }
+      { command = [ "${lib.getExe pkgs.swaybg}" "-m" "fill" "-i" wallpaper ]; }
     ];
   };
 
   programs.niri.settings.binds =
     with config.lib.niri.actions;
     let
-      terminal = "foot";
-      menu = "fuzzel";
-      browser = "librewolf";
-      file-manager = "thunar";
+      sh = spawn "sh" "-c";
     in
     {
       "Mod+Return".action = spawn terminal;

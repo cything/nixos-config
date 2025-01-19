@@ -6,7 +6,7 @@
   imports = [
     ./common.nix
     ../foot.nix
-    ../niri.nix
+    ../niri
   ];
   home = {
     username = "yt";
