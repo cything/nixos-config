@@ -315,4 +315,9 @@
   };
 
   services.trezord.enable = true;
+
+  my.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
 }

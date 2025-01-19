@@ -6,6 +6,7 @@
   imports = [
     ./common.nix
     ../foot.nix
+    ../niri.nix
   ];
   home = {
     username = "yt";
@@ -99,6 +100,7 @@
     clang
     seahorse
     github-cli
+    fuzzel
   ];
 
   programs.waybar.enable = true;

@@ -28,6 +28,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
   };
@@ -35,9 +37,11 @@
   nixConfig = {
     extra-substituters = [
       "https://cache.cything.io/central"
+      "https://niri.cachix.org"
     ];
     extra-trusted-public-keys = [
       "central:uWhjva6m6dhC2hqNisjn2hXGvdGBs19vPkA1dPEuwFg="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
     builders-use-substitutes = true;
   };
@@ -92,7 +96,8 @@
             pkgs = import nixpkgs {
               config.allowUnfree = true;
               system = "x86_64-linux";
-              overlays = import ./overlay;
+              overlays = [ inputs.niri.overlays.niri ]
+                      ++ import ./overlay;
             };
           in
           {
@@ -102,6 +107,7 @@
             in
             {
               ytnix = lib.nixosSystem {
+                specialArgs = { inherit inputs; };
                 modules = [
                   {
                     nixpkgs = { inherit pkgs; };
@@ -110,6 +116,7 @@
                   inputs.sops-nix.nixosModules.sops
                   ./modules
                   inputs.lanzaboote.nixosModules.lanzaboote
+                  inputs.niri.nixosModules.niri
                 ];
               };
               chunk = lib.nixosSystem {
@@ -152,6 +159,7 @@
                 modules = [
                   ./home/yt/ytnix.nix
                   inputs.nixvim.homeManagerModules.nixvim
+                  inputs.niri.homeModules.config
                 ];
               };
 
