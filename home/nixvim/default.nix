@@ -150,7 +150,10 @@
         nil_ls = {
           enable = true;
           settings = {
-            formatting.command = [ "nix" "fmt" ];
+            formatting.command = [
+              "nix"
+              "fmt"
+            ];
             nix.flake.autoArchive = true;
           };
         };

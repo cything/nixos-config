@@ -96,92 +96,91 @@
             pkgs = import nixpkgs {
               config.allowUnfree = true;
               system = "x86_64-linux";
-              overlays = [ inputs.niri.overlays.niri ]
-                      ++ import ./overlay;
+              overlays = [ inputs.niri.overlays.niri ] ++ import ./overlay;
             };
           in
           {
-          nixosConfigurations =
-            let
-              lib = nixpkgs.lib;
-            in
-            {
-              ytnix = lib.nixosSystem {
-                specialArgs = { inherit inputs; };
-                modules = [
-                  {
-                    nixpkgs = { inherit pkgs; };
-                  }
-                  ./hosts/ytnix
-                  inputs.sops-nix.nixosModules.sops
-                  ./modules
-                  inputs.lanzaboote.nixosModules.lanzaboote
-                  inputs.niri.nixosModules.niri
-                ];
-              };
-              chunk = lib.nixosSystem {
-                specialArgs = { inherit inputs; };
-                modules = [
-                  {
-                    nixpkgs = { inherit pkgs; };
-                    disabledModules = [
-                      "services/web-servers/garage.nix"
-                    ];
-                  }
-                  ./hosts/chunk
-                  inputs.sops-nix.nixosModules.sops
-                  ./modules
-                  (inputs.nixpkgs-garage + "/nixos/modules/services/web-servers/garage.nix")
-                ];
-              };
+            nixosConfigurations =
+              let
+                lib = nixpkgs.lib;
+              in
+              {
+                ytnix = lib.nixosSystem {
+                  specialArgs = { inherit inputs; };
+                  modules = [
+                    {
+                      nixpkgs = { inherit pkgs; };
+                    }
+                    ./hosts/ytnix
+                    inputs.sops-nix.nixosModules.sops
+                    ./modules
+                    inputs.lanzaboote.nixosModules.lanzaboote
+                    inputs.niri.nixosModules.niri
+                  ];
+                };
+                chunk = lib.nixosSystem {
+                  specialArgs = { inherit inputs; };
+                  modules = [
+                    {
+                      nixpkgs = { inherit pkgs; };
+                      disabledModules = [
+                        "services/web-servers/garage.nix"
+                      ];
+                    }
+                    ./hosts/chunk
+                    inputs.sops-nix.nixosModules.sops
+                    ./modules
+                    (inputs.nixpkgs-garage + "/nixos/modules/services/web-servers/garage.nix")
+                  ];
+                };
 
-              titan = lib.nixosSystem {
-                specialArgs = { inherit inputs; };
-                modules = [
-                  {
-                    nixpkgs = { inherit pkgs; };
-                  }
-                  ./hosts/titan
-                  disko.nixosModules.disko
-                  inputs.sops-nix.nixosModules.sops
-                  ./modules
-                ];
+                titan = lib.nixosSystem {
+                  specialArgs = { inherit inputs; };
+                  modules = [
+                    {
+                      nixpkgs = { inherit pkgs; };
+                    }
+                    ./hosts/titan
+                    disko.nixosModules.disko
+                    inputs.sops-nix.nixosModules.sops
+                    ./modules
+                  ];
+                };
               };
-            };
-          homeConfigurations =
-            let
-              lib = home-manager.lib;
-            in
-            {
-              "yt@ytnix" = lib.homeManagerConfiguration {
-                inherit pkgs;
-                extraSpecialArgs = { inherit inputs; };
-                modules = [
-                  ./home/yt/ytnix.nix
-                  inputs.nixvim.homeManagerModules.nixvim
-                  inputs.niri.homeModules.config
-                ];
-              };
+            homeConfigurations =
+              let
+                lib = home-manager.lib;
+              in
+              {
+                "yt@ytnix" = lib.homeManagerConfiguration {
+                  inherit pkgs;
+                  extraSpecialArgs = { inherit inputs; };
+                  modules = [
+                    ./home/yt/ytnix.nix
+                    inputs.nixvim.homeManagerModules.nixvim
+                    inputs.niri.homeModules.config
+                  ];
+                };
 
-              "yt@chunk" = lib.homeManagerConfiguration {
-                inherit pkgs;
-                extraSpecialArgs = { inherit inputs; };
-                modules = [
-                  ./home/yt/chunk.nix
-                  inputs.nixvim.homeManagerModules.nixvim
-                ];
-              };
+                "yt@chunk" = lib.homeManagerConfiguration {
+                  inherit pkgs;
+                  extraSpecialArgs = { inherit inputs; };
+                  modules = [
+                    ./home/yt/chunk.nix
+                    inputs.nixvim.homeManagerModules.nixvim
+                  ];
+                };
 
-              "codespace@codespace" = lib.homeManagerConfiguration {
-                inherit pkgs;
-                extraSpecialArgs = { inherit inputs; };
-                modules = [
-                  ./home/yt/codespace.nix
-                  inputs.nixvim.homeManagerModules.nixvim
-                ];
+                "codespace@codespace" = lib.homeManagerConfiguration {
+                  inherit pkgs;
+                  extraSpecialArgs = { inherit inputs; };
+                  modules = [
+                    ./home/yt/codespace.nix
+                    inputs.nixvim.homeManagerModules.nixvim
+                  ];
+                };
               };
-            };
-        };
+          };
       }
     );
 }
