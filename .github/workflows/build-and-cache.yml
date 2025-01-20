@@ -25,7 +25,6 @@ jobs:
           cache: ${{ vars.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
       - run: nix build -L '${{ matrix.package }}'
-
   build-machines:
     strategy:
       matrix:
@@ -66,7 +65,6 @@ jobs:
         with:
           persist-credentials: false
       - run: nix build -L --accept-flake-config .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
-
   build-homes:
     strategy:
       matrix:

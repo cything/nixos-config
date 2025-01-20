@@ -1,8 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   wallpaper = "${./nixos-c-book.png}";
   terminal = "foot";
-  menu = [ "fuzzel" "-w" "100" ];
+  menu = [
+    "fuzzel"
+    "-w"
+    "100"
+  ];
   browser = "librewolf";
   file-manager = "thunar";
   clipboard = "cliphist list | ${lib.concatStringsSep " " menu} --dmenu | cliphist decode | wl-copy";
@@ -13,7 +22,15 @@ in
     input.keyboard.xkb.options = "ctrl:nocaps";
     spawn-at-startup = [
       { command = [ "${lib.getExe pkgs.waybar}" ]; }
-      { command = [ "${lib.getExe pkgs.swaybg}" "-m" "fill" "-i" wallpaper ]; }
+      {
+        command = [
+          "${lib.getExe pkgs.swaybg}"
+          "-m"
+          "fill"
+          "-i"
+          wallpaper
+        ];
+      }
       { command = [ "${lib.getExe pkgs.xwayland-satellite}" ]; }
     ];
     hotkey-overlay.skip-at-startup = true;
@@ -36,10 +53,10 @@ in
     layout = {
       gaps = 4;
       focus-ring = {
-          width = 4;
-          active.color = "#00000055";
-          inactive.color = "#505050";
-        };
+        width = 4;
+        active.color = "#00000055";
+        inactive.color = "#505050";
+      };
       always-center-single-column = true;
       border.enable = false;
     };
@@ -47,25 +64,31 @@ in
     window-rules = [
       {
         matches = [
-          { app-id = "anki"; title = "Add"; }
+          {
+            app-id = "anki";
+            title = "Add";
+          }
           { app-id = "mpv"; }
           { app-id = "Bitwarden"; }
         ];
         open-floating = true;
       }
       {
-        matches = [{ app-id = "anki"; }];
+        matches = [ { app-id = "anki"; } ];
         default-column-width.proportion = .25;
       }
       {
         matches = [
           { app-id = "foot"; }
-          { app-id = "anki"; title = "^Browse"; }
+          {
+            app-id = "anki";
+            title = "^Browse";
+          }
         ];
         default-column-width.proportion = .5;
       }
       {
-        matches = [{ app-id = "librewolf"; }];
+        matches = [ { app-id = "librewolf"; } ];
         default-column-width.proportion = .75;
       }
     ];

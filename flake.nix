@@ -89,7 +89,10 @@
               programs.typos.enable = true;
               programs.shellcheck.enable = true;
 
-              settings.global.excludes = [ "secrets/*" ];
+              settings.global.excludes = [
+                "secrets/*"
+                "**/*.png" # tries to format a png file??
+              ];
             };
           };
 
