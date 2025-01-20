@@ -43,7 +43,7 @@ in
         click-method = "clickfinger";
       };
       warp-mouse-to-focus = true;
-      focus-follows-mouse.enable = true;
+      focus-follows-mouse.enable = false;
     };
 
     environment = {
