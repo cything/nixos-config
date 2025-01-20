@@ -53,7 +53,7 @@ jobs:
         uses: nix-community/cache-nix-action@v5.1.0
         with:
           # restore and save a cache using this key
-          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
+          primary-key: nix-${{ runner.os }}-${{ matrix.machine }}-${{ hashFiles('flake.lock') }}
           # if there's no cache hit, restore a cache by this prefix
           restore-prefixes-first-match: nix-${{ runner.os }}-
           # do purge caches
@@ -67,7 +67,7 @@ jobs:
           # always save the cache
           save-always: true
 
-      - run: nix build -L --accept-flake-config .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+      - run: nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
 
   build-homes:
     strategy:
@@ -119,7 +119,7 @@ jobs:
         uses: nix-community/cache-nix-action@v5.1.0
         with:
           # restore and save a cache using this key
-          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
+          primary-key: nix-${{ runner.os }}-${{ matrix.home }}-${{ hashFiles('flake.lock') }}
           # if there's no cache hit, restore a cache by this prefix
           restore-prefixes-first-match: nix-${{ runner.os }}-
           # do purge caches
@@ -133,4 +133,4 @@ jobs:
           # always save the cache
           save-always: true
 
-      - run: nix build -L --accept-flake-config .#homeConfigurations."${{ matrix.home }}".activationPackage
+      - run: nix build -L .#homeConfigurations."${{ matrix.home }}".activationPackage
