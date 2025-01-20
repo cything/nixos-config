@@ -28,8 +28,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
-    niri.url = "github:sodiboo/niri-flake";
-    niri.inputs.nixpkgs.follows = "nixpkgs";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
   };
@@ -101,7 +107,10 @@
             pkgs = import nixpkgs {
               config.allowUnfree = true;
               system = "x86_64-linux";
-              overlays = [ inputs.niri.overlays.niri ] ++ import ./overlay;
+              overlays = [
+                inputs.niri.overlays.niri
+                inputs.rust-overlay.overlays.default
+              ] ++ import ./overlay;
             };
           in
           {
