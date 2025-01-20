@@ -53,9 +53,9 @@ jobs:
         uses: nix-community/cache-nix-action@v5.1.0
         with:
           # restore and save a cache using this key
-          primary-key: nix-${{ runner.os }}-${{ matrix.machine }}-${{ hashFiles('flake.lock') }}
+          primary-key: nix-${{ runner.os }}-${{ matrix.machine }}-${{ hashFiles('**/*.nix', 'flake.lock') }}
           # if there's no cache hit, restore a cache by this prefix
-          restore-prefixes-first-match: nix-${{ runner.os }}-
+          restore-prefixes-first-match: nix-${{ runner.os }}-${{ matrix.machine }}-
           # do purge caches
           purge: true
           # purge all versions of the cache
@@ -119,9 +119,9 @@ jobs:
         uses: nix-community/cache-nix-action@v5.1.0
         with:
           # restore and save a cache using this key
-          primary-key: nix-${{ runner.os }}-${{ matrix.home }}-${{ hashFiles('flake.lock') }}
+          primary-key: nix-${{ runner.os }}-${{ matrix.home }}-${{ hashFiles('**/*.nix', 'flake.lock') }}
           # if there's no cache hit, restore a cache by this prefix
-          restore-prefixes-first-match: nix-${{ runner.os }}-
+          restore-prefixes-first-match: nix-${{ runner.os }}-${{ matrix.home }}-
           # do purge caches
           purge: true
           # purge all versions of the cache
