@@ -27,7 +27,6 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
-          build-mount-path-ownership: 'root:root'
 
       - uses: nixbuild/nix-quick-install-action@master
 
@@ -94,7 +93,6 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
-          build-mount-path-ownership: 'root:root'
 
       - uses: nixbuild/nix-quick-install-action@master
 
