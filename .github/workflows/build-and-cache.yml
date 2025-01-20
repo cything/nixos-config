@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
 jobs:
-  build:
+  build-packages:
     strategy:
       matrix:
         package:
@@ -25,3 +25,36 @@ jobs:
           cache: ${{ vars.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
       - run: nix build -L '${{ matrix.package }}'
+  build-machines:
+    strategy:
+      matrix:
+        machine:
+          - chunk
+          - ytnix
+          - titan
+        home:
+          - yt@ytnix
+          - yt@chunk
+
+        os:
+          - ubuntu-latest
+          # - macos-latest
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          logger: pretty
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0
+        with:
+          endpoint: ${{ vars.ATTIC_ENDPOINT }}
+          cache: ${{ vars.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
+      - name: Sync repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+      # - run: nix build -L .#homeConfigurations."${{ matrix.home }}".activationPackage
