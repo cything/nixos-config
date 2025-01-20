@@ -20,6 +20,7 @@
       };
       actions.ENABLED = false;
       repository.ENABLE_PUSH_CREATE_USER = true;
+      indexer.REPO_INDEXER_ENABLED = true;
     };
     database = {
       type = "postgres";
