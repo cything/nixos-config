@@ -118,6 +118,14 @@ in
         cooldown-ms = 150;
         action = focus-column-left;
       };
+      "Mod+Shift+WheelScrollDown" = {
+        cooldown-ms = 150;
+        action = focus-workspace-down;
+      };
+      "Mod+Shift+WheelScrollUp" = {
+        cooldown-ms = 150;
+        action = focus-workspace-up;
+      };
 
       "XF86AudioRaiseVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
       "XF86AudioLowerVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";

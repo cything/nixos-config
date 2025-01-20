@@ -42,6 +42,7 @@
 
   home.sessionVariables = {
     ANKI_WAYLAND = "1";
+    DISPLAY = ":0";
   };
 
   home.packages = with pkgs; [
