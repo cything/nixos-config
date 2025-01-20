@@ -7,10 +7,10 @@ jobs:
     strategy:
       matrix:
         package:
-          - github:cything/nixpkgs/fd06e41125350bc3db5628df49d3b84e4652a59d#lact
+          - github:cything/nixpkgs#hello
         os:
           - ubuntu-latest
-          # - macos-latest
+          - macos-latest
     runs-on: ${{ matrix.os }}
     continue-on-error: true
     steps:

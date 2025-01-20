@@ -10,14 +10,11 @@ final: prev: {
             src = final.fetchFromGitHub {
               owner = "girlbossceo";
               repo = "conduwuit";
-              rev = "8c74e35e7640a041c1f3496d82585e5240294352";
-              hash = "sha256-/2YD3TXT9pQ7oPEm9wDrq35afU88qukMIWqrBX5JyXg=";
+              rev = "5b8464252c2c03edf65e43153be026dbb768a12a";
+              hash = "sha256-yNdxoVZX13QUDJYM6zTMY9ExvacTqB+f0MLvDreSW8U=";
             };
             doCheck = false;
-            cargoHash = "sha256-ZenMTCEJrALKQnW7/eXqrhFj+BedE9i/rQZMsPHl8K0=";
-            cargoPatches = [
-              ./fix-lint.patch
-            ];
+            cargoHash = "sha256-g19UujLI9d4aw+1273gfC17LDLOciqBvuLhe/VCsh80=";
             # unstable has this set to "conduit"
             meta.mainProgram = "conduwuit";
 
