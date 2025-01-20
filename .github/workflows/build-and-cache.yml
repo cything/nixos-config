@@ -3,37 +3,6 @@ on:
   workflow_dispatch:
   push:
 jobs:
-  build-packages:
-    strategy:
-      matrix:
-        package:
-          - github:cything/nixpkgs#hello
-        os:
-          - ubuntu-latest
-          - macos-latest
-
-    runs-on: ${{ matrix.os }}
-    continue-on-error: true
-    steps:
-      - name: Install Nix
-        uses: cachix/install-nix-action@v30
-
-      - uses: cachix/cachix-action@v14
-        with:
-          name: cything
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          useDaemon: false
-          installCommand: nix profile install nixpkgs#cachix
-
-      - name: Setup Attic cache
-        uses: ryanccn/attic-action@v0
-        with:
-          endpoint: ${{ vars.ATTIC_ENDPOINT }}
-          cache: ${{ vars.ATTIC_CACHE }}
-          token: ${{ secrets.ATTIC_TOKEN }}
-
-      - run: nix build -L '${{ matrix.package }}'
-
   build-machines:
     strategy:
       matrix:
@@ -43,7 +12,6 @@ jobs:
           - titan
         os:
           - ubuntu-latest
-          # - macos-latest
  
     runs-on: ${{ matrix.os }}
     continue-on-error: true
@@ -61,15 +29,12 @@ jobs:
           build-mount-path: /nix
           build-mount-path-ownership: 'root:root'
 
-      - name: Install Nix
-        uses: cachix/install-nix-action@v30
+      - uses: nixbuild/nix-quick-install-action@master
 
-      - name: Setup Attic cache
-        uses: ryanccn/attic-action@v0
+      - name: Sync repository
+        uses: actions/checkout@v4
         with:
-          endpoint: ${{ vars.ATTIC_ENDPOINT }}
-          cache: ${{ vars.ATTIC_CACHE }}
-          token: ${{ secrets.ATTIC_TOKEN }}
+          persist-credentials: false
 
       - uses: cachix/cachix-action@v14
         with:
@@ -78,10 +43,30 @@ jobs:
           useDaemon: false
           installCommand: nix profile install nixpkgs#cachix
 
-      - name: Sync repository
-        uses: actions/checkout@v4
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0
         with:
-          persist-credentials: false
+          endpoint: ${{ vars.ATTIC_ENDPOINT }}
+          cache: ${{ vars.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Restore and cache Nix store
+        uses: nix-community/cache-nix-action@v5.1.0
+        with:
+          # restore and save a cache using this key
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
+          # if there's no cache hit, restore a cache by this prefix
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+          # do purge caches
+          purge: true
+          # purge all versions of the cache
+          purge-prefixes: nix-${{ runner.os }}-
+          # created more than this number of seconds ago relative to the start of the `Post Restore` phase
+          purge-last-accessed: 86400
+          # except the version with the `primary-key`, if it exists
+          purge-primary-key: never
+          # always save the cache
+          save-always: true
 
       - run: nix build -L --accept-flake-config .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
 
@@ -111,15 +96,12 @@ jobs:
           build-mount-path: /nix
           build-mount-path-ownership: 'root:root'
 
-      - name: Install Nix
-        uses: cachix/install-nix-action@v30
+      - uses: nixbuild/nix-quick-install-action@master
 
-      - name: Setup Attic cache
-        uses: ryanccn/attic-action@v0
+      - name: Sync repository
+        uses: actions/checkout@v4
         with:
-          endpoint: ${{ vars.ATTIC_ENDPOINT }}
-          cache: ${{ vars.ATTIC_CACHE }}
-          token: ${{ secrets.ATTIC_TOKEN }}
+          persist-credentials: false
 
       - uses: cachix/cachix-action@v14
         with:
@@ -128,9 +110,29 @@ jobs:
           useDaemon: false
           installCommand: nix profile install nixpkgs#cachix
 
-      - name: Sync repository
-        uses: actions/checkout@v4
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0
         with:
-          persist-credentials: false
+          endpoint: ${{ vars.ATTIC_ENDPOINT }}
+          cache: ${{ vars.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Restore and cache Nix store
+        uses: nix-community/cache-nix-action@v5.1.0
+        with:
+          # restore and save a cache using this key
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
+          # if there's no cache hit, restore a cache by this prefix
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+          # do purge caches
+          purge: true
+          # purge all versions of the cache
+          purge-prefixes: nix-${{ runner.os }}-
+          # created more than this number of seconds ago relative to the start of the `Post Restore` phase
+          purge-last-accessed: 86400
+          # except the version with the `primary-key`, if it exists
+          purge-primary-key: never
+          # always save the cache
+          save-always: true
 
       - run: nix build -L --accept-flake-config .#homeConfigurations."${{ matrix.home }}".activationPackage
