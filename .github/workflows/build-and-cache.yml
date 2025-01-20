@@ -50,6 +50,7 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+          build-mount-path-ownership: 'root:root'
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           logger: pretty
@@ -89,6 +90,7 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+          build-mount-path-ownership: 'root:root'
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           logger: pretty
