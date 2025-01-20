@@ -1,9 +1,17 @@
-final: prev: {
+final: prev:
+let
+  newRust = final.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+  newRustPlatform = final.makeRustPlatform {
+    cargo = newRust;
+    rustc = newRust;
+  };
+in
+{
   conduwuit = prev.conduwuit.override (old: {
-    rustPlatform = old.rustPlatform // {
+    rustPlatform = newRustPlatform // {
       buildRustPackage =
         args:
-        old.rustPlatform.buildRustPackage (
+        newRustPlatform.buildRustPackage (
           args
           // {
             version = "0.5.0-rc2";
