@@ -8,6 +8,7 @@
     ../foot.nix
     ../niri
     ../irssi.nix
+    ../ghostty.nix
   ];
   home = {
     username = "yt";

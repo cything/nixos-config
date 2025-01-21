@@ -6,7 +6,7 @@
 }:
 let
   wallpaper = "${./nixos-c-book.png}";
-  terminal = "foot";
+  terminal = "ghostty";
   menu = [
     "fuzzel"
     "-w"
@@ -93,6 +93,7 @@ in
             app-id = "anki";
             title = "^Browse";
           }
+          { app-id = "com.mitchellh.ghostt"; }
         ];
         default-column-width.proportion = .5;
       }
