@@ -42,6 +42,13 @@
     };
   };
 
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern";
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
   home.packages = with pkgs; [
     firefox
     ungoogled-chromium
@@ -49,7 +56,6 @@
     bitwarden-desktop
     bitwarden-cli
     fastfetch
-    discord
     nwg-look
     kdePackages.gwenview
     kdePackages.okular
