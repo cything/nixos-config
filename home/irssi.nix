@@ -14,5 +14,8 @@
         rust.autoJoin = true;
       };
     };
+    extraConfig = ''
+      ignores = ( { level = "JOINS PARTS QUITS MODES NICKS"; } )
+    '';
   };
 }
