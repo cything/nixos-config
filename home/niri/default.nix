@@ -49,6 +49,7 @@ in
 
     environment = {
       DISPLAY = ":0"; # for xwayland-satellite
+      ANKI_WAYLAND = "1";
     };
 
     layout = {
