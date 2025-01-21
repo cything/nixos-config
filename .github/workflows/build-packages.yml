@@ -7,7 +7,7 @@ jobs:
       matrix:
         package:
           - github:cything/nixpkgs/928e0c6874ab3e759305e93f806a4cf559645677#alvr
-          - github:cything/nixpkgs/37f85574e47a570002631f5b6e2de40307710ae7#lact
+          - github:cything/nixpkgs/5d6f135f3965a0ff29e72718b41bb5e8217b996d#lact
         os:
           - ubuntu-latest
           - macos-latest
