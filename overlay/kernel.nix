@@ -1,6 +1,8 @@
-final: prev: let
+final: prev:
+let
   inherit (prev) lib;
-in {
+in
+{
   linuxKernels.kernels.linux_zen = prev.linuxKernels.kernels.linux_zen.override (old: {
     extraStructuredConfig = with lib.kernel; {
       CONFIG_SCHED_MUQSS = yes;

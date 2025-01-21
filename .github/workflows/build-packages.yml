@@ -6,7 +6,6 @@ on:
         description: "package to build"
         required: false
         type: string
-
 jobs:
   build-packages:
     strategy:
@@ -19,32 +18,27 @@ jobs:
           - ubuntu-latest
           - macos-latest
           - ubuntu-24.04-arm
- 
     runs-on: ${{ matrix.os }}
     continue-on-error: true
     steps:
       - name: Install Nix
         uses: cachix/install-nix-action@v30
-
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-
       - uses: cachix/cachix-action@v14
         with:
           name: cything
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           useDaemon: false
           installCommand: nix profile install nixpkgs#cachix
-
       - name: Setup Attic cache
         uses: ryanccn/attic-action@v0
         with:
           endpoint: ${{ vars.ATTIC_ENDPOINT }}
           cache: ${{ vars.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
-
       - name: Restore and cache Nix store
         uses: nix-community/cache-nix-action@v5.1.0
         with:
@@ -62,5 +56,4 @@ jobs:
           purge-primary-key: never
           # always save the cache
           save-always: true
-
       - run: nix build -L ${{ matrix.package }}

@@ -32,7 +32,14 @@ in
         ];
       }
       { command = [ "${lib.getExe pkgs.xwayland-satellite}" ]; }
-      { command = [ "wl-paste" "--watch" "cliphist" "store"]; }
+      {
+        command = [
+          "wl-paste"
+          "--watch"
+          "cliphist"
+          "store"
+        ];
+      }
     ];
     hotkey-overlay.skip-at-startup = true;
 
