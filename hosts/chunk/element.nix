@@ -7,9 +7,12 @@
   virtualisation.oci-containers.containers.element = {
     image = "vectorim/element-web";
     autoStart = true;
-    ports = [ "127.0.0.1:8089:80" ];
+    ports = [ "127.0.0.1:8089:8089" ];
     pull = "newer";
     networks = [ "element-net" ];
+    environment = {
+      ELEMENT_WEB_PORT = "8089";
+    };
   };
 
   systemd.services.create-element-net = {
