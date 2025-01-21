@@ -22,9 +22,9 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
-    style.name = "adwaita-dark";
-    style.package = pkgs.adwaita-qt;
+    platformTheme.name = "kde";
+    style.name = "breeze-dark";
+    style.package = pkgs.kdePackages.breeze;
   };
 
   gtk = {

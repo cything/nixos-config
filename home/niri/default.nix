@@ -94,6 +94,8 @@ in
             title = "^Browse";
           }
           { app-id = "com.mitchellh.ghostt"; }
+          { app-id = "org.kde.okular"; }
+          { app-id = "kitty"; }
         ];
         default-column-width.proportion = .5;
       }
