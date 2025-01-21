@@ -1,13 +1,20 @@
 name: build and cache packages
 on:
   workflow_dispatch:
+    inputs:
+      package:
+        description: "package to build"
+        required: false
+        type: string
+
 jobs:
   build-packages:
     strategy:
       matrix:
         package:
           - github:cything/nixpkgs/928e0c6874ab3e759305e93f806a4cf559645677#alvr
-          - github:cything/nixpkgs/7a6df0d295e2477d88251bd6d80bf25d251e59d2#lact
+          - github:cything/nixpkgs/8929e1256ceec677dd57fce405cdaca23176399b#lact
+          - ${{ inputs.package }}
         os:
           - ubuntu-latest
           - macos-latest
