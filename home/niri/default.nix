@@ -6,7 +6,7 @@
 }:
 let
   wallpaper = "${./nixos-c-book.png}";
-  terminal = "ghostty";
+  terminal = "kitty";
   menu = [
     "fuzzel"
     "-w"

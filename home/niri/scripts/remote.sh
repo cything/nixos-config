@@ -5,7 +5,7 @@ active_window=$(niri msg --json focused-window |jq -r .app_id)
 if [ "$1" = "btn1" ]; then
   if [ "$active_window" = "anki" ]; then
     wtype " "
-  elif [ "$active_window" = "foot" ]; then
+  elif [ "$active_window" = "kitty" ]; then
     wtype -M ctrl -M shift -k c -m ctrl -m shift
   elif [ "$active_window" = "chromium-browser" ] || [ "$active_window" = "librewolf" ]; then
     wtype -M alt -P right -p right -m alt
@@ -15,7 +15,7 @@ if [ "$1" = "btn1" ]; then
 else
   if [ "$active_window" = "anki" ]; then
     wtype "1"
-  elif [ "$active_window" = "foot" ]; then
+  elif [ "$active_window" = "kitty" ]; then
     wtype -M ctrl -M shift -k v -m ctrl
   elif [ "$active_window" = "chromium-browser" ] || [ "$active_window" = "librewolf" ]; then
     wtype -M alt -P left -p left -m alt
