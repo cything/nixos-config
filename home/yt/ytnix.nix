@@ -102,6 +102,7 @@
     seahorse
     github-cli
     fuzzel
+    nixpkgs-review
   ];
 
   programs.waybar.enable = true;

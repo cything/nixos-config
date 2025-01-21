@@ -32,6 +32,7 @@ in
         ];
       }
       { command = [ "${lib.getExe pkgs.xwayland-satellite}" ]; }
+      { command = [ "wl-paste" "--watch" "cliphist" "store"]; }
     ];
     hotkey-overlay.skip-at-startup = true;
 
@@ -51,11 +52,11 @@ in
     };
 
     layout = {
-      gaps = 4;
+      gaps = 0;
       focus-ring = {
         width = 4;
-        active.color = "#00000055";
-        inactive.color = "#505050";
+        active.color = "#4c7899";
+        inactive.color = "#333333";
       };
       always-center-single-column = true;
       border.enable = false;
