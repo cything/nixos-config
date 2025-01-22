@@ -42,6 +42,16 @@
     };
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    kernelPatches = [
+      {
+        name = "zen";
+        patch = null;
+        extraStructuredConfig = with lib.kernel; {
+          CONFIG_SCHED_MUQSS = yes;
+        };
+      }
+    ];
+    # kernelPackages = with pkgs.linuxKernel; packagesFor kernels.linux_zen;
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
     ];
