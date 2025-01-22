@@ -61,6 +61,12 @@
       url = "git+https://git.lix.systems/lix-project/nixos-module";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
+      inputs.lix.follows = "lix";
+    };
+    lix = {
+      url = "git+https://git.lix.systems/lix-project/lix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
     };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
