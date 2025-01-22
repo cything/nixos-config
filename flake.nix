@@ -37,8 +37,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ghostty.url = "github:ghostty-org/ghostty";
+    conduwuit.url = "github:girlbossceo/conduwuit";
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
+
+    nvim-github-theme = {
+      url = "github:projekt0n/github-nvim-theme";
+      flake = false;
+    };
   };
 
   nixConfig = {
