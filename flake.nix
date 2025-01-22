@@ -22,15 +22,27 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.home-manager.follows = "home-manager";
+      inputs.treefmt-nix.follows = "treefmt";
     };
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -38,11 +50,17 @@
     };
     conduwuit = {
       url = "github:girlbossceo/conduwuit";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        crane.follows = "crane";
+        flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
+      };
     };
     lix-module = {
       url = "git+https://git.lix.systems/lix-project/nixos-module";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
@@ -51,6 +69,11 @@
       url = "github:projekt0n/github-nvim-theme";
       flake = false;
     };
+
+    # deduplication
+    flake-utils.url = "github:numtide/flake-utils";
+    crane.url = "github:ipetkov/crane";
+    flake-compat.url = "github:edolstra/flake-compat";
   };
 
   nixConfig = {
