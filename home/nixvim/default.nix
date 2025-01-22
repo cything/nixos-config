@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   programs.nixvim = {
     enable = true;
@@ -15,15 +15,18 @@
       incsearch = true;
       smartcase = true;
     };
-    colorscheme = "iceberg";
-    clipboard.register = "unnamedplus";
+    colorscheme = "github_dark_tritanopia";
+    clipboard.register = "unnamed";
 
     globals = {
       mapleader = ",";
     };
 
-    extraPlugins = with pkgs.vimPlugins; [
-      iceberg-vim
+    extraPlugins = [
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "gitub-theme";
+        src = inputs.nvim-github-theme;
+      })
     ];
 
     keymaps = [
