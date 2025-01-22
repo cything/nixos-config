@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   nix = {
     settings = {
@@ -26,6 +26,7 @@
     extraOptions = ''
       	    builders-use-substitutes = true
       	  '';
+    registry.nixpkgs.flake = inputs.nixpkgs;
   };
   time.timeZone = "America/Toronto";
   networking.firewall.logRefusedConnections = false;
