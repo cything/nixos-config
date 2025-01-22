@@ -311,8 +311,7 @@
 
   services.trezord.enable = true;
 
-  my.niri = {
-    enable = true;
-    package = pkgs.niri-unstable;
-  };
+  programs.niri.enable = true;
+  programs.niri.package = pkgs.niri-unstable;
+  programs.xwayland.enable = true;
 }

@@ -135,13 +135,16 @@ in
       "Mod+Shift+U".action = move-window-to-workspace-up;
       "Mod+Shift+I".action = move-window-to-workspace-down;
       "Mod+W".action = maximize-column;
+      "Mod+E".action = set-column-width "50%";
+      "Mod+R".action = set-column-width "75%";
+      "Mod+Q".action = set-column-width "25%";
       "Mod+C".action = center-column;
       "Mod+Shift+Space".action = toggle-window-floating;
       "Mod+Space".action = switch-focus-between-floating-and-tiling;
       "Print".action = screenshot;
       "Alt+Print".action = screenshot-window;
       "Ctrl+Print".action = screenshot-screen;
-      "Mod+R".action = switch-preset-column-width;
+      # "Mod+R".action = switch-preset-column-width;
       "Mod+Shift+R".action = switch-preset-window-height;
       "Mod+Ctrl+R".action = reset-window-height;
       "Mod+F".action = fullscreen-window;
