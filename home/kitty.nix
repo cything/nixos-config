@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.kitty = {
     enable = true;
     font = {
@@ -15,7 +16,7 @@
       clear_all_shortcuts = true;
 
       # will probably lower this later but the max allowed is actually 4GB
-      # this is NOT stored in memory and can only be viewed wth scrollback_pager
+      # this is NOT stored in memory and can only be viewed with scrollback_pager
       "scrollback_pager_history_size" = "1024";
       # see https://github.com/sharkdp/bat/issues/1077#issuecomment-652785399
       "scrollback_pager" = "bat --pager='less -FR +G'";

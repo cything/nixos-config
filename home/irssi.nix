@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.irssi = {
     enable = true;
     networks.liberachat = {
