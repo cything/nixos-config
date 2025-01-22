@@ -8,7 +8,6 @@
     ../foot.nix
     ../niri
     ../irssi.nix
-    ../ghostty.nix
     ../kitty.nix
   ];
   home = {
