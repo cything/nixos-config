@@ -115,7 +115,8 @@
               end
             end)
           '';
-          "<Tab>" = ''
+          # plain tab conflicts with i try to indent
+          "<C-Tab>" = ''
             cmp.mapping(function(fallback)
               if require("luasnip").jumpable(1) then
                 require("luasnip").jump(1)
@@ -174,6 +175,7 @@
     };
     plugins.fzf-lua = {
       enable = true;
+      profile = "fzf-native";
       keymaps = {
         "<leader>ff" = "files";
         "<leader>fg" = "live_grep";
