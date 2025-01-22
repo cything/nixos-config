@@ -36,7 +36,14 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    conduwuit.url = "github:girlbossceo/conduwuit";
+    conduwuit = {
+      url = "github:girlbossceo/conduwuit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lix-module = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
@@ -85,17 +92,12 @@
         ];
         perSystem =
           {
-            system,
+            inputs',
             ...
           }:
           {
             # make pkgs available to `perSystem`
-            _module.args.pkgs = import inputs.nixpkgs {
-              inherit system;
-              config = {
-                allowUnfree = true;
-              };
-            };
+            _module.args.pkgs = inputs'.nixpkgs.legacyPackages;
 
             treefmt = {
               projectRootFile = "flake.nix";
@@ -140,6 +142,7 @@
                     ./modules
                     inputs.lanzaboote.nixosModules.lanzaboote
                     inputs.niri.nixosModules.niri
+                    inputs.lix-module.nixosModules.default
                   ];
                 };
                 chunk = lib.nixosSystem {
