@@ -13,12 +13,20 @@
       # for confirmation
       confirm_os_window_close = 0;
       clear_all_shortcuts = true;
+
+      # will probably lower this later but the max allowed is actually 4GB
+      # this is NOT stored in memory and can only be viewed wth scrollback_pager
+      "scrollback_pager_history_size" = "1024";
+      # see https://github.com/sharkdp/bat/issues/1077#issuecomment-652785399
+      "scrollback_pager" = "bat --pager='less -FR +G'";
     };
     keybindings = {
       # kitty_mod is ctrl+shift by default
       "kitty_mod+c" = "copy_to_clipboard";
       "kitty_mod+v" = "paste_from_clipboard";
       # "ctrl+q" = "quit";
+
+      "kitty_mod+m" = "show_scrollback";
 
       # windows
       "kitty_mod+h" = "neighboring_window left";
