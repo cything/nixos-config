@@ -44,8 +44,8 @@
     ];
   };
 
-  networkings.wireless.enable = true;
-  networkings.wireless.networks = {
+  networking.wireless.enable = true;
+  networking.wireless.networks = {
     "36 Halsey" = {
       psk = "Canada2022";
     };
@@ -66,4 +66,10 @@
   ];
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
+  users.users.root.initialHashedPassword = "";
+  users.users.yt.initialHashedPassword = "";
+
+  boot.loader.generic-extlinux-compatible.mirroredBoots = [
+    { path = "/boot/firmware"; }
+  ];
 }
