@@ -9,7 +9,6 @@
     ../common.nix
     ../zsh.nix
     ./hardware-configuration.nix
-    ./gitlab.nix
     ./backup.nix
     ./rclone.nix
     ./postgres.nix
@@ -25,6 +24,8 @@
     ./immich.nix
     ./element.nix
     ./attic.nix
+    ./forgejo.nix
+    ./garage.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -59,31 +60,15 @@
     "miniflux/env" = {
       sopsFile = ../../secrets/services/miniflux.yaml;
     };
-    "gitlab/root" = {
-      sopsFile = ../../secrets/services/gitlab.yaml;
-      owner = config.users.users.git.name;
-    };
-    "gitlab/secret" = {
-      sopsFile = ../../secrets/services/gitlab.yaml;
-      owner = config.users.users.git.name;
-    };
-    "gitlab/jws" = {
-      sopsFile = ../../secrets/services/gitlab.yaml;
-      owner = config.users.users.git.name;
-    };
-    "gitlab/db" = {
-      sopsFile = ../../secrets/services/gitlab.yaml;
-      owner = config.users.users.git.name;
-    };
-    "gitlab/otp" = {
-      sopsFile = ../../secrets/services/gitlab.yaml;
-      owner = config.users.users.git.name;
-    };
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/zh5061/chunk.yaml;
     };
     "attic/env" = {
       sopsFile = ../../secrets/services/attic.yaml;
+    };
+
+    "garage/env" = {
+      sopsFile = ../../secrets/services/garage.yaml;
     };
   };
 
@@ -157,6 +142,13 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdhAQYy0+vS+QmyCd0MAbqbgzyMGcsuuFyf6kg2yKge yt@ytlinux"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyn2+OoRN4nExti+vFQ1NHEZip0slAoCH9C5/FzvgZD yt@ytnix"
   ];
+  # for forgejo
+  users.users.git = {
+    isNormalUser = true;
+    home = "/var/lib/forgejo";
+    group = "git";
+  };
+  users.groups.git = { };
 
   environment.systemPackages = with pkgs; [
     vim

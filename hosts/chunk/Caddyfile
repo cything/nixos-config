@@ -11,12 +11,24 @@
   header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
 }
 
-git.cy7.sh, git.cything.io {
+git.cything.io {
   import common
-  reverse_proxy unix//run/gitlab/gitlab-workhorse.socket
+
+  # wrap in route so things are evaluated in the order written
+  route {
+    # rewrite gitlab URIs to make it work with forgejo
+    uri path_regexp /-/ /
+    uri replace /blob/ /src/
+    redir https://git.cy7.sh{uri} permanent
+  }
 }
 
-rss.cything.io {
+git.cy7.sh {
+  import common
+  reverse_proxy localhost:3000
+}
+
+rss.cy7.sh {
   import common
   reverse_proxy localhost:8080
 }
@@ -64,4 +76,14 @@ element.cything.io {
 cache.cything.io {
   import common
   reverse_proxy localhost:8090
+}
+
+s3.cy7.sh {
+  import common
+  reverse_proxy localhost:3900
+}
+
+admin.s3.cy7.sh {
+  import common
+  reverse_proxy localhost:3903
 }

@@ -6,6 +6,9 @@
   imports = [
     ./common.nix
     ../foot.nix
+    ../niri
+    ../irssi.nix
+    ../kitty.nix
   ];
   home = {
     username = "yt";
@@ -18,9 +21,9 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
-    style.name = "adwaita-dark";
-    style.package = pkgs.adwaita-qt;
+    platformTheme.name = "kde";
+    style.name = "breeze-dark";
+    style.package = pkgs.kdePackages.breeze;
   };
 
   gtk = {
@@ -39,8 +42,17 @@
     };
   };
 
-  home.sessionVariables = {
-    ANKI_WAYLAND = "1";
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern";
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      cursor-theme = "Bibata-Modern";
+    };
   };
 
   home.packages = with pkgs; [
@@ -50,9 +62,7 @@
     bitwarden-desktop
     bitwarden-cli
     fastfetch
-    discord
     nwg-look
-    element-desktop
     kdePackages.gwenview
     kdePackages.okular
     kdePackages.qtwayland
@@ -97,8 +107,11 @@
     opentofu
     terraform-ls
     gdb
-    gcc
+    clang
     seahorse
+    github-cli
+    fuzzel
+    nixpkgs-review
   ];
 
   programs.waybar.enable = true;
@@ -121,7 +134,6 @@
   };
 
   xdg.configFile = {
-    sway.source = ../sway;
     rofi.source = ../rofi;
     waybar.source = ../waybar;
     mpv.source = ../mpv;
@@ -138,4 +150,9 @@
   };
 
   services.gnome-keyring.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 }

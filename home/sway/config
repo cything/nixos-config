@@ -26,7 +26,7 @@ floating_modifier $mod normal
 default_border pixel
 smart_borders on
 focus_follows_mouse always
-mouse_warping container
+# mouse_warping container
 
 bindsym $mod+Return exec $term
 bindsym $mod+Ctrl+q kill
@@ -125,6 +125,7 @@ for_window [app_id=mpv] inhibit_idle visible, floating enable, sticky enable
 for_window [app_id="LibreWolf" title="^Extension"] floating enable
 for_window [floating] border csd
 for_window [app_id="Bitwarden"] floating enable
+for_window [app_id=anki title="Add"] floating enable
 
 bar {
 	swaybar_command waybar

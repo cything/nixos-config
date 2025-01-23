@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  inputs,
   lib,
   ...
 }:
@@ -10,12 +9,6 @@
     ./hardware-configuration.nix
     ../common.nix
     ../zsh.nix
-    {
-      disabledModules = [
-        "services/backup/btrbk.nix"
-      ];
-    }
-    (inputs.nixpkgs-btrbk + "/nixos/modules/services/backup/btrbk.nix")
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -48,7 +41,7 @@
       efi.canTouchEfiVariables = false; # toggle when installing
     };
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
     ];
@@ -195,11 +188,6 @@
   };
   services.blueman.enable = true;
 
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
-
   my.backup = {
     enable = true;
     jobName = "ytnixRsync";
@@ -322,4 +310,8 @@
   };
 
   services.trezord.enable = true;
+
+  programs.niri.enable = true;
+  programs.niri.package = pkgs.niri-unstable;
+  programs.xwayland.enable = true;
 }

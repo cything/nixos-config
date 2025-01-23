@@ -1,0 +1,126 @@
+name: build and cache machines and homes
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+jobs:
+  build-machines:
+    strategy:
+      matrix:
+        machine:
+          - chunk
+          - ytnix
+          - titan
+        os:
+          - ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    steps:
+      - name: Maximize build disk space
+        uses: easimon/maximize-build-space@v10
+        with:
+          overprovision-lvm: true
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+          remove-docker-images: 'true'
+          build-mount-path: /nix
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
+        with:
+          install_url: https://releases.nixos.org/nix/nix-2.25.4/install
+          extra_nix_config: 'accept-flake-config = true'
+      - name: Sync repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: cachix/cachix-action@v14
+        with:
+          name: cything
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          useDaemon: false
+          installCommand: nix profile install nixpkgs#cachix
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0
+        with:
+          endpoint: ${{ vars.ATTIC_ENDPOINT }}
+          cache: ${{ vars.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
+      - name: Restore and cache Nix store
+        uses: nix-community/cache-nix-action@v5.1.0
+        with:
+          # restore and save a cache using this key
+          primary-key: nix-${{ runner.os }}-${{ matrix.machine }}-${{ hashFiles('**/*.nix', 'flake.lock') }}
+          # if there's no cache hit, restore a cache by this prefix
+          restore-prefixes-first-match: nix-${{ runner.os }}-${{ matrix.machine }}-
+          # do purge caches
+          purge: true
+          # purge all versions of the cache
+          purge-prefixes: nix-${{ runner.os }}-
+          # created more than this number of seconds ago relative to the start of the `Post Restore` phase
+          purge-last-accessed: 86400
+          # except the version with the `primary-key`, if it exists
+          purge-primary-key: never
+          # always save the cache
+          save-always: true
+      - run: nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+  build-homes:
+    strategy:
+      matrix:
+        home:
+          - yt@ytnix
+          - yt@chunk
+        os:
+          - ubuntu-latest
+          # - macos-latest
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    steps:
+      - name: Maximize build disk space
+        uses: easimon/maximize-build-space@v10
+        with:
+          overprovision-lvm: true
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+          remove-docker-images: 'true'
+          build-mount-path: /nix
+      - uses: nixbuild/nix-quick-install-action@master
+      - name: Sync repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: cachix/cachix-action@v14
+        with:
+          name: cything
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          useDaemon: false
+          installCommand: nix profile install nixpkgs#cachix
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0
+        with:
+          endpoint: ${{ vars.ATTIC_ENDPOINT }}
+          cache: ${{ vars.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
+      - name: Restore and cache Nix store
+        uses: nix-community/cache-nix-action@v5.1.0
+        with:
+          # restore and save a cache using this key
+          primary-key: nix-${{ runner.os }}-${{ matrix.home }}-${{ hashFiles('**/*.nix', 'flake.lock') }}
+          # if there's no cache hit, restore a cache by this prefix
+          restore-prefixes-first-match: nix-${{ runner.os }}-${{ matrix.home }}-
+          # do purge caches
+          purge: true
+          # purge all versions of the cache
+          purge-prefixes: nix-${{ runner.os }}-
+          # created more than this number of seconds ago relative to the start of the `Post Restore` phase
+          purge-last-accessed: 86400
+          # except the version with the `primary-key`, if it exists
+          purge-primary-key: never
+          # always save the cache
+          save-always: true
+      - run: nix build -L .#homeConfigurations."${{ matrix.home }}".activationPackage
