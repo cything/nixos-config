@@ -962,6 +962,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-rpi": {
+      "locked": {
+        "lastModified": 1737645144,
+        "narHash": "sha256-QPTPf1ccrGTIgKA+/a3MIqrKiUbxhUSRUCQll86kUl8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d4e529a24b66b0341f2b866c5abe3ad8a96be2d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d4e529a24b66b0341f2b866c5abe3ad8a96be2d7",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1724316499,
@@ -1225,6 +1241,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-garage": "nixpkgs-garage",
+        "nixpkgs-rpi": "nixpkgs-rpi",
         "nixvim": "nixvim",
         "nvim-github-theme": "nvim-github-theme",
         "rust-overlay": "rust-overlay",
