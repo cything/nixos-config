@@ -9,7 +9,7 @@
     };
     themeFile = "GitHub_Dark";
     settings = {
-      enable_audio_bell = false;
+      enable_audio_bell = true;
       # how many windows should be open before kitty asks
       # for confirmation
       confirm_os_window_close = 0;
@@ -20,6 +20,7 @@
       "scrollback_pager_history_size" = "1024";
       # see https://github.com/sharkdp/bat/issues/1077#issuecomment-652785399
       "scrollback_pager" = "bat --pager='less -FR +G'";
+      "scrollback_lines" = 20000;
     };
     keybindings = {
       # kitty_mod is ctrl+shift by default

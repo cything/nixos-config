@@ -49,12 +49,6 @@
     x11.enable = true;
   };
 
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      cursor-theme = "Bibata-Modern";
-    };
-  };
-
   home.packages = with pkgs; [
     firefox
     ungoogled-chromium

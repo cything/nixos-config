@@ -197,4 +197,5 @@
     };
   };
   virtualisation.oci-containers.backend = "podman";
+  environment.enableAllTerminfo = true;
 }
