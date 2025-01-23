@@ -210,7 +210,6 @@
                     {
                       nixpkgs.pkgs = pkgsFor "aarch64-linux";
                     }
-                    disko.nixosModules.disko
                     inputs.nixos-hardware.nixosModules.raspberry-pi-3
                     ./hosts/pancake
                     ./modules

@@ -8,8 +8,8 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ../common.nix
-    ./disk-config.nix
     ./hardware-configuration.nix
+    ../zsh.nix
   ];
 
   services.openssh = {
@@ -31,7 +31,6 @@
 
   # network stuff
   networking.hostName = "pancake";
-  networking.networkmanager.enable = true;
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
