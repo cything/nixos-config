@@ -899,6 +899,21 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1737590910,
+        "narHash": "sha256-qM/y6Dtpu9Wmf5HqeZajQdn+cS0aljdYQQQnrvx+LJE=",
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "rev": "9368027715d8dde4b84c79c374948b5306fdd2db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1726042813,
@@ -1207,6 +1222,7 @@
         "lix": "lix",
         "lix-module": "lix-module",
         "niri": "niri",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-garage": "nixpkgs-garage",
         "nixvim": "nixvim",

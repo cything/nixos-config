@@ -68,6 +68,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
     };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
@@ -145,9 +146,9 @@
 
         flake =
           let
-            pkgs = import nixpkgs {
+            pkgsFor = system: import nixpkgs {
               config.allowUnfree = true;
-              system = "x86_64-linux";
+              system = system;
               overlays = [
                 inputs.niri.overlays.niri
                 inputs.rust-overlay.overlays.default
@@ -164,7 +165,7 @@
                   specialArgs = { inherit inputs; };
                   modules = [
                     {
-                      nixpkgs = { inherit pkgs; };
+                      nixpkgs.pkgs = pkgsFor "x86_64-linux";
                     }
                     ./hosts/ytnix
                     inputs.sops-nix.nixosModules.sops
@@ -178,7 +179,7 @@
                   specialArgs = { inherit inputs; };
                   modules = [
                     {
-                      nixpkgs = { inherit pkgs; };
+                      nixpkgs.pkgs = pkgsFor "x86_64-linux";
                       disabledModules = [
                         "services/web-servers/garage.nix"
                       ];
@@ -194,11 +195,24 @@
                   specialArgs = { inherit inputs; };
                   modules = [
                     {
-                      nixpkgs = { inherit pkgs; };
+                      nixpkgs.pkgs = pkgsFor "x86_64-linux";
                     }
                     ./hosts/titan
                     disko.nixosModules.disko
                     inputs.sops-nix.nixosModules.sops
+                    ./modules
+                  ];
+                };
+
+                pancake = lib.nixosSystem {
+                  specialArgs = { inherit inputs; };
+                  modules = [
+                    {
+                      nixpkgs.pkgs = pkgsFor "aarch64-linux";
+                    }
+                    disko.nixosModules.disko
+                    inputs.nixos-hardware.nixosModules.raspberry-pi-3
+                    ./hosts/pancake
                     ./modules
                   ];
                 };
@@ -209,7 +223,7 @@
               in
               {
                 "yt@ytnix" = lib.homeManagerConfiguration {
-                  inherit pkgs;
+                  pkgs = pkgsFor "x86_64-linux";
                   extraSpecialArgs = { inherit inputs; };
                   modules = [
                     ./home/yt/ytnix.nix
@@ -219,7 +233,7 @@
                 };
 
                 "yt@chunk" = lib.homeManagerConfiguration {
-                  inherit pkgs;
+                  pkgs = pkgsFor "x86_64-linux";
                   extraSpecialArgs = { inherit inputs; };
                   modules = [
                     ./home/yt/chunk.nix
@@ -228,7 +242,7 @@
                 };
 
                 "codespace@codespace" = lib.homeManagerConfiguration {
-                  inherit pkgs;
+                  pkgs = pkgsFor "x86_64-linux";
                   extraSpecialArgs = { inherit inputs; };
                   modules = [
                     ./home/yt/codespace.nix
