@@ -1,5 +1,8 @@
 update:
     git switch -c update
+    nix flake update
+    git add flake.lock
+    git commit -s -m "flake update"
     git push
     git switch main
 
