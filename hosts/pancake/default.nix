@@ -24,7 +24,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyn2+OoRN4nExti+vFQ1NHEZip0slAoCH9C5/FzvgZD yt@ytnix"
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   environment.systemPackages = with pkgs; [
     curl
@@ -57,11 +57,6 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager = {
-    enable = true;
-    autoLogin.user = "yt";
-  };
   users.users.yt.extraGroups = [
     "wheel"
   ];
