@@ -227,6 +227,15 @@
                   ];
                 };
 
+                "yt@pancake" = lib.homeManagerConfiguration {
+                  inherit pkgs;
+                  extraSpecialArgs = { inherit inputs; };
+                  modules = [
+                    ./home/yt/chunk.nix
+                    inputs.nixvim.homeManagerModules.nixvim
+                  ];
+                };
+
                 "codespace@codespace" = lib.homeManagerConfiguration {
                   inherit pkgs;
                   extraSpecialArgs = { inherit inputs; };
