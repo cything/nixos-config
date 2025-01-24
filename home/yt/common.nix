@@ -44,7 +44,11 @@
         rebase = true;
         autostash = true;
       };
-      merge.tool = "vimdiff";
+      merge = {
+        tool = "vimdiff";
+        keepBackup = false;
+        prompt = false;
+      };
       rebase = {
         stat = true;
         autoStash = true;
@@ -52,10 +56,7 @@
         updateRefs = true;
       };
       help.autocorrect = 1;
-      mergetool = {
-        prompt = false;
-        path = "nvim-open";
-      };
+      "mergetool \"vimdiff\"".cmd = "nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
     };
   };
   programs.ripgrep.enable = true;
