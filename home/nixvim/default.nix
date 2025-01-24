@@ -192,6 +192,28 @@
       enable = true;
       settings.current_line_blame = true;
     };
+    
+    plugins.none-ls = {
+      enable = true;
+      enableLspFormat = true;
+      sources = {
+        code_actions.gitsigns.enable = true;
+        completion = {
+          luasnip.enable = true;
+          spell.enable = true;
+        };
+        diagnostics = {
+          codespell.enable = true; 
+          commitlint.enable = true; 
+          deadnix.enable = true; 
+          markdownlint.enable = true; 
+          pylint.enable = true; 
+        };
+        formatting = {
+          just.enable = true; 
+        };
+      };
+    };
 
     plugins.cmp-buffer.enable = true;
     plugins.cmp-emoji.enable = true;
@@ -205,5 +227,6 @@
     plugins.auto-save.enable = true;
     plugins.indent-blankline.enable = true;
     plugins.undotree.enable = true;
+    plugins.lsp-format.enable = true;
   };
 }
