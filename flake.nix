@@ -69,7 +69,7 @@
       inputs.flake-compat.follows = "flake-compat";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixpkgs-rpi.url = "github:nixos/nixpkgs/d4e529a24b66b0341f2b866c5abe3ad8a96be2d7";
+    nixpkgs-rpi.url = "github:nixos/nixpkgs/dd3f45d31469f81166b31c667ca722c0efb18325";
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
