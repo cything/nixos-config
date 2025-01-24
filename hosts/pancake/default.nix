@@ -70,10 +70,6 @@
   users.users.root.initialHashedPassword = "";
   users.users.yt.initialHashedPassword = "";
 
-  boot.loader.generic-extlinux-compatible.mirroredBoots = [
-    { path = "/boot/firmware"; }
-  ];
-
   # remove this after https://github.com/NixOS/nixpkgs/pull/375165 lands on unstable
   boot.kernelPackages = lib.mkForce inputs.nixpkgs-rpi.legacyPackages.aarch64-linux.linuxKernel.packages.linux_rpi3;
 }
