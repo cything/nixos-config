@@ -69,8 +69,12 @@
       inputs.flake-compat.follows = "flake-compat";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixpkgs-rpi.url = "github:nixos/nixpkgs/d4e529a24b66b0341f2b866c5abe3ad8a96be2d7";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    nixpkgs-rpi.url = "github:nixos/nixpkgs/d4e529a24b66b0341f2b866c5abe3ad8a96be2d7";
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
     nvim-github-theme = {
@@ -212,6 +216,7 @@
                       nixpkgs.pkgs = pkgsFor "aarch64-linux";
                     }
                     inputs.nixos-hardware.nixosModules.raspberry-pi-3
+                    inputs.nixos-generators.nixosModules.all-formats
                     ./hosts/pancake
                     ./modules
                   ];

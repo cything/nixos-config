@@ -1,6 +1,6 @@
 { config, ... }: {
   services.tailscale = {
-    enable = true;
+    enable = false;
     authKeyFile = config.sops.secrets."tailscale/auth".path;
     openFirewall = true;
     useRoutingFeatures = "client";

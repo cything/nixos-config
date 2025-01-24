@@ -10,7 +10,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ../common.nix
-    ./hardware-configuration.nix
+    # ./hardware-configuration.nix
     ../zsh.nix
   ];
 
