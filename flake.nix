@@ -171,7 +171,7 @@
                     ./modules
                     inputs.lanzaboote.nixosModules.lanzaboote
                     inputs.niri.nixosModules.niri
-                    inputs.lix-module.nixosModules.default
+                    # inputs.lix-module.nixosModules.default # broken
                   ];
                 };
                 chunk = lib.nixosSystem {
