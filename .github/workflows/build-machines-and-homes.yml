@@ -8,12 +8,12 @@ jobs:
     strategy:
       matrix:
         machine:
-          - chunk
-          - ytnix
-          - titan
+          # - chunk
+          # - ytnix
+          # - titan
           - pancake
         os:
-          - ubuntu-latest
+          # - ubuntu-latest
           - ubuntu-24.04-arm
     runs-on: ${{ matrix.os }}
     continue-on-error: true
@@ -67,7 +67,14 @@ jobs:
           purge-primary-key: never
           # always save the cache
           save-always: true
-      - run: nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+      # - run: nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+      # - run: nix run -L github:nix-community/nixos-generators -- --flake .#pancake -f sd-aarch64 --system aarch64-linux
+      - run: nix build -L .#nixosConfigurations.pancake.config.formats.sd-aarch64
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: image
+          path: result/
   build-homes:
     strategy:
       matrix:

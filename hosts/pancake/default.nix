@@ -10,7 +10,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ../common.nix
-    ./hardware-configuration.nix
+    # ./hardware-configuration.nix
     ../zsh.nix
   ];
 
@@ -57,11 +57,6 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager = {
-    enable = true;
-    autoLogin.user = "yt";
-  };
   users.users.yt.extraGroups = [
     "wheel"
   ];
@@ -70,10 +65,6 @@
   users.users.root.initialHashedPassword = "";
   users.users.yt.initialHashedPassword = "";
 
-  boot.loader.generic-extlinux-compatible.mirroredBoots = [
-    { path = "/boot/firmware"; }
-  ];
-
   # remove this after https://github.com/NixOS/nixpkgs/pull/375165 lands on unstable
-  boot.kernelPackages = lib.mkForce inputs.nixpkgs-rpi.legacyPackages.aarch64-linux.linuxKernel.packages.linux_rpi3;
+  # boot.kernelPackages = lib.mkForce inputs.nixpkgs-rpi.legacyPackages.aarch64-linux.linuxKernel.packages.linux_rpi3;
 }

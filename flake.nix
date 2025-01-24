@@ -2,7 +2,7 @@
   description = "cy's flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -70,6 +70,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs-rpi.url = "github:nixos/nixpkgs/d4e529a24b66b0341f2b866c5abe3ad8a96be2d7";
+    nixos-generators.url = "github:nix-community/nixos-generators";
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
@@ -212,6 +213,7 @@
                       nixpkgs.pkgs = pkgsFor "aarch64-linux";
                     }
                     inputs.nixos-hardware.nixosModules.raspberry-pi-3
+                    inputs.nixos-generators.nixosModules.all-formats
                     ./hosts/pancake
                     ./modules
                   ];
