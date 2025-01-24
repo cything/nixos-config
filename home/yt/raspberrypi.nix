@@ -16,6 +16,6 @@
   systemd.user.startServices = "sd-switch";
 
   home.packages = with pkgs; [
-    attic-server
+
   ];
 }

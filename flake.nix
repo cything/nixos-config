@@ -145,14 +145,16 @@
 
         flake =
           let
-            pkgs = import nixpkgs {
-              config.allowUnfree = true;
-              system = "x86_64-linux";
-              overlays = [
-                inputs.niri.overlays.niri
-                inputs.rust-overlay.overlays.default
-              ] ++ import ./overlay;
-            };
+            pkgsFor =
+              system:
+              import nixpkgs {
+                config.allowUnfree = true;
+                system = system;
+                overlays = [
+                  inputs.niri.overlays.niri
+                  inputs.rust-overlay.overlays.default
+                ] ++ import ./overlay;
+              };
           in
           {
             nixosConfigurations =
@@ -164,7 +166,7 @@
                   specialArgs = { inherit inputs; };
                   modules = [
                     {
-                      nixpkgs = { inherit pkgs; };
+                      nixpkgs.pkgs = pkgsFor "x86_64-linux";
                     }
                     ./hosts/ytnix
                     inputs.sops-nix.nixosModules.sops
@@ -178,7 +180,7 @@
                   specialArgs = { inherit inputs; };
                   modules = [
                     {
-                      nixpkgs = { inherit pkgs; };
+                      nixpkgs.pkgs = pkgsFor "x86_64-linux";
                       disabledModules = [
                         "services/web-servers/garage.nix"
                       ];
@@ -194,7 +196,7 @@
                   specialArgs = { inherit inputs; };
                   modules = [
                     {
-                      nixpkgs = { inherit pkgs; };
+                      nixpkgs.pkgs = pkgsFor "x86_64-linux";
                     }
                     ./hosts/titan
                     disko.nixosModules.disko
@@ -209,7 +211,7 @@
               in
               {
                 "yt@ytnix" = lib.homeManagerConfiguration {
-                  inherit pkgs;
+                  pkgs = pkgsFor "x86_64-linux";
                   extraSpecialArgs = { inherit inputs; };
                   modules = [
                     ./home/yt/ytnix.nix
@@ -219,7 +221,7 @@
                 };
 
                 "yt@chunk" = lib.homeManagerConfiguration {
-                  inherit pkgs;
+                  pkgs = pkgsFor "x86_64-linux";
                   extraSpecialArgs = { inherit inputs; };
                   modules = [
                     ./home/yt/chunk.nix
@@ -227,17 +229,17 @@
                   ];
                 };
 
-                "yt@pancake" = lib.homeManagerConfiguration {
-                  inherit pkgs;
+                "yt@raspberrypi" = lib.homeManagerConfiguration {
+                  pkgs = pkgsFor "aarch64-linux";
                   extraSpecialArgs = { inherit inputs; };
                   modules = [
-                    ./home/yt/chunk.nix
+                    ./home/yt/raspberrypi.nix
                     inputs.nixvim.homeManagerModules.nixvim
                   ];
                 };
 
                 "codespace@codespace" = lib.homeManagerConfiguration {
-                  inherit pkgs;
+                  pkgs = pkgsFor "x86_64-linux";
                   extraSpecialArgs = { inherit inputs; };
                   modules = [
                     ./home/yt/codespace.nix
