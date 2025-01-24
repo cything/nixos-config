@@ -74,7 +74,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-rpi.url = "github:nixos/nixpkgs/d4e529a24b66b0341f2b866c5abe3ad8a96be2d7";
+    nixpkgs-rpi.url = "github:nixos/nixpkgs/68f4d47d0c18eac85d7c654d3f12c756cc1a48a2";
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
     nvim-github-theme = {
