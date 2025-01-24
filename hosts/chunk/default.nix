@@ -26,6 +26,7 @@
     ./attic.nix
     ./forgejo.nix
     ./garage.nix
+    ./tailscale.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -66,9 +67,11 @@
     "attic/env" = {
       sopsFile = ../../secrets/services/attic.yaml;
     };
-
     "garage/env" = {
       sopsFile = ../../secrets/services/garage.yaml;
+    };
+    "tailscale/auth" = {
+      sopsFile = ../../secrets/services/tailscale.yaml;
     };
   };
 

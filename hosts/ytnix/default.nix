@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../common.nix
     ../zsh.nix
+    ./tailscale.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -31,6 +32,9 @@
     "newsboat/miniflux" = {
       sopsFile = ../../secrets/newsboat.yaml;
       owner = "yt";
+    };
+    "tailscale/auth" = {
+      sopsFile = ../../secrets/services/tailscale.yaml;
     };
   };
 
@@ -58,6 +62,7 @@
       pkiBundle = "/var/lib/sbctl";
     };
     kernel.sysctl."kernel.sysrq" = 1;
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   networking = {
@@ -128,6 +133,7 @@
     "wheel"
     "libvirtd"
     "docker"
+    "disk"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -314,4 +320,8 @@
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
   programs.xwayland.enable = true;
+
+  services.udev.extraHwdb = ''
+    SUBSYSTEM=="usb", SYSFS{idVendor}=="090c", SYSFS{idProduct}=="1000", ACTION=="add", GROUP="users", MODE="0664"
+  '';
 }
