@@ -89,6 +89,7 @@
       "https://nix-community.cachix.org"
       "https://cache.garnix.io"
       "https://cything.cachix.org"
+      "https://aseipp-nix-cache.global.ssl.fastly.net"
     ];
     extra-trusted-public-keys = [
       "central:uWhjva6m6dhC2hqNisjn2hXGvdGBs19vPkA1dPEuwFg="

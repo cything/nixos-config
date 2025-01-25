@@ -9,8 +9,21 @@
         "root"
         "@wheel"
       ];
-      trusted-public-keys = [ "central:uWhjva6m6dhC2hqNisjn2hXGvdGBs19vPkA1dPEuwFg=" ];
-      substituters = [ "https://cache.cything.io/central" ];
+      trusted-public-keys = [
+        "central:uWhjva6m6dhC2hqNisjn2hXGvdGBs19vPkA1dPEuwFg="
+        "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+        "cything.cachix.org-1:xqW1W5NNL+wrM9wfSELb0MLj/harD2ZyB4HbdaMyvPI="
+      ];
+      substituters = [
+        "https://aseipp-nix-cache.global.ssl.fastly.net"
+        "https://cache.cything.io/central"
+        "https://niri.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://cache.garnix.io"
+        "https://cything.cachix.org"
+      ];
     };
     channel.enable = false;
     optimise = {
@@ -24,8 +37,8 @@
       options = "--delete-older-than 14d";
     };
     extraOptions = ''
-      	    builders-use-substitutes = true
-      	  '';
+      builders-use-substitutes = true
+    '';
     registry.nixpkgs.flake = inputs.nixpkgs;
   };
   time.timeZone = "America/Toronto";

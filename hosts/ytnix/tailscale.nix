@@ -6,6 +6,7 @@
     useRoutingFeatures = "client";
     extraUpFlags = [
       "--exit-node=100.122.132.30"
+      "--accept-dns=false"
     ];
   };
 }
