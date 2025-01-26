@@ -1,7 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 {
   services.forgejo = {
     enable = true;
+    package = pkgs.forgejo; # uses forgejo-lts by default
     user = "git";
     group = "git";
     settings = {
@@ -16,7 +17,7 @@
       service.DISABLE_REGISTRATION = true;
       ui = {
         AMBIGUOUS_UNICODE_DETECTION = false;
-        DEFAULT_THEME = "gitea-dark";
+        DEFAULT_THEME = "forgejo-dark";
       };
       actions.ENABLED = false;
       repository.ENABLE_PUSH_CREATE_USER = true;
