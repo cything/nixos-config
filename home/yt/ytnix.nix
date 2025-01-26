@@ -28,10 +28,6 @@
 
   gtk = {
     enable = true;
-    cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern";
-    };
     theme = {
       package = pkgs.adw-gtk3;
       name = "adw-gtk3-dark";
@@ -44,7 +40,8 @@
 
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
-    name = "Bibata-Modern";
+    name = "Bibata-Modern-Classic";
+    size = 23;
     gtk.enable = true;
     x11.enable = true;
   };
