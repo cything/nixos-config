@@ -155,6 +155,7 @@
       signingKey = "~/.ssh/id.key";
     };
     gpg.format = "ssh";
-    global.gpgsign = true;
+    commit.gpgsign = true;
+    core.sshCommand = "ssh -i ~/.ssh/id.key";
   };
 }
