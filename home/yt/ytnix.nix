@@ -149,4 +149,12 @@
     enable = true;
     nix-direnv.enable = true;
   };
+
+  programs.git.extraConfig = {
+    user = {
+      signingKey = "~/.ssh/id.key";
+    };
+    gpg.format = "ssh";
+    global.gpgsign = true;
+  };
 }
