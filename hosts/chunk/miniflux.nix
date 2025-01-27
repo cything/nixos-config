@@ -9,4 +9,9 @@
       FORCE_REFRESH_INTERVAL = 0; # don't rate limit me
     };
   };
+
+  services.caddy.virtualHosts."rss.cy7.sh".extraConfig = ''
+    import common
+    reverse_proxy localhost:8080
+  '';
 }

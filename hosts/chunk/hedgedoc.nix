@@ -16,4 +16,9 @@
       protocolUseSSL = true;
     };
   };
+
+  services.caddy.virtualHosts."pad.cy7.sh".extraConfig = ''
+    import common
+    reverse_proxy localhost:8085
+  '';
 }

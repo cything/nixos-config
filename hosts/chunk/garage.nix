@@ -16,4 +16,9 @@
     };
     environmentFile = config.sops.secrets."garage/env".path;
   };
+
+  services.caddy.virtualHosts."s3.cy7.sh".extraConfig = ''
+    import common
+    reverse_proxy localhost:3900
+  '';
 }

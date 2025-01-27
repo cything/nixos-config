@@ -95,4 +95,9 @@ in
       ${pkgs.podman}/bin/podman network create immich-net
     '';
   };
+
+  services.caddy.virtualHosts."photos.cy7.sh".extraConfig = ''
+    import common
+    reverse_proxy localhost:2283
+  '';
 }

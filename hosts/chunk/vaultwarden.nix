@@ -10,4 +10,9 @@
       DATABASE_URL = "postgresql://vaultwarden:vaultwarden@127.0.0.1:5432/vaultwarden";
     };
   };
+
+  services.caddy.virtualHosts."pass.cy7.sh".extraConfig = ''
+    import common
+    reverse_proxy localhost:8081
+  '';
 }

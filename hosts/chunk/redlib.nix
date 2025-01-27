@@ -10,4 +10,9 @@
       REDLIB_ROBOTS_DISABLE_INDEXING = "on";
     };
   };
+
+  services.caddy.virtualHosts."red.cy7.sh".extraConfig = ''
+    import common
+    reverse_proxy localhost:8087
+  '';
 }

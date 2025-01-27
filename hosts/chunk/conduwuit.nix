@@ -10,4 +10,9 @@
       allow_check_for_updates = true;
     };
   };
+
+  services.caddy.virtualHosts."chat.cything.io".extraConfig = ''
+    import common
+    reverse_proxy localhost:8448
+  '';
 }

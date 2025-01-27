@@ -25,4 +25,9 @@
       ${pkgs.podman}/bin/podman network create element-net
     '';
   };
+
+  services.caddy.virtualHosts."element.cy7.sh".extraConfig = ''
+    import common
+    reverse_proxy localhost:8089
+  '';
 }

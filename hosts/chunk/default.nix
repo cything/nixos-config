@@ -183,11 +183,13 @@
   programs.gnupg.agent.enable = true;
   programs.git.enable = true;
 
-  services.caddy = {
-    enable = true;
-    configFile = ./Caddyfile;
-    environmentFile = config.sops.secrets."caddy/env".path;
-    logFormat = lib.mkForce "level INFO";
+  my.caddy.enable = true;
+  services.caddy.virtualHosts."cy7.sh" = {
+    serverAliases = [ "www.cy7.sh" ];
+    extraConfig = ''
+      import common
+      redir https://cything.io temporary
+    '';
   };
 
   # container stuff

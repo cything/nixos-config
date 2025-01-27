@@ -30,4 +30,20 @@
       name = "git";
     };
   };
+
+  services.caddy.virtualHosts."git.cy7.sh".extraConfig = ''
+    import common
+    reverse_proxy localhost:3000
+  '';
+  services.caddy.virtualHosts."git.cything.io".extraConfig = ''
+    import common
+
+    # wrap in route so things are evaluated in the order written
+    route {
+      # rewrite gitlab URIs to make it work with forgejo
+      uri path_regexp /-/ /
+      uri replace /blob/ /src/
+      redir https://git.cy7.sh{uri} permanent
+    }
+  '';
 }

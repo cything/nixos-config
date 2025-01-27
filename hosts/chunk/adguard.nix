@@ -21,4 +21,9 @@
       ];
     };
   };
+
+  services.caddy.virtualHosts."dns.cything.io".extraConfig = ''
+    import common
+    reverse_proxy localhost:8082
+  '';
 }
