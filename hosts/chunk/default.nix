@@ -27,6 +27,7 @@
     ./forgejo.nix
     ./garage.nix
     ./tailscale.nix
+    ./shiori.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";

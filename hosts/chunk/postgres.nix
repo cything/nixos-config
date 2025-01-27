@@ -11,10 +11,15 @@
     ensureDatabases = [
       "hedgedoc"
       "atticd"
+      "shiori"
     ];
     ensureUsers = [
       {
         name = "atticd";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "shiori";
         ensureDBOwnership = true;
       }
     ];
