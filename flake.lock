@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "anki": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1737901258,
+        "narHash": "sha256-OCZ3q9b/lo+JNIKRoVur87Dsl7RArJz3qZHg9Q3JvkE=",
+        "owner": "ankitects",
+        "repo": "anki",
+        "rev": "b65fa693dacbd92c0bdd2a8c3800d0827432d108",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ankitects",
+        "repo": "anki",
+        "type": "github"
+      }
+    },
     "attic": {
       "inputs": {
         "crane": "crane",
@@ -1196,6 +1212,7 @@
     },
     "root": {
       "inputs": {
+        "anki": "anki",
         "conduwuit": "conduwuit",
         "crane": "crane_2",
         "disko": "disko",

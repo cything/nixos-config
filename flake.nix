@@ -75,6 +75,10 @@
       url = "github:projekt0n/github-nvim-theme";
       flake = false;
     };
+    anki = {
+      url = "github:ankitects/anki";
+      flake = false;
+    };
 
     # deduplication
     flake-utils.url = "github:numtide/flake-utils";
@@ -152,7 +156,7 @@
               overlays = [
                 inputs.niri.overlays.niri
                 inputs.rust-overlay.overlays.default
-              ] ++ import ./overlay;
+              ] ++ import ./overlay inputs;
             };
           in
           {

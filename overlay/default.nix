@@ -1,8 +1,10 @@
-let
+inputs: let
   overlays = [
     ./conduwuit
     ./attic
   ];
   importedOverlays = map (m: import m) overlays;
 in
-importedOverlays
+importedOverlays ++ [
+  (import ./anki.nix inputs)
+]
