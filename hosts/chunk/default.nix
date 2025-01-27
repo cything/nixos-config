@@ -75,8 +75,11 @@
     };
   };
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
+  boot = {
+    loader.grub.enable = true;
+    loader.grub.device = "/dev/vda";
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 
   system.stateVersion = "24.05";
 

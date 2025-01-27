@@ -324,4 +324,10 @@
   services.udev.extraHwdb = ''
     SUBSYSTEM=="usb", SYSFS{idVendor}=="090c", SYSFS{idProduct}=="1000", ACTION=="add", GROUP="users", MODE="0664"
   '';
+
+  programs.ssh = {
+    askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
+    startAgent = true;
+    enableAskPassword = true;
+  };
 }
