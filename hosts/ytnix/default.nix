@@ -330,4 +330,6 @@
     startAgent = true;
     enableAskPassword = true;
   };
+
+  my.kde.enable = true;
 }
