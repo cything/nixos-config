@@ -1,9 +1,10 @@
 update:
+    git branch -D update || true
     git switch -c update
     nix flake update
     git add flake.lock
     git commit -s -m "flake update"
-    git push
+    git push -f
     git switch main
 
 upgrade:

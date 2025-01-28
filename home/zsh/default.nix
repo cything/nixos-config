@@ -39,11 +39,6 @@
     initExtra = ''
       # disable control+s to pause terminal
       unsetopt FLOW_CONTROL
-      # manually integrate fzf cause we need to make sure zsh-vi-mode
-      # won't override C-r
-      function zvm_after_init() {
-        eval "$(${pkgs.fzf}/bin/fzf --zsh)"
-      }
 
       # useful emacs mode bindings
       bindkey -M viins "^E" end-of-line
