@@ -171,7 +171,11 @@
     plugins.treesitter = {
       enable = true;
       nixGrammars = true;
-      settings.indent.enable = true;
+      settings = {
+        indent.enable = true;
+        auto_install = true;
+        highlight.enable = true;
+      };
     };
     plugins.fzf-lua = {
       enable = true;
