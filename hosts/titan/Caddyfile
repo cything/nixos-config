@@ -13,7 +13,7 @@
 
 cything.io {
   import common
-  reverse_proxy localhost:8084
+  redir https://cy7.sh/posts{uri} permanent
 
   header /.well-known/matrix/* Content-Type application/json
   header /.well-known/matrix/* Access-Control-Allow-Origin *
