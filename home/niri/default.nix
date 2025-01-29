@@ -50,7 +50,7 @@ in
         natural-scroll = true;
         click-method = "clickfinger";
       };
-      warp-mouse-to-focus = true;
+      warp-mouse-to-focus = false;
       focus-follows-mouse.enable = false;
     };
 
@@ -79,6 +79,11 @@ in
           }
           { app-id = "mpv"; }
           { app-id = "Bitwarden"; }
+          {
+            app-id = "ghidra-Ghidra";
+            # pop-up windows
+            title = "^win(.*)";
+          }
         ];
         open-floating = true;
       }

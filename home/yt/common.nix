@@ -61,4 +61,5 @@
   };
   programs.ripgrep.enable = true;
   programs.man.generateCaches = true;
+  programs.fd.enable = true;
 }

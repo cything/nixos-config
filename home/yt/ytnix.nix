@@ -103,6 +103,10 @@
     github-cli
     fuzzel
     nixpkgs-review
+    just
+    hugo
+    ghidra
+    sequoia
   ];
 
   programs.waybar.enable = true;
@@ -154,5 +158,10 @@
     gpg.format = "ssh";
     commit.gpgsign = true;
     core.sshCommand = "ssh -i ~/.ssh/id.key";
+  };
+
+  home.sessionVariables = {
+    # to make ghidra work on xwayland
+    _JAVA_AWT_WM_NONREPARENTING = 1;
   };
 }
