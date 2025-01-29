@@ -82,7 +82,10 @@
             end
           end
         '';
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
       }
       # ask perplexity a quick question
       {
@@ -98,7 +101,10 @@
             end
           end
         '';
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
       }
     ];
 

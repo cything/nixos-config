@@ -1,4 +1,4 @@
-{... }:
+{ ... }:
 {
   programs.irssi = {
     enable = true;

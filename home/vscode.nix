@@ -27,8 +27,8 @@
       };
       "vim.normalModeKeyBindings" = [
         {
-          "before" = [";"];
-          "after" = [":"];
+          "before" = [ ";" ];
+          "after" = [ ":" ];
           "silent" = true;
         }
       ];

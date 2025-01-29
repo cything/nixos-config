@@ -126,9 +126,6 @@
             ...
           }:
           {
-            # make pkgs available to `perSystem`
-            _module.args.pkgs = inputs'.nixpkgs.legacyPackages;
-
             treefmt = {
               projectRootFile = "flake.nix";
               programs.nixfmt.enable = true;
