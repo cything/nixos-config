@@ -58,6 +58,7 @@
       "ctrl+f2" = "detach_tab";
 
       # hints
+      # > basically means the preceding key is a prefix (think tmux)
       "kitty_mod+o>o" = "open_url_with_hints";
       "kitty_mod+o>p" = "kitten hints --type path --program -";
       "kitty_mod+o>n" = "kitten hints --type line --program -";

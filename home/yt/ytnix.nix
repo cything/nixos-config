@@ -9,6 +9,7 @@
     ../niri
     ../irssi.nix
     ../kitty.nix
+    ../vscode.nix
   ];
   home = {
     username = "yt";

@@ -73,10 +73,6 @@ in
     window-rules = [
       {
         matches = [
-          {
-            app-id = "anki";
-            title = "Add";
-          }
           { app-id = "mpv"; }
           { app-id = "Bitwarden"; }
           {
@@ -88,7 +84,12 @@ in
         open-floating = true;
       }
       {
-        matches = [ { app-id = "anki"; } ];
+        matches = [
+          {
+            app-id = "anki";
+            title = "Add";
+          }
+        ];
         default-column-width.proportion = .25;
       }
       {
