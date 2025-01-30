@@ -102,6 +102,7 @@ in
           { app-id = "com.mitchellh.ghostt"; }
           { app-id = "org.kde.okular"; }
           { app-id = "kitty"; }
+          { app-id = "VSCodium"; }
         ];
         default-column-width.proportion = .5;
       }

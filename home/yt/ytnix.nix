@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
@@ -108,6 +109,8 @@
     hugo
     ghidra
     sequoia
+    sccache
+    awscli2
   ];
 
   programs.waybar.enable = true;
@@ -164,5 +167,19 @@
   home.sessionVariables = {
     # to make ghidra work on xwayland
     _JAVA_AWT_WM_NONREPARENTING = 1;
+
+    # sccache stuff
+    RUSTC_WRAPPER = "${lib.getExe pkgs.sccache}";
+    SCCACHE_BUCKET = "sccache";
+    SCCACHE_REGION = "earth";
+    SCCACHE_ENDPOINT = "https://sccache.s3.cy7.sh";
+    SCCACHE_ALLOW_CORE_DUMPS = "true";
+    SCCACHE_S3_USE_SSL = "true";
+    SCCACHE_CACHE_MULTIARCH = "true";
+    SCCACHE_LOG_LEVEL = "warn";
+    AWS_DEFAULT_REGION = "earth";
+    AWS_ENDPOINT_URL = "https://s3.cy7.sh";
+    AWS_ACCESS_KEY_ID = "$(cat /run/secrets/aws/key_id)";
+    AWS_SECRET_ACCESS_KEY = "$(cat /run/secrets/aws/key_secret)";
   };
 }

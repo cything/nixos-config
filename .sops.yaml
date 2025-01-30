@@ -108,3 +108,8 @@ creation_rules:
       - age:
           - *chunk
           - *cy
+  - path_regex: secrets/yt/(.*).yaml$
+    key_groups:
+      - age:
+          - *yt
+          - *cy

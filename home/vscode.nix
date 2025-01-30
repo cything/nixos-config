@@ -11,7 +11,8 @@
       jnoortheen.nix-ide
       editorconfig.editorconfig
       github.github-vscode-theme
-      github.codespaces
+      github.copilot
+      rust-lang.rust-analyzer
     ];
     userSettings = {
       "workbench.colorTheme" = "GitHub Dark Default";

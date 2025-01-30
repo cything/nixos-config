@@ -36,6 +36,14 @@
     "tailscale/auth" = {
       sopsFile = ../../secrets/services/tailscale.yaml;
     };
+    "aws/key_id" = {
+      sopsFile = ../../secrets/yt/aws.yaml;
+      owner = "yt";
+    };
+    "aws/key_secret" = {
+      sopsFile = ../../secrets/yt/aws.yaml;
+      owner = "yt";
+    };
   };
 
   boot = {

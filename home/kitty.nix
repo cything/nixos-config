@@ -67,4 +67,6 @@
       "kitty_mod+o>l" = "kitten hints --type linenum";
     };
   };
+
+  programs.zsh.shellAliases."ssh" = "kitten ssh";
 }
