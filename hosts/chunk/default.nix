@@ -206,4 +206,6 @@
   };
   virtualisation.oci-containers.backend = "podman";
   environment.enableAllTerminfo = true;
+
+  my.soju.enable = true;
 }
