@@ -11,6 +11,7 @@
       jnoortheen.nix-ide
       editorconfig.editorconfig
       github.github-vscode-theme
+      github.codespaces
     ];
     userSettings = {
       "workbench.colorTheme" = "GitHub Dark Default";
@@ -18,10 +19,10 @@
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nixd";
       "editor.fontFamily" = "IBM Plex Mono";
-      "editor.fontSize" = 15;
+      "editor.fontSize" = 16;
       "editor.wordWrap" = "on";
 
-      # vim mode
+      # vim mode settings
       "vim.handleKeys" = {
         "<C-b>" = false; # file tree toggle
       };
@@ -32,6 +33,7 @@
           "silent" = true;
         }
       ];
+      "workbench.startupEditor" = "none";
     };
   };
 }
