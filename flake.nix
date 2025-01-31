@@ -70,6 +70,7 @@
     };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
+    nixpkgs-cutter.url = "github:cything/nixpkgs/cutter-unstable";
 
     nvim-github-theme = {
       url = "github:projekt0n/github-nvim-theme";
@@ -136,7 +137,7 @@
 
               settings.global.excludes = [
                 "secrets/*"
-                "**/*.png" # tries to format a png file??
+                "**/*.png" # tries to format a png file
               ];
             };
           };
@@ -149,6 +150,9 @@
               overlays = [
                 inputs.niri.overlays.niri
                 inputs.rust-overlay.overlays.default
+                (final: prev: {
+                  cutter = inputs.nixpkgs-cutter.legacyPackages.${prev.system}.cutter;
+                })
               ] ++ import ./overlay;
             };
           in
@@ -169,7 +173,7 @@
                     ./modules
                     inputs.lanzaboote.nixosModules.lanzaboote
                     inputs.niri.nixosModules.niri
-                    inputs.lix-module.nixosModules.default # broken
+                    inputs.lix-module.nixosModules.default
                   ];
                 };
                 chunk = lib.nixosSystem {

@@ -89,8 +89,8 @@
       "ga" = "git add";
       "gaa" = "git add --all";
       "gb" = "git branch";
-      "gc" = "git commit --verbose -s";
-      "gcmsg" = "git commit -s --message";
+      "gc" = "git commit --verbose";
+      "gcmsg" = "git commit --message";
       "gd" = "git diff";
       "gdca" = "git diff --cached";
       "gds" = "git diff --staged";

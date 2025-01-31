@@ -111,6 +111,8 @@
     sequoia
     sccache
     awscli2
+    lldb
+    (cutter.withPlugins (plugins: [ plugins.rz-ghidra ]))
   ];
 
   programs.waybar.enable = true;
@@ -147,8 +149,6 @@
       miniflux-passwordfile /run/secrets/newsboat/miniflux
     '';
   };
-
-  services.gnome-keyring.enable = true;
 
   programs.direnv = {
     enable = true;
