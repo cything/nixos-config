@@ -883,6 +883,26 @@
         "type": "github"
       }
     },
+    "nix-ld": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737361468,
+        "narHash": "sha256-+CtIrQZ22MOAOHcpg1zbhX/fVkmEc8A8lYVpXAbXElQ=",
+        "owner": "nix-community",
+        "repo": "nix-ld",
+        "rev": "7f15f8622b63b907fef137689f4528a9447d9377",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-ld",
+        "type": "github"
+      }
+    },
     "nix2container": {
       "flake": false,
       "locked": {
@@ -1207,6 +1227,7 @@
         "lix": "lix",
         "lix-module": "lix-module",
         "niri": "niri",
+        "nix-ld": "nix-ld",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-garage": "nixpkgs-garage",
         "nixvim": "nixvim",

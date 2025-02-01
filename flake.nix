@@ -68,6 +68,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
     };
+    nix-ld = {
+      url = "github:nix-community/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
@@ -170,6 +174,7 @@
                     inputs.lanzaboote.nixosModules.lanzaboote
                     inputs.niri.nixosModules.niri
                     inputs.lix-module.nixosModules.default
+                    inputs.nix-ld.nixosModules.nix-ld
                   ];
                 };
                 chunk = lib.nixosSystem {

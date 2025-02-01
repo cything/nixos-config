@@ -276,7 +276,44 @@
   programs.virt-manager.enable = true;
 
   services.usbmuxd.enable = true;
-  programs.nix-ld.enable = true;
+  programs.nix-ld.dev = {
+    enable = true;
+    # nix run github:thiagokokada/nix-alien#nix-alien-find-libs ./<binary>
+    libraries = with pkgs; [
+      mesa
+      extest
+      stdenv.cc.cc
+      libGL
+      fontconfig
+      libxkbcommon
+      zlib
+      libxml2
+      dbus
+      freetype
+      egl-wayland
+      waylandpp
+      cairo
+      xcb-util-cursor
+      xorg.libX11
+      xorg.libxcb
+      xorg.xcbutilwm
+      xorg.xcbutilimage
+      xorg.xcbutilkeysyms
+      xorg.xcbutilrenderutil
+      xorg.libXScrnSaver
+      xorg.libXcomposite
+      xorg.libXcursor
+      xorg.libXdamage
+      xorg.libXext
+      xorg.libXfixes
+      xorg.libXi
+      xorg.libXrandr
+      xorg.libXrender
+      xorg.libXtst
+      xorg.libxkbfile
+      xorg.libxshmfence
+    ];
+  };
   programs.evolution.enable = true;
 
   xdg.portal = {
