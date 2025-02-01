@@ -113,6 +113,7 @@
     awscli2
     lldb
     (cutter.withPlugins (plugins: with plugins; [ rz-ghidra jsdec sigdb ]))
+    ida-free
   ];
 
   programs.waybar.enable = true;
