@@ -70,7 +70,6 @@
     };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
-    nixpkgs-cutter.url = "github:cything/nixpkgs/cutter-unstable";
 
     nvim-github-theme = {
       url = "github:projekt0n/github-nvim-theme";
@@ -150,9 +149,6 @@
               overlays = [
                 inputs.niri.overlays.niri
                 inputs.rust-overlay.overlays.default
-                (final: prev: {
-                  cutter = inputs.nixpkgs-cutter.legacyPackages.${prev.system}.cutter;
-                })
               ] ++ import ./overlay;
             };
           in

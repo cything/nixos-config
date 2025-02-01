@@ -112,7 +112,7 @@
     sccache
     awscli2
     lldb
-    (cutter.withPlugins (plugins: [ plugins.rz-ghidra ]))
+    (cutter.withPlugins (plugins: with plugins; [ rz-ghidra jsdec sigdb ]))
   ];
 
   programs.waybar.enable = true;

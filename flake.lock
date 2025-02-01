@@ -915,22 +915,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-cutter": {
-      "locked": {
-        "lastModified": 1738351607,
-        "narHash": "sha256-jJ9u1dLnhGeAeQdmziihaka33zEwBOIKmlB6YbFcIjs=",
-        "owner": "cything",
-        "repo": "nixpkgs",
-        "rev": "940b291c7c6ad8e999cb34d8d5de7913f6776c26",
-        "type": "github"
-      },
-      "original": {
-        "owner": "cything",
-        "ref": "cutter-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-garage": {
       "locked": {
         "lastModified": 1736921030,
@@ -1224,7 +1208,6 @@
         "lix-module": "lix-module",
         "niri": "niri",
         "nixpkgs": "nixpkgs_5",
-        "nixpkgs-cutter": "nixpkgs-cutter",
         "nixpkgs-garage": "nixpkgs-garage",
         "nixvim": "nixvim",
         "nvim-github-theme": "nvim-github-theme",
