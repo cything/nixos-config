@@ -33,6 +33,10 @@
 
   services.caddy.virtualHosts."git.cy7.sh".extraConfig = ''
     import common
+
+    # renamed repo
+    uri replace /cy/infra /cy/nixos-config
+
     reverse_proxy localhost:3000
   '';
   services.caddy.virtualHosts."git.cything.io".extraConfig = ''
