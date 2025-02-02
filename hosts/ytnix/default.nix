@@ -174,6 +174,8 @@
     haskell-language-server
     ghc
     sbctl # secure boot
+    wine-wayland
+    wine64
   ];
 
   environment.sessionVariables = {
@@ -187,6 +189,12 @@
   services.displayManager = {
     enable = true;
     autoLogin.user = "yt";
+    defaultSession = "plasma";
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+      autoNumlock = true;
+    };
   };
 
   fonts.packages = with pkgs; [
@@ -294,6 +302,8 @@
       waylandpp
       cairo
       xcb-util-cursor
+      libplist
+      p11-kit
       xorg.libX11
       xorg.libxcb
       xorg.xcbutilwm
@@ -376,5 +386,10 @@
     askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
     startAgent = true;
     enableAskPassword = true;
+  };
+
+  services.desktopManager.plasma6 = {
+    enable = true;
+    enableQt5Integration = true;
   };
 }

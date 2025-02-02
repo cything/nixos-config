@@ -11,6 +11,7 @@
     ../irssi.nix
     ../kitty.nix
     ../vscode.nix
+    ../plasma.nix
   ];
   home = {
     username = "yt";
@@ -114,6 +115,7 @@
     lldb
     (cutter.withPlugins (plugins: with plugins; [ rz-ghidra jsdec sigdb ]))
     ida-free
+    patchelf
   ];
 
   programs.waybar.enable = true;

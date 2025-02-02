@@ -72,6 +72,11 @@
       url = "github:nix-community/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
@@ -218,6 +223,7 @@
                     ./home/yt/ytnix.nix
                     inputs.nixvim.homeManagerModules.nixvim
                     inputs.niri.homeModules.config
+                    inputs.plasma-manager.homeManagerModules.plasma-manager
                   ];
                 };
 
