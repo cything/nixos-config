@@ -22,12 +22,14 @@
 
   systemd.user.startServices = "sd-switch";
 
-  qt = {
-    enable = true;
-    platformTheme.name = "kde";
-    style.name = "breeze-dark";
-    style.package = pkgs.kdePackages.breeze;
-  };
+  # keep this commented when using plasma
+  # otherwise "system settings" in KDE will not function
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "kde";
+  #   style.name = "breeze-dark";
+  #   style.package = pkgs.kdePackages.breeze;
+  # };
 
   gtk = {
     enable = true;
