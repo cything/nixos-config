@@ -32,6 +32,11 @@
         key = "Meta+Return";
         command = "kitty";
       };
+      "launch-browser" = {
+        name = "launch browser";
+        key = "Meta+B";
+        command = "librewolf";
+      };
     };
 
     shortcuts = {
@@ -62,6 +67,14 @@
     configFile = {
       # save RAM
       baloofilerc."Basic Settings"."Indexing-Enabled" = false;
+    };
+
+    # looks like KDE overrides services.logind settings
+    powerdevil.AC = {
+      whenLaptopLidClosed = "hibernate";
+    };
+    powerdevil.battery = {
+      whenLaptopLidClosed = "hibernate";
     };
   };
 }

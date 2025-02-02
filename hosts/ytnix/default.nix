@@ -304,6 +304,9 @@
       xcb-util-cursor
       libplist
       p11-kit
+      kdePackages.qtwayland
+      qt6.qtwayland
+      libsForQt5.qt5.qtwayland
       xorg.libX11
       xorg.libxcb
       xorg.xcbutilwm
