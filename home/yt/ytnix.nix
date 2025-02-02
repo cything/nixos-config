@@ -31,17 +31,18 @@
   #   style.package = pkgs.kdePackages.breeze;
   # };
 
-  gtk = {
-    enable = true;
-    theme = {
-      package = pkgs.adw-gtk3;
-      name = "adw-gtk3-dark";
-    };
-    iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-  };
+  # this one too
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     package = pkgs.adw-gtk3;
+  #     name = "adw-gtk3-dark";
+  #   };
+  #   iconTheme = {
+  #     package = pkgs.adwaita-icon-theme;
+  #     name = "Adwaita";
+  #   };
+  # };
 
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
