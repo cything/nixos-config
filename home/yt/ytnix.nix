@@ -111,14 +111,19 @@
     nixpkgs-review
     just
     hugo
-    ghidra
+    ghidra-bin
     sequoia
     sccache
     awscli2
     lldb
-    (cutter.withPlugins (plugins: with plugins; [ rz-ghidra jsdec sigdb ]))
+    (cutter.withPlugins (p: with p; [
+      rz-ghidra
+      jsdec
+      sigdb
+    ]))
     ida-free
     patchelf
+    radare2
   ];
 
   programs.waybar.enable = true;
