@@ -124,6 +124,7 @@
     ida-free
     patchelf
     radare2
+    p7zip
   ];
 
   programs.waybar.enable = true;
