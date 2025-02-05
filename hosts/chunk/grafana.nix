@@ -7,7 +7,7 @@
       http_port = 8088;
       enforce_domain = true;
       enable_gzip = true;
-      domain = "grafana.cything.io";
+      domain = "grafana.cy7.sh";
     };
     settings.analytics.reporting_enabled = false;
   };
