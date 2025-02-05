@@ -53,7 +53,8 @@
       efi.canTouchEfiVariables = false; # toggle when installing
     };
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    # upgrade after https://github.com/tomaspinho/rtl8821ce/issues/356 is fixed
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
     ];
