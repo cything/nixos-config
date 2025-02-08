@@ -177,6 +177,7 @@
     sbctl # secure boot
     wine-wayland
     wine64
+    solaar
   ];
 
   environment.sessionVariables = {

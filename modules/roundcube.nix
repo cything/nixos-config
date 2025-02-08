@@ -43,6 +43,7 @@ in
       import common
       root ${roundcube.package}
       php_fastcgi unix/${fpm.socket}
+      file_server
     '';
   };
 }
