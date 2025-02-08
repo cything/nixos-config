@@ -125,6 +125,7 @@
     patchelf
     radare2
     p7zip
+    qbittorrent
   ];
 
   programs.waybar.enable = true;
