@@ -111,7 +111,7 @@
     nixpkgs-review
     just
     hugo
-    ghidra-bin
+    ghidra
     sequoia
     sccache
     awscli2

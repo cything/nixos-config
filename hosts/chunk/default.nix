@@ -205,4 +205,6 @@
   };
   virtualisation.oci-containers.backend = "podman";
   environment.enableAllTerminfo = true;
+
+  my.roundcube.enable = true;
 }
