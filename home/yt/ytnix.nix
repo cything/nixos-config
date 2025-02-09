@@ -66,7 +66,6 @@
     mpv
     yt-dlp
     signal-desktop
-    azure-cli
     pavucontrol
     btop
     grim

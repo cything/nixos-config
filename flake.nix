@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,8 +78,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-
-    nixpkgs-garage.url = "github:cything/nixpkgs/garage-module"; # unmerged PR
 
     nvim-github-theme = {
       url = "github:projekt0n/github-nvim-theme";
@@ -158,7 +157,7 @@
               overlays = [
                 inputs.niri.overlays.niri
                 inputs.rust-overlay.overlays.default
-              ] ++ import ./overlay;
+              ] ++ (import ./overlay { inherit inputs; });
             };
           in
           {
@@ -187,14 +186,10 @@
                   modules = [
                     {
                       nixpkgs = { inherit pkgs; };
-                      disabledModules = [
-                        "services/web-servers/garage.nix"
-                      ];
                     }
                     ./hosts/chunk
                     inputs.sops-nix.nixosModules.sops
                     ./modules
-                    (inputs.nixpkgs-garage + "/nixos/modules/services/web-servers/garage.nix")
                   ];
                 };
 

@@ -935,22 +935,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-garage": {
-      "locked": {
-        "lastModified": 1736921030,
-        "narHash": "sha256-A7knAvBOwoM5X7oNdIOKvuXYtXJpuR4O8iKHIk8EwOI=",
-        "owner": "cything",
-        "repo": "nixpkgs",
-        "rev": "97f27249297bf5fbc563014ae9d4884dee27f1e0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "cything",
-        "ref": "garage-module",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -1011,6 +995,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable_4": {
+      "locked": {
+        "lastModified": 1738843498,
+        "narHash": "sha256-7x+Q4xgFj9UxZZO9aUDCR8h4vyYut4zPUvfj3i+jBHE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f5a32fa27df91dfc4b762671a0e0a859a8a0058f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-24.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1252,7 +1252,7 @@
         "niri": "niri",
         "nix-ld": "nix-ld",
         "nixpkgs": "nixpkgs_5",
-        "nixpkgs-garage": "nixpkgs-garage",
+        "nixpkgs-stable": "nixpkgs-stable_4",
         "nixvim": "nixvim",
         "nvim-github-theme": "nvim-github-theme",
         "plasma-manager": "plasma-manager",
