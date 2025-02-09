@@ -115,11 +115,13 @@
     sccache
     awscli2
     lldb
-    (cutter.withPlugins (p: with p; [
-      rz-ghidra
-      jsdec
-      sigdb
-    ]))
+    (cutter.withPlugins (
+      p: with p; [
+        rz-ghidra
+        jsdec
+        sigdb
+      ]
+    ))
     ida-free
     patchelf
     radare2

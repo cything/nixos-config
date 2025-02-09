@@ -1,4 +1,5 @@
-{ inputs }: let
+{ inputs }:
+let
   overlays = [
     ./conduwuit
     ./attic
@@ -7,9 +8,9 @@
   importedOverlays = map (m: import m) overlays;
 in
 importedOverlays
-++
-[
-  (final: prev:
+++ [
+  (
+    final: prev:
     let
       pkgFrom = flake: pkg: flake.legacyPackages.${prev.system}.${pkg};
       stable = inputs.nixpkgs-stable;
