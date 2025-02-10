@@ -11,14 +11,13 @@
       jnoortheen.nix-ide
       editorconfig.editorconfig
       github.github-vscode-theme
-      github.copilot
       rust-lang.rust-analyzer
     ];
     userSettings = {
       "workbench.colorTheme" = "GitHub Dark Default";
       "files.autoSave" = "afterDelay";
       "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nixd";
+      "nix.serverPath" = "nil";
       "editor.fontFamily" = "IBM Plex Mono";
       "editor.fontSize" = 16;
       "editor.wordWrap" = "on";

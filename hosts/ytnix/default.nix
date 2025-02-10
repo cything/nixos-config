@@ -280,10 +280,10 @@
   services.tumbler.enable = true;
 
   virtualisation = {
-    libvirtd.enable = true;
-    docker.enable = true;
+    libvirtd.enable = false;
+    docker.enable = false;
   };
-  programs.virt-manager.enable = true;
+  programs.virt-manager.enable = false;
 
   services.usbmuxd.enable = true;
   programs.nix-ld.dev = {
@@ -358,7 +358,7 @@
     ];
   };
 
-  services.ollama.enable = true;
+  services.ollama.enable = false;
 
   # wireguard setup
   networking.wg-quick.interfaces.wg0 = {
@@ -382,9 +382,9 @@
     ];
   };
 
-  services.trezord.enable = true;
+  services.trezord.enable = false;
 
-  programs.niri.enable = true;
+  programs.niri.enable = false;
   programs.niri.package = pkgs.niri-unstable;
   programs.xwayland.enable = true;
 

@@ -20,6 +20,7 @@ importedOverlays
       roundcube = pkgFrom stable "roundcube";
       lldb = pkgFrom stable "lldb";
       calibre = pkgFrom stable "calibre";
+      nil = inputs.nil.packages.${prev.system}.nil;
     }
   )
 ]

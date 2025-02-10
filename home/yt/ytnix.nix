@@ -10,7 +10,7 @@
     ../niri
     ../irssi.nix
     ../kitty.nix
-    ../vscode.nix
+    ../codium.nix
     ../plasma.nix
   ];
   home = {
@@ -127,6 +127,8 @@
     radare2
     p7zip
     qbittorrent
+    # vscodium
+    nil
   ];
 
   programs.waybar.enable = true;
