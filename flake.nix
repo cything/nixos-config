@@ -84,6 +84,12 @@
       inputs.rust-overlay.follows = "rust-overlay";
       inputs.flake-utils.follows = "flake-utils";
     };
+    vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
+    };
 
     nvim-github-theme = {
       url = "github:projekt0n/github-nvim-theme";
@@ -163,6 +169,7 @@
               overlays = [
                 inputs.niri.overlays.niri
                 inputs.rust-overlay.overlays.default
+                inputs.vscode-extensions.overlays.default
               ] ++ (import ./overlay { inherit inputs; });
             };
           in

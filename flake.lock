@@ -1285,7 +1285,8 @@
         "plasma-manager": "plasma-manager",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
-        "treefmt": "treefmt"
+        "treefmt": "treefmt",
+        "vscode-extensions": "vscode-extensions"
       }
     },
     "rust-analyzer-src": {
@@ -1392,6 +1393,32 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vscode-extensions": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1739152168,
+        "narHash": "sha256-Zv6eGe+c5f9Chyw6O3ePJ4hbscetuzZxYShwjn3ACEs=",
+        "owner": "nix-community",
+        "repo": "nix-vscode-extensions",
+        "rev": "bd6b70f681b2561f53c9522be64330c7ff9d08d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-vscode-extensions",
         "type": "github"
       }
     },

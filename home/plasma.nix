@@ -35,7 +35,12 @@
       "launch-browser" = {
         name = "launch browser";
         key = "Meta+B";
-        command = "librewolf";
+        command = "chromium";
+      };
+      "launch-fuzzel" = {
+        name = "launch-fuzzel";
+        key = "Meta+d";
+        command = "fuzzel";
       };
     };
 
