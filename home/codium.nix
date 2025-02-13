@@ -6,16 +6,17 @@
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
     mutableExtensionsDir = false;
-    extensions = (with pkgs.open-vsx; [
-      vscodevim.vim
-      jnoortheen.nix-ide
-      editorconfig.editorconfig
-      github.github-vscode-theme
-      rust-lang.rust-analyzer
-    ]) ++
-    (with pkgs.vscode-marketplace; [
-      github.codespaces
-    ]);
+    extensions =
+      (with pkgs.open-vsx; [
+        vscodevim.vim
+        jnoortheen.nix-ide
+        editorconfig.editorconfig
+        github.github-vscode-theme
+        rust-lang.rust-analyzer
+      ])
+      ++ (with pkgs.vscode-marketplace; [
+        github.codespaces
+      ]);
     userSettings = {
       "workbench.colorTheme" = "GitHub Dark Default";
       "files.autoSave" = "afterDelay";
