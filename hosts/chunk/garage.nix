@@ -8,7 +8,7 @@
       s3_api = {
         s3_region = "earth";
         api_bind_addr = "[::]:3900";
-        root_domain = ".s3.cy7.sh";
+        root_domain = "s3.cy7.sh";
       };
       s3_web = {
         bind_addr = "[::]:3902";
