@@ -72,6 +72,9 @@
     "tailscale/auth" = {
       sopsFile = ../../secrets/services/tailscale.yaml;
     };
+    "zipline/env" = {
+      sopsFile = ../../secrets/services/zipline.yaml;
+    };
   };
 
   boot = {
@@ -207,4 +210,5 @@
   environment.enableAllTerminfo = true;
 
   my.roundcube.enable = true;
+  my.zipline.enable = true;
 }
