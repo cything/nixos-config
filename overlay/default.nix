@@ -20,6 +20,7 @@ importedOverlays
       lldb = pkgFrom stable "lldb";
       calibre = pkgFrom stable "calibre";
       nil = inputs.nil.packages.${prev.system}.nil;
+      anki = pkgFrom inputs.anki "anki-bin";
     }
   )
 ]

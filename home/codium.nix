@@ -7,15 +7,15 @@
     enableExtensionUpdateCheck = false;
     mutableExtensionsDir = false;
     extensions =
+      # if unfree
+      # (with pkgs.vscode-marketplace; [
       (with pkgs.open-vsx; [
         vscodevim.vim
         jnoortheen.nix-ide
         editorconfig.editorconfig
         github.github-vscode-theme
         rust-lang.rust-analyzer
-      ])
-      ++ (with pkgs.vscode-marketplace; [
-        github.codespaces
+        shd101wyy.markdown-preview-enhanced
       ]);
     userSettings = {
       "workbench.colorTheme" = "GitHub Dark Default";

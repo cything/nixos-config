@@ -402,4 +402,9 @@
     enable = true;
     enableQt5Integration = true;
   };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 }

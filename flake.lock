@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "anki": {
+      "locked": {
+        "lastModified": 1739471491,
+        "narHash": "sha256-ZCKWgsNqKWkVOAQFaFSmK3EN/uDdamNOcSItzvooWYs=",
+        "owner": "cything",
+        "repo": "nixpkgs",
+        "rev": "1562f5286858b3c1e5ea7e60f4bf6b3578519248",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cything",
+        "repo": "nixpkgs",
+        "rev": "1562f5286858b3c1e5ea7e60f4bf6b3578519248",
+        "type": "github"
+      }
+    },
     "attic": {
       "inputs": {
         "crane": "crane",
@@ -1265,6 +1281,7 @@
     },
     "root": {
       "inputs": {
+        "anki": "anki",
         "conduwuit": "conduwuit",
         "crane": "crane_2",
         "disko": "disko",

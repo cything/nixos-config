@@ -100,6 +100,9 @@
     flake-utils.url = "github:numtide/flake-utils";
     crane.url = "github:ipetkov/crane";
     flake-compat.url = "github:edolstra/flake-compat";
+
+    # unmerged PRs
+    anki.url = "github:cything/nixpkgs/1562f5286858b3c1e5ea7e60f4bf6b3578519248";
   };
 
   nixConfig = {
