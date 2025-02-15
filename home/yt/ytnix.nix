@@ -94,7 +94,6 @@
     unzip
     lm_sensors
     sshfs
-    python312Packages.python-lsp-server
     gopls
     anki
     trezorctl
@@ -129,6 +128,18 @@
     qbittorrent
     # vscodium
     nil
+    pkg-config
+    gtk2
+    gtk2-x11
+    android-tools
+    (python313.withPackages (
+      p: with p; [
+        python-lsp-server
+        pip
+        virtualenv
+        wxpython
+      ]
+    ))
   ];
 
   programs.waybar.enable = true;

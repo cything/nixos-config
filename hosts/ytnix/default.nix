@@ -143,6 +143,7 @@
     "libvirtd"
     "docker"
     "disk"
+    "adbusers"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -329,6 +330,7 @@
       xorg.libXtst
       xorg.libxkbfile
       xorg.libxshmfence
+      python312Packages.wxpython
     ];
   };
   programs.evolution.enable = true;
@@ -407,4 +409,6 @@
     enable = true;
     binfmt = true;
   };
+
+  programs.adb.enable = true;
 }
