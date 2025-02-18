@@ -6,7 +6,7 @@
     settings = {
       data_dir = "/mnt/garage";
       s3_api = {
-        s3_region = "earth";
+        s3_region = "us-east-1";
         api_bind_addr = "[::]:3900";
         root_domain = "s3.cy7.sh";
       };

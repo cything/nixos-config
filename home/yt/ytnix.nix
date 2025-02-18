@@ -132,6 +132,9 @@
     gtk2
     gtk2-x11
     android-tools
+    frida-tools
+    mitmproxy
+    openssl
     (python313.withPackages (
       p: with p; [
         python-lsp-server
@@ -204,7 +207,7 @@
     SCCACHE_S3_USE_SSL = "true";
     SCCACHE_CACHE_MULTIARCH = "true";
     SCCACHE_LOG_LEVEL = "warn";
-    AWS_DEFAULT_REGION = "earth";
+    AWS_DEFAULT_REGION = "us-east-1";
     AWS_ENDPOINT_URL = "https://s3.cy7.sh";
     AWS_ACCESS_KEY_ID = "$(cat /run/secrets/aws/key_id)";
     AWS_SECRET_ACCESS_KEY = "$(cat /run/secrets/aws/key_secret)";

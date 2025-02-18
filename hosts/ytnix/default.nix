@@ -93,8 +93,7 @@
     };
     resolvconf.enable = true;
     firewall = {
-      allowedUDPPorts = [ 51820 ]; # for wireguard
-      trustedInterfaces = [ "wg0" ];
+      allowedTCPPorts = [ 8080 ]; # for mitmproxy
     };
   };
   programs.nm-applet.enable = true;
@@ -330,7 +329,19 @@
       xorg.libXtst
       xorg.libxkbfile
       xorg.libxshmfence
-      python312Packages.wxpython
+      xorg.libXxf86vm
+      xorg.libSM
+      gtk3
+      pango
+      gdk-pixbuf
+      glib
+      libnotify
+      SDL2
+      libpng
+      libjpeg8
+      libtiff
+      curl
+      pcre2
     ];
   };
   programs.evolution.enable = true;
@@ -411,4 +422,6 @@
   };
 
   programs.adb.enable = true;
+  services.envfs.enable = true;
+  programs.kdeconnect.enable = true;
 }

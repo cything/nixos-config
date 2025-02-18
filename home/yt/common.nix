@@ -32,11 +32,12 @@
     userName = "cy";
     userEmail = "cy@cy7.sh";
     delta = {
-      enable = true;
+      enable = false;
       options = {
         navigate = true;
       };
     };
+    difftastic.enable = true;
     extraConfig = {
       init.defaultBranch = "main";
       push.autoSetupRemote = true; # assume -u on first push
