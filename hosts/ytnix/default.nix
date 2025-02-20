@@ -178,6 +178,7 @@
     wine-wayland
     wine64
     solaar
+    gtk3
   ];
 
   environment.sessionVariables = {
@@ -280,8 +281,8 @@
   services.tumbler.enable = true;
 
   virtualisation = {
-    libvirtd.enable = false;
-    docker.enable = false;
+    libvirtd.enable = true;
+    docker.enable = true;
   };
   programs.virt-manager.enable = false;
 
@@ -342,6 +343,7 @@
       libtiff
       curl
       pcre2
+      gsettings-desktop-schemas
     ];
   };
   programs.evolution.enable = true;
@@ -424,4 +426,5 @@
   programs.adb.enable = true;
   services.envfs.enable = true;
   programs.kdeconnect.enable = true;
+  programs.dconf.enable = true;
 }

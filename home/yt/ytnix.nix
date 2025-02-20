@@ -140,16 +140,17 @@
         python-lsp-server
         pip
         virtualenv
-        wxpython
       ]
     ))
+    telegram-desktop
+    jadx
   ];
 
   programs.waybar.enable = true;
   programs.feh.enable = true;
 
   services.mako = {
-    enable = true;
+    enable = false;
     backgroundColor = "#1a1a1a";
     defaultTimeout = 5000;
     borderSize = 0;
