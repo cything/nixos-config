@@ -54,7 +54,7 @@
     };
     tmp.cleanOnBoot = true;
     # upgrade after https://github.com/tomaspinho/rtl8821ce/issues/356 is fixed
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
     ];

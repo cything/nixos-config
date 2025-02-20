@@ -15,12 +15,12 @@ importedOverlays
       stable = inputs.nixpkgs-stable;
     in
     {
-      bitwarden-cli = pkgFrom stable "bitwarden-cli";
-      roundcube = pkgFrom stable "roundcube";
-      lldb = pkgFrom stable "lldb";
-      calibre = pkgFrom stable "calibre";
-      nil = inputs.nil.packages.${prev.system}.nil;
-      anki = pkgFrom inputs.anki "anki-bin";
+      # bitwarden-cli = pkgFrom stable "bitwarden-cli";
+      # roundcube = pkgFrom stable "roundcube";
+      # lldb = pkgFrom stable "lldb";
+      # calibre = pkgFrom stable "calibre";
+      # nil = inputs.nil.packages.${prev.system}.nil;
+      # anki = pkgFrom inputs.anki "anki-bin";
     }
   )
 ]
