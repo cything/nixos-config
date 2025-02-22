@@ -12,7 +12,6 @@
       with pkgs.open-vsx; [
         vscodevim.vim
         jnoortheen.nix-ide
-        editorconfig.editorconfig
         github.github-vscode-theme
         rust-lang.rust-analyzer
         shd101wyy.markdown-preview-enhanced
