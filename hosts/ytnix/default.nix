@@ -284,7 +284,7 @@
     libvirtd.enable = true;
     docker.enable = true;
   };
-  programs.virt-manager.enable = false;
+  programs.virt-manager.enable = true;
 
   services.usbmuxd.enable = true;
   programs.nix-ld.dev = {

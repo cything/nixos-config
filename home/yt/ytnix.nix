@@ -11,7 +11,6 @@
     ../irssi.nix
     ../kitty.nix
     ../codium.nix
-    ../plasma.nix
   ];
   home = {
     username = "yt";

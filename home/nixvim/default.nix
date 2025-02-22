@@ -201,6 +201,7 @@
           installRustc = true;
           installCargo = true;
         };
+        eslint.enable = true;
       };
     };
     plugins.treesitter = {
