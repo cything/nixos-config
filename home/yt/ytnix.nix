@@ -94,7 +94,7 @@
     lm_sensors
     sshfs
     gopls
-    anki
+    anki-bin
     trezorctl
     trezor-agent
     q
@@ -143,6 +143,7 @@
     ))
     telegram-desktop
     jadx
+    gradle
   ];
 
   programs.waybar.enable = true;

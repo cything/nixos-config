@@ -1,7 +1,6 @@
 { inputs }:
 let
   overlays = [
-    ./conduwuit
     ./attic
   ];
   importedOverlays = map (m: import m) overlays;
@@ -15,12 +14,7 @@ importedOverlays
       stable = inputs.nixpkgs-stable;
     in
     {
-      # bitwarden-cli = pkgFrom stable "bitwarden-cli";
-      # roundcube = pkgFrom stable "roundcube";
-      # lldb = pkgFrom stable "lldb";
-      # calibre = pkgFrom stable "calibre";
-      # nil = inputs.nil.packages.${prev.system}.nil;
-      # anki = pkgFrom inputs.anki "anki-bin";
+      conduwuit = inputs.conduwuit.packages.x86_64-linux.static-x86_64-linux-musl-all-features-x86_64-haswell-optimised;
     }
   )
 ]

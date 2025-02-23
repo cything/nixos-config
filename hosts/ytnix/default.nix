@@ -427,4 +427,9 @@
   services.envfs.enable = true;
   programs.kdeconnect.enable = true;
   programs.dconf.enable = true;
+
+  programs.java = {
+    enable = true;
+    binfmt = true;
+  };
 }
