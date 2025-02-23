@@ -36,6 +36,12 @@
       searchUpKey = "^p";
       searchDownKey = "^n";
     };
+
+    prezto = {
+      enable = true;
+      caseSensitive = false;
+    };
+
     initExtra = ''
       # disable control+s to pause terminal
       unsetopt FLOW_CONTROL
