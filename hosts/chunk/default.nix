@@ -10,13 +10,11 @@
     ./backup.nix
     ./rclone.nix
     ./postgres.nix
-    ./wireguard.nix
     ./adguard.nix
     ./hedgedoc.nix
     ./miniflux.nix
     ./redlib.nix
     ./vaultwarden.nix
-    ./wireguard.nix
     ./grafana.nix
     ./conduwuit.nix
     ./immich.nix
@@ -47,15 +45,6 @@
     };
     "hedgedoc/env" = {
       sopsFile = ../../secrets/services/hedgedoc.yaml;
-    };
-    "wireguard/private" = {
-      sopsFile = ../../secrets/wireguard/chunk.yaml;
-    };
-    "wireguard/psk-yt" = {
-      sopsFile = ../../secrets/wireguard/chunk.yaml;
-    };
-    "wireguard/psk-phone" = {
-      sopsFile = ../../secrets/wireguard/chunk.yaml;
     };
     "miniflux/env" = {
       sopsFile = ../../secrets/services/miniflux.yaml;
@@ -100,11 +89,13 @@
     ];
     allowedUDPPorts = [
       443
-      51820
       53
       853
-    ]; # 51820 is wireguard
-    trustedInterfaces = [ "wg0" ];
+    ];
+    extraCommands = ''
+      iptables -t mangle -A OUTPUT -m cgroup --path "system.slice/tailscaled.service" -j MARK --set-mark 1
+      iptables -t mangle -A OUTPUT -m cgroup --path "system.slice/tor.service" -j MARK --set-mark 2
+    '';
   };
   networking.interfaces.ens18 = {
     ipv6.addresses = [

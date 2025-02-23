@@ -20,12 +20,6 @@
     "services/ntfy" = {
       sopsFile = ../../secrets/services/ntfy.yaml;
     };
-    "wireguard/private" = {
-      sopsFile = ../../secrets/wireguard/yt.yaml;
-    };
-    "wireguard/psk" = {
-      sopsFile = ../../secrets/wireguard/yt.yaml;
-    };
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/zh5061/yt.yaml;
     };
@@ -89,10 +83,14 @@
     networkmanager = {
       enable = true;
       dns = "none";
-      wifi.backend = "iwd";
+      wifi = {
+        backend = "iwd";
+        powersave = false;
+      };
     };
     resolvconf.enable = true;
     firewall = {
+      enable = true;
       allowedTCPPorts = [ 8080 ]; # for mitmproxy
     };
   };
@@ -105,9 +103,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     wireplumber.extraConfig.bluetoothEnhancements = {
-      "wireplumber.settings" = {
-        "bluetooth.autoswitch-to-headset-profile" = false;
-      };
+      # https://julian.pages.freedesktop.org/wireplumber/daemon/configuration/bluetooth.html#bluetooth-configuration
       "monitor.bluez.properties" = {
         "bluez5.enable-sbc-xq" = true;
         "bluez5.enable-msbc" = true;
@@ -115,6 +111,10 @@
         "bluez5.roles" = [
           "a2dp_sink"
           "a2dp_source"
+          "hsp_hs"
+          "hsp_ag"
+          "hfp_hf"
+          "hfp_ag"
         ];
       };
     };
@@ -374,28 +374,6 @@
   };
 
   services.ollama.enable = false;
-
-  # wireguard setup
-  networking.wg-quick.interfaces.wg0 = {
-    autostart = false;
-    address = [
-      "10.0.0.2/24"
-      "fdc9:281f:04d7:9ee9::2/64"
-    ];
-    privateKeyFile = config.sops.secrets."wireguard/private".path;
-    peers = [
-      {
-        publicKey = "a16/F/wP7HQIUtFywebqPSXQAktPsLgsMLH9ZfevMy0=";
-        allowedIPs = [
-          "0.0.0.0/0"
-          "::/0"
-        ];
-        endpoint = "31.59.129.225:51820";
-        persistentKeepalive = 25;
-        presharedKeyFile = config.sops.secrets."wireguard/psk".path;
-      }
-    ];
-  };
 
   services.trezord.enable = false;
 

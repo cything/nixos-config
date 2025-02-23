@@ -37,10 +37,11 @@
       searchDownKey = "^n";
     };
 
-    prezto = {
-      enable = true;
-      caseSensitive = false;
-    };
+    # prezto = {
+    #   enable = true;
+    #   caseSensitive = false;
+    #   editor.keymap = "vi";
+    # };
 
     initExtra = ''
       # disable control+s to pause terminal

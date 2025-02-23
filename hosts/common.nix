@@ -41,15 +41,30 @@
     '';
     registry.nixpkgs.flake = inputs.nixpkgs;
   };
-  time.timeZone = "America/Toronto";
-  networking.firewall.logRefusedConnections = false;
-  networking.nameservers = [
-    # quad9
-    "2620:fe::fe"
-    "2620:fe::9"
-    "9.9.9.9"
-    "149.112.112.112"
-  ];
+
+  time.timeZone = "America/New_York";
+  networking = {
+    firewall.logRefusedConnections = false;
+    nameservers = [
+      # quad9
+      "2620:fe::fe"
+      "2620:fe::9"
+      "9.9.9.9"
+      "149.112.112.112"
+    ];
+    timeServers = [
+      "ntppool1.time.nl"
+      "nts.netnod.se"
+      "ptbtime1.ptb.de"
+      "ohio.time.system76.com"
+      "time.txryan.com"
+      "time.dfm.dk"
+    ];
+  };
+  services.chrony = {
+    enable = true;
+    enableNTS = true;
+  };
 
   # this is true by default and mutually exclusive with
   # programs.nix-index
