@@ -2,6 +2,7 @@
 let
   overlays = [
     ./attic
+    ./zipline
   ];
   importedOverlays = map (m: import m) overlays;
 in
