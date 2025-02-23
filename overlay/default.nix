@@ -14,7 +14,8 @@ importedOverlays
       stable = inputs.nixpkgs-stable;
     in
     {
-      conduwuit = inputs.conduwuit.packages.x86_64-linux.static-x86_64-linux-musl-all-features-x86_64-haswell-optimised;
+      conduwuit =
+        inputs.conduwuit.packages.x86_64-linux.static-x86_64-linux-musl-all-features-x86_64-haswell-optimised;
     }
   )
 ]

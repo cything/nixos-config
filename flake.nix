@@ -208,19 +208,6 @@
                     ./modules
                   ];
                 };
-
-                titan = lib.nixosSystem {
-                  specialArgs = { inherit inputs; };
-                  modules = [
-                    {
-                      nixpkgs = { inherit pkgs; };
-                    }
-                    ./hosts/titan
-                    disko.nixosModules.disko
-                    inputs.sops-nix.nixosModules.sops
-                    ./modules
-                  ];
-                };
               };
             homeConfigurations =
               let
@@ -243,15 +230,6 @@
                   extraSpecialArgs = { inherit inputs; };
                   modules = [
                     ./home/yt/chunk.nix
-                    inputs.nixvim.homeManagerModules.nixvim
-                  ];
-                };
-
-                "codespace@codespace" = lib.homeManagerConfiguration {
-                  inherit pkgs;
-                  extraSpecialArgs = { inherit inputs; };
-                  modules = [
-                    ./home/yt/codespace.nix
                     inputs.nixvim.homeManagerModules.nixvim
                   ];
                 };
