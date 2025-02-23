@@ -153,7 +153,7 @@
     git
     python3
     wl-clipboard
-    mako
+    # mako # sway config uses this
     tree
     kitty
     borgbackup

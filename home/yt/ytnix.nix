@@ -148,22 +148,6 @@
   programs.waybar.enable = true;
   programs.feh.enable = true;
 
-  services.mako = {
-    enable = false;
-    backgroundColor = "#1a1a1a";
-    defaultTimeout = 5000;
-    borderSize = 0;
-    borderRadius = 10;
-    font = "DejaVu Sans Mono 11";
-    padding = "10";
-    textColor = "#ffffff";
-    extraConfig = ''
-      [urgency=high]
-      background-color=#c00000
-      border-color=#ff0000
-    '';
-  };
-
   xdg.configFile = {
     rofi.source = ../rofi;
     waybar.source = ../waybar;
