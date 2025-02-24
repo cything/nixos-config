@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
@@ -10,7 +11,6 @@
     ./backup.nix
     ./rclone.nix
     ./postgres.nix
-    ./adguard.nix
     ./hedgedoc.nix
     ./miniflux.nix
     ./redlib.nix
@@ -92,9 +92,28 @@
       53
       853
     ];
-    extraCommands = ''
+    extraCommands =
+      let
+        ethtool = lib.getExe pkgs.ethtool;
+        tc = lib.getExe' pkgs.iproute2 "tc";
+      in ''
+      # disable TCP segmentation offload (https://wiki.archlinux.org/title/Advanced_traffic_control#Prerequisites)
+      ${ethtool} -K ens18 tso off
+
+      # clear existing rules
+      ${tc} qdisc del dev ens18 root || true
+
+      # create HTB hierarchy
+      ${tc} qdisc add dev ens18 root handle 1: htb default 20
+      ${tc} class add dev ens18 parent 1: classid 1:1 htb rate 100% ceil 100%
+      ${tc} class add dev ens18 parent 1:1 classid 1:10 htb rate 40% ceil 100%
+      ${tc} class add dev ens18 parent 1:1 classid 1:20 htb rate 60% ceil 100%
+
+      # mark traffic
       iptables -t mangle -A OUTPUT -m cgroup --path "system.slice/tailscaled.service" -j MARK --set-mark 1
-      iptables -t mangle -A OUTPUT -m cgroup --path "system.slice/tor.service" -j MARK --set-mark 2
+
+      # route marked packets
+      ${tc} filter add dev ens18 parent 1: protocol ip prio 1 handle 1 fw flowid 1:10
     '';
   };
   networking.interfaces.ens18 = {

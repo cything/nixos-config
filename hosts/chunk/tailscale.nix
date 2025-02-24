@@ -7,6 +7,9 @@
       "--advertise-exit-node"
       "--accept-dns=false"
     ];
+    extraDaemonFlags = [
+      "--no-logs-no-support"
+    ];
     useRoutingFeatures = "server";
     openFirewall = true;
   };

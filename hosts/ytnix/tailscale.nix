@@ -6,8 +6,13 @@
     openFirewall = true;
     useRoutingFeatures = "client";
     extraUpFlags = [
-      "--exit-node=100.122.132.30"
+      "--exit-node=chunk"
       "--accept-dns=false"
+      "--operator=yt"
+      "--exit-node-allow-lan-access"
+    ];
+    extraDaemonFlags = [
+      "--no-logs-no-support"
     ];
   };
 }

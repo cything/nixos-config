@@ -144,6 +144,9 @@
     telegram-desktop
     jadx
     gradle
+    localsend
+    scrcpy
+    syncthing
   ];
 
   programs.waybar.enable = true;

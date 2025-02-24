@@ -91,7 +91,10 @@
     resolvconf.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 8080 ]; # for mitmproxy
+      allowedTCPPorts = [
+        8080  # mitmproxy
+        22000 # syncthing
+      ];
     };
   };
   programs.nm-applet.enable = true;
@@ -223,6 +226,7 @@
       "/home/yt/.local/share/Steam"
       "**/.wine"
       "/home/yt/Games"
+      "/home/yt/Videos"
     ];
     repo = "yt";
     passFile = config.sops.secrets."borg/rsyncnet".path;
