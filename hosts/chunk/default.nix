@@ -31,9 +31,6 @@
     "borg/rsyncnet" = {
       sopsFile = ../../secrets/borg/chunk.yaml;
     };
-    "services/ntfy" = {
-      sopsFile = ../../secrets/services/ntfy.yaml;
-    };
     "rclone/config" = {
       sopsFile = ../../secrets/rclone.yaml;
     };

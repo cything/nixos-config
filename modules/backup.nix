@@ -6,7 +6,6 @@
 }:
 let
   cfg = config.my.backup;
-  hostname = config.networking.hostName;
   defaultPaths = [
     "/root"
     "/home"
@@ -97,23 +96,6 @@ in
       ];
       # warnings are often not that serious
       failOnWarnings = false;
-      postHook = ''
-        invocationId=$(systemctl show -p InvocationID --value borgbackup-job-${cfg.jobName}.service)
-        title="${hostname}: backup completed with exit code: $exitStatus"
-        msg=$(journalctl -o cat _SYSTEMD_INVOCATION_ID=$invocationId)
-
-        if [ "$exitStatus" -eq 0 ]; then
-          tag="v"
-        else
-          tag="rotating_light"
-        fi
-
-        ${pkgs.curl}/bin/curl -sL -u $(cat ${config.sops.secrets."services/ntfy".path}) \
-        -H "Title: $title" \
-        -H "Tags: $tag" \
-        -d "$msg" \
-        https://ntfy.cything.io/backups > /dev/null
-      '';
 
       prune.keep = {
         within = "2d";

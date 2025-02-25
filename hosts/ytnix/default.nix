@@ -17,9 +17,6 @@
     "borg/rsyncnet" = {
       sopsFile = ../../secrets/borg/yt.yaml;
     };
-    "services/ntfy" = {
-      sopsFile = ../../secrets/services/ntfy.yaml;
-    };
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/zh5061/yt.yaml;
     };
