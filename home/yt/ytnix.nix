@@ -19,30 +19,6 @@
   };
   programs.home-manager.enable = true;
 
-  systemd.user.startServices = "sd-switch";
-
-  # keep this commented when using plasma
-  # otherwise "system settings" in KDE will not function
-  # qt = {
-  #   enable = true;
-  #   platformTheme.name = "kde";
-  #   style.name = "breeze-dark";
-  #   style.package = pkgs.kdePackages.breeze;
-  # };
-
-  # this one too
-  # gtk = {
-  #   enable = true;
-  #   theme = {
-  #     package = pkgs.adw-gtk3;
-  #     name = "adw-gtk3-dark";
-  #   };
-  #   iconTheme = {
-  #     package = pkgs.adwaita-icon-theme;
-  #     name = "Adwaita";
-  #   };
-  # };
-
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
@@ -56,7 +32,6 @@
     ungoogled-chromium
     librewolf
     bitwarden-desktop
-    bitwarden-cli
     fastfetch
     nwg-look
     kdePackages.gwenview
@@ -67,11 +42,6 @@
     signal-desktop
     pavucontrol
     btop
-    grim
-    slurp
-    rofi-wayland
-    rofimoji
-    cliphist
     jq
     bash-language-server
     sqlite
@@ -88,7 +58,6 @@
     pwgen
     lua-language-server
     gnumake
-    foot
     minisign
     unzip
     lm_sensors
@@ -125,7 +94,6 @@
     radare2
     p7zip
     qbittorrent
-    # vscodium
     nil
     pkg-config
     gtk2
@@ -147,26 +115,14 @@
     localsend
     scrcpy
     syncthing
+    syncthingtray
     obsidian
   ];
 
-  programs.waybar.enable = true;
   programs.feh.enable = true;
 
   xdg.configFile = {
-    rofi.source = ../rofi;
-    waybar.source = ../waybar;
     mpv.source = ../mpv;
-  };
-
-  programs.newsboat = {
-    enable = true;
-    extraConfig = ''
-      urls-source "miniflux"
-      miniflux-url "https://rss.cything.io/"
-      miniflux-login "cy"
-      miniflux-passwordfile /run/secrets/newsboat/miniflux
-    '';
   };
 
   programs.direnv = {

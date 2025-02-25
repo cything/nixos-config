@@ -20,10 +20,6 @@
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/zh5061/yt.yaml;
     };
-    "newsboat/miniflux" = {
-      sopsFile = ../../secrets/newsboat.yaml;
-      owner = "yt";
-    };
     "tailscale/auth" = {
       sopsFile = ../../secrets/services/tailscale.yaml;
     };
