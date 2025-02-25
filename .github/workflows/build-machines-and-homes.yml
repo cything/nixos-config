@@ -10,7 +10,6 @@ jobs:
         machine:
           - chunk
           - ytnix
-          - titan
         os:
           - ubuntu-latest
     runs-on: ${{ matrix.os }}
