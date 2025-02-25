@@ -16,6 +16,9 @@ final: prev: {
             cargoLock = null;
             cargoHash = "sha256-AbpWnYfBMrR6oOfy2LkQvIPYsClCWE89bJav+iHTtLM=";
             useFetchCargoVendor = true;
+            patches = [
+              ./concurrent-32.patch
+            ];
           }
         );
     };

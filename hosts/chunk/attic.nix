@@ -7,32 +7,26 @@
 
     settings = {
       listen = "[::]:8090";
-      api-endpoint = "https://cache.cything.io/";
-      allowed-hosts = [ "cache.cything.io" ];
+      api-endpoint = "https://cache.cy7.sh/";
+      allowed-hosts = [ "cache.cy7.sh" ];
       require-proof-of-possession = false;
       compression.type = "zstd";
       database.url = "postgresql:///atticd?host=/run/postgresql";
 
       storage = {
-        type = "local";
-        path = "/mnt/attic";
+        type = "s3";
+        region = "auto";
+        bucket = "attic";
+        endpoint = "https://e3e97aac307d106a7becea43cef8fcbd.r2.cloudflarestorage.com";
       };
 
       garbage-collection = {
-        default-retention-period = "3 months";
-      };
-
-      chunking = {
-        nar-size-threshold = 0; # disables chunking
-        min-size = 0;
-        avg-size = 0;
-        max-size = 0;
-        concurrent-chunk-uploads = 32;
+        default-retention-period = "2 weeks";
       };
     };
   };
 
-  services.caddy.virtualHosts."cache.cything.io".extraConfig = ''
+  services.caddy.virtualHosts."cache.cy7.sh".extraConfig = ''
     import common
     reverse_proxy localhost:8090
   '';
