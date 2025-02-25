@@ -92,7 +92,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        8080  # mitmproxy
+        8080 # mitmproxy
         22000 # syncthing
       ];
     };

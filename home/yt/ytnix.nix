@@ -147,6 +147,7 @@
     localsend
     scrcpy
     syncthing
+    obsidian
   ];
 
   programs.waybar.enable = true;
@@ -189,12 +190,12 @@
     # sccache stuff
     RUSTC_WRAPPER = "${lib.getExe pkgs.sccache}";
     SCCACHE_BUCKET = "sccache";
-    SCCACHE_REGION = "earth";
+    SCCACHE_REGION = "us-east-1";
     SCCACHE_ENDPOINT = "https://sccache.s3.cy7.sh";
     SCCACHE_ALLOW_CORE_DUMPS = "true";
     SCCACHE_S3_USE_SSL = "true";
     SCCACHE_CACHE_MULTIARCH = "true";
-    SCCACHE_LOG_LEVEL = "warn";
+    SCCACHE_LOG = "warn";
     AWS_DEFAULT_REGION = "us-east-1";
     AWS_ENDPOINT_URL = "https://s3.cy7.sh";
     AWS_ACCESS_KEY_ID = "$(cat /run/secrets/aws/key_id)";
