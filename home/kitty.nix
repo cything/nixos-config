@@ -47,13 +47,16 @@
       "ctrl+alt+s" = "goto_layout stack";
       "kitty_mod+enter" = "new_window_with_cwd";
       "kitty_mod+r" = "resize_window";
+      # this closes the *current* window, not the *OS* window
+      # https://sw.kovidgoyal.net/kitty/overview/#tabs-and-windows
+      "kitty_mod+w" = "close_window";
 
       # tabs
       "kitty_mod+n" = "next_tab";
       "kitty_mod+p" = "previous_tab";
       "kitty_mod+alt+n" = "move_tab_forward";
       "kitty_mod+alt+p" = "move_tab_backward";
-      "kitty_mod+w" = "close_tab";
+      "kitty_mod+q" = "close_tab";
       "kitty_mod+t" = "new_tab_with_cwd";
       "ctrl+f2" = "detach_tab";
 
