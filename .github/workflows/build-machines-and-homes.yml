@@ -41,12 +41,6 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           useDaemon: false
           installCommand: nix profile install nixpkgs#cachix
-      - name: Setup Attic cache
-        uses: ryanccn/attic-action@v0
-        with:
-          endpoint: ${{ vars.ATTIC_ENDPOINT }}
-          cache: ${{ vars.ATTIC_CACHE }}
-          token: ${{ secrets.ATTIC_TOKEN }}
       - name: Restore and cache Nix store
         uses: nix-community/cache-nix-action@v5.1.0
         with:
@@ -99,12 +93,6 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           useDaemon: false
           installCommand: nix profile install nixpkgs#cachix
-      - name: Setup Attic cache
-        uses: ryanccn/attic-action@v0
-        with:
-          endpoint: ${{ vars.ATTIC_ENDPOINT }}
-          cache: ${{ vars.ATTIC_CACHE }}
-          token: ${{ secrets.ATTIC_TOKEN }}
       - name: Restore and cache Nix store
         uses: nix-community/cache-nix-action@v5.1.0
         with:
