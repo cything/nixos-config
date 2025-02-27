@@ -54,7 +54,7 @@
     yarn
     rclone
     go
-    rustup
+    (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default))
     pwgen
     lua-language-server
     gnumake

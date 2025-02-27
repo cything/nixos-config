@@ -66,6 +66,7 @@
     };
   };
   programs.ripgrep.enable = true;
-  programs.man.generateCaches = true;
+  # programs.man.generateCaches = true; # slows down eval
   programs.fd.enable = true;
+  news.display = "silent";
 }

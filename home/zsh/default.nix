@@ -51,6 +51,7 @@
       bindkey -M viins "^E" end-of-line
       bindkey -M viins "^A" beginning-of-line
       bindkey -M viins "^B" backward-char
+      bindkey -M viins "^F" forward-char
 
       # accept one word completion
       bindkey -M viins "^S" forward-word
@@ -111,6 +112,7 @@
       "grv" = "git remote --verbose";
       "gs" = "git status --short";
       "gss" = "git status";
+      "code" = "codium";
     };
   };
 
