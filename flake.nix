@@ -32,9 +32,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.home-manager.follows = "home-manager";
-      inputs.treefmt-nix.follows = "treefmt";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -104,15 +101,12 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://cache.cy7.sh/central"
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
       "https://cache.garnix.io"
       "https://cything.cachix.org"
-      "https://aseipp-nix-cache.global.ssl.fastly.net"
     ];
     extra-trusted-public-keys = [
-      "central:KNxL0JFzHDGosui8ASem9n/tDmEAYLL9dtVMJ6TWsyg="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="

@@ -19,7 +19,6 @@
     ./conduwuit.nix
     ./immich.nix
     ./element.nix
-    ./attic.nix
     ./forgejo.nix
     ./garage.nix
     ./tailscale.nix
