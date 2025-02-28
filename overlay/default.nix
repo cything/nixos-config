@@ -17,6 +17,7 @@ importedOverlays
     {
       conduwuit =
         inputs.conduwuit.packages.x86_64-linux.static-x86_64-linux-musl-all-features-x86_64-haswell-optimised;
+      ungoogled-chromium = pkgFrom inputs.nixpkgs-master "ungoogled-chromium";
     }
   )
 ]
