@@ -232,9 +232,9 @@
     snapshotOnly = true;
     settings = {
       snapshot_preserve_min = "latest";
-      target_preserve = "*d";
-      target_preserve_min = "no";
-      target = "/mnt/external/btr_backup/ytnix";
+      target_preserve = "30d";
+      target_preserve_min = "2d";
+      target = "/mnt/target/btr_backup/ytnix";
       stream_compress = "zstd";
       stream_compress_level = "8";
       snapshot_dir = "/snapshots";

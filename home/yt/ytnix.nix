@@ -54,7 +54,9 @@
     yarn
     rclone
     go
-    (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default))
+    (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
+      extensions = [ "rust-src" ];
+    }))
     pwgen
     lua-language-server
     gnumake

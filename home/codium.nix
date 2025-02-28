@@ -29,7 +29,7 @@
         "editor.fontSize" = 15;
         "window.zoomLevel" = 0.5;
 
-        # vim mode settings
+        # vim stuff
         "vim.leader" = ",";
         "vim.normalModeKeyBindings" = [
           {
@@ -64,6 +64,20 @@
           {
             "before" = [ "<leader>" "f" "t"];
             "commands" = [ "find-it-faster.findWithinFilesWithType"];
+          }
+          # "gd" for definitions is by default
+          {
+            "before" = [ "g" "r" ];
+            "commands" = [ "editor.action.goToReferences" ];
+          }
+          # the default is weird when you need to go back within a file
+          {
+            "before" = [ "C-o" ];
+            "commands" = [ "workbench.action.navigateBack" ];
+          }
+          {
+            "before" = [ "C-i" ];
+            "commands" = [ "workbench.action.navigateForward" ];
           }
         ];
         "vim.insertModeKeyBindings" = [
@@ -103,6 +117,9 @@
         # don't let the workbench handle terminal keys like ctrl+n and friends
 	      "terminal.integrated.sendKeybindingsToShell" = true;
         "terminal.integrated.allowChords" = false;
+
+	      "security.promptForLocalFileProtocolHandling" = false;
+	      "security.promptForRemoteFileProtocolHandling" = false;
       };
     };
   };
