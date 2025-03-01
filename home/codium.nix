@@ -19,6 +19,7 @@
           fwcd.kotlin
           alefragnani.bookmarks
           tomrijndorp.find-it-faster
+          streetsidesoftware.code-spell-checker
         ];
       userSettings = {
         "workbench.colorTheme" = "GitHub Dark Default";
@@ -120,6 +121,10 @@
 
 	      "security.promptForLocalFileProtocolHandling" = false;
 	      "security.promptForRemoteFileProtocolHandling" = false;
+        "markdown-preview-enhanced.previewTheme" = "github-dark.css";
+	      "editor.minimap.enabled" = false;
+        "explorer.confirmDelete" = false;
+        "explorer.confirmDragAndDrop" = false;
       };
     };
   };
