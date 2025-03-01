@@ -54,9 +54,12 @@
     yarn
     rclone
     go
-    (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
-      extensions = [ "rust-src" ];
-    }))
+    (rust-bin.selectLatestNightlyWith (
+      toolchain:
+      toolchain.default.override {
+        extensions = [ "rust-src" ];
+      }
+    ))
     pwgen
     lua-language-server
     gnumake
@@ -159,4 +162,6 @@
     AWS_ACCESS_KEY_ID = "$(cat /run/secrets/aws/key_id)";
     AWS_SECRET_ACCESS_KEY = "$(cat /run/secrets/aws/key_secret)";
   };
+
+  programs.nix-index-database.comma.enable = true;
 }

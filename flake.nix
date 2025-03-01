@@ -87,6 +87,10 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nvim-github-theme = {
       url = "github:projekt0n/github-nvim-theme";
@@ -213,6 +217,7 @@
                     inputs.nixvim.homeManagerModules.nixvim
                     inputs.niri.homeModules.config
                     inputs.plasma-manager.homeManagerModules.plasma-manager
+                    inputs.nix-index-database.hmModules.nix-index
                   ];
                 };
 

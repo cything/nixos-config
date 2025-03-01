@@ -24,11 +24,39 @@
       userSettings = {
         "workbench.colorTheme" = "GitHub Dark Default";
         "files.autoSave" = "onFocusChange";
-        "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nil";
         "editor.fontFamily" = "IBM Plex Mono";
         "editor.fontSize" = 15;
         "window.zoomLevel" = 0.5;
+        "security.promptForLocalFileProtocolHandling" = false;
+        "security.promptForRemoteFileProtocolHandling" = false;
+        "markdown-preview-enhanced.previewTheme" = "github-dark.css";
+        "editor.minimap.enabled" = false;
+        "explorer.confirmDelete" = false;
+        "explorer.confirmDragAndDrop" = false;
+        "editor.acceptSuggestionOnEnter" = "off";
+        "editor.acceptSuggestionOnCommitCharacter" = false;
+        "workbench.startupEditor" = "none";
+        "git.openRepositoryInParentFolders" = "never";
+
+        # terminal stuff
+        "terminal.integrated.cursorBlinking" = true;
+        "terminal.integrated.cursorStyle" = "line";
+        "terminal.integrated.customGlyphs" = false;
+        "terminal.integrated.env.linux" = {
+          # https://github.com/tomrijndorp/vscode-finditfaster/issues/112#issuecomment-2475227546
+          FZF_DEFAULT_OPTS = "--bind ctrl-n:down,ctrl-p:up";
+        };
+        # don't let the workbench handle terminal keys like ctrl+n and friends
+        "terminal.integrated.sendKeybindingsToShell" = true;
+        "terminal.integrated.allowChords" = false;
+
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nil";
+
+        "cSpell.enabledFileTypes" = {
+          "markdown" = true;
+          "*" = false;
+        };
 
         # vim stuff
         "vim.leader" = ",";
@@ -39,36 +67,63 @@
             "silent" = true;
           }
           {
-            "before" = [ "<leader>" "m" ];
+            "before" = [
+              "<leader>"
+              "m"
+            ];
             "commands" = [ "bookmarks.toggle" ];
           }
           {
-            "before" = [ "<leader>" "l" ];
+            "before" = [
+              "<leader>"
+              "l"
+            ];
             "commands" = [ "bookmarks.toggleLabeled" ];
           }
           {
-            "before" = [ "<leader>" "b" ];
+            "before" = [
+              "<leader>"
+              "b"
+            ];
             "commands" = [ "bookmarks.list" ];
           }
           {
-            "before" = [ "<leader>" "s" ];
+            "before" = [
+              "<leader>"
+              "s"
+            ];
             "commands" = [ "workbench.action.toggleSidebarVisibility" ];
           }
           {
-            "before" = [ "<leader>" "f" "f" ];
+            "before" = [
+              "<leader>"
+              "f"
+              "f"
+            ];
             "commands" = [ "find-it-faster.findFiles" ];
           }
           {
-            "before" = [ "<leader>" "f" "g"];
-            "commands" = [ "find-it-faster.findWithinFiles"];
+            "before" = [
+              "<leader>"
+              "f"
+              "g"
+            ];
+            "commands" = [ "find-it-faster.findWithinFiles" ];
           }
           {
-            "before" = [ "<leader>" "f" "t"];
-            "commands" = [ "find-it-faster.findWithinFilesWithType"];
+            "before" = [
+              "<leader>"
+              "f"
+              "t"
+            ];
+            "commands" = [ "find-it-faster.findWithinFilesWithType" ];
           }
           # "gd" for definitions is by default
           {
-            "before" = [ "g" "r" ];
+            "before" = [
+              "g"
+              "r"
+            ];
             "commands" = [ "editor.action.goToReferences" ];
           }
           # the default is weird when you need to go back within a file
@@ -84,7 +139,7 @@
         "vim.insertModeKeyBindings" = [
           {
             "before" = [ "C-a" ];
-            "commands"  = [ "cursorHome" ];
+            "commands" = [ "cursorHome" ];
           }
           {
             "before" = [ "C-e" ];
@@ -104,27 +159,6 @@
         "extensions.experimental.affinity" = {
           "vscodevim.vim" = 1;
         };
-        "workbench.startupEditor" = "none";
-        "git.openRepositoryInParentFolders" = "never";
-        
-        # terminal stuff
-        "terminal.integrated.cursorBlinking" = true;
-        "terminal.integrated.cursorStyle" = "line";
-        "terminal.integrated.customGlyphs" = false;
-        "terminal.integrated.env.linux" = {
-          # https://github.com/tomrijndorp/vscode-finditfaster/issues/112#issuecomment-2475227546
-          FZF_DEFAULT_OPTS = "--bind ctrl-n:down,ctrl-p:up";
-        };
-        # don't let the workbench handle terminal keys like ctrl+n and friends
-	      "terminal.integrated.sendKeybindingsToShell" = true;
-        "terminal.integrated.allowChords" = false;
-
-	      "security.promptForLocalFileProtocolHandling" = false;
-	      "security.promptForRemoteFileProtocolHandling" = false;
-        "markdown-preview-enhanced.previewTheme" = "github-dark.css";
-	      "editor.minimap.enabled" = false;
-        "explorer.confirmDelete" = false;
-        "explorer.confirmDragAndDrop" = false;
       };
     };
   };
