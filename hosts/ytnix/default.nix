@@ -163,6 +163,8 @@
     sshfs
     openssl
     just
+    killall
+    lshw
   ];
 
   environment.sessionVariables = {

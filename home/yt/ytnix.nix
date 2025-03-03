@@ -92,9 +92,14 @@
       syncthing
       syncthingtray
       (with llvmPackages; [
-        clang
-        clang-tools
+        clangUseLLVM
+        libcxxClang
+        stdenv
+        libcxx
+        libcxxStdenv
+        compiler-rt
       ])
+      nix-output-monitor
     ];
 
   programs.feh.enable = true;
