@@ -16,10 +16,6 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    disko = {
-      url = "github:nix-community/disko/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,11 +32,6 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -69,11 +60,6 @@
     nix-ld = {
       url = "github:nix-community/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
     nil = {
       url = "github:oxalica/nil";
@@ -105,13 +91,11 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://niri.cachix.org"
       "https://nix-community.cachix.org"
       "https://cache.garnix.io"
       "https://cything.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "cything.cachix.org-1:xqW1W5NNL+wrM9wfSELb0MLj/harD2ZyB4HbdaMyvPI="
@@ -124,7 +108,6 @@
       self,
       nixpkgs,
       home-manager,
-      disko,
       flake-parts,
       ...
     }@inputs:
@@ -165,7 +148,6 @@
               config.allowUnfree = true;
               system = "x86_64-linux";
               overlays = [
-                inputs.niri.overlays.niri
                 inputs.rust-overlay.overlays.default
                 inputs.vscode-extensions.overlays.default
               ] ++ (import ./overlay { inherit inputs; });
@@ -184,10 +166,9 @@
                       nixpkgs = { inherit pkgs; };
                     }
                     ./hosts/ytnix
-                    inputs.sops-nix.nixosModules.sops
                     ./modules
+                    inputs.sops-nix.nixosModules.sops
                     inputs.lanzaboote.nixosModules.lanzaboote
-                    inputs.niri.nixosModules.niri
                     inputs.lix-module.nixosModules.default
                     inputs.nix-ld.nixosModules.nix-ld
                   ];
@@ -199,8 +180,9 @@
                       nixpkgs = { inherit pkgs; };
                     }
                     ./hosts/chunk
-                    inputs.sops-nix.nixosModules.sops
                     ./modules
+                    inputs.sops-nix.nixosModules.sops
+                    inputs.lix-module.nixosModules.default
                   ];
                 };
               };
@@ -215,8 +197,6 @@
                   modules = [
                     ./home/yt/ytnix.nix
                     inputs.nixvim.homeManagerModules.nixvim
-                    inputs.niri.homeModules.config
-                    inputs.plasma-manager.homeManagerModules.plasma-manager
                     inputs.nix-index-database.hmModules.nix-index
                   ];
                 };
