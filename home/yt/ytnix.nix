@@ -6,8 +6,6 @@
 {
   imports = [
     ./common.nix
-    ../foot.nix
-    ../niri
     ../irssi.nix
     ../kitty.nix
     ../codium.nix
@@ -27,102 +25,77 @@
     x11.enable = true;
   };
 
-  home.packages = with pkgs; [
-    firefox
-    ungoogled-chromium
-    librewolf
-    bitwarden-desktop
-    fastfetch
-    nwg-look
-    kdePackages.gwenview
-    kdePackages.okular
-    kdePackages.qtwayland
-    mpv
-    yt-dlp
-    signal-desktop
-    pavucontrol
-    btop
-    jq
-    bash-language-server
-    sqlite
-    usbutils
-    clang-tools
-    calibre
-    tor-browser
-    wtype
-    bat
-    yarn
-    rclone
-    go
-    (rust-bin.selectLatestNightlyWith (
-      toolchain:
-      toolchain.default.override {
-        extensions = [ "rust-src" ];
-      }
-    ))
-    pwgen
-    lua-language-server
-    gnumake
-    minisign
-    unzip
-    lm_sensors
-    sshfs
-    gopls
-    anki-bin
-    trezorctl
-    trezor-agent
-    q
-    opentofu
-    terraform-ls
-    gdb
-    clang
-    seahorse
-    github-cli
-    fuzzel
-    nixpkgs-review
-    just
-    hugo
-    ghidra
-    sequoia
-    sccache
-    awscli2
-    lldb
-    (cutter.withPlugins (
-      p: with p; [
-        rz-ghidra
-        jsdec
-        sigdb
-      ]
-    ))
-    ida-free
-    patchelf
-    radare2
-    p7zip
-    qbittorrent
-    nil
-    pkg-config
-    gtk2
-    gtk2-x11
-    android-tools
-    frida-tools
-    mitmproxy
-    openssl
-    (python313.withPackages (
-      p: with p; [
-        python-lsp-server
-        pip
-        virtualenv
-      ]
-    ))
-    telegram-desktop
-    jadx
-    gradle
-    localsend
-    scrcpy
-    syncthing
-    syncthingtray
-    obsidian
-  ];
+  home.packages =
+    with pkgs;
+    lib.flatten [
+      ungoogled-chromium
+      librewolf
+      bitwarden-desktop
+      fastfetch
+      (with kdePackages; [
+        gwenview
+        okular
+      ])
+      mpv
+      signal-desktop
+      btop
+      jq
+      sqlite
+      usbutils
+      calibre
+      tor-browser
+      wtype
+      bat
+      rclone
+      go
+      (rust-bin.selectLatestNightlyWith (
+        toolchain:
+        toolchain.default.override {
+          extensions = [ "rust-src" ];
+        }
+      ))
+      pwgen
+      gnumake
+      unzip
+      anki-bin
+      trezorctl
+      trezor-agent
+      q
+      gdb
+      fuzzel
+      hugo
+      ghidra
+      sccache
+      awscli2
+      (cutter.withPlugins (
+        p: with p; [
+          rz-ghidra
+          jsdec
+          sigdb
+        ]
+      ))
+      p7zip
+      qbittorrent
+      nil
+      android-tools
+      frida-tools
+      mitmproxy
+      (python313.withPackages (
+        p: with p; [
+          python-lsp-server
+          pip
+          virtualenv
+        ]
+      ))
+      jadx
+      scrcpy
+      syncthing
+      syncthingtray
+      (with llvmPackages; [
+        clang
+        clang-tools
+      ])
+    ];
 
   programs.feh.enable = true;
 
@@ -137,11 +110,10 @@
 
   programs.git.extraConfig = {
     user = {
-      signingKey = "~/.ssh/id.key";
+      signingKey = "~/.ssh/id_ed25519";
     };
     gpg.format = "ssh";
     commit.gpgsign = true;
-    core.sshCommand = "ssh -i ~/.ssh/id.key";
   };
 
   home.sessionVariables = {
@@ -161,6 +133,9 @@
     AWS_ENDPOINT_URL = "https://e3e97aac307d106a7becea43cef8fcbd.r2.cloudflarestorage.com";
     AWS_ACCESS_KEY_ID = "$(cat /run/secrets/aws/key_id)";
     AWS_SECRET_ACCESS_KEY = "$(cat /run/secrets/aws/key_secret)";
+
+    # bitwarden ssh agent
+    SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
   };
 
   programs.nix-index-database.comma.enable = true;

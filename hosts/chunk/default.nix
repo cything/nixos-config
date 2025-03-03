@@ -71,81 +71,74 @@
   system.stateVersion = "24.05";
 
   # network stuff
+  networking = {
+    hostName = "chunk";
+    networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        22
+        80
+        443
+      ];
+      allowedUDPPorts = [
+        443
+        53
+        853
+      ];
+      extraCommands =
+        let
+          ethtool = lib.getExe pkgs.ethtool;
+          tc = lib.getExe' pkgs.iproute2 "tc";
+        in
+        ''
+          # disable TCP segmentation offload (https://wiki.archlinux.org/title/Advanced_traffic_control#Prerequisites)
+          ${ethtool} -K ens18 tso off
 
-  networking.hostName = "chunk";
-  networking.networkmanager.enable = true;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      22
-      80
-      443
-      53
-      853
-    ];
-    allowedUDPPorts = [
-      443
-      53
-      853
-    ];
-    extraCommands =
-      let
-        ethtool = lib.getExe pkgs.ethtool;
-        tc = lib.getExe' pkgs.iproute2 "tc";
-      in
-      ''
-        # disable TCP segmentation offload (https://wiki.archlinux.org/title/Advanced_traffic_control#Prerequisites)
-        ${ethtool} -K ens18 tso off
+          # clear existing rules
+          ${tc} qdisc del dev ens18 root || true
 
-        # clear existing rules
-        ${tc} qdisc del dev ens18 root || true
+          # create HTB hierarchy
+          ${tc} qdisc add dev ens18 root handle 1: htb default 30
+          ${tc} class add dev ens18 parent 1: classid 1:1 htb rate 100% ceil 100%
+          # tailscale
+          ${tc} class add dev ens18 parent 1:1 classid 1:10 htb rate 30% ceil 100%
+          # caddy
+          ${tc} class add dev ens18 parent 1:1 classid 1:20 htb rate 30% ceil 100%
+          # rest
+          ${tc} class add dev ens18 parent 1:1 classid 1:30 htb rate 40% ceil 100%
 
-        # create HTB hierarchy
-        ${tc} qdisc add dev ens18 root handle 1: htb default 30
-        ${tc} class add dev ens18 parent 1: classid 1:1 htb rate 100% ceil 100%
-        # tailscale
-        ${tc} class add dev ens18 parent 1:1 classid 1:10 htb rate 30% ceil 100%
-        # caddy
-        ${tc} class add dev ens18 parent 1:1 classid 1:20 htb rate 30% ceil 100%
-        # rest
-        ${tc} class add dev ens18 parent 1:1 classid 1:30 htb rate 40% ceil 100%
+          # mark traffic
+          iptables -t mangle -A OUTPUT -m cgroup --path "system.slice/tailscaled.service" -j MARK --set-mark 1
+          iptables -t mangle -A OUTPUT -m cgroup --path "system.slice/caddy.service" -j MARK --set-mark 2
 
-        # mark traffic
-        iptables -t mangle -A OUTPUT -m cgroup --path "system.slice/tailscaled.service" -j MARK --set-mark 1
-        iptables -t mangle -A OUTPUT -m cgroup --path "system.slice/caddy.service" -j MARK --set-mark 2
-
-        # route marked packets
-        ${tc} filter add dev ens18 parent 1: protocol ip prio 1 handle 1 fw flowid 1:10
-        ${tc} filter add dev ens18 parent 1: protocol ip prio 1 handle 2 fw flowid 1:20
-      '';
-  };
-  networking.interfaces.ens18 = {
-    ipv6.addresses = [
-      {
-        address = "2a0f:85c1:840:2bfb::1";
-        prefixLength = 64;
-      }
-    ];
-    ipv4.addresses = [
-      {
-        address = "31.59.129.225";
-        prefixLength = 24;
-      }
-    ];
-  };
-  networking.defaultGateway6 = {
-    address = "2a0f:85c1:840::1";
-    interface = "ens18";
-  };
-  networking.defaultGateway = {
-    address = "31.59.129.1";
-    interface = "ens18";
-  };
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    useXkbConfig = true;
+          # route marked packets
+          ${tc} filter add dev ens18 parent 1: protocol ip prio 1 handle 1 fw flowid 1:10
+          ${tc} filter add dev ens18 parent 1: protocol ip prio 1 handle 2 fw flowid 1:20
+        '';
+    };
+    interfaces.ens18 = {
+      ipv6.addresses = [
+        {
+          address = "2a0f:85c1:840:2bfb::1";
+          prefixLength = 64;
+        }
+      ];
+      ipv4.addresses = [
+        {
+          address = "31.59.129.225";
+          prefixLength = 24;
+        }
+      ];
+    };
+    defaultGateway6 = {
+      address = "2a0f:85c1:840::1";
+      interface = "ens18";
+    };
+    defaultGateway = {
+      address = "31.59.129.1";
+      interface = "ens18";
+    };
   };
 
   users.users.yt = {
@@ -179,7 +172,6 @@
     tmux
     file
     sops
-    attic-server
   ];
 
   environment.variables = {
@@ -199,28 +191,9 @@
   programs.git.enable = true;
 
   my.caddy.enable = true;
-  services.caddy.virtualHosts."cy7.sh" = {
-    serverAliases = [ "www.cy7.sh" ];
-    extraConfig = ''
-      import common
-      redir https://cything.io temporary
-    '';
-  };
 
   # container stuff
-  virtualisation.containers.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    # create 'docker' alias for podman, to use as
-    # drop-in replacement
-    dockerCompat = true;
-    defaultNetwork.settings = {
-      dns_enabled = true;
-      ipv6_enabled = true;
-    };
-  };
-  virtualisation.oci-containers.backend = "podman";
-  environment.enableAllTerminfo = true;
+  my.containerization.enable = true;
 
   my.roundcube.enable = true;
   my.zipline.enable = true;

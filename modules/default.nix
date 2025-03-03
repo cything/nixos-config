@@ -5,5 +5,6 @@
     ./caddy.nix
     ./roundcube.nix
     ./zipline.nix
+    ./containerization.nix
   ];
 }

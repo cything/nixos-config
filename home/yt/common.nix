@@ -60,7 +60,11 @@
       "mergetool \"vimdiff\"".cmd = "nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
       url = {
         "ssh://git@github.com/" = {
-          insteadOf = "https://github.com/";
+          insteadOf = [
+            "https://github.com/"
+            "github:"
+            "gh:"
+          ];
         };
       };
     };

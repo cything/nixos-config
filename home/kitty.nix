@@ -71,5 +71,5 @@
     };
   };
 
-  programs.zsh.shellAliases."ssh" = "kitten ssh";
+  # programs.zsh.shellAliases."ssh" = "kitten ssh"; # doesn't seem to work with bitwarden ssh agent :(
 }

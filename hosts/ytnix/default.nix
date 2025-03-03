@@ -37,10 +37,9 @@
     loader = {
       # lanzaboote replaces systemd-boot
       systemd-boot.enable = lib.mkForce false;
-      efi.canTouchEfiVariables = false; # toggle when installing
+      efi.canTouchEfiVariables = true;
     };
     tmp.cleanOnBoot = true;
-    # upgrade after https://github.com/tomaspinho/rtl8821ce/issues/356 is fixed
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
@@ -145,36 +144,25 @@
     tmux
     vim
     wget
-    neovim
-    git
-    python3
-    wl-clipboard
-    # mako # sway config uses this
     tree
     kitty
     borgbackup
-    brightnessctl
-    alsa-utils
-    nixd
-    bluetuith
-    libimobiledevice
-    pass-wayland
     htop
     file
     dnsutils
+    q
     age
     compsize
     wireguard-tools
     traceroute
     sops
-    restic
-    haskell-language-server
-    ghc
     sbctl # secure boot
     wine-wayland
     wine64
-    solaar
-    gtk3
+    lm_sensors
+    sshfs
+    openssl
+    just
   ];
 
   environment.sessionVariables = {
@@ -196,11 +184,13 @@
     };
   };
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.roboto-mono
-    ibm-plex
-  ];
-  fonts.enableDefaultPackages = true;
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.roboto-mono
+      ibm-plex
+    ];
+    enableDefaultPackages = true;
+  };
 
   hardware.enableAllFirmware = true;
   hardware.bluetooth = {
@@ -253,8 +243,9 @@
   hardware.steam-hardware.enable = true;
 
   services.logind = {
-    lidSwitch = "hibernate";
-    powerKey = "hibernate";
+    lidSwitch = "suspend";
+    powerKey = "poweroff";
+    suspendKey = "hibernate";
   };
 
   xdg.mime.defaultApplications = {
@@ -263,31 +254,18 @@
     "*/html" = "chromium-browser.desktop";
   };
 
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
-  # preference changes don't work in thunar without this
-  programs.xfconf.enable = true;
-  # mount, trash and stuff in thunar
-  services.gvfs.enable = true;
-  # thumbnails in thunar
-  services.tumbler.enable = true;
-
   virtualisation = {
     libvirtd.enable = true;
-    docker.enable = true;
   };
   programs.virt-manager.enable = true;
+  my.containerization.enable = true;
 
   services.usbmuxd.enable = true;
   programs.nix-ld.dev = {
     enable = true;
     # nix run github:thiagokokada/nix-alien#nix-alien-find-libs ./<binary>
     libraries = with pkgs; [
+      # TODO: revisit what we actually need
       mesa
       extest
       stdenv.cc.cc
@@ -359,6 +337,7 @@
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
       wlrobs
+      obs-pipewire-audio-capture
     ];
   };
 
@@ -382,12 +361,6 @@
     SUBSYSTEM=="usb", SYSFS{idVendor}=="090c", SYSFS{idProduct}=="1000", ACTION=="add", GROUP="users", MODE="0664"
   '';
 
-  programs.ssh = {
-    askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
-    startAgent = true;
-    enableAskPassword = true;
-  };
-
   services.desktopManager.plasma6 = {
     enable = true;
     enableQt5Integration = true;
@@ -402,11 +375,6 @@
   services.envfs.enable = true;
   programs.kdeconnect.enable = true;
   programs.dconf.enable = true;
-
-  programs.java = {
-    enable = true;
-    binfmt = true;
-  };
 
   programs.ccache.enable = true;
   nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
