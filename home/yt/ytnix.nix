@@ -31,6 +31,7 @@
       ungoogled-chromium
       librewolf
       bitwarden-desktop
+      bitwarden-cli
       fastfetch
       (with kdePackages; [
         gwenview
@@ -93,11 +94,8 @@
       syncthingtray
       (with llvmPackages; [
         clangUseLLVM
-        libcxxClang
-        stdenv
-        libcxx
-        libcxxStdenv
         compiler-rt
+        libllvm
       ])
       nix-output-monitor
     ];

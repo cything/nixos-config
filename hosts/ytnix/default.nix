@@ -31,6 +31,9 @@
       sopsFile = ../../secrets/yt/aws.yaml;
       owner = "yt";
     };
+    "vaultwarden/env" = {
+      sopsFile = ../../secrets/services/vaultwarden.yaml;
+    };
   };
 
   boot = {
@@ -140,7 +143,7 @@
     "adbusers"
   ];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; lib.flatten [
     tmux
     vim
     wget
@@ -157,14 +160,29 @@
     traceroute
     sops
     sbctl # secure boot
-    wine-wayland
-    wine64
     lm_sensors
     sshfs
     openssl
     just
     killall
     lshw
+    bubblewrap
+    fuse-overlayfs
+    dwarfs
+    wineWowPackages.stagingFull
+    (with gst_all_1; [
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+      gst-plugins-base
+    ])
+    vulkan-loader
+    (heroic.override {
+      extraPkgs = pkgs: [
+        pkgs.gamescope
+        pkgs.gamemode
+      ];
+    })
   ];
 
   environment.sessionVariables = {
@@ -242,7 +260,7 @@
     extest.enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
-  hardware.steam-hardware.enable = true;
+  programs.gamescope.enable = true;
 
   services.logind = {
     lidSwitch = "suspend";
@@ -380,4 +398,22 @@
 
   programs.ccache.enable = true;
   nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
+
+  services.postgresql = {
+    enable = true;
+    settings.port = 5432;
+    package = pkgs.postgresql_17;
+    enableTCPIP = true;
+  };
+
+  services.vaultwarden = {
+    enable = true;
+    dbBackend = "postgresql";
+    environmentFile = config.sops.secrets."vaultwarden/env".path;
+    config = {
+      ROCKET_ADDRESS = "0.0.0.0";
+      ROCKET_PORT = "8081";
+      DATABASE_URL = "postgresql://vaultwarden:vaultwarden@127.0.0.1:5432/vaultwarden";
+    };
+  };
 }

@@ -10,20 +10,18 @@
       extensions =
         # if unfree
         # with pkgs.vscode-marketplace;
-        (
-          with pkgs.open-vsx;
-          [
-            vscodevim.vim
-            jnoortheen.nix-ide
-            github.github-vscode-theme
-            rust-lang.rust-analyzer
-            shd101wyy.markdown-preview-enhanced
-            alefragnani.bookmarks
-            tomrijndorp.find-it-faster
-            streetsidesoftware.code-spell-checker
-            emilast.logfilehighlighter
-          ]
-        );
+        with pkgs.open-vsx;
+        [
+          vscodevim.vim
+          jnoortheen.nix-ide
+          github.github-vscode-theme
+          rust-lang.rust-analyzer
+          shd101wyy.markdown-preview-enhanced
+          alefragnani.bookmarks
+          tomrijndorp.find-it-faster
+          streetsidesoftware.code-spell-checker
+          emilast.logfilehighlighter
+        ];
       userSettings =
         let
           vimCommonKeyBindings = [
@@ -54,6 +52,7 @@
           "editor.acceptSuggestionOnCommitCharacter" = false;
           "git.openRepositoryInParentFolders" = "never";
           "git.ignoreLimitWarning" = true;
+          "git.blame.editorDecoration.enabled" = true;
           "extensions.ignoreRecommendations" = true;
           "telemetry.enableTelemetry" = false;
           "telemetry.telemetryLevel" = "off";
