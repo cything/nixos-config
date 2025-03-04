@@ -6,5 +6,6 @@
     ./roundcube.nix
     ./zipline.nix
     ./containerization.nix
+    ./vaultwarden.nix
   ];
 }

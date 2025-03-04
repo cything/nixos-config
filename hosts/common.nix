@@ -54,7 +54,7 @@
       # https://github.com/jauderho/nts-servers
       "ntp3.fau.de"
       "ntppool1.time.nl"
-      "time.signorini.ch"
+      "ntpmon.dcs1.biz"
       "stratum1.time.cifelli.xyz"
       "nts.teambelgium.net"
       "c.st1.ntp.br"
