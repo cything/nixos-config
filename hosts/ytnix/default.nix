@@ -405,6 +405,10 @@
     package = pkgs.postgresql_17;
     enableTCPIP = true;
   };
+  services.postgresqlBackup = {
+    enable = true;
+    startAt = "hourly";
+  };
 
   my.vaultwarden.enable = true;
 }
