@@ -1231,6 +1231,7 @@
       "original": {
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
+        "rev": "1fc267a10f46200e32f0850caa396bd1ba4ba08e",
         "type": "github"
       }
     }
