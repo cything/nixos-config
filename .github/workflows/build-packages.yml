@@ -14,8 +14,9 @@ jobs:
           - ${{ inputs.package }}
         os:
           - ubuntu-latest
-          - macos-latest
           - ubuntu-24.04-arm
+          - macos-latest
+          - macos-13
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install Nix
@@ -32,5 +33,5 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           useDaemon: false
           installCommand: nix profile install nixpkgs#cachix
-          
+
       - run: nix build -L ${{ matrix.package }}
