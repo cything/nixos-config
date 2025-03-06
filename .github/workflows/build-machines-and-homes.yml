@@ -13,7 +13,6 @@ jobs:
         os:
           - ubuntu-latest
     runs-on: ${{ matrix.os }}
-    continue-on-error: true
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
@@ -69,7 +68,6 @@ jobs:
           - ubuntu-latest
           # - macos-latest
     runs-on: ${{ matrix.os }}
-    continue-on-error: true
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
