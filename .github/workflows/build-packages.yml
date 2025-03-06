@@ -9,6 +9,7 @@ on:
 jobs:
   build-packages:
     strategy:
+      fail-fast: false
       matrix:
         package:
           - ${{ inputs.package }}
