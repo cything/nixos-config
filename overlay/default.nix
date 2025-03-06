@@ -11,12 +11,14 @@ importedOverlays
   (
     final: prev:
     let
-      pkgFrom = flake: pkg: flake.legacyPackages.${prev.system}.${pkg};
-      stable = inputs.nixpkgs-stable;
+      # nixpkgsFrom = flake: pkg: flake.legacyPackages.${prev.system}.${pkg};
+      pkgFrom = flake: pkgFrom' flake "default";
+      pkgFrom' = flake: pkg: flake.packages.${prev.system}.${pkg};
     in
     {
       conduwuit =
-        inputs.conduwuit.packages.x86_64-linux.static-x86_64-linux-musl-all-features-x86_64-haswell-optimised;
+       pkgFrom' inputs.conduwuit "static-x86_64-linux-musl-all-features-x86_64-haswell-optimised";
+      pixelflasher = pkgFrom inputs.pixelflasher;
     }
   )
 ]

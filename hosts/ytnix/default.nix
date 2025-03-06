@@ -217,7 +217,6 @@
     enable = true;
     powerOnBoot = true;
   };
-  services.blueman.enable = true;
 
   my.backup = {
     enable = true;
@@ -234,25 +233,6 @@
     repo = "yt";
     passFile = config.sops.secrets."borg/rsyncnet".path;
     sshKeyFile = config.sops.secrets."rsyncnet/id_ed25519".path;
-  };
-
-  services.btrbk.instances.local = {
-    onCalendar = "hourly";
-    # only create snapshots automatically. backups are triggered manually with `btrbk resume`
-    snapshotOnly = true;
-    settings = {
-      snapshot_preserve_min = "latest";
-      target_preserve = "30d";
-      target_preserve_min = "2d";
-      target = "/mnt/target/btr_backup/ytnix";
-      stream_compress = "zstd";
-      stream_compress_level = "8";
-      snapshot_dir = "/snapshots";
-      subvolume = {
-        "/home" = { };
-        "/" = { };
-      };
-    };
   };
 
   programs.steam = {
@@ -293,6 +273,7 @@
       fontconfig
       libxkbcommon
       zlib
+      libz
       libxml2
       dbus
       freetype

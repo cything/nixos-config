@@ -98,6 +98,8 @@
         libllvm
       ])
       nix-output-monitor
+      wl-clipboard-rs
+      pixelflasher
     ];
 
   programs.feh.enable = true;
