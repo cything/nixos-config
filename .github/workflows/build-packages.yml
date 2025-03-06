@@ -20,31 +20,17 @@ jobs:
     steps:
       - name: Install Nix
         uses: cachix/install-nix-action@v30
+
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+
       - uses: cachix/cachix-action@v14
         with:
           name: cything
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           useDaemon: false
           installCommand: nix profile install nixpkgs#cachix
-      - name: Restore and cache Nix store
-        uses: nix-community/cache-nix-action@v5.1.0
-        with:
-          # restore and save a cache using this key
-          primary-key: nix-${{ runner.os }}-${{ matrix.package }}-${{ hashFiles('**/*.nix', 'flake.lock') }}
-          # if there's no cache hit, restore a cache by this prefix
-          restore-prefixes-first-match: nix-${{ runner.os }}-${{ matrix.package }}-
-          # do purge caches
-          purge: true
-          # purge all versions of the cache
-          purge-prefixes: nix-${{ runner.os }}-
-          # created more than this number of seconds ago relative to the start of the `Post Restore` phase
-          purge-last-accessed: 86400
-          # except the version with the `primary-key`, if it exists
-          purge-primary-key: never
-          # always save the cache
-          save-always: true
+          
       - run: nix build -L ${{ matrix.package }}
