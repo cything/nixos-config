@@ -229,6 +229,7 @@
       "**/.wine"
       "/home/yt/Games"
       "/home/yt/Videos"
+      "/home/yt/.bitmonero"
     ];
     repo = "yt";
     passFile = config.sops.secrets."borg/rsyncnet".path;

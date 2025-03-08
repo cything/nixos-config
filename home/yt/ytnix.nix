@@ -100,6 +100,7 @@
       nix-output-monitor
       wl-clipboard-rs
       pixelflasher
+      element-desktop
     ];
 
   programs.feh.enable = true;

@@ -1002,25 +1002,18 @@
       }
     },
     "pixelflasher": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
       "locked": {
-        "lastModified": 1741157109,
-        "narHash": "sha256-yoOMkH0n7e3UQSEAHHDuoBRDbJhnSymjt3gtoA8mMkI=",
+        "lastModified": 1741302870,
+        "narHash": "sha256-7AywZ1b3PaqolAZ0vQmddD6Br4o0a7ucdtE0/W3rnaM=",
         "owner": "cything",
-        "repo": "pixelflasher-flake",
-        "rev": "400c423071a4807ac01152a1060b75df4a11cc2d",
+        "repo": "nixpkgs",
+        "rev": "5ef8b274bb7f939104295a22cec3382268ed73cc",
         "type": "github"
       },
       "original": {
         "owner": "cything",
-        "repo": "pixelflasher-flake",
+        "ref": "pixelflasher",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },

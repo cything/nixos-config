@@ -78,11 +78,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    pixelflasher = {
-      url = "github:cything/pixelflasher-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-    };
+    pixelflasher.url = "github:cything/nixpkgs/pixelflasher";
 
     nvim-github-theme = {
       url = "github:projekt0n/github-nvim-theme";
