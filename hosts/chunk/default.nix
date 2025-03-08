@@ -60,6 +60,9 @@
     "zipline/env" = {
       sopsFile = ../../secrets/services/zipline.yaml;
     };
+    "searx/env" = {
+      sopsFile = ../../secrets/services/searx.yaml;
+    };
   };
 
   boot = {
@@ -197,4 +200,5 @@
 
   my.roundcube.enable = true;
   my.zipline.enable = true;
+  my.searx.enable = true;
 }

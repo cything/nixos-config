@@ -7,5 +7,6 @@
     ./zipline.nix
     ./containerization.nix
     ./vaultwarden.nix
+    ./searx.nix
   ];
 }

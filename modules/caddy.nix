@@ -29,10 +29,11 @@ in
         (common) {
           encode zstd gzip
           header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+          tls {
+            dns cloudflare {$CLOUDFLARE_KEY}
+            resolvers 1.1.1.1 8.8.8.8
+          }
         }
-      '';
-      globalConfig = ''
-        acme_dns cloudflare {$CLOUDFLARE_KEY}
       '';
       environmentFile = config.sops.secrets."caddy/env".path;
     };

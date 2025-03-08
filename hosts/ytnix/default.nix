@@ -353,7 +353,7 @@
 
   services.ollama.enable = false;
 
-  services.trezord.enable = false;
+  services.trezord.enable = true;
 
   programs.niri.enable = false;
   programs.niri.package = pkgs.niri-unstable;
