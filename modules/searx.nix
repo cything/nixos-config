@@ -5,7 +5,6 @@
 }:
 let
   cfg = config.my.searx;
-  sockPath = "/run/searx/searx.sock";
 in
 {
   options.my.searx = {
@@ -25,6 +24,19 @@ in
         server.secret_key = "@SEARX_SECRET_KEY@";
       };
       environmentFile = config.sops.secrets."searx/env".path;
+      redisCreateLocally = true; # required for limiter
+      limiterSettings = {
+        real_ip = {
+          x_for = 1;
+          ipv4_prefix = 32;
+          ipv6_prefix = 56;
+        };
+        botdetection.ip_lists.pass_ip = [
+          "100.121.152.86"
+          "100.66.32.54"
+        ];
+        link_token = true;
+      };
     };
 
     services.caddy.virtualHosts."x.cy7.sh".extraConfig = ''
