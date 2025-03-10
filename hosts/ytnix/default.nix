@@ -10,6 +10,7 @@
     ../common.nix
     ../zsh.nix
     ./tailscale.nix
+    ./containers.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -86,10 +87,12 @@
     resolvconf.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [
-        8080 # mitmproxy
-        22000 # syncthing
-      ];
+      trustedInterfaces = [ "tailscale0" ];
+      # allowedTCPPorts = [
+      #   8080 # mitmproxy
+      #   22000 # syncthing
+      #   3003 # immich-ml
+      # ];
     };
   };
   programs.nm-applet.enable = true;
@@ -252,7 +255,6 @@
   xdg.mime.defaultApplications = {
     "application/pdf" = "okular.desktop";
     "image/*" = "gwenview.desktop";
-    "*/html" = "chromium-browser.desktop";
   };
 
   virtualisation = {

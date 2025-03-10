@@ -101,6 +101,7 @@
       wl-clipboard-rs
       pixelflasher
       element-desktop
+      freetube
     ];
 
   programs.feh.enable = true;

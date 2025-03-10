@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 let
@@ -67,21 +68,9 @@ in
       ];
       networks = [ "immich-net" ];
     };
-
-    # immich-ml = {
-    #   image = "ghcr.io/immich-app/immich-machine-learning:release";
-    #   autoStart = true;
-    #   pull = "newer";
-    #   environment = {
-    #     REDIS_HOSTNAME = "immich-redis";
-    #     DB_HOSTNAME = "immich-db";
-    #   };
-    #   volumes = [ "${modelCache}:/cache" ];
-    #   networks = [ "immich-net" ];
-    # };
   };
 
-  systemd.services.create-immich-net = {
+  systemd.services.create-immich-net = rec {
     serviceConfig.Type = "oneshot";
     requiredBy = with config.virtualisation.oci-containers; [
       "${backend}-immich.service"
@@ -89,10 +78,10 @@ in
       "${backend}-immich-redis.service"
       # "${backend}-immich-ml.service"
     ];
-    before = config.systemd.services.create-immich-net.requiredBy;
+    before = requiredBy;
     script = ''
-      ${pkgs.podman}/bin/podman network exists immich-net || \
-      ${pkgs.podman}/bin/podman network create immich-net
+      ${lib.getExe pkgs.podman} network exists immich-net || \
+      ${lib.getExe pkgs.podman} network create immich-net
     '';
   };
 

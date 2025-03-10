@@ -79,6 +79,7 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
+      trustedInterfaces = [ "tailscale0" ];
       allowedTCPPorts = [
         22
         80
@@ -86,8 +87,6 @@
       ];
       allowedUDPPorts = [
         443
-        53
-        853
       ];
       extraCommands =
         let
