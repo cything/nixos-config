@@ -6,6 +6,7 @@ on:
 jobs:
   build-machines:
     strategy:
+      fail-fast: false
       matrix:
         machine:
           - chunk
