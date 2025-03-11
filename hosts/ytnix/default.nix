@@ -257,8 +257,9 @@
     "image/*" = "gwenview.desktop";
   };
 
-  virtualisation = {
-    libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
   };
   programs.virt-manager.enable = true;
   my.containerization.enable = true;
@@ -382,4 +383,5 @@
 
   programs.ccache.enable = true;
   nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
+  programs.fuse.userAllowOther = true;
 }

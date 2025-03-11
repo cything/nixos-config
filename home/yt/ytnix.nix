@@ -104,25 +104,6 @@
       freetube
     ];
 
-  programs.feh.enable = true;
-
-  xdg.configFile = {
-    mpv.source = ../mpv;
-  };
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  programs.git.extraConfig = {
-    user = {
-      signingKey = "~/.ssh/id_ed25519";
-    };
-    gpg.format = "ssh";
-    commit.gpgsign = true;
-  };
-
   home.sessionVariables = {
     # to make ghidra work on xwayland
     _JAVA_AWT_WM_NONREPARENTING = 1;
@@ -143,6 +124,30 @@
 
     # bitwarden ssh agent
     SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
+  };
+
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+    "$HOME/go/bin"
+  ];
+
+  programs.feh.enable = true;
+
+  xdg.configFile = {
+    mpv.source = ../mpv;
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.git.extraConfig = {
+    user = {
+      signingKey = "~/.ssh/id_ed25519";
+    };
+    gpg.format = "ssh";
+    commit.gpgsign = true;
   };
 
   programs.nix-index-database.comma.enable = true;

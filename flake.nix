@@ -68,11 +68,9 @@
       inputs.flake-utils.follows = "flake-utils";
     };
     vscode-extensions = {
-      # https://github.com/nix-community/nix-vscode-extensions/issues/102
-      url = "github:nix-community/nix-vscode-extensions/1fc267a10f46200e32f0850caa396bd1ba4ba08e";
+      url = "github:nix-community/nix-vscode-extensions/";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
-      inputs.flake-compat.follows = "flake-compat";
     };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
