@@ -3,6 +3,17 @@ on:
   workflow_dispatch:
   push:
   pull_request:
+env:
+  ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+  NIX_CONFIG: |
+    show-trace = true
+    extra-substituters = https://cache.cy7.sh/main
+    extra-trusted-public-keys = main:Ku31HoEWcBtfggge2VGj+QTkVrQuIwRIMGyfV/5VQP0=
+    experimental-features = nix-command flakes
+    extra-experimental-features = nix-command flakes
+    accept-flake-config = true
+  TERM: ansi
+
 jobs:
   build-machines:
     strategy:
@@ -26,21 +37,15 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+
       - name: Install Nix
-        uses: cachix/install-nix-action@v30
-        with:
-          install_url: https://releases.nixos.org/nix/nix-2.25.4/install
-          extra_nix_config: 'accept-flake-config = true'
+        uses: nixbuild/nix-quick-install-action@master
+
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: cachix/cachix-action@v14
-        with:
-          name: cything
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          useDaemon: false
-          installCommand: nix profile install nixpkgs#cachix
+
       - name: Restore and cache Nix store
         uses: nix-community/cache-nix-action@v5.1.0
         with:
@@ -58,7 +63,30 @@ jobs:
           purge-primary-key: never
           # always save the cache
           save-always: true
-      - run: nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+          
+      - name: setup attic
+        run: |
+          nix profile install github:zhaofengli/attic
+          attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
+
+      - name: build and cache
+        run: |
+          package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
+          nix build -L "$package"
+          derivation="$(nix path-info --derivation "$package")"
+          cache="$(nix-store --query --requisites --include-outputs "$derivation")"
+          attic push main --stdin <<< "$cache"
+
+      - name: prepare tarball to upload
+        run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
+
+      - name: upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.machine }}-${{ matrix.os }}
+          path: result.tar
+          if-no-files-found: error
+
   build-homes:
     strategy:
       matrix:
@@ -81,17 +109,14 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+
       - uses: nixbuild/nix-quick-install-action@master
+
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: cachix/cachix-action@v14
-        with:
-          name: cything
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          useDaemon: false
-          installCommand: nix profile install nixpkgs#cachix
+
       - name: Restore and cache Nix store
         uses: nix-community/cache-nix-action@v5.1.0
         with:
@@ -109,4 +134,26 @@ jobs:
           purge-primary-key: never
           # always save the cache
           save-always: true
-      - run: nix build -L .#homeConfigurations."${{ matrix.home }}".activationPackage
+
+      - name: setup attic
+        run: |
+          nix profile install github:zhaofengli/attic
+          attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
+
+      - name: build and cache
+        run: |
+          package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
+          nix build -L "$package"
+          derivation="$(nix path-info --derivation "$package")"
+          cache="$(nix-store --query --requisites --include-outputs "$derivation")"
+          attic push main --stdin <<< "$cache"
+
+      - name: prepare tarball to upload
+        run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
+
+      - name: upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.home }}-${{ matrix.os }}
+          path: result.tar
+          if-no-files-found: error
