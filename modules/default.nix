@@ -8,5 +8,6 @@
     ./containerization.nix
     ./vaultwarden.nix
     ./searx.nix
+    ./attic.nix
   ];
 }

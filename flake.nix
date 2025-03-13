@@ -44,6 +44,7 @@
         crane.follows = "crane";
         flake-compat.follows = "flake-compat";
         flake-utils.follows = "flake-utils";
+        attic.follows = "attic";
       };
     };
     lix-module = {
@@ -77,6 +78,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     pixelflasher.url = "github:cything/nixpkgs/pixelflasher";
+    attic = {
+      url = "github:zhaofengli/attic";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        crane.follows = "crane";
+      };
+    };
 
     nvim-github-theme = {
       url = "github:projekt0n/github-nvim-theme";

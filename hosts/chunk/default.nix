@@ -200,4 +200,5 @@
   my.roundcube.enable = true;
   my.zipline.enable = true;
   my.searx.enable = true;
+  my.attic.enable = true;
 }

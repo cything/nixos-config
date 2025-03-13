@@ -22,23 +22,6 @@
     };
   };
 
-  systemd.services.attic-mount = {
-    enable = true;
-    description = "Mount the attic data remote";
-    requires = [ "network-online.target" ];
-    after = [ "network-online.target" ];
-    requiredBy = [ "atticd.service" ];
-    before = [ "atticd.service" ];
-    serviceConfig = {
-      Type = "notify";
-      ExecStartPre = "/usr/bin/env mkdir -p /mnt/attic";
-      ExecStart = "${lib.getExe pkgs.rclone} mount --config ${
-        config.sops.secrets."rclone/config".path
-      } --cache-dir /var/cache/rclone --transfers=32 --checkers=32 --vfs-cache-mode writes --vfs-cache-max-size 2G --allow-other rsyncnet:attic /mnt/attic ";
-      ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/attic";
-    };
-  };
-
   systemd.services.garage-mount = {
     enable = true;
     description = "Mount the garage data remote";
