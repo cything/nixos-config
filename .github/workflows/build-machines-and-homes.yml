@@ -70,6 +70,9 @@ jobs:
 
       - run: |
           nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+      
+      - name: cache result
+        run: |
           nix run github:zhaofengli/attic push main result
 
   build-homes:
@@ -126,4 +129,7 @@ jobs:
 
       - run: |
           nix build -L .#homeConfigurations."${{ matrix.home }}".activationPackage
+
+      - name: cache result
+        run: |
           nix run github:zhaofengli/attic push main result
