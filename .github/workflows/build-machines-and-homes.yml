@@ -3,6 +3,9 @@ on:
   workflow_dispatch:
   push:
   pull_request:
+env:
+  ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+
 jobs:
   build-machines:
     strategy:
@@ -58,7 +61,17 @@ jobs:
           purge-primary-key: never
           # always save the cache
           save-always: true
-      - run: nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+          
+      - name: setup attic
+        run: |
+          nix profile install nixpkgs#attic
+          attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
+          attic use main
+
+      - run: |
+          nix build -L .#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel
+          attic push main result
+
   build-homes:
     strategy:
       matrix:
@@ -109,4 +122,13 @@ jobs:
           purge-primary-key: never
           # always save the cache
           save-always: true
-      - run: nix build -L .#homeConfigurations."${{ matrix.home }}".activationPackage
+
+      - name: setup attic
+        run: |
+          nix profile install nixpkgs#attic
+          attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
+          attic use main
+
+      - run: |
+          nix build -L .#homeConfigurations."${{ matrix.home }}".activationPackage
+          attic push main result
