@@ -73,7 +73,9 @@ jobs:
       
       - name: cache result
         run: |
-          nix run github:zhaofengli/attic push main result
+          derivation="$(nix path-info --derivation "${{ matrix.machine }}")"
+          cache="$(nix-store --query --requisites --include-outputs "$derivation")"
+          nix run github:zhaofengli/attic push main --stdin <<< "$cache"
 
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
@@ -142,7 +144,9 @@ jobs:
 
       - name: cache result
         run: |
-          nix run github:zhaofengli/attic push main result
+          derivation="$(nix path-info --derivation "${{ matrix.home }}")"
+          cache="$(nix-store --query --requisites --include-outputs "$derivation")"
+          nix run github:zhaofengli/attic push main --stdin <<< "$cache"
 
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
