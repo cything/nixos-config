@@ -50,9 +50,12 @@ jobs:
         run: |
           nix run github:zhaofengli/attic push main result
 
+      - name: prepare tarball to upload
+        run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
+
       - name: upload result
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.package }}-${{ matrix.os }}
-          path: result
+          path: result.tar
           if-no-files-found: error
