@@ -75,6 +75,13 @@ jobs:
         run: |
           nix run github:zhaofengli/attic push main result
 
+      - name: upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.machine }}-${{ matrix.os }}
+          path: result
+          if-no-files-found: error
+
   build-homes:
     strategy:
       matrix:
@@ -133,3 +140,10 @@ jobs:
       - name: cache result
         run: |
           nix run github:zhaofengli/attic push main result
+
+      - name: upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.home }}-${{ matrix.os }}
+          path: result
+          if-no-files-found: error

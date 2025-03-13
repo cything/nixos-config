@@ -49,3 +49,10 @@ jobs:
       - name: cache result
         run: |
           nix run github:zhaofengli/attic push main result
+
+      - name: upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.package }}-${{ matrix.os }}
+          path: result
+          if-no-files-found: error
