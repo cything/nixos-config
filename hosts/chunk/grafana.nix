@@ -29,6 +29,14 @@
           }
         ];
       }
+      {
+        job_name = "garage";
+        static_configs = [
+          {
+            targets = [ "127.0.0.1:3903" ];
+          }
+        ];
+      }
     ];
   };
 

@@ -10,15 +10,13 @@
         api_bind_addr = "[::]:3900";
         root_domain = "s3.cy7.sh";
       };
-      s3_web = {
-        bind_addr = "[::]:3902";
-        root_domain = ".web.s3.cy7.sh";
-        index = "index.html";
-      };
       admin.api_bind_addr = "[::]:3903";
       rpc_bind_addr = "[::]:3901";
       replication_factor = 1;
       db_engine = "lmdb";
+      disable_scrub = true;
+      block_size = "10M";
+      compression_level = 3;
     };
     environmentFile = config.sops.secrets."garage/env".path;
   };
@@ -31,10 +29,6 @@
         reverse_proxy localhost:3900
       '';
     };
-    "*.web.s3.cy7.sh".extraConfig = ''
-      import common
-      reverse_proxy localhost:3902
-    '';
     "admin.s3.cy7.sh".extraConfig = ''
       import common
       reverse_proxy localhost:3903
