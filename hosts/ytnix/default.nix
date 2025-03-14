@@ -147,47 +147,49 @@
     "podman"
   ];
 
-  environment.systemPackages = with pkgs; lib.flatten [
-    tmux
-    vim
-    wget
-    tree
-    kitty
-    borgbackup
-    htop
-    file
-    dnsutils
-    q
-    age
-    compsize
-    wireguard-tools
-    traceroute
-    sops
-    sbctl # secure boot
-    lm_sensors
-    sshfs
-    openssl
-    just
-    killall
-    lshw
-    bubblewrap
-    fuse-overlayfs
-    dwarfs
-    wineWowPackages.stagingFull
-    (with gst_all_1; [
-      gst-plugins-good
-      gst-plugins-bad
-      gst-plugins-ugly
-      gst-plugins-base
-    ])
-    vulkan-loader
-    (heroic.override {
-      extraPkgs = pkgs: [
-        pkgs.gamescope
-        pkgs.gamemode
-      ];
-    })
-  ];
+  environment.systemPackages =
+    with pkgs;
+    lib.flatten [
+      tmux
+      vim
+      wget
+      tree
+      kitty
+      borgbackup
+      htop
+      file
+      dnsutils
+      q
+      age
+      compsize
+      wireguard-tools
+      traceroute
+      sops
+      sbctl # secure boot
+      lm_sensors
+      sshfs
+      openssl
+      just
+      killall
+      lshw
+      bubblewrap
+      fuse-overlayfs
+      dwarfs
+      wineWowPackages.stagingFull
+      (with gst_all_1; [
+        gst-plugins-good
+        gst-plugins-bad
+        gst-plugins-ugly
+        gst-plugins-base
+      ])
+      vulkan-loader
+      (heroic.override {
+        extraPkgs = pkgs: [
+          pkgs.gamescope
+          pkgs.gamemode
+        ];
+      })
+    ];
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";

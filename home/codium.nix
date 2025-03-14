@@ -10,8 +10,7 @@
       extensions =
         # if unfree
         # with pkgs.vscode-marketplace;
-        with pkgs.open-vsx;
-        [
+        with pkgs.open-vsx; [
           vscodevim.vim
           jnoortheen.nix-ide
           github.github-vscode-theme

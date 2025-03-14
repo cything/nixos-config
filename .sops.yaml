@@ -118,7 +118,6 @@ creation_rules:
       - age:
           - *chunk
           - *cy
-
   - path_regex: secrets/services/searx.yaml
     key_groups:
       - age:

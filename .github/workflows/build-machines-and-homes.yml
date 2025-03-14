@@ -13,7 +13,6 @@ env:
     extra-experimental-features = nix-command flakes
     accept-flake-config = true
   TERM: ansi
-
 jobs:
   build-machines:
     strategy:
@@ -37,15 +36,12 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
-
       - name: Install Nix
         uses: nixbuild/nix-quick-install-action@master
-
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-
       - name: Restore and cache Nix store
         uses: nix-community/cache-nix-action@v5.1.0
         with:
@@ -63,12 +59,10 @@ jobs:
           purge-primary-key: never
           # always save the cache
           save-always: true
-          
       - name: setup attic
         run: |
           nix profile install github:zhaofengli/attic
           attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
-
       - name: build and cache
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
@@ -76,7 +70,6 @@ jobs:
           derivation="$(nix path-info --derivation "$package")"
           cache="$(nix-store --query --requisites --include-outputs "$derivation")"
           attic push main --stdin <<< "$cache"
-
   build-homes:
     strategy:
       matrix:
@@ -99,14 +92,11 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
-
       - uses: nixbuild/nix-quick-install-action@master
-
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-
       - name: Restore and cache Nix store
         uses: nix-community/cache-nix-action@v5.1.0
         with:
@@ -124,12 +114,10 @@ jobs:
           purge-primary-key: never
           # always save the cache
           save-always: true
-
       - name: setup attic
         run: |
           nix profile install github:zhaofengli/attic
           attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
-
       - name: build and cache
         run: |
           package=".#homeConfigurations."${{ matrix.home }}".activationPackage"

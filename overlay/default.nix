@@ -14,14 +14,15 @@ in
       pkgFrom = flake: pkg: flake.packages.${prev.system}.${pkg};
     in
     {
-      conduwuit =
-       pkgFrom inputs.conduwuit "static-x86_64-linux-musl-all-features-x86_64-haswell-optimised";
+      conduwuit = pkgFrom inputs.conduwuit "static-x86_64-linux-musl-all-features-x86_64-haswell-optimised";
       pixelflasher = nixpkgsFrom inputs.pixelflasher "pixelflasher";
       attic-server = pkgFrom inputs.attic "attic-server";
       attic = pkgFrom inputs.attic "attic";
-      garage = ((pkgFrom inputs.garage "default").overrideAttrs {
+      garage = (
+        (pkgFrom inputs.garage "default").overrideAttrs {
           meta.mainProgram = "garage";
-      });
+        }
+      );
     }
   )
 ]
