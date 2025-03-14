@@ -28,8 +28,11 @@ in
           dns_enabled = true;
           ipv6_enabled = true;
         };
+        # answer on /var/run/docker.sock
+        dockerSocket.enable = true;
       };
-      oci-containers.backend = lib.mkIf cfg.usePodman "podman";
+      docker.enable = lib.mkIf (!cfg.usePodman) true;
+      oci-containers.backend = lib.mkIf (!cfg.usePodman) "docker";
     };
   };
 }
