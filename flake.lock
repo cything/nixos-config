@@ -342,6 +342,38 @@
         "type": "github"
       }
     },
+    "garage": {
+      "inputs": {
+        "crane": [
+          "crane"
+        ],
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
+      },
+      "locked": {
+        "lastModified": 1741360584,
+        "narHash": "sha256-5UkuvKllBRhU943imyc0jHDXQDVhIFx5WWUr3qrLEWQ=",
+        "owner": "deuxfleurs-org",
+        "repo": "garage",
+        "rev": "c96be1a9a8aa3b51075678888b80c2414ead2909",
+        "type": "github"
+      },
+      "original": {
+        "owner": "deuxfleurs-org",
+        "repo": "garage",
+        "type": "github"
+      }
+    },
     "git-hooks": {
       "inputs": {
         "flake-compat": [
@@ -1002,6 +1034,7 @@
         "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts_2",
         "flake-utils": "flake-utils",
+        "garage": "garage",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "lix": "lix",
