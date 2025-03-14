@@ -19,6 +19,9 @@ in
       pixelflasher = nixpkgsFrom inputs.pixelflasher "pixelflasher";
       attic-server = pkgFrom inputs.attic "attic-server";
       attic = pkgFrom inputs.attic "attic";
+      garage = ((pkgFrom inputs.garage "default").overrideAttrs {
+          meta.mainProgram = "garage";
+      });
     }
   )
 ]
