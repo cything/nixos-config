@@ -21,6 +21,8 @@
           tomrijndorp.find-it-faster
           streetsidesoftware.code-spell-checker
           emilast.logfilehighlighter
+          tamasfe.even-better-toml
+          golang.go
         ];
       userSettings =
         let

@@ -102,6 +102,7 @@
       pixelflasher
       element-desktop
       freetube
+      gopls
     ];
 
   home.sessionVariables = {
