@@ -77,16 +77,6 @@ jobs:
           cache="$(nix-store --query --requisites --include-outputs "$derivation")"
           attic push main --stdin <<< "$cache"
 
-      - name: prepare tarball to upload
-        run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
-
-      - name: upload result
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.machine }}-${{ matrix.os }}
-          path: result.tar
-          if-no-files-found: error
-
   build-homes:
     strategy:
       matrix:
@@ -147,13 +137,3 @@ jobs:
           derivation="$(nix path-info --derivation "$package")"
           cache="$(nix-store --query --requisites --include-outputs "$derivation")"
           attic push main --stdin <<< "$cache"
-
-      - name: prepare tarball to upload
-        run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
-
-      - name: upload result
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.home }}-${{ matrix.os }}
-          path: result.tar
-          if-no-files-found: error
