@@ -144,6 +144,7 @@
     "docker"
     "disk"
     "adbusers"
+    "podman"
   ];
 
   environment.systemPackages = with pkgs; lib.flatten [
@@ -384,4 +385,5 @@
   programs.ccache.enable = true;
   nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
   programs.fuse.userAllowOther = true;
+  nix.settings.sandbox = false;
 }
