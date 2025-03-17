@@ -113,13 +113,13 @@
     RUSTC_WRAPPER = "${lib.getExe pkgs.sccache}";
     SCCACHE_BUCKET = "sccache";
     SCCACHE_REGION = "us-east-1";
-    SCCACHE_ENDPOINT = "https://e3e97aac307d106a7becea43cef8fcbd.r2.cloudflarestorage.com";
+    SCCACHE_ENDPOINT = "https://s3.cy7.sh";
     SCCACHE_ALLOW_CORE_DUMPS = "true";
     SCCACHE_S3_USE_SSL = "true";
     SCCACHE_CACHE_MULTIARCH = "true";
     SCCACHE_LOG = "warn";
     AWS_DEFAULT_REGION = "us-east-1";
-    AWS_ENDPOINT_URL = "https://e3e97aac307d106a7becea43cef8fcbd.r2.cloudflarestorage.com";
+    AWS_ENDPOINT_URL = "https://s3.cy7.sh";
     AWS_ACCESS_KEY_ID = "$(cat /run/secrets/aws/key_id)";
     AWS_SECRET_ACCESS_KEY = "$(cat /run/secrets/aws/key_secret)";
 
