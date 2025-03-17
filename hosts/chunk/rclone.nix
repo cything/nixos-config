@@ -15,9 +15,16 @@
     serviceConfig = {
       Type = "notify";
       ExecStartPre = "/usr/bin/env mkdir -p /mnt/photos";
-      ExecStart = "${lib.getExe pkgs.rclone} mount --config ${
-        config.sops.secrets."rclone/config".path
-      } --cache-dir /var/cache/rclone --transfers=32 --checkers=32 --dir-cache-time 72h --vfs-cache-mode writes --vfs-cache-max-size 2G photos: /mnt/photos ";
+      ExecStart = ''
+        ${lib.getExe pkgs.rclone} mount \
+          --config ${config.sops.secrets."rclone/config".path} \
+          --cache-dir /var/cache/rclone \
+          --transfers=32 \
+          --dir-cache-time 30d \
+          --vfs-cache-mode writes \
+          --vfs-cache-max-size 2G \
+          photos: /mnt/photos
+      '';
       ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/photos";
     };
   };
@@ -37,10 +44,15 @@
           --config ${config.sops.secrets."rclone/config".path} \
           --allow-other \
           --cache-dir /var/cache/rclone \
-          --transfers=32 --checkers=32 \
-          --vfs-cache-mode writes \
-          --vfs-cache-max-size 5G \
+          --transfers=32 \
+          --vfs-cache-mode full \
+          --vfs-cache-min-free-space 5G \
           --dir-cache-time 30d \
+          --no-checksum \
+          --no-modtime \
+          --vfs-fast-fingerprint \
+          --vfs-read-chunk-size 10M \
+          --vfs-read-chunk-streams 32 \
           rsyncnet:garage /mnt/garage
       '';
       ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/garage";

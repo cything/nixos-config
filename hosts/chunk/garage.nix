@@ -16,7 +16,7 @@
       db_engine = "lmdb";
       disable_scrub = true;
       block_size = "10M";
-      compression_level = 3;
+      compression_level = "none";
     };
     environmentFile = config.sops.secrets."garage/env".path;
   };

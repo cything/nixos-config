@@ -21,7 +21,7 @@ in
         allowed-hosts = [ "cache.cy7.sh" ];
         require-proof-of-possession = false;
         compression = {
-          type = "zstd";
+          type = "none";
           level = 3;
         };
         database.url = "postgresql:///atticd?host=/run/postgresql";
