@@ -11,12 +11,10 @@
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         "main:Ku31HoEWcBtfggge2VGj+QTkVrQuIwRIMGyfV/5VQP0="
       ];
-      substituters = [
+      trusted-substituters = [
         "https://nix-community.cachix.org"
-        "https://cache.garnix.io"
         "https://cache.cy7.sh/main"
       ];
     };
@@ -31,9 +29,6 @@
       persistent = true;
       options = "--delete-older-than 14d";
     };
-    extraOptions = ''
-      builders-use-substitutes = true
-    '';
     registry.nixpkgs.flake = inputs.nixpkgs;
   };
 
