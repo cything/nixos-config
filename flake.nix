@@ -160,7 +160,6 @@
               config.allowUnfree = true;
               system = "x86_64-linux";
               overlays = [
-                inputs.lix-module.overlays.default
                 inputs.rust-overlay.overlays.default
                 inputs.vscode-extensions.overlays.default
               ] ++ (import ./overlay { inherit inputs; });
