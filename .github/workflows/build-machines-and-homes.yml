@@ -63,13 +63,17 @@ jobs:
         run: |
           nix profile install github:zhaofengli/attic
           attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
-      - name: build and cache
+      - name: build
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
           nix build -L "$package"
+      - name: cache
+        if: always()
+        run: |
+          package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
           derivation="$(nix path-info --derivation "$package")"
           cache="$(nix-store --query --requisites --include-outputs "$derivation")"
-          attic push main --stdin <<< "$cache"
+          xargs attic push main <<< "$cache"
   build-homes:
     strategy:
       fail-fast: false
@@ -119,10 +123,14 @@ jobs:
         run: |
           nix profile install github:zhaofengli/attic
           attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
-      - name: build and cache
+      - name: build
         run: |
           package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
           nix build -L "$package"
+      - name: cache
+        if: always()
+        run: |
+          package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
           derivation="$(nix path-info --derivation "$package")"
           cache="$(nix-store --query --requisites --include-outputs "$derivation")"
-          attic push main --stdin <<< "$cache"
+          xargs attic push main <<< "$cache"
