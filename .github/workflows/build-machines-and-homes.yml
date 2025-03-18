@@ -37,7 +37,7 @@ jobs:
           remove-docker-images: 'true'
           build-mount-path: /nix
       - name: Install Nix
-        uses: nixbuild/nix-quick-install-action@master
+        uses: cachix/install-nix-action@v30
       - name: Sync repository
         uses: actions/checkout@v4
         with:
@@ -80,7 +80,8 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
-      - uses: nixbuild/nix-quick-install-action@master
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
       - name: Sync repository
         uses: actions/checkout@v4
         with:
