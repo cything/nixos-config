@@ -51,12 +51,6 @@
       url = "git+https://git.lix.systems/lix-project/nixos-module";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
-      inputs.lix.follows = "lix";
-    };
-    lix = {
-      url = "git+https://git.lix.systems/lix-project/lix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "flake-compat";
     };
     nix-ld = {
       url = "github:nix-community/nix-ld";
@@ -166,6 +160,7 @@
               config.allowUnfree = true;
               system = "x86_64-linux";
               overlays = [
+                inputs.lix-module.overlays.default
                 inputs.rust-overlay.overlays.default
                 inputs.vscode-extensions.overlays.default
               ] ++ (import ./overlay { inherit inputs; });
