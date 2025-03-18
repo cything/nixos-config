@@ -39,13 +39,13 @@
     };
     conduwuit = {
       url = "github:girlbossceo/conduwuit";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        crane.follows = "crane";
-        flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
-        attic.follows = "attic";
-      };
+      # inputs = {
+      #   nixpkgs.follows = "nixpkgs";
+      #   crane.follows = "crane";
+      #   flake-compat.follows = "flake-compat";
+      #   flake-utils.follows = "flake-utils";
+      #   attic.follows = "attic";
+      # };
     };
     lix-module = {
       url = "git+https://git.lix.systems/lix-project/nixos-module";
@@ -107,11 +107,13 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
+      "https://conduwuit.cachix.org"
       "https://cache.cy7.sh/main"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "main:Ku31HoEWcBtfggge2VGj+QTkVrQuIwRIMGyfV/5VQP0="
+      "conduwuit.cachix.org-1:MFRm6jcnfTf0jSAbmvLfhO3KBMt4px+1xaereWXp8Xg="
     ];
   };
 
