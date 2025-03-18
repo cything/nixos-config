@@ -42,23 +42,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Restore and cache Nix store
-        uses: nix-community/cache-nix-action@v5.1.0
-        with:
-          # restore and save a cache using this key
-          primary-key: nix-${{ runner.os }}-${{ matrix.machine }}-${{ hashFiles('**/*.nix', 'flake.lock') }}
-          # if there's no cache hit, restore a cache by this prefix
-          restore-prefixes-first-match: nix-${{ runner.os }}-${{ matrix.machine }}-
-          # do purge caches
-          purge: true
-          # purge all versions of the cache
-          purge-prefixes: nix-${{ runner.os }}-
-          # created more than this number of seconds ago relative to the start of the `Post Restore` phase
-          purge-last-accessed: 86400
-          # except the version with the `primary-key`, if it exists
-          purge-primary-key: never
-          # always save the cache
-          save-always: true
       - name: setup attic
         run: |
           nix profile install github:zhaofengli/attic
@@ -102,23 +85,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Restore and cache Nix store
-        uses: nix-community/cache-nix-action@v5.1.0
-        with:
-          # restore and save a cache using this key
-          primary-key: nix-${{ runner.os }}-${{ matrix.home }}-${{ hashFiles('**/*.nix', 'flake.lock') }}
-          # if there's no cache hit, restore a cache by this prefix
-          restore-prefixes-first-match: nix-${{ runner.os }}-${{ matrix.home }}-
-          # do purge caches
-          purge: true
-          # purge all versions of the cache
-          purge-prefixes: nix-${{ runner.os }}-
-          # created more than this number of seconds ago relative to the start of the `Post Restore` phase
-          purge-last-accessed: 86400
-          # except the version with the `primary-key`, if it exists
-          purge-primary-key: never
-          # always save the cache
-          save-always: true
       - name: setup attic
         run: |
           nix profile install github:zhaofengli/attic
