@@ -42,10 +42,11 @@ jobs:
           attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
       - run: nix build -L ${{ matrix.package }}
       - name: cache result
+        if: always()
         run: |
           derivation="$(nix path-info --derivation "${{ matrix.package }}")"
           cache="$(nix-store --query --requisites --include-outputs "$derivation")"
-          attic push main --stdin <<< "$cache"
+          xargs attic push main <<< "$cache"
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
       - name: upload result
