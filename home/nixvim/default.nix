@@ -71,41 +71,6 @@
         key = "<C-e>";
         mode = "i";
       }
-      # quick chat with copilot
-      {
-        key = "<leader>ccq";
-        action.__raw = ''
-          function()
-            local input = vim.fn.input("Quick chat: ")
-            if input ~= "" then
-              require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-            end
-          end
-        '';
-        mode = [
-          "n"
-          "v"
-        ];
-      }
-      # ask perplexity a quick question
-      {
-        key = "<leader>ccs";
-        action.__raw = ''
-          function()
-            local input = vim.fn.input("Perplexity: ")
-            if input ~= "" then
-              require("CopilotChat").ask(input, {
-                agent = "perplexityai",
-                selection = false,
-              })
-            end
-          end
-        '';
-        mode = [
-          "n"
-          "v"
-        ];
-      }
     ];
 
     plugins.cmp = {
@@ -196,11 +161,7 @@
             nix.flake.autoArchive = true;
           };
         };
-        rust_analyzer = {
-          enable = true;
-          installRustc = true;
-          installCargo = true;
-        };
+        rust_analyzer.enable = true;
         eslint.enable = true;
       };
     };
