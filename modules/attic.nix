@@ -30,12 +30,31 @@ in
           type = "s3";
           region = "us-east-1";
           bucket = "attic";
-          endpoint = "https://s3.cy7.sh";
+          # attic must be patched to never serve pre-signed s3 urls directly
+          # otherwise it will redirect clients to this localhost endpoint
+          endpoint = "http://127.0.0.1:3900";
         };
 
         garbage-collection = {
           default-retention-period = "1 month";
         };
+
+        chunking = {
+          # disable chunking since garage does its own
+          nar-size-threshold = 0;
+          # defaults
+          min-size = 16384;
+          avg-size = 65536;
+          max-size = 262144;
+        };
+      };
+    };
+
+    systemd.services.atticd = {
+      requires = [ "garage.service" ];
+      after = [ "garage.service" ];
+      environment = {
+        RUST_LOG = "INFO";
       };
     };
 
