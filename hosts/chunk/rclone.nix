@@ -44,15 +44,17 @@
           --config ${config.sops.secrets."rclone/config".path} \
           --allow-other \
           --cache-dir /var/cache/rclone \
-          --transfers=32 \
+          --transfers 32 \
           --vfs-cache-mode full \
           --vfs-cache-min-free-space 5G \
           --dir-cache-time 30d \
           --no-checksum \
           --no-modtime \
           --vfs-fast-fingerprint \
-          --vfs-read-chunk-size 10M \
-          --vfs-read-chunk-streams 32 \
+          --vfs-read-chunk-size 4M \
+          --vfs-read-chunk-streams 64 \
+          --sftp-concurrency 128 \
+          --sftp-chunk-size 255k \
           rsyncnet:garage /mnt/garage
       '';
       ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -u /mnt/garage";
