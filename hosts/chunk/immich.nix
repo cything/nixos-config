@@ -9,6 +9,7 @@ let
   thumbsLocation = "/opt/immich/thumbs";
   profileLocation = "/opt/immich/profile";
   dbDataLocation = "/opt/immich/postgres";
+  backupsLocation = "/opt/immich/backups";
 in
 {
   virtualisation.oci-containers.containers = {
@@ -21,6 +22,7 @@ in
         "${uploadLocation}:/usr/src/app/upload"
         "${thumbsLocation}:/usr/src/app/upload/thumbs"
         "${profileLocation}:/usr/src/app/upload/profile"
+        "${backupsLocation}:/usr/src/app/upload/backups"
       ];
       environment = {
         REDIS_HOSTNAME = "immich-redis";
