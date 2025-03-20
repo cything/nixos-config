@@ -167,6 +167,7 @@
           installCargo = false;
         };
         eslint.enable = true;
+        yamlls.enable = true;
       };
     };
     plugins.treesitter = {
@@ -196,13 +197,6 @@
     plugins.gitsigns = {
       enable = true;
       settings.current_line_blame = true;
-    };
-
-    plugins.copilot-chat = {
-      enable = true;
-      settings = {
-        model = "claude-3.5-sonnet";
-      };
     };
 
     plugins.cmp-buffer.enable = true;
