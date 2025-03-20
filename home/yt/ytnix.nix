@@ -152,4 +152,14 @@
   };
 
   programs.nix-index-database.comma.enable = true;
+  programs.helix = {
+    enable = true;
+    settings = {
+      theme = "github_dark";
+      editor = {
+        line-number = "relative";
+        lsp.display-messages = true;
+      };
+    };
+  };
 }
