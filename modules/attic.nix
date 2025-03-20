@@ -18,7 +18,7 @@ in
       settings = {
         listen = "[::]:8091";
         api-endpoint = "https://cache.cy7.sh/";
-        allowed-hosts = [ "cache.cy7.sh" ];
+        allowed-hosts = [ "cache.cy7.sh" "cdn.cy7.sh" ];
         require-proof-of-possession = false;
         compression = {
           type = "none";
@@ -39,9 +39,12 @@ in
       };
     };
 
-    services.caddy.virtualHosts."cache.cy7.sh".extraConfig = ''
-      import common
-      reverse_proxy localhost:8091
-    '';
+    services.caddy.virtualHosts."cache.cy7.sh" = {
+      serverAliases = [ "cdn.cy7.sh" ];
+      extraConfig = ''
+        import common
+        reverse_proxy localhost:8091
+      '';
+    };
   };
 }

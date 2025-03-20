@@ -15,7 +15,7 @@
       ];
       extra-substituters = [
         "https://nix-community.cachix.org"
-        "https://cache.cy7.sh/main"
+        "https://cdn.cy7.sh/main"
       ];
     };
     channel.enable = false;
