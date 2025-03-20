@@ -15,7 +15,7 @@
       replication_factor = 1;
       db_engine = "lmdb";
       disable_scrub = true;
-      block_size = "10M";
+      block_size = "128M";
       compression_level = "none";
     };
     environmentFile = config.sops.secrets."garage/env".path;
