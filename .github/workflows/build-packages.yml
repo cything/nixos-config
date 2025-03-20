@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Install Nix
         uses: cachix/install-nix-action@v30
+        with:
+          install_url: https://install.lix.systems/lix
       - name: Sync repository
         uses: actions/checkout@v4
         with:
