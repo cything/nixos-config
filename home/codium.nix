@@ -22,6 +22,7 @@
           emilast.logfilehighlighter
           tamasfe.even-better-toml
           golang.go
+          ms-python.python
         ];
       userSettings =
         let

@@ -161,7 +161,11 @@
             nix.flake.autoArchive = true;
           };
         };
-        rust_analyzer.enable = true;
+        rust_analyzer = {
+          enable = true;
+          installRustc = false;
+          installCargo = false;
+        };
         eslint.enable = true;
       };
     };

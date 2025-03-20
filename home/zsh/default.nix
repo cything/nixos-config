@@ -92,7 +92,7 @@
       "s" = "sudo";
       "nrs" = "sudo nixos-rebuild switch -L --flake . --log-format internal-json -v |& nom --json";
       "nrt" = "sudo nixos-rebuild test -L --flake . --log-format internal-json -v |& nom --json";
-      "hrs" = "home-manager switch -L --flake . |& nom --json";
+      "hrs" = "home-manager switch -L --flake .";
       "g" = "git";
       "ga" = "git add";
       "gaa" = "git add --all";

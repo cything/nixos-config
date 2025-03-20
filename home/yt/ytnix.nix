@@ -60,7 +60,6 @@
       unzip
       anki-bin
       trezorctl
-      trezor-agent
       q
       gdb
       fuzzel
@@ -100,9 +99,10 @@
       nix-output-monitor
       wl-clipboard-rs
       pixelflasher
-      element-desktop
+      cinny-desktop
       freetube
       gopls
+      rust-analyzer
     ];
 
   home.sessionVariables = {
