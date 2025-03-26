@@ -7,10 +7,7 @@ env:
   ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
   NIX_CONFIG: |
     show-trace = true
-    extra-substituters = https://cdn.cy7.sh/main
-    extra-trusted-public-keys = main:Ku31HoEWcBtfggge2VGj+QTkVrQuIwRIMGyfV/5VQP0=
     experimental-features = nix-command flakes
-    accept-flake-config = true
     system-features = nixos-test benchmark big-parallel kvm
   TERM: ansi
 jobs:
