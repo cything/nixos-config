@@ -945,22 +945,6 @@
         "type": "github"
       }
     },
-    "pixelflasher": {
-      "locked": {
-        "lastModified": 1741302870,
-        "narHash": "sha256-7AywZ1b3PaqolAZ0vQmddD6Br4o0a7ucdtE0/W3rnaM=",
-        "owner": "cything",
-        "repo": "nixpkgs",
-        "rev": "5ef8b274bb7f939104295a22cec3382268ed73cc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "cything",
-        "ref": "pixelflasher",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": [
@@ -1024,7 +1008,6 @@
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixvim": "nixvim",
         "nvim-github-theme": "nvim-github-theme",
-        "pixelflasher": "pixelflasher",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "treefmt": "treefmt",

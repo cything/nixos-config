@@ -16,7 +16,6 @@ in
     in
     {
       conduwuit = pkgFrom inputs.conduwuit "default";
-      pixelflasher = nixpkgsFrom inputs.pixelflasher "pixelflasher";
       attic-server = pkgFrom inputs.attic "attic-server";
       attic = pkgFrom inputs.attic "attic";
       garage = (
