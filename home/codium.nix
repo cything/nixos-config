@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.vscode = {
     enable = true;
@@ -23,10 +23,12 @@
           tamasfe.even-better-toml
           golang.go
           ms-python.python
+          christian-kohler.path-intellisense
         ];
       userSettings =
         let
           vimCommonKeyBindings = [
+            # nice emacs bindings
             {
               "before" = [ "C-a" ];
               "commands" = [ "cursorHome" ];
@@ -34,6 +36,19 @@
             {
               "before" = [ "C-e" ];
               "commands" = [ "cursorEnd" ];
+            }
+            {
+              "before" = [ "C-b" ];
+              "commands" = [ "cursorLeft" ];
+            }
+            {
+              "before" = [ "C-f" ];
+              "commands" = [ "cursorRight" ];
+            }
+            # ctrl+h to turn off search highlighting
+            {
+              "before" = [ "C-h" ];
+              "commands" = [ ":nohl" ];
             }
           ];
         in
@@ -74,7 +89,7 @@
 
           "markdown-preview-enhanced.previewTheme" = "github-dark.css";
           "nix.enableLanguageServer" = true;
-          "nix.serverPath" = "nil";
+          "nix.serverPath" = "${lib.getExe pkgs.nil}";
           "bookmarks.saveBookmarksInProject" = true;
 
           "cSpell.enabledFileTypes" = {
@@ -84,6 +99,15 @@
 
           # vim stuff
           "vim.leader" = ",";
+          "extensions.experimental.affinity" = {
+            "vscodevim.vim" = 1;
+          };
+          "vim.sneak" = true;
+          "vim.sneakUseIgnorecaseAndSmartcase" = true;
+          "vim.enableNeovim" = true;
+          "vim.hlsearch" = true;
+          "vim.easymotion" = true;
+	        "editor.lineNumbers" = "relative";
           "vim.normalModeKeyBindings" = vimCommonKeyBindings ++ [
             {
               "before" = [ ";" ];
@@ -114,6 +138,13 @@
             {
               "before" = [
                 "<leader>"
+                "s"
+              ];
+              "commands" = [ "workbench.action.toggleSidebarVisibility" ];
+            }
+            {
+              "before" = [
+                "<space>"
                 "s"
               ];
               "commands" = [ "workbench.action.toggleSidebarVisibility" ];
@@ -191,10 +222,33 @@
               "commands" = [ "editor.action.outdentLines" ];
             }
           ];
-          "extensions.experimental.affinity" = {
-            "vscodevim.vim" = 1;
-          };
         };
+        keybindings = [
+          # repeat these vim bindings here cause otherwise they get overridden by vscode
+          {
+            "key" = "ctrl+b";
+            "when" = "inputFocus";
+            "command" = "cursorLeft";
+          }
+          {
+            "key" = "ctrl+f";
+            "when" = "inputFocus";
+            "command" = "cursorRight";
+          }
+          # clear default bindings that conflict
+          {
+            "key" = "ctrl+f";
+            "command" = "-actions.find";
+          }
+          {
+            "key" = "ctrl+b";
+            "command" = "-workbench.action.toggleSidebarVisibility";
+          }
+          {
+            "key" = "ctrl+w";
+            "command" = "-workbench.action.closeActiveEditor";
+          }
+        ];
     };
   };
 }

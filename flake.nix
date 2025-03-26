@@ -134,7 +134,6 @@
         imports = [
           inputs.treefmt.flakeModule
         ];
-        debug = true;
         systems = [
           "x86_64-linux"
         ];
@@ -147,10 +146,13 @@
             treefmt = {
               projectRootFile = "flake.nix";
               programs.nixfmt.enable = true;
-              programs.stylua.enable = true;
-              programs.yamlfmt.enable = true;
               programs.typos.enable = true;
               programs.shellcheck.enable = true;
+
+              programs.yamlfmt = {
+                enable = true;
+                settings.retain_line_breaks = true;
+              };
 
               settings.global.excludes = [
                 "secrets/*"

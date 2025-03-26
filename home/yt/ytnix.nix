@@ -76,7 +76,6 @@
       ))
       p7zip
       qbittorrent
-      nil
       android-tools
       frida-tools
       mitmproxy
