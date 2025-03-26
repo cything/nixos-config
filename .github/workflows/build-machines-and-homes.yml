@@ -3,7 +3,6 @@ on:
   workflow_dispatch:
   push:
   pull_request:
-
 env:
   ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
   NIX_CONFIG: |
@@ -14,7 +13,6 @@ env:
     accept-flake-config = true
     system-features = nixos-test benchmark big-parallel kvm
   TERM: ansi
-
 jobs:
   build-machines:
     strategy:
@@ -38,20 +36,16 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
-
       - name: Install Nix
         uses: cachix/install-nix-action@v30
-
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-
       - name: setup attic
         run: |
           nix profile install github:zhaofengli/attic
           attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
-          
       - name: build
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"

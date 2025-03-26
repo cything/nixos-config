@@ -107,7 +107,7 @@
           "vim.enableNeovim" = true;
           "vim.hlsearch" = true;
           "vim.easymotion" = true;
-	        "editor.lineNumbers" = "relative";
+          "editor.lineNumbers" = "relative";
           "vim.normalModeKeyBindings" = vimCommonKeyBindings ++ [
             {
               "before" = [ ";" ];
@@ -223,32 +223,32 @@
             }
           ];
         };
-        keybindings = [
-          # repeat these vim bindings here cause otherwise they get overridden by vscode
-          {
-            "key" = "ctrl+b";
-            "when" = "inputFocus";
-            "command" = "cursorLeft";
-          }
-          {
-            "key" = "ctrl+f";
-            "when" = "inputFocus";
-            "command" = "cursorRight";
-          }
-          # clear default bindings that conflict
-          {
-            "key" = "ctrl+f";
-            "command" = "-actions.find";
-          }
-          {
-            "key" = "ctrl+b";
-            "command" = "-workbench.action.toggleSidebarVisibility";
-          }
-          {
-            "key" = "ctrl+w";
-            "command" = "-workbench.action.closeActiveEditor";
-          }
-        ];
+      keybindings = [
+        # repeat these vim bindings here cause otherwise they get overridden by vscode
+        {
+          "key" = "ctrl+b";
+          "when" = "inputFocus";
+          "command" = "cursorLeft";
+        }
+        {
+          "key" = "ctrl+f";
+          "when" = "inputFocus";
+          "command" = "cursorRight";
+        }
+        # clear default bindings that conflict
+        {
+          "key" = "ctrl+f";
+          "command" = "-actions.find";
+        }
+        {
+          "key" = "ctrl+b";
+          "command" = "-workbench.action.toggleSidebarVisibility";
+        }
+        {
+          "key" = "ctrl+w";
+          "command" = "-workbench.action.closeActiveEditor";
+        }
+      ];
     };
   };
 }

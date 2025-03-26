@@ -18,7 +18,10 @@ in
       settings = {
         listen = "[::]:8091";
         api-endpoint = "https://cache.cy7.sh/";
-        allowed-hosts = [ "cache.cy7.sh" "cdn.cy7.sh" ];
+        allowed-hosts = [
+          "cache.cy7.sh"
+          "cdn.cy7.sh"
+        ];
         require-proof-of-possession = false;
         compression = {
           type = "none";
