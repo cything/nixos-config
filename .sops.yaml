@@ -123,3 +123,8 @@ creation_rules:
       - age:
           - *chunk
           - *cy
+  - path_regex: secrets/cache-priv-key.pem
+    key_groups:
+      - age:
+          - *yt
+          - *cy
