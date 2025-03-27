@@ -10,10 +10,11 @@ env:
   ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
   NIX_CONFIG: |
     show-trace = true
-    extra-substituters = https://cdn.cy7.sh/main
-    extra-trusted-public-keys = main:Ku31HoEWcBtfggge2VGj+QTkVrQuIwRIMGyfV/5VQP0=
     experimental-features = nix-command flakes
     accept-flake-config = true
+    secret-key-files = /home/runner/cache-priv-key.pem
+    extra-substituters = https://nixcache.cy7.sh
+    extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
   TERM: ansi
 jobs:
   build-packages:
@@ -29,23 +30,19 @@ jobs:
           - macos-13
     runs-on: ${{ matrix.os }}
     steps:
+      - name: setup binary cache key
+        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
       - name: Install Nix
         uses: cachix/install-nix-action@v30
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: setup attic
-        run: |
-          nix profile install github:zhaofengli/attic
-          attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
       - run: nix build -L ${{ matrix.package }}
       - name: cache result
         if: always()
         run: |
-          derivation="$(nix path-info --derivation "${{ matrix.package }}")"
-          cache="$(nix-store --query --requisites --include-outputs "$derivation")"
-          xargs attic push main <<< "$cache"
+          nix copy "${{ matrix.machine }}" --to "s3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem"
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
       - name: upload result
