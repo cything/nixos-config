@@ -10,6 +10,11 @@
         api_bind_addr = "[::]:3900";
         root_domain = "s3.cy7.sh";
       };
+      s3_web = {
+        bind_addr = "[::]:3902";
+        root_domain = ".web.cy7.sh";
+        add_host_to_metrics = true;
+      };
       admin.api_bind_addr = "[::]:3903";
       rpc_bind_addr = "[::]:3901";
       replication_factor = 1;
@@ -33,5 +38,12 @@
       import common
       reverse_proxy localhost:3903
     '';
+    "*.web.cy7.sh" = {
+      serverAliases = [ "nixcache.cy7.sh" ];
+      extraConfig = ''
+        import common
+        reverse_proxy localhost:3902
+      '';
+    };
   };
 }

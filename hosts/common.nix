@@ -11,11 +11,11 @@
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "main:Ku31HoEWcBtfggge2VGj+QTkVrQuIwRIMGyfV/5VQP0="
+        "nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8="
       ];
       extra-substituters = [
         "https://nix-community.cachix.org"
-        "https://cdn.cy7.sh/main"
+        "https://nixcache.cy7.sh"
       ];
     };
     channel.enable = false;
