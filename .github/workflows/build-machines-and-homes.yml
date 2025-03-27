@@ -11,6 +11,8 @@ env:
     accept-flake-config = true
     system-features = nixos-test benchmark big-parallel kvm
     secret-key-files = ~/cache-priv-key.pem
+    extra-substituters = https://nixcache.cy7.sh
+    extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
   TERM: ansi
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
