@@ -7,12 +7,13 @@ env:
   ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
   NIX_CONFIG: |
     show-trace = true
-    extra-substituters = https://cdn.cy7.sh/main
-    extra-trusted-public-keys = main:Ku31HoEWcBtfggge2VGj+QTkVrQuIwRIMGyfV/5VQP0=
     experimental-features = nix-command flakes
     accept-flake-config = true
     system-features = nixos-test benchmark big-parallel kvm
+    secret-key-files = ~/cache-priv-key.pem
   TERM: ansi
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
 jobs:
   build-machines:
     strategy:
@@ -36,16 +37,14 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+      - name: setup binary cache key
+        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> ~/cache-priv-key.pem
       - name: Install Nix
         uses: cachix/install-nix-action@v30
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: setup attic
-        run: |
-          nix profile install github:zhaofengli/attic
-          attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
       - name: build
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
@@ -53,10 +52,7 @@ jobs:
       - name: cache
         if: always()
         run: |
-          package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
-          derivation="$(nix path-info --derivation "$package")"
-          cache="$(nix-store --query --requisites --include-outputs "$derivation")"
-          xargs attic push main <<< "$cache"
+          nix copy ".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel" --to "s3://nixcache?endpoint=s3.cy7.sh"
   build-homes:
     strategy:
       fail-fast: false
@@ -80,16 +76,14 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+      - name: setup binary cache key
+        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> ~/cache-priv-key.pem
       - name: Install Nix
         uses: cachix/install-nix-action@v30
       - name: Sync repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: setup attic
-        run: |
-          nix profile install github:zhaofengli/attic
-          attic login cy7 https://cache.cy7.sh "$ATTIC_TOKEN"
       - name: build
         run: |
           package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
@@ -97,7 +91,4 @@ jobs:
       - name: cache
         if: always()
         run: |
-          package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
-          derivation="$(nix path-info --derivation "$package")"
-          cache="$(nix-store --query --requisites --include-outputs "$derivation")"
-          xargs attic push main <<< "$cache"
+          nix copy ".#homeConfigurations."${{ matrix.home }}".activationPackage" --to "s3://nixcache?endpoint=s3.cy7.sh"
