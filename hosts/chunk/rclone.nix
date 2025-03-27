@@ -23,13 +23,12 @@ let
         --vfs-fast-fingerprint \
         --vfs-read-chunk-size 16M \
         --vfs-read-chunk-streams 16 \
-        --sftp-concurrency 128 \
+        --sftp-concurrency 64 \
         --sftp-chunk-size 255k \
         --buffer-size 0 \
         ${remote} ${mount}
     '';
     ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -zu ${mount}";
-    OOMScoreAdjust = -1000;
   };
 in
 {
