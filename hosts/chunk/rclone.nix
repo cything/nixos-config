@@ -14,20 +14,22 @@ let
         --config ${config.sops.secrets."rclone/config".path} \
         --allow-other \
         --cache-dir /var/cache/rclone \
-        --transfers 32 \
+        --transfers 16 \
         --vfs-cache-mode full \
         --vfs-cache-min-free-space 5G \
         --dir-cache-time 30d \
         --no-checksum \
         --no-modtime \
         --vfs-fast-fingerprint \
-        --vfs-read-chunk-size 4M \
-        --vfs-read-chunk-streams 32 \
+        --vfs-read-chunk-size 16M \
+        --vfs-read-chunk-streams 16 \
         --sftp-concurrency 128 \
         --sftp-chunk-size 255k \
+        --buffer-size 0 \
         ${remote} ${mount}
     '';
     ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -zu ${mount}";
+    OOMScoreAdjust = -1000;
   };
 in
 {
