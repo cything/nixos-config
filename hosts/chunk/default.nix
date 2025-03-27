@@ -184,7 +184,6 @@
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
-  programs.gnupg.agent.enable = true;
   programs.git.enable = true;
 
   my.caddy.enable = true;
@@ -192,8 +191,5 @@
   # container stuff
   my.containerization.enable = true;
 
-  my.roundcube.enable = true;
-  my.zipline.enable = true;
-  my.searx.enable = true;
   my.attic.enable = true;
 }
