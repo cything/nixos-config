@@ -10,7 +10,7 @@ env:
     experimental-features = nix-command flakes
     accept-flake-config = true
     system-features = nixos-test benchmark big-parallel kvm
-    secret-key-files = ~/cache-priv-key.pem
+    secret-key-files = /home/runner/cache-priv-key.pem
     extra-substituters = https://nixcache.cy7.sh
     extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
   TERM: ansi
@@ -40,7 +40,7 @@ jobs:
           remove-docker-images: 'true'
           build-mount-path: /nix
       - name: setup binary cache key
-        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> ~/cache-priv-key.pem
+        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
       - name: Install Nix
         uses: cachix/install-nix-action@v30
       - name: Sync repository
@@ -54,7 +54,7 @@ jobs:
       - name: cache
         if: always()
         run: |
-          nix copy ".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel" --to "s3://nixcache?endpoint=s3.cy7.sh"
+          nix copy ".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel" --to "s3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem"
   build-homes:
     strategy:
       fail-fast: false
@@ -79,7 +79,7 @@ jobs:
           remove-docker-images: 'true'
           build-mount-path: /nix
       - name: setup binary cache key
-        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> ~/cache-priv-key.pem
+        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
       - name: Install Nix
         uses: cachix/install-nix-action@v30
       - name: Sync repository
@@ -93,4 +93,4 @@ jobs:
       - name: cache
         if: always()
         run: |
-          nix copy ".#homeConfigurations."${{ matrix.home }}".activationPackage" --to "s3://nixcache?endpoint=s3.cy7.sh"
+          nix copy ".#homeConfigurations."${{ matrix.home }}".activationPackage" --to "s3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem"
