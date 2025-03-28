@@ -14,7 +14,7 @@ let
         --config ${config.sops.secrets."rclone/config".path} \
         --allow-other \
         --cache-dir /var/cache/rclone \
-        --transfers 16 \
+        --transfers 32 \
         --vfs-cache-mode full \
         --vfs-cache-min-free-space 5G \
         --dir-cache-time 30d \

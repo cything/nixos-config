@@ -190,6 +190,4 @@
 
   # container stuff
   my.containerization.enable = true;
-
-  my.attic.enable = true;
 }
