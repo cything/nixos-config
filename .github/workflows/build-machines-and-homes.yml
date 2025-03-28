@@ -43,6 +43,16 @@ jobs:
         run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
       - name: Install Nix
         uses: cachix/install-nix-action@v30
+
+      - name: Install Lix
+        run: |
+          sudo --preserve-env=PATH $(which nix) run \
+          --experimental-features "nix-command flakes" \
+          --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
+          'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.92.0' -- \
+          upgrade-nix \
+          --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+
       - name: Sync repository
         uses: actions/checkout@v4
         with:
@@ -83,6 +93,16 @@ jobs:
         run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
       - name: Install Nix
         uses: cachix/install-nix-action@v30
+
+      - name: Install Lix
+        run: |
+          sudo --preserve-env=PATH $(which nix) run \
+          --experimental-features "nix-command flakes" \
+          --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
+          'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.92.0' -- \
+          upgrade-nix \
+          --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+
       - name: Sync repository
         uses: actions/checkout@v4
         with:
