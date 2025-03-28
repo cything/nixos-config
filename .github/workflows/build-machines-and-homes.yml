@@ -54,7 +54,7 @@ jobs:
       - name: cache
         if: always()
         run: |
-          nix copy ".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel" --to "s3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem"
+          nix copy --all --to 's3://nixcache?endpoint=s3.cy7.sh' --verbose
   build-homes:
     strategy:
       fail-fast: false
@@ -93,4 +93,4 @@ jobs:
       - name: cache
         if: always()
         run: |
-          nix copy ".#homeConfigurations."${{ matrix.home }}".activationPackage" --to "s3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem"
+          nix copy --all --to 's3://nixcache?endpoint=s3.cy7.sh' --verbose

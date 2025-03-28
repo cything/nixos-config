@@ -16,6 +16,8 @@ env:
     extra-substituters = https://nixcache.cy7.sh
     extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
   TERM: ansi
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
 jobs:
   build-packages:
     strategy:
@@ -42,7 +44,7 @@ jobs:
       - name: cache result
         if: always()
         run: |
-          nix copy "${{ matrix.package }}" --to "s3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem"
+          nix copy --all --to 's3://nixcache?endpoint=s3.cy7.sh' --verbose
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
       - name: upload result
