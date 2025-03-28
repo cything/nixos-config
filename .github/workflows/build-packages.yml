@@ -36,6 +36,17 @@ jobs:
         run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
       - name: Install Nix
         uses: cachix/install-nix-action@v30
+
+      - name: Install Lix
+        run: |
+          sudo --preserve-env=PATH $(which nix) run \
+          --experimental-features "nix-command flakes" \
+          --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
+          'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.92.0' -- \
+          upgrade-nix \
+          --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+          nix --version
+
       - name: Sync repository
         uses: actions/checkout@v4
         with:
@@ -44,8 +55,9 @@ jobs:
       - name: cache result
         if: always()
         run: |
-          nix copy --all --to 's3://nixcache?endpoint=s3.cy7.sh' --verbose
-          nix store sign --store 's3://nixcache?endpoint=s3.cy7.sh' -k /home/runner/cache-priv-key.pem --all
+          nix copy -j8 \
+            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
+            $(nix path-info --recursive --derivation "${{ matrix.package }}" |sed 's/\.drv$/.drv^*/')
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
       - name: upload result
