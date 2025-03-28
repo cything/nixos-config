@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 {
   nix = {
     settings = {
@@ -9,13 +9,16 @@
         "root"
         "@wheel"
       ];
-      trusted-public-keys = [
+      extra-trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8="
       ];
       extra-substituters = [
         "https://nix-community.cachix.org"
         "https://nixcache.cy7.sh"
+      ];
+      secret-key-files = [
+        config.sops.secrets.cache-priv-key.path
       ];
     };
     channel.enable = false;
@@ -74,4 +77,11 @@
 
   services.thermald.enable = true;
   environment.enableAllTerminfo = true;
+
+  sops.secrets.cache-priv-key = {
+    format = "binary";
+    sopsFile = ../secrets/cache-priv-key.pem;
+    mode = "0440";
+    group = "users";
+  };
 }
