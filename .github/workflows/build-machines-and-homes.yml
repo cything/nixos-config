@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   push:
   pull_request:
+
 env:
   ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
   NIX_CONFIG: |
@@ -16,6 +17,7 @@ env:
   TERM: ansi
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
+
 jobs:
   build-machines:
     strategy:
@@ -27,6 +29,7 @@ jobs:
         os:
           - ubuntu-latest
     runs-on: ${{ matrix.os }}
+
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
@@ -39,8 +42,10 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+
       - name: setup binary cache key
         run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
+
       - name: Install Nix
         uses: cachix/install-nix-action@v30
 
@@ -58,10 +63,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+
       - name: build
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
           nix build -L "$package"
+
       - name: cache
         if: always()
         run: |
@@ -69,6 +76,7 @@ jobs:
           nix copy -j8 \
             --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
             $(nix path-info --recursive --derivation "$package" |sed 's/\.drv$/.drv^*/')
+
   build-homes:
     strategy:
       fail-fast: false
@@ -80,6 +88,7 @@ jobs:
           - ubuntu-latest
           # - macos-latest
     runs-on: ${{ matrix.os }}
+
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
@@ -92,8 +101,10 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+
       - name: setup binary cache key
         run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
+
       - name: Install Nix
         uses: cachix/install-nix-action@v30
 
@@ -111,10 +122,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+
       - name: build
         run: |
           package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
           nix build -L "$package"
+
       - name: cache
         if: always()
         run: |
