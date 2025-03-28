@@ -70,17 +70,15 @@ jobs:
           nix build -L "$package"
 
       - name: cache
-        if: always()
+        # if: always()
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
           derivations=()
           while IFS=$'\n' read derivation; do
               derivations+=("$derivation")
-          done < <(nix path-info --recursive --derivation "$package")
+          done < <(nix path-info --derivation "$package")
 
           for derivation in "${derivations[@]}"; do
-              cache+=(
-              )
               nix copy -j8 \
                 --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
                 $(nix-store --query --requisites --include-outputs "$derivation")
@@ -138,13 +136,13 @@ jobs:
           nix build -L "$package"
 
       - name: cache
-        if: always()
+        # if: always()
         run: |
           package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
           derivations=()
           while IFS=$'\n' read derivation; do
               derivations+=("$derivation")
-          done < <(nix path-info --recursive --derivation "$package")
+          done < <(nix path-info --derivation "$package")
 
           for derivation in "${derivations[@]}"; do
               nix copy -j8 \
