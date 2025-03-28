@@ -61,9 +61,16 @@ jobs:
       - name: cache result
         if: always()
         run: |
-          nix copy -j8 \
-            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
-            $(nix path-info --recursive --derivation "${{ matrix.package }}" |sed 's/\.drv$/.drv^*/')
+          derivations=()
+          while IFS=$'\n' read derivation; do
+              derivations+=("$derivation")
+          done < <(nix path-info --derivation "${{ matrix.package }}")
+
+          for derivation in "${derivations[@]}"; do
+              nix copy -j8 \
+                --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
+                $(nix-store --query --requisites --include-outputs "$derivation")
+          done
 
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
