@@ -45,6 +45,7 @@ jobs:
         if: always()
         run: |
           nix copy --all --to 's3://nixcache?endpoint=s3.cy7.sh' --verbose
+          nix store sign --store 's3://nixcache?endpoint=s3.cy7.sh' -k /home/runner/cache-priv-key.pem --all
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
       - name: upload result

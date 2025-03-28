@@ -55,6 +55,7 @@ jobs:
         if: always()
         run: |
           nix copy --all --to 's3://nixcache?endpoint=s3.cy7.sh' --verbose
+          nix store sign --store 's3://nixcache?endpoint=s3.cy7.sh' -k /home/runner/cache-priv-key.pem --all
   build-homes:
     strategy:
       fail-fast: false
@@ -94,3 +95,4 @@ jobs:
         if: always()
         run: |
           nix copy --all --to 's3://nixcache?endpoint=s3.cy7.sh' --verbose
+          nix store sign --store 's3://nixcache?endpoint=s3.cy7.sh' -k /home/runner/cache-priv-key.pem --all
