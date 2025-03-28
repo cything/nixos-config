@@ -23,7 +23,6 @@ in
           meta.mainProgram = "garage";
         }
       );
-      helix = pkgFrom inputs.helix "default";
     }
   )
 ]

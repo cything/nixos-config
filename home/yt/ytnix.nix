@@ -102,6 +102,7 @@
       freetube
       gopls
       rust-analyzer
+      minio-client
     ];
 
   home.sessionVariables = {
@@ -151,17 +152,4 @@
   };
 
   programs.nix-index-database.comma.enable = true;
-  programs.helix = {
-    enable = true;
-    settings = {
-      theme = "github_dark";
-      editor = {
-        line-number = "relative";
-        lsp.display-messages = true;
-      };
-      keys.insert = {
-        "C-[" = "normal_mode";
-      };
-    };
-  };
 }

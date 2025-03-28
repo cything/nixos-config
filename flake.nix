@@ -91,11 +91,6 @@
         flake-utils.follows = "flake-utils";
       };
     };
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
 
     nvim-github-theme = {
       url = "github:projekt0n/github-nvim-theme";
