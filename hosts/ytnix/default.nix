@@ -94,8 +94,10 @@
       #   3003 # immich-ml
       # ];
     };
+    hosts = {
+      "100.122.132.30" = [ "s3.cy7.sh" ];
+    };
   };
-  programs.nm-applet.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {

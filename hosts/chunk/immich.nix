@@ -6,7 +6,7 @@
 }:
 let
   uploadLocation = "/mnt/photos/immich";
-  thumbsLocation = "/opt/immich/thumbs";
+  # thumbsLocation = "/opt/immich/thumbs";
   profileLocation = "/opt/immich/profile";
   dbDataLocation = "/opt/immich/postgres";
   backupsLocation = "/opt/immich/backups";
@@ -20,7 +20,7 @@ in
       pull = "newer";
       volumes = [
         "${uploadLocation}:/usr/src/app/upload"
-        "${thumbsLocation}:/usr/src/app/upload/thumbs"
+        # "${thumbsLocation}:/usr/src/app/upload/thumbs"
         "${profileLocation}:/usr/src/app/upload/profile"
         "${backupsLocation}:/usr/src/app/upload/backups"
       ];

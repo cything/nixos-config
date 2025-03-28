@@ -24,6 +24,7 @@
       compression_level = "none";
     };
     environmentFile = config.sops.secrets."garage/env".path;
+    logLevel = "warn";
   };
 
   services.caddy.virtualHosts = {
