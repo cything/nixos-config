@@ -70,7 +70,8 @@ jobs:
           nix build -L "$package"
 
       - name: cache
-        # if: always()
+        # https://stackoverflow.com/a/58859404
+        if: '!cancelled()'
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
           derivations=()
@@ -136,7 +137,8 @@ jobs:
           nix build -L "$package"
 
       - name: cache
-        # if: always()
+        # https://stackoverflow.com/a/58859404
+        if: '!cancelled()'
         run: |
           package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
           derivations=()

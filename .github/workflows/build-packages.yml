@@ -59,7 +59,8 @@ jobs:
       - run: nix build -L ${{ matrix.package }}
 
       - name: cache result
-        if: always()
+        # https://stackoverflow.com/a/58859404
+        if: '!cancelled()'
         run: |
           derivations=()
           while IFS=$'\n' read derivation; do
