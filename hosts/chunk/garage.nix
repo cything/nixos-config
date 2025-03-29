@@ -46,5 +46,20 @@
         reverse_proxy localhost:3902
       '';
     };
+    "dl.cy7.sh".extraConfig = ''
+      import common
+      fs dl
+      file_server {
+        browse
+      }
+    '';
   };
+
+  services.caddy.globalConfig = ''
+    filesystem dl s3 {
+      bucket caddy-dl
+      region us-east-1
+      endpoint https://s3.cy7.sh
+    }
+  '';
 }
