@@ -11,8 +11,30 @@ jobs:
   createPullRequest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+        with:
+          ssh-key: ${{ secrets.SSH_DEPLOY_KEY }}
+
       - name: Install Nix
-        uses: cachix/install-nix-action@v30
+        uses: cachix/install-nix-action@53fb48f556dd912c4814b24ee8059a9c91c82b18
+        with:
+          enable_kvm: true
+          extra_nix_config: |
+            show-trace = true
+            experimental-features = nix-command flakes
+            accept-flake-config = true
+            system-features = nixos-test benchmark big-parallel kvm
+            secret-key-files = /home/runner/cache-priv-key.pem
+            extra-substituters = https://nixcache.cy7.sh
+            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
+
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v24
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          nix flake update --commit-lock-file
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@98106d3f2b65918a6591f9e155117b7219ff7e51
+        with:
+          title: nix flake update
