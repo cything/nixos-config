@@ -38,10 +38,10 @@ jobs:
         run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
 
       - name: Install Nix
-        uses: cachix/install-nix-action@v30
+        uses: DeterminateSystems/nix-installer-action@main
         with:
-          enable_kvm: true
-          extra_nix_config: |
+          kvm: true
+          extra-conf: |
             show-trace = true
             experimental-features = nix-command flakes
             accept-flake-config = true
