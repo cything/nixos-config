@@ -23,16 +23,19 @@ jobs:
 
     steps:
       - name: Maximize build disk space
-        uses: easimon/maximize-build-space@v10
+        uses: easimon/maximize-build-space@master
         with:
-          overprovision-lvm: true
-          swap-size-mb: 1024
+          overprovision-lvm: false
+          # swap-size-mb: 1024
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: /nix
+
+      - name: make root own /nix
+        run: sudo chown -R root:root /nix
 
       - name: setup binary cache key
         run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
