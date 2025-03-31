@@ -11,7 +11,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     rust-overlay.url = "github:oxalica/rust-overlay";
     conduwuit.url = "github:girlbossceo/conduwuit";
-    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module";
+    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module?ref=release-2.92";
     nix-ld.url = "github:nix-community/nix-ld";
     nil.url = "github:oxalica/nil";
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions/";
