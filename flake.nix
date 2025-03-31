@@ -47,35 +47,9 @@
     flake-parts.lib.mkFlake { inherit inputs; } (
       { ... }:
       {
-        imports = [
-          inputs.treefmt.flakeModule
-        ];
         systems = [
           "x86_64-linux"
         ];
-        perSystem =
-          {
-            inputs',
-            ...
-          }:
-          {
-            treefmt = {
-              projectRootFile = "flake.nix";
-              programs.nixfmt.enable = true;
-              programs.typos.enable = true;
-              programs.shellcheck.enable = true;
-
-              programs.yamlfmt = {
-                enable = true;
-                settings.retain_line_breaks = true;
-              };
-
-              settings.global.excludes = [
-                "secrets/*"
-                "**/*.png" # tries to format a png file
-              ];
-            };
-          };
 
         flake =
           let
