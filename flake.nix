@@ -48,7 +48,7 @@
       };
     };
     lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=release-2.92";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
