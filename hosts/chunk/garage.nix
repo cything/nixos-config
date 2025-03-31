@@ -43,6 +43,14 @@
       serverAliases = [ "nixcache.cy7.sh" ];
       extraConfig = ''
         import common
+        @plain {
+          host nixcache.cy7.sh nixcache.web.cy7.sh
+          path / /nix-cache-info
+        }
+        header @plain {
+          >content-type text/plain
+        }
+
         reverse_proxy localhost:3902
       '';
     };
