@@ -122,9 +122,6 @@
     AWS_ENDPOINT_URL = "https://s3.cy7.sh";
     AWS_ACCESS_KEY_ID = "$(cat /run/secrets/aws/key_id)";
     AWS_SECRET_ACCESS_KEY = "$(cat /run/secrets/aws/key_secret)";
-
-    # bitwarden ssh agent
-    SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
   };
 
   home.sessionPath = [
@@ -152,4 +149,15 @@
   };
 
   programs.nix-index-database.comma.enable = true;
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
 }

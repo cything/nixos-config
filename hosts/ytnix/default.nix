@@ -329,6 +329,7 @@
       curl
       pcre2
       gsettings-desktop-schemas
+      fzf
     ];
   };
   programs.evolution.enable = true;
@@ -390,4 +391,6 @@
   nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
   programs.fuse.userAllowOther = true;
   nix.settings.sandbox = false;
+
+  programs.ssh.startAgent = true;
 }
