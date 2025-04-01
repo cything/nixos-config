@@ -36,6 +36,15 @@ in
         }
       '';
       environmentFile = config.sops.secrets."caddy/env".path;
+      
+      virtualHosts."keys.cy7.sh".extraConfig = ''
+        import common
+        respond / 200 {
+          body "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOfubDWr0kRm2o4DqaK6l1s4NCdTkljXZWKWCiF5nX+6
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPhUt9h5dCcrwOrZNKkStCX5OxumPzEwYXSU/0DgtWgP
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyn2+OoRN4nExti+vFQ1NHEZip0slAoCH9C5/FzvgZD"
+        }
+      '';
     };
   };
 }
