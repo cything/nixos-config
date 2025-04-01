@@ -29,10 +29,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -101,6 +97,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     crane.url = "github:ipetkov/crane";
     flake-compat.url = "github:edolstra/flake-compat";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   nixConfig = {
@@ -119,111 +116,74 @@
       self,
       nixpkgs,
       home-manager,
-      flake-parts,
       ...
     }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      { ... }:
+      let
+        pkgs = import nixpkgs {
+          config.allowUnfree = true;
+          system = "x86_64-linux";
+          overlays = [
+            inputs.rust-overlay.overlays.default
+            inputs.vscode-extensions.overlays.default
+          ] ++ (import ./overlay { inherit inputs; });
+        };
+      in
       {
-        imports = [
-          inputs.treefmt.flakeModule
-        ];
-        systems = [
-          "x86_64-linux"
-        ];
-        perSystem =
+        nixosConfigurations =
+          let
+            lib = nixpkgs.lib;
+          in
           {
-            inputs',
-            ...
-          }:
-          {
-            treefmt = {
-              projectRootFile = "flake.nix";
-              programs.nixfmt.enable = true;
-              programs.typos.enable = true;
-              programs.shellcheck.enable = true;
-
-              programs.yamlfmt = {
-                enable = true;
-                settings.retain_line_breaks = true;
-              };
-
-              settings.global.excludes = [
-                "secrets/*"
-                "**/*.png" # tries to format a png file
+            ytnix = lib.nixosSystem {
+              specialArgs = { inherit inputs; };
+              modules = [
+                {
+                  nixpkgs = { inherit pkgs; };
+                }
+                ./hosts/ytnix
+                ./modules
+                inputs.sops-nix.nixosModules.sops
+                inputs.lanzaboote.nixosModules.lanzaboote
+                inputs.lix-module.nixosModules.default
+                inputs.nix-ld.nixosModules.nix-ld
+              ];
+            };
+            chunk = lib.nixosSystem {
+              specialArgs = { inherit inputs; };
+              modules = [
+                {
+                  nixpkgs = { inherit pkgs; };
+                }
+                ./hosts/chunk
+                ./modules
+                inputs.sops-nix.nixosModules.sops
+                inputs.lix-module.nixosModules.default
               ];
             };
           };
-
-        flake =
+        homeConfigurations =
           let
-            pkgs = import nixpkgs {
-              config.allowUnfree = true;
-              system = "x86_64-linux";
-              overlays = [
-                inputs.rust-overlay.overlays.default
-                inputs.vscode-extensions.overlays.default
-              ] ++ (import ./overlay { inherit inputs; });
-            };
+            lib = home-manager.lib;
           in
           {
-            nixosConfigurations =
-              let
-                lib = nixpkgs.lib;
-              in
-              {
-                ytnix = lib.nixosSystem {
-                  specialArgs = { inherit inputs; };
-                  modules = [
-                    {
-                      nixpkgs = { inherit pkgs; };
-                    }
-                    ./hosts/ytnix
-                    ./modules
-                    inputs.sops-nix.nixosModules.sops
-                    inputs.lanzaboote.nixosModules.lanzaboote
-                    inputs.lix-module.nixosModules.default
-                    inputs.nix-ld.nixosModules.nix-ld
-                  ];
-                };
-                chunk = lib.nixosSystem {
-                  specialArgs = { inherit inputs; };
-                  modules = [
-                    {
-                      nixpkgs = { inherit pkgs; };
-                    }
-                    ./hosts/chunk
-                    ./modules
-                    inputs.sops-nix.nixosModules.sops
-                    inputs.lix-module.nixosModules.default
-                  ];
-                };
-              };
-            homeConfigurations =
-              let
-                lib = home-manager.lib;
-              in
-              {
-                "yt@ytnix" = lib.homeManagerConfiguration {
-                  inherit pkgs;
-                  extraSpecialArgs = { inherit inputs; };
-                  modules = [
-                    ./home/yt/ytnix.nix
-                    inputs.nixvim.homeManagerModules.nixvim
-                    inputs.nix-index-database.hmModules.nix-index
-                  ];
-                };
+            "yt@ytnix" = lib.homeManagerConfiguration {
+              inherit pkgs;
+              extraSpecialArgs = { inherit inputs; };
+              modules = [
+                ./home/yt/ytnix.nix
+                inputs.nixvim.homeManagerModules.nixvim
+                inputs.nix-index-database.hmModules.nix-index
+              ];
+            };
 
-                "yt@chunk" = lib.homeManagerConfiguration {
-                  inherit pkgs;
-                  extraSpecialArgs = { inherit inputs; };
-                  modules = [
-                    ./home/yt/chunk.nix
-                    inputs.nixvim.homeManagerModules.nixvim
-                  ];
-                };
-              };
+            "yt@chunk" = lib.homeManagerConfiguration {
+              inherit pkgs;
+              extraSpecialArgs = { inherit inputs; };
+              modules = [
+                ./home/yt/chunk.nix
+                inputs.nixvim.homeManagerModules.nixvim
+              ];
+            };
           };
-      }
-    );
+      };
 }
