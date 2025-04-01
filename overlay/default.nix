@@ -1,12 +1,4 @@
 { inputs }:
-let
-  overlays = [
-    ./zipline
-    ./bitwarden
-    ./attic
-  ];
-  importedOverlays = map (m: import m) overlays;
-in
 [
   (
     final: prev:
@@ -26,4 +18,3 @@ in
     }
   )
 ]
-++ importedOverlays
