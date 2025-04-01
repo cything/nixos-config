@@ -76,16 +76,12 @@ jobs:
         if: '!cancelled()'
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
-          derivations=()
-          while IFS=$'\n' read derivation; do
-              derivations+=("$derivation")
-          done < <(nix path-info --derivation "$package")
-
-          for derivation in "${derivations[@]}"; do
-              nix copy -j8 \
-                --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
-                $(nix-store --query --requisites --include-outputs "$derivation")
-          done
+          nix profile install git+https://git.cy7.sh/cy/nixcp.git
+          nixcp \
+            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
+            -u https://nix-community.cachix.org \
+            -u https://nixcache.cy7.sh \
+            $package
 
   build-homes:
     strategy:
@@ -153,13 +149,9 @@ jobs:
         if: '!cancelled()'
         run: |
           package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
-          derivations=()
-          while IFS=$'\n' read derivation; do
-              derivations+=("$derivation")
-          done < <(nix path-info --derivation "$package")
-
-          for derivation in "${derivations[@]}"; do
-              nix copy -j8 \
-                --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
-                $(nix-store --query --requisites --include-outputs "$derivation")
-          done
+          nix profile install git+https://git.cy7.sh/cy/nixcp.git
+          nixcp \
+            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
+            -u https://nix-community.cachix.org \
+            -u https://nixcache.cy7.sh \
+            $package
