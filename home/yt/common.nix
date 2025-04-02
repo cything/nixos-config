@@ -3,7 +3,6 @@
   imports = [
     ../tmux.nix
     ../zsh
-    ../nixvim
   ];
 
   home.sessionVariables = {

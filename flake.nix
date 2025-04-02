@@ -10,8 +10,6 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     lanzaboote.url = "github:nix-community/lanzaboote/master";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     conduwuit.url = "github:girlbossceo/conduwuit";
@@ -101,7 +99,6 @@
               extraSpecialArgs = { inherit inputs; };
               modules = [
                 ./home/yt/ytnix.nix
-                inputs.nixvim.homeManagerModules.nixvim
                 inputs.nix-index-database.hmModules.nix-index
               ];
             };
@@ -111,7 +108,6 @@
               extraSpecialArgs = { inherit inputs; };
               modules = [
                 ./home/yt/chunk.nix
-                inputs.nixvim.homeManagerModules.nixvim
               ];
             };
           };
