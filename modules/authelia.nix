@@ -64,6 +64,19 @@ in
             scopes = [ "openid" "profile" "email" ];
             userinfo_signed_response_alg = "none";
           }
+          {
+            client_id = "forgejo";
+            client_name = "Forgejo";
+            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$O2O5r/7A8hc4EMvernQ4Dw$YOVqtwY3jv0HlcxmviPq2CRnD7Dw85V9KDtTSUQE7bA";
+            public = false;
+            authorization_policy = "two_factor";
+            redirect_uris = [
+              "https://git.cy7.sh/user/oauth2/authelia/callback"
+            ];
+            scopes = [ "openid" "profile" "email" ];
+            userinfo_signed_response_alg = "none";
+            token_endpoint_auth_method = "client_secret_basic";
+          }
         ];
       };
       secrets = {
