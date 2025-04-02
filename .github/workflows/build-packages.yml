@@ -40,17 +40,14 @@ jobs:
             accept-flake-config = true
             system-features = nixos-test benchmark big-parallel kvm
             secret-key-files = /home/runner/cache-priv-key.pem
-            extra-substituters = https://nixcache.cy7.sh
-            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
+            extra-substituters = https://nixcache.cy7.sh https://cache.lix.systems
+            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8= cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=
 
       - name: Install Lix
         run: |
           sudo --preserve-env=PATH $(which nix) run \
-          --experimental-features "nix-command flakes" \
-          --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
           'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.92.0' -- \
-          upgrade-nix \
-          --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+          upgrade-nix
           nix --version
 
       - name: Sync repository
@@ -65,7 +62,7 @@ jobs:
         if: '!cancelled()'
         run: |
           nix run git+https://git.cy7.sh/cy/nixcp.git -- \
-            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
+            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem&compression=none' \
             -u https://nix-community.cachix.org \
             -u https://nixcache.web.cy7.sh \
             "${{ matrix.package }}"
