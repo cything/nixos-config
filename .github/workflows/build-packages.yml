@@ -67,7 +67,7 @@ jobs:
           nix run git+https://git.cy7.sh/cy/nixcp.git -- \
             --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem' \
             -u https://nix-community.cachix.org \
-            -u https://nixcache.cy7.sh \
+            -u https://nixcache.web.cy7.sh \
             "${{ matrix.package }}"
 
       - name: prepare tarball to upload
