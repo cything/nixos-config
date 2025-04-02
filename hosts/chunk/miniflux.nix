@@ -12,6 +12,7 @@
 
   services.caddy.virtualHosts."rss.cy7.sh".extraConfig = ''
     import common
+    import authelia
     reverse_proxy localhost:8080
   '';
 }

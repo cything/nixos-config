@@ -35,7 +35,7 @@ in
           default_policy = "deny";
           rules = [
             {
-              domain = "red.cy7.sh";
+              domain = "*.cy7.sh";
               policy = "one_factor";
             }
           ];
