@@ -34,6 +34,13 @@ in
             resolvers 1.1.1.1 8.8.8.8
           }
         }
+
+        (authelia) {
+          forward_auth localhost:9091 {
+		        uri /api/authz/forward-auth
+		        copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+	        }
+        }
       '';
       environmentFile = config.sops.secrets."caddy/env".path;
       

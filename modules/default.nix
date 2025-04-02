@@ -9,5 +9,6 @@
     ./vaultwarden.nix
     ./searx.nix
     ./attic.nix
+    ./authelia.nix
   ];
 }

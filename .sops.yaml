@@ -129,3 +129,10 @@ creation_rules:
           - *yt
           - *cy
           - *chunk
+  - path_regex: secrets/services/authelia.yaml
+    key_groups:
+      - age:
+          - *yt
+          - *cy
+          - *chunk
+
