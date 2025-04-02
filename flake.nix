@@ -4,100 +4,30 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    treefmt = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-    };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    conduwuit = {
-      url = "github:girlbossceo/conduwuit";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        crane.follows = "crane";
-        flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
-        attic.follows = "attic";
-      };
-    };
-    lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=release-2.92";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-    nix-ld = {
-      url = "github:nix-community/nix-ld";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-    vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions/";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    attic = {
-      url = "github:zhaofengli/attic";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "nixpkgs-stable";
-        flake-compat.follows = "flake-compat";
-        flake-parts.follows = "flake-parts";
-        crane.follows = "crane";
-      };
-    };
-    garage = {
-      url = "github:deuxfleurs-org/garage";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "rust-overlay";
-        crane.follows = "crane";
-        flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
-      };
-    };
-
-    nvim-github-theme = {
-      url = "github:projekt0n/github-nvim-theme";
-      flake = false;
-    };
-
-    # deduplication
-    flake-utils.url = "github:numtide/flake-utils";
-    crane.url = "github:ipetkov/crane";
-    flake-compat.url = "github:edolstra/flake-compat";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    lanzaboote.url = "github:nix-community/lanzaboote/master";
+    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    conduwuit.url = "github:girlbossceo/conduwuit";
+    conduwuit.inputs.nixpkgs.follows = "nixpkgs";
+    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module?ref=release-2.92";
+    lix-module.inputs.nixpkgs.follows = "nixpkgs";
+    nix-ld.url = "github:nix-community/nix-ld";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    nil.url = "github:oxalica/nil";
+    nil.inputs.nixpkgs.follows = "nixpkgs";
+    vscode-extensions.url = "github:nix-community/nix-vscode-extensions/";
+    vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    garage.url = "github:deuxfleurs-org/garage";
+    garage.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   nixConfig = {
