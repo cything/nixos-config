@@ -47,8 +47,8 @@ jobs:
             accept-flake-config = true
             system-features = nixos-test benchmark big-parallel kvm
             secret-key-files = /home/runner/cache-priv-key.pem
-            extra-substituters = https://nixcache.cy7.sh https://cache.lix.systems
-            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8= cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=
+            extra-substituters = https://nixcache.cy7.sh https://cache.lix.systems https://attic.kennel.juneis.dog/conduwuit
+            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8= cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o= conduwuit:BbycGUgTISsltcmH0qNjFR9dbrQNYgdIAcmViSGoVTE=
 
       - name: Install Lix
         run: |
