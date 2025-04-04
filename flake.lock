@@ -114,11 +114,11 @@
         "rocksdb": "rocksdb"
       },
       "locked": {
-        "lastModified": 1743473828,
-        "narHash": "sha256-x/sfh6LCHGAz8rL23GHhH7dac1LtHBbRRJi1p8gOdtI=",
+        "lastModified": 1743735594,
+        "narHash": "sha256-aaP8OjY4fkpxk2JdSggx9S3Rk+P+VhuivT6aRpLxoj0=",
         "owner": "girlbossceo",
         "repo": "conduwuit",
-        "rev": "0f81c1e1ccdcb0c5c6d5a27e82f16eb37b1e61c8",
+        "rev": "00f7745ec4ebcea5f892376c5de5db1299f71696",
         "type": "github"
       },
       "original": {
@@ -151,11 +151,11 @@
     },
     "crane_2": {
       "locked": {
-        "lastModified": 1742394900,
-        "narHash": "sha256-vVOAp9ahvnU+fQoKd4SEXB2JG2wbENkpqcwlkIXgUC0=",
+        "lastModified": 1739936662,
+        "narHash": "sha256-x4syUjNUuRblR07nDPeLDP7DpphaBVbUaSoeZkFbGSk=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "70947c1908108c0c551ddfd73d4f750ff2ea67cd",
+        "rev": "19de14aaeb869287647d9461cbd389187d8ecdb7",
         "type": "github"
       },
       "original": {
