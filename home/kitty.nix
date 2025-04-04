@@ -17,10 +17,10 @@
 
       # will probably lower this later but the max allowed is actually 4GB
       # this is NOT stored in memory and can only be viewed with scrollback_pager
-      "scrollback_pager_history_size" = "1024";
+      "scrollback_pager_history_size" = "10"; # in MB
       # see https://github.com/sharkdp/bat/issues/1077#issuecomment-652785399
       "scrollback_pager" = "bat --pager='less -FR +G'";
-      "scrollback_lines" = 20000;
+      # "scrollback_lines" = 20000;
     };
     keybindings = {
       # kitty_mod is ctrl+shift by default
@@ -58,18 +58,29 @@
       "kitty_mod+alt+p" = "move_tab_backward";
       "kitty_mod+q" = "close_tab";
       "kitty_mod+t" = "new_tab_with_cwd";
-      "ctrl+f2" = "detach_tab";
 
       # hints
       # > basically means the preceding key is a prefix (think tmux)
       "kitty_mod+o>o" = "open_url_with_hints";
-      "kitty_mod+o>p" = "kitten hints --type path --program -";
-      "kitty_mod+o>n" = "kitten hints --type line --program -";
-      "kitty_mod+o>w" = "kitten hints --type word --program -";
-      "kitty_mod+o>h" = "kitten hints --type hash --program -";
+      # `--program @` means copy to clipboard
+      "kitty_mod+o>u" = "kitten hints --type url --program @";
+      "kitty_mod+o>p" = "kitten hints --type path --program @";
+      "kitty_mod+o>n" = "kitten hints --type line --program @";
+      "kitty_mod+o>w" = "kitten hints --type word --program @";
+      "kitty_mod+o>h" = "kitten hints --type hash --program @";
       "kitty_mod+o>l" = "kitten hints --type linenum";
+
+      # scrolling
+      "kitty_mod+u" = "scroll_page_up";
+      "kitty_mod+d" = "scroll_page_down";
+      "kitty_mod+a" = "scroll_home";
+      "kitty_mod+e" = "scroll_end";
+      "kitty_mod+z" = "scroll_to_prompt -1"; # scroll to previous shell prompt
+      "kitty_mod+x" = "scroll_to_prompt 1"; # scroll to next shell prompt
+      "kitty_mod+y" = "show_scrollback"; # browse scrollback buffer in pager
+      "kitty_mod+g" = "show_last_command_output"; # browse output of last command in pager
     };
   };
 
-  # programs.zsh.shellAliases."ssh" = "kitten ssh"; # doesn't seem to work with bitwarden ssh agent :(
+  programs.zsh.shellAliases."ssh" = "kitten ssh";
 }
