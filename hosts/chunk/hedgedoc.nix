@@ -11,7 +11,7 @@
         dialect = "postgresql";
       };
       port = 8085;
-      domain = "pad.cything.io";
+      domain = "pad.cy7.sh";
       allowEmailRegister = false;
       protocolUseSSL = true;
     };
