@@ -77,6 +77,23 @@ in
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_basic";
           }
+          {
+            client_id = "hedgedoc";
+            client_name = "HedgeDoc";
+            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$MFSXW3gjIZf0M3e8s8RJCg$6KWwksJe2vdUebPEdYc0Zy88fzGcHPrbStcqkiXl+Hg";
+            public = false;
+            authorization_policy = "two_factor";
+            redirect_uris = [
+              "https://pad.cy7.sh/auth/oauth2/callback"
+            ];
+            scopes = [ "openid" "profile" "email" ];
+            userinfo_signed_response_alg = "none";
+            grant_types = [ "refresh_token" "authorization_code" ];
+            response_types = [ "code" ];
+            response_modes = [ "form_post" "query" "fragment" ];
+            audience = [];
+            token_endpoint_auth_method = "client_secret_post";
+          }
         ];
       };
       secrets = {

@@ -14,6 +14,7 @@
       domain = "pad.cy7.sh";
       allowEmailRegister = false;
       protocolUseSSL = true;
+      imageuploadtype = "minio";
     };
   };
 
