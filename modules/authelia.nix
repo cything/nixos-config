@@ -56,7 +56,7 @@ in
         };
         identity_providers.oidc.clients = [
           {
-            client_id = "immich";
+            client_id = "4EIrpRb9rnwHWjYWvlz2gYrtTmoOLF1D5gqXw28BvmOS0f-9T2p4CFwuctf4Co1hkpo2sd4Y";
             client_name = "immich";
             client_secret = "$argon2id$v=19$m=65536,t=3,p=4$Vny2G8EbSPafSwnIuq2Zkg$eF2om4WDEaqCFmrAG27h2mYl+cXxXyttPJ7gaPLs+f8";
             public = false;
@@ -70,7 +70,7 @@ in
             userinfo_signed_response_alg = "none";
           }
           {
-            client_id = "forgejo";
+            client_id = "_kuUEYxyfXjInJCniwugpw2Qn6iI-YW24NOkHZG~63BAhnAACDZ.xsLqOdGghj2DNZxXR0sU";
             client_name = "Forgejo";
             client_secret = "$argon2id$v=19$m=65536,t=3,p=4$O2O5r/7A8hc4EMvernQ4Dw$YOVqtwY3jv0HlcxmviPq2CRnD7Dw85V9KDtTSUQE7bA";
             public = false;
@@ -83,7 +83,7 @@ in
             token_endpoint_auth_method = "client_secret_basic";
           }
           {
-            client_id = "hedgedoc";
+            client_id = "b_ITCG0uNzy9lZ5nVC~Ny5R35te8I3hoQW1uraCbdxeiE9VuiCIelMmZZ7dAZLg_anTUWSQG";
             client_name = "HedgeDoc";
             client_secret = "$argon2id$v=19$m=65536,t=3,p=4$MFSXW3gjIZf0M3e8s8RJCg$6KWwksJe2vdUebPEdYc0Zy88fzGcHPrbStcqkiXl+Hg";
             public = false;
