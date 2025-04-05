@@ -24,6 +24,7 @@
           golang.go
           ms-python.python
           christian-kohler.path-intellisense
+          # firefox-devtools.vscode-firefox-debug
         ];
       userSettings =
         let
@@ -74,6 +75,11 @@
           "telemetry.enableTelemetry" = false;
           "telemetry.telemetryLevel" = "off";
           "window.titleBarStyle" = "custom";
+          # https://github.com/ChristianKohler/PathIntellisense#installation
+          "typescript.suggest.paths" = false;
+          "javascript.suggest.paths" = false;
+
+          "path-intellisense.absolutePathToWorkspace" = true;
 
           # terminal stuff
           "terminal.integrated.cursorBlinking" = true;

@@ -18,7 +18,6 @@
     ./grafana.nix
     ./conduwuit.nix
     ./immich.nix
-    ./element.nix
     ./forgejo.nix
     ./garage.nix
     ./tailscale.nix
