@@ -46,20 +46,14 @@
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/zh5061/chunk.yaml;
     };
-    "attic/env" = {
-      sopsFile = ../../secrets/services/attic.yaml;
-    };
     "garage/env" = {
       sopsFile = ../../secrets/services/garage.yaml;
     };
     "tailscale/auth" = {
       sopsFile = ../../secrets/services/tailscale.yaml;
     };
-    "zipline/env" = {
-      sopsFile = ../../secrets/services/zipline.yaml;
-    };
-    "searx/env" = {
-      sopsFile = ../../secrets/services/searx.yaml;
+    "karakeep/env" = {
+      sopsFile = ../../secrets/services/karakeep.yaml;
     };
   };
 
@@ -186,9 +180,10 @@
   programs.git.enable = true;
 
   my.caddy.enable = true;
-
-  # container stuff
   my.containerization.enable = true;
-
   my.authelia.enable = true;
+  my.karakeep = {
+    enable = true;
+    dataDir = "/opt/karakeep";
+  };
 }

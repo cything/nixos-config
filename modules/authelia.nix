@@ -49,6 +49,11 @@ in
         webauthn = {
           enable_passkey_login = true;
         };
+        identity_providers.oidc.claims_policies = {
+          # https://github.com/karakeep-app/karakeep/issues/410
+          # https://www.authelia.com/integration/openid-connect/openid-connect-1.0-claims/#restore-functionality-prior-to-claims-parameter
+          karakeep.id_token = [ "email" ];
+        };
         identity_providers.oidc.clients = [
           {
             client_id = "immich";
@@ -93,6 +98,17 @@ in
             response_modes = [ "form_post" "query" "fragment" ];
             audience = [];
             token_endpoint_auth_method = "client_secret_post";
+          }
+          {
+            client_id = "0SbsGvw5APYJ4px~dv38rCVgXtK2XWrF1QvyuaFz48cgsNm-rAXkSgNOctfxS21IWOFSfsm5";
+            client_name = "Karakeep";
+            client_secret = "$pbkdf2-sha512$310000$4UanDZq.6oholJW3CmKwtQ$9e3hqR8qGU4LoneR/Y9jtJTx0iSzATI4iXymrs8QrmGw4JY1BPF4.IJ9Jbc.8cikU4qpfUIFO6r2dG7JHznCnw";
+            public = false;
+            authorization_policy = "two_factor";
+            redirect_uris = [ "https://keep.cy7.sh/api/auth/callback/custom" ];
+            scopes = [ "openid" "profile" "email" ];
+            userinfo_signed_response_alg = "none";
+            claims_policy = "karakeep";
           }
         ];
       };

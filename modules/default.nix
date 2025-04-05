@@ -10,5 +10,6 @@
     ./searx.nix
     ./attic.nix
     ./authelia.nix
+    ./karakeep.nix
   ];
 }

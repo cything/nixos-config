@@ -135,4 +135,10 @@ creation_rules:
           - *yt
           - *cy
           - *chunk
+  - path_regex: secrets/services/karakeep.yaml
+    key_groups:
+      - age:
+          - *yt
+          - *cy
+          - *chunk
 
