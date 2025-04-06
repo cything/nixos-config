@@ -17,11 +17,12 @@
       };
       admin.api_bind_addr = "[::]:3903";
       rpc_bind_addr = "[::]:3901";
+      rpc_public_addr = "100.122.132.30:3901";
       replication_factor = 1;
       db_engine = "lmdb";
       disable_scrub = true;
-      block_size = "16M";
-      compression_level = 3;
+      block_size = "128M";
+      compression_level = "none";
     };
     environmentFile = config.sops.secrets."garage/env".path;
     logLevel = "warn";
