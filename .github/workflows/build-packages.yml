@@ -62,7 +62,7 @@ jobs:
         if: '!cancelled()'
         run: |
           nix run git+https://git.cy7.sh/cy/nixcp.git -- \
-            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem&compression=none' \
+            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem&compression=zstd' \
             -u https://nix-community.cachix.org \
             -u https://nixcache.web.cy7.sh \
             "${{ matrix.package }}"
