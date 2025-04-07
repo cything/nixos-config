@@ -274,7 +274,6 @@
     enable = true;
     # nix run github:thiagokokada/nix-alien#nix-alien-find-libs ./<binary>
     libraries = with pkgs; [
-      # TODO: revisit what we actually need
       mesa
       extest
       stdenv.cc.cc
@@ -330,6 +329,7 @@
       pcre2
       gsettings-desktop-schemas
       fzf
+      systemd
     ];
   };
   programs.evolution.enable = true;
