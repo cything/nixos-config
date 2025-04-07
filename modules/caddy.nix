@@ -49,7 +49,8 @@ in
         respond / 200 {
           body "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOfubDWr0kRm2o4DqaK6l1s4NCdTkljXZWKWCiF5nX+6
         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPhUt9h5dCcrwOrZNKkStCX5OxumPzEwYXSU/0DgtWgP
-        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyn2+OoRN4nExti+vFQ1NHEZip0slAoCH9C5/FzvgZD"
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyn2+OoRN4nExti+vFQ1NHEZip0slAoCH9C5/FzvgZD
+        sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIA/IX9OFEhHS9Dl8nrtHkL7j7hhy7in9OAY/hVuzEGL0AAAABHNzaDo="
         }
       '';
     };
