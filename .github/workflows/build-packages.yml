@@ -11,6 +11,8 @@ env:
   TERM: ansi
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_ENDPOINT_URL: https://s3.cy7.sh
 
 jobs:
   build-packages:
@@ -65,7 +67,6 @@ jobs:
             push \
             --bucket nixcache \
             --signing-key ${{ runner.temp }}/cache-priv-key.pem \
-            --endpoint https://s3.cy7.sh \
             -u https://nix-community.cachix.org \
             "${{ matrix.package }}"
 
