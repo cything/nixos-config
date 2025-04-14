@@ -22,8 +22,8 @@ jobs:
         os:
           - ubuntu-latest
           - ubuntu-24.04-arm
-          # - macos-latest
-          # - macos-13
+          - macos-latest
+          - macos-13
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -61,10 +61,12 @@ jobs:
         # https://stackoverflow.com/a/58859404
         if: '!cancelled()'
         run: |
-          nix run git+https://git.cy7.sh/cy/nixcp.git -- \
-            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem&compression=zstd' \
+          nix run github:cything/nixcp/2025-04-12 -- \
+            push \
+            --bucket nixcache \
+            --signing-key /home/runner/cache-priv-key.pem \
+            --endpoint https://s3.cy7.sh \
             -u https://nix-community.cachix.org \
-            -u https://nixcache.web.cy7.sh \
             "${{ matrix.package }}"
 
       - name: prepare tarball to upload

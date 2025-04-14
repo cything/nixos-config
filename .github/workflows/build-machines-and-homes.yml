@@ -73,10 +73,12 @@ jobs:
         if: '!cancelled()'
         run: |
           package=".#nixosConfigurations."${{ matrix.machine }}".config.system.build.toplevel"
-          nix run git+https://git.cy7.sh/cy/nixcp.git -- \
-            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem&compression=zstd' \
+          nix run github:cything/nixcp/2025-04-12 -- \
+            push \
+            --bucket nixcache \
+            --signing-key /home/runner/cache-priv-key.pem \
+            --endpoint https://s3.cy7.sh \
             -u https://nix-community.cachix.org \
-            -u https://nixcache.web.cy7.sh \
             $package
 
   build-homes:
@@ -142,8 +144,10 @@ jobs:
         if: '!cancelled()'
         run: |
           package=".#homeConfigurations."${{ matrix.home }}".activationPackage"
-          nix run git+https://git.cy7.sh/cy/nixcp.git -- \
-            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem&compression=zstd' \
+          nix run github:cything/nixcp/2025-04-12 -- \
+            push \
+            --bucket nixcache \
+            --signing-key /home/runner/cache-priv-key.pem \
+            --endpoint https://s3.cy7.sh \
             -u https://nix-community.cachix.org \
-            -u https://nixcache.web.cy7.sh \
             $package
