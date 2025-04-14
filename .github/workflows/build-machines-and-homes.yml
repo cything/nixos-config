@@ -35,7 +35,7 @@ jobs:
           build-mount-path: /nix
 
       - name: setup binary cache key
-        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" > ${{ runner.temp }}/cache-priv-key.pem
+        run: echo -n "${{ secrets.NIX_CACHE_SECRET_KEY }}" | xxd -p -r > ${{ runner.temp }}/cache-priv-key.pem
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -107,7 +107,7 @@ jobs:
           build-mount-path: /nix
 
       - name: setup binary cache key
-        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" > ${{ runner.temp }}/cache-priv-key.pem
+        run: echo -n "${{ secrets.NIX_CACHE_SECRET_KEY }}" | xxd -p -r > ${{ runner.temp }}/cache-priv-key.pem
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
