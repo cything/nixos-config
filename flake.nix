@@ -14,7 +14,6 @@
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     conduwuit.url = "github:girlbossceo/conduwuit";
     conduwuit.inputs.nixpkgs.follows = "nixpkgs";
-    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module?ref=release-2.92";
     nix-ld.url = "github:nix-community/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
     nil.url = "github:oxalica/nil";
@@ -71,7 +70,6 @@
                 ./modules
                 inputs.sops-nix.nixosModules.sops
                 inputs.lanzaboote.nixosModules.lanzaboote
-                inputs.lix-module.nixosModules.default
                 inputs.nix-ld.nixosModules.nix-ld
               ];
             };
@@ -84,7 +82,6 @@
                 ./hosts/chunk
                 ./modules
                 inputs.sops-nix.nixosModules.sops
-                inputs.lix-module.nixosModules.default
               ];
             };
           };
