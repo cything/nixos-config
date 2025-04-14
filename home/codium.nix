@@ -73,6 +73,7 @@
           "telemetry.enableTelemetry" = false;
           "telemetry.telemetryLevel" = "off";
           "window.titleBarStyle" = "custom";
+          "editor.formatOnSave" = true;
 
           # terminal stuff
           "terminal.integrated.cursorBlinking" = true;
