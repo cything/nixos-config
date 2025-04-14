@@ -16,7 +16,6 @@
     ./redlib.nix
     ./vaultwarden.nix
     ./grafana.nix
-    ./conduwuit.nix
     ./immich.nix
     ./forgejo.nix
     ./garage.nix

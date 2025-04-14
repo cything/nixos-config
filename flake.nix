@@ -12,8 +12,6 @@
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-    conduwuit.url = "github:girlbossceo/conduwuit";
-    conduwuit.inputs.nixpkgs.follows = "nixpkgs";
     lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module?ref=release-2.92";
     nix-ld.url = "github:nix-community/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
