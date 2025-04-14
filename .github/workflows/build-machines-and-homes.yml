@@ -35,7 +35,7 @@ jobs:
           build-mount-path: /nix
 
       - name: setup binary cache key
-        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
+        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" > ${{ runner.temp }}/cache-priv-key.pem
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -46,7 +46,7 @@ jobs:
             experimental-features = nix-command flakes
             accept-flake-config = true
             system-features = nixos-test benchmark big-parallel kvm
-            secret-key-files = /home/runner/cache-priv-key.pem
+            secret-key-files = ${{ runner.temp }}/cache-priv-key.pem
             extra-substituters = https://nixcache.cy7.sh https://cache.lix.systems
             extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8= cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=
 
@@ -76,7 +76,7 @@ jobs:
           nix run github:cything/nixcp/2025-04-12 -- \
             push \
             --bucket nixcache \
-            --signing-key /home/runner/cache-priv-key.pem \
+            --signing-key ${{ runner.temp }}/cache-priv-key.pem \
             --endpoint https://s3.cy7.sh \
             -u https://nix-community.cachix.org \
             $package
@@ -107,7 +107,7 @@ jobs:
           build-mount-path: /nix
 
       - name: setup binary cache key
-        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
+        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" > ${{ runner.temp }}/cache-priv-key.pem
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -118,7 +118,7 @@ jobs:
             experimental-features = nix-command flakes
             accept-flake-config = true
             system-features = nixos-test benchmark big-parallel kvm
-            secret-key-files = /home/runner/cache-priv-key.pem
+            secret-key-files = ${{ runner.temp }}/cache-priv-key.pem
             extra-substituters = https://nixcache.cy7.sh https://cache.lix.systems
             extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8= cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=
 
@@ -147,7 +147,7 @@ jobs:
           nix run github:cything/nixcp/2025-04-12 -- \
             push \
             --bucket nixcache \
-            --signing-key /home/runner/cache-priv-key.pem \
+            --signing-key ${{ runner.temp }}/cache-priv-key.pem \
             --endpoint https://s3.cy7.sh \
             -u https://nix-community.cachix.org \
             $package
