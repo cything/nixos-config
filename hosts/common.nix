@@ -33,7 +33,6 @@
       options = "--delete-older-than 14d";
     };
     registry.nixpkgs.flake = inputs.nixpkgs;
-    package = pkgs.lix;
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
