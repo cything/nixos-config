@@ -103,6 +103,7 @@
       gopls
       rust-analyzer
       minio-client
+      nil
     ];
 
   home.sessionVariables = {

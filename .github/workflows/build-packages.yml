@@ -11,6 +11,8 @@ env:
   TERM: ansi
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_ENDPOINT_URL: https://s3.cy7.sh
 
 jobs:
   build-packages:
@@ -22,13 +24,13 @@ jobs:
         os:
           - ubuntu-latest
           - ubuntu-24.04-arm
-          # - macos-latest
-          # - macos-13
+          - macos-latest
+          - macos-13
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: setup binary cache key
-        run: echo "${{ secrets.NIX_CACHE_SECRET_KEY }}" >> /home/runner/cache-priv-key.pem
+        run: echo -n "${{ secrets.NIX_CACHE_SECRET_KEY }}" | xxd -p -r > ${{ runner.temp }}/cache-priv-key.pem
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -39,21 +41,9 @@ jobs:
             experimental-features = nix-command flakes
             accept-flake-config = true
             system-features = nixos-test benchmark big-parallel kvm
-            secret-key-files = /home/runner/cache-priv-key.pem
-            extra-substituters = https://nixcache.cy7.sh https://cache.lix.systems
-            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8= cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=
-
-      - name: Install Lix
-        run: |
-          sudo --preserve-env=PATH $(which nix) run \
-          'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.92.0' -- \
-          upgrade-nix
-          nix --version
-
-      - name: Sync repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
+            secret-key-files = ${{ runner.temp }}/cache-priv-key.pem
+            extra-substituters = https://nixcache.cy7.sh
+            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
 
       - run: nix build -L ${{ matrix.package }}
 
@@ -61,10 +51,11 @@ jobs:
         # https://stackoverflow.com/a/58859404
         if: '!cancelled()'
         run: |
-          nix run git+https://git.cy7.sh/cy/nixcp.git -- \
-            --to 's3://nixcache?endpoint=s3.cy7.sh&secret-key=/home/runner/cache-priv-key.pem&compression=zstd' \
+          nix run github:cything/nixcp/2025-04-12 -- \
+            push \
+            --bucket nixcache \
+            --signing-key ${{ runner.temp }}/cache-priv-key.pem \
             -u https://nix-community.cachix.org \
-            -u https://nixcache.web.cy7.sh \
             "${{ matrix.package }}"
 
       - name: prepare tarball to upload

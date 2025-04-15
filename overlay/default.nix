@@ -12,6 +12,7 @@
           meta.mainProgram = "garage";
         }
       );
+      nil = pkgFrom inputs.nil "default";
     }
   )
 ]
