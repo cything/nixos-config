@@ -184,7 +184,7 @@
   my.containerization.enable = true;
   my.authelia.enable = true;
   my.karakeep = {
-    enable = true;
+    enable = false;
     dataDir = "/opt/karakeep";
   };
 }

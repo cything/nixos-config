@@ -498,6 +498,7 @@
     "vscode-extensions": {
       "inputs": {
         "flake-utils": "flake-utils_3",
+
         "nixpkgs": [
           "nixpkgs"
         ]
