@@ -43,20 +43,8 @@ jobs:
             accept-flake-config = true
             system-features = nixos-test benchmark big-parallel kvm
             secret-key-files = ${{ runner.temp }}/cache-priv-key.pem
-            extra-substituters = https://nixcache.cy7.sh https://cache.lix.systems
-            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8= cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=
-
-      - name: Install Lix
-        run: |
-          sudo --preserve-env=PATH $(which nix) run \
-          'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.92.0' -- \
-          upgrade-nix
-          nix --version
-
-      - name: Sync repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
+            extra-substituters = https://nixcache.cy7.sh
+            extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
 
       - run: nix build -L ${{ matrix.package }}
 
