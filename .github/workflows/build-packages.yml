@@ -51,7 +51,7 @@ jobs:
         # https://stackoverflow.com/a/58859404
         if: '!cancelled()'
         run: |
-          nix run github:cything/nixcp/2025-04-12 -- \
+          nix run github:cything/nixcp -- \
             push \
             --bucket nixcache \
             --signing-key ${{ runner.temp }}/cache-priv-key.pem \
