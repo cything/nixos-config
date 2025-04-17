@@ -104,6 +104,7 @@
       rust-analyzer
       minio-client
       nil
+      keepassxc
     ];
 
   home.sessionVariables = {
