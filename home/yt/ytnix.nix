@@ -162,4 +162,6 @@
     enable = true;
     addKeysToAgent = "yes";
   };
+
+  programs.firefox.enable = true;
 }
