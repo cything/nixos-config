@@ -1,6 +1,7 @@
 { inputs, config, pkgs, ... }:
 {
   nix = {
+    package = pkgs.lix;
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
