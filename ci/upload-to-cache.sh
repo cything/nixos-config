@@ -5,4 +5,4 @@ set -eu
 set -f # disable globbing
 export IFS=' '
 echo "Uploading paths" $OUT_PATHS
-exec /nix/var/nix/profiles/default/bin/nix copy --to "s3://nixcache?endpoint=s3.cy7.sh&compression=zstd" $OUT_PATHS
+exec /nix/var/nix/profiles/default/bin/nix copy --to "s3://nixcache?endpoint=s3.cy7.sh&compression=zstd&parallel-compression=true" $OUT_PATHS
