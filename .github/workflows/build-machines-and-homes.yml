@@ -63,6 +63,9 @@ jobs:
             extra-substituters = https://nixcache.cy7.sh
             extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
             post-build-hook = /etc/nix/upload-to-cache.sh
+        
+      - name: debug
+        run: echo "$(which nix)"
 
       - name: build
         run: |
