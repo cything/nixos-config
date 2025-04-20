@@ -5,4 +5,5 @@ set -eu
 set -f # disable globbing
 export IFS=' '
 echo "Uploading paths" $OUT_PATHS
-exec nix copy --to "s3://nixcache" $OUT_PATHS
+# this is where the cachix installer installs nix
+exec /nix/var/nix/profiles/default/bin/nix copy --to "s3://nixcache" $OUT_PATHS
