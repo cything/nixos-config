@@ -21,7 +21,7 @@ in
           # (still need the @ to pass nix config check)
           "github.com/caddy-dns/cloudflare@v0.0.0-20250228175314-1fb64108d4de"
         ];
-        hash = "sha256-YYpsf8HMONR1teMiSymo2y+HrKoxuJMKIea5/NEykGc=";
+        hash = "sha256-pfh9DXUj35jlAntkWc4D5wuW04xxQfM1rZ4KFauMzvc=";
       };
       logFormat = lib.mkForce "level INFO";
       acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
