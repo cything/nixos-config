@@ -7,7 +7,6 @@
       package = pkgs.ibm-plex;
       size = 12;
     };
-    themeFile = "GitHub_Dark";
     settings = {
       enable_audio_bell = true;
       # how many windows should be open before kitty asks
