@@ -87,7 +87,7 @@
     resolvconf.enable = true;
     firewall = {
       enable = true;
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = [ "tailscale0" "virbr0" ];
       # allowedTCPPorts = [
       #   8080 # mitmproxy
       #   22000 # syncthing

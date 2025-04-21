@@ -19,8 +19,5 @@
       }
     ];
   };
-  services.postgresqlBackup = {
-    enable = true;
-    startAt = "hourly";
-  };
+  services.postgresqlBackup.enable = true;
 }

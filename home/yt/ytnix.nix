@@ -53,6 +53,7 @@
         toolchain:
         toolchain.default.override {
           extensions = [ "rust-src" ];
+          targets = [ "aarch64-unknown-linux-musl" ];
         }
       ))
       pwgen

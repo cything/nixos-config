@@ -47,7 +47,7 @@ in
     };
     startAt = lib.mkOption {
       type = lib.types.str;
-      default = "hourly";
+      default = "daily";
       description = "see systemd.timer(5)";
     };
     jobName = lib.mkOption {
@@ -98,8 +98,9 @@ in
       failOnWarnings = false;
 
       prune.keep = {
-        within = "2d";
-        daily = 365;
+        daily = 7;
+        weekly = 12;
+        monthly = -1;
       };
       extraPruneArgs = [ "--stats" ];
     };
