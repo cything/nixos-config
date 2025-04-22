@@ -24,13 +24,32 @@ jobs:
         os:
           - ubuntu-latest
           - ubuntu-24.04-arm
-          - macos-latest
-          - macos-13
+          # - macos-latest
+          # - macos-13
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: setup binary cache key
         run: echo -n "${{ secrets.NIX_CACHE_SECRET_KEY }}" | xxd -p -r > ${{ runner.temp }}/cache-priv-key.pem
+
+      - name: Sync repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: post-build-hook
+        run: |
+          sudo mkdir -p /etc/nix
+          sudo cp ci/upload-to-cache.sh /etc/nix/
+          sudo chmod +x /etc/nix/upload-to-cache.sh
+
+      - name: setup s3 credentials
+        run: |
+          sudo mkdir /root/.aws
+          echo "[default]" |sudo tee /root/.aws/config |sudo tee /root/.aws/credentials
+          echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" |sudo tee -a /root/.aws/credentials
+          echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" |sudo tee -a /root/.aws/credentials
+          echo "endpoint_url=$AWS_ENDPOINT_URL" |sudo tee -a /root/.aws/config
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -44,19 +63,9 @@ jobs:
             secret-key-files = ${{ runner.temp }}/cache-priv-key.pem
             extra-substituters = https://nixcache.cy7.sh
             extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
+            post-build-hook = /etc/nix/upload-to-cache.sh
 
       - run: nix build -L ${{ matrix.package }}
-
-      - name: cache result
-        # https://stackoverflow.com/a/58859404
-        if: '!cancelled()'
-        run: |
-          nix run github:cything/nixcp -- \
-            push \
-            --bucket nixcache \
-            --signing-key ${{ runner.temp }}/cache-priv-key.pem \
-            -u https://nix-community.cachix.org \
-            "${{ matrix.package }}"
 
       - name: prepare tarball to upload
         run: nix run github:nixos/nixpkgs#gnutar hcvf result.tar result
