@@ -31,6 +31,7 @@ in
         "contextmenu"
         "custom_from"
         "thunderbird_labels"
+        "managesieve"
       ];
       dicts = with pkgs.aspellDicts; [ en ];
       extraConfig = ''
@@ -38,6 +39,8 @@ in
         $config['smtp_host'] = "ssl://smtp.migadu.com:465";
         $config['smtp_user'] = "%u";
         $config['smtp_pass'] = "%p";
+        $config['managesieve_host'] = "tls://imap.migadu.com";
+        $config['managesieve_port'] = 4190;
       '';
     };
 
@@ -48,6 +51,7 @@ in
 
     services.caddy.virtualHosts."mail.cy7.sh".extraConfig = ''
       import common
+      import authelia
       root ${roundcube.package}
       php_fastcgi unix/${fpm.socket}
       file_server

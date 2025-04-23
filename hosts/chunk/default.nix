@@ -187,4 +187,5 @@
     enable = false;
     dataDir = "/opt/karakeep";
   };
+  my.roundcube.enable = true;
 }

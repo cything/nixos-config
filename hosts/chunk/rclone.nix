@@ -30,6 +30,7 @@ let
         ${remote} ${mount}
     '';
     ExecStop = "${lib.getExe' pkgs.fuse "fusermount"} -zu ${mount}";
+    Restart = "on-failure";
   };
 in
 {

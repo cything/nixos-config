@@ -106,6 +106,7 @@
       minio-client
       nil
       keepassxc
+      lua-language-server
     ];
 
   home.sessionVariables = {
