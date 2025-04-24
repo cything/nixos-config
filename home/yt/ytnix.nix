@@ -8,7 +8,7 @@
     ./common.nix
     ../irssi.nix
     ../kitty.nix
-    ../codium.nix
+    # ../codium.nix
   ];
   home = {
     username = "yt";
