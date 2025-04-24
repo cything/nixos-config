@@ -97,16 +97,11 @@
         libllvm
       ])
       nix-output-monitor
-      wl-clipboard-rs
       pixelflasher
       cinny-desktop
       freetube
-      gopls
-      rust-analyzer
       minio-client
-      nil
       keepassxc
-      lua-language-server
     ];
 
   home.sessionVariables = {
@@ -158,6 +153,11 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+    extraPackages = with pkgs; [
+      lua-language-server
+      nil
+      rust-analyzer
+    ];
   };
 
   programs.ssh = {
