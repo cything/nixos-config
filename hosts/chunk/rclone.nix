@@ -15,16 +15,15 @@ let
         --allow-other \
         --cache-dir /var/cache/rclone \
         --transfers 64 \
-        --vfs-cache-mode full \
+        --vfs-cache-mode writes \
         --vfs-cache-min-free-space 5G \
         --dir-cache-time 30d \
-        --no-checksum \
         --no-modtime \
         --vfs-fast-fingerprint \
         --vfs-read-chunk-size 8M \
         --vfs-read-chunk-streams 16 \
         --sftp-concurrency 64 \
-        --sftp-chunk-size 255k \
+        --sftp-chunk-size 1m \
         --buffer-size 0 \
         --write-back-cache \
         ${remote} ${mount}
