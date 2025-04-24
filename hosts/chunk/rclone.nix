@@ -23,7 +23,7 @@ let
         --vfs-fast-fingerprint \
         --vfs-read-chunk-size 8M \
         --vfs-read-chunk-streams 16 \
-        --sftp-concurrency 64 \
+        --sftp-concurrency 96 \
         --sftp-chunk-size 255k \
         --buffer-size 0 \
         --write-back-cache \

@@ -204,7 +204,7 @@
   services.displayManager = {
     enable = true;
     autoLogin.user = "yt";
-    defaultSession = "plasma";
+    defaultSession = "sway";
     sddm = {
       enable = true;
       wayland.enable = true;
@@ -360,12 +360,8 @@
     ];
   };
 
-  services.ollama.enable = false;
-
   services.trezord.enable = true;
 
-  programs.niri.enable = false;
-  programs.niri.package = pkgs.niri-unstable;
   programs.xwayland.enable = true;
 
   services.udev.extraHwdb = ''
@@ -393,4 +389,21 @@
   nix.settings.sandbox = false;
 
   programs.ssh.startAgent = true;
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraPackages = with pkgs; [
+      rofi-wayland
+      cliphist
+      rofimoji
+      grim
+      slurp
+      swaylock
+      swayidle
+      brightnessctl
+      waybar
+      wl-clipboard
+    ];
+  };
 }
