@@ -19,9 +19,9 @@ in
         plugins = [
           # error message will tell you the correct version tag to use
           # (still need the @ to pass nix config check)
-          "github.com/caddy-dns/cloudflare@v0.0.0-20250228175314-1fb64108d4de"
+          "github.com/caddy-dns/cloudflare@v0.2.2-0.20250420134112-006ebb07b349"
         ];
-        hash = "sha256-pfh9DXUj35jlAntkWc4D5wuW04xxQfM1rZ4KFauMzvc=";
+        hash = "sha256-2U+icm4GtI5Fww6U8nKzQ/+pPf63T3scTGuj1zjj4b4=";
       };
       logFormat = lib.mkForce "level INFO";
       acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
@@ -37,9 +37,9 @@ in
 
         (authelia) {
           forward_auth localhost:9091 {
-		        uri /api/authz/forward-auth
-		        copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-	        }
+            uri /api/authz/forward-auth
+            copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+	  }
         }
       '';
       environmentFile = config.sops.secrets."caddy/env".path;
