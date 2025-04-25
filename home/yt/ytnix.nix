@@ -102,6 +102,7 @@
       freetube
       minio-client
       keepassxc
+      ida-free
     ];
 
   home.sessionVariables = {
