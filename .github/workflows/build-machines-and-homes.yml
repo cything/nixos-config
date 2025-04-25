@@ -36,27 +36,11 @@ jobs:
           remove-docker-images: 'true'
           build-mount-path: /nix
 
-      - name: setup binary cache key
-        run: echo -n "${{ secrets.NIX_CACHE_SECRET_KEY }}" | xxd -p -r > ${{ runner.temp }}/cache-priv-key.pem
-
-      - name: Sync repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: post-build-hook
+      - name: setup ssh key
         run: |
-          sudo mkdir -p /etc/nix
-          sudo cp ci/upload-to-cache.sh /etc/nix/
-          sudo chmod +x /etc/nix/upload-to-cache.sh
-
-      - name: setup s3 credentials
-        run: |
-          sudo mkdir /root/.aws
-          echo "[default]" |sudo tee /root/.aws/config |sudo tee /root/.aws/credentials
-          echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" |sudo tee -a /root/.aws/credentials
-          echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" |sudo tee -a /root/.aws/credentials
-          echo "endpoint_url=$AWS_ENDPOINT_URL" |sudo tee -a /root/.aws/config
+          mkdir -p ~/.ssh
+          echo "${{ secrets.NIXCACHE_SSH_PRIVATE_KEY }}" >> ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -71,6 +55,42 @@ jobs:
             extra-substituters = https://nixcache.cy7.sh
             extra-trusted-public-keys = nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8=
             post-build-hook = /etc/nix/upload-to-cache.sh
+
+      - name: setup rclone mount
+        run: |
+          nix profile install nixpkgs#rclone
+
+          mkdir -p ~/.config/rclone
+          cat >>~/.config/rclone/rclone.conf <<EOF
+          [rsyncnet]
+          type = sftp
+          host = zh5061.rsync.net
+          user = zh5061
+          shell_type = unix
+          md5sum_command = md5 -r
+          sha1sum_command = sha1 -r
+          chunk_size = 255k
+          key_file = ~/.ssh/id_ed25519
+          EOF
+
+          sudo mkdir -p /mnt/nixcache
+          sudo chmod 777 /mnt/nixcache
+          sudo chown $USER /mnt/nixcache
+          rclone mount --transfers 64 rsyncnet:nixcache /mnt/nixcache
+
+      - name: setup binary cache key
+        run: echo -n "${{ secrets.NIX_CACHE_SECRET_KEY }}" | xxd -p -r > ${{ runner.temp }}/cache-priv-key.pem
+
+      - name: Sync repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: post-build-hook
+        run: |
+          sudo mkdir -p /etc/nix
+          sudo cp ci/upload-to-cache.sh /etc/nix/
+          sudo chmod +x /etc/nix/upload-to-cache.sh
 
       - name: build
         run: |
