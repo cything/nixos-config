@@ -102,6 +102,7 @@
       minio-client
       keepassxc
       ida-free
+      jujutsu
     ];
 
   home.sessionVariables = {
@@ -162,6 +163,7 @@
       ripgrep
       bat
       delta
+      taplo
     ];
   };
 
