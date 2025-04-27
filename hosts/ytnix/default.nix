@@ -360,8 +360,6 @@
     ];
   };
 
-  services.trezord.enable = true;
-
   programs.xwayland.enable = true;
 
   services.udev.extraHwdb = ''
@@ -386,7 +384,7 @@
   programs.ccache.enable = true;
   nix.settings.extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
   programs.fuse.userAllowOther = true;
-  nix.settings.sandbox = false;
+  nix.settings.sandbox = true;
 
   programs.ssh.startAgent = true;
 

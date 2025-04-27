@@ -60,7 +60,6 @@
       gnumake
       unzip
       anki-bin
-      trezorctl
       q
       gdb
       fuzzel
@@ -158,6 +157,11 @@
       lua-language-server
       nil
       rust-analyzer
+      fzf
+      fd
+      ripgrep
+      bat
+      delta
     ];
   };
 
@@ -167,4 +171,32 @@
   };
 
   programs.firefox.enable = true;
+
+  programs.emacs = {
+    enable = true;
+    extraPackages = _: with pkgs; [
+      rust-analyzer
+      nil
+      ispell
+    ];
+  };
+
+  gtk = {
+    enable = true;
+    theme.package = pkgs.gnome-themes-extra;
+    theme.name = "Adwaita-dark";
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "adwaita";
+    style.name = "adwaita-dark";
+    style.package = pkgs.adwaita-qt;
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
 }

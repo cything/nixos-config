@@ -14,15 +14,14 @@ let
         --config ${config.sops.secrets."rclone/config".path} \
         --allow-other \
         --cache-dir /var/cache/rclone \
-        --transfers 64 \
-        --vfs-cache-mode full \
+        --transfers 16 \
+        --vfs-cache-mode writes \
         --vfs-cache-min-free-space 5G \
         --dir-cache-time 30d \
-        --no-checksum \
         --no-modtime \
         --vfs-fast-fingerprint \
-        --vfs-read-chunk-size 8M \
-        --vfs-read-chunk-streams 16 \
+        --vfs-read-chunk-size 128M \
+        --vfs-read-chunk-streams 0 \
         --sftp-concurrency 64 \
         --sftp-chunk-size 255k \
         --buffer-size 0 \
