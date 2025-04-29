@@ -37,12 +37,6 @@
       searchDownKey = "^n";
     };
 
-    # prezto = {
-    #   enable = true;
-    #   caseSensitive = false;
-    #   editor.keymap = "vi";
-    # };
-
     initExtra = ''
       # disable control+s to pause terminal
       unsetopt FLOW_CONTROL
@@ -85,14 +79,11 @@
     shellAliases = {
       "vi" = "nvim";
       "vim" = "nvim";
-      "t" = "tmux";
-      "tl" = "tmux list-sessions";
-      "ta" = "tmux new-session -A -s";
       "se" = "sudoedit";
       "s" = "sudo";
-      "nrs" = "sudo nixos-rebuild switch -L --flake . --log-format internal-json -v |& nom --json";
-      "nrt" = "sudo nixos-rebuild test -L --flake . --log-format internal-json -v |& nom --json";
-      "hrs" = "home-manager switch -L --flake .";
+      "nrs" = "sudo nixos-rebuild switch -L --flake ~/nixos-config";
+      "nrt" = "sudo nixos-rebuild test -L --flake ~/nixos-config";
+      "hrs" = "home-manager switch -L --flake ~/nixos-config";
       "g" = "git";
       "ga" = "git add";
       "gaa" = "git add --all";
@@ -100,7 +91,6 @@
       "gc" = "git commit --verbose";
       "gcmsg" = "git commit --message";
       "gd" = "git diff";
-      "gdca" = "git diff --cached";
       "gds" = "git diff --staged";
       "gl" = "git log --stat";
       "glg" = "git log --graph";
@@ -113,6 +103,11 @@
       "gs" = "git status --short";
       "gss" = "git status";
       "code" = "codium";
+      "jl" = "jj log -n 10";
+      "jll" = "jj log";
+      "jd" = "jj diff";
+      "jn" = "jj new";
+      "jm" = "jj describe -m";
     };
   };
 
