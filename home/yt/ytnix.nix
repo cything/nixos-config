@@ -28,10 +28,7 @@
   home.packages =
     with pkgs;
     lib.flatten [
-      ungoogled-chromium
-      librewolf
       bitwarden-desktop
-      bitwarden-cli
       fastfetch
       (with kdePackages; [
         gwenview
@@ -41,14 +38,12 @@
       signal-desktop
       btop
       jq
-      sqlite
       usbutils
       calibre
       tor-browser
       wtype
       bat
       rclone
-      go
       (rust-bin.selectLatestNightlyWith (
         toolchain:
         toolchain.default.override {
@@ -56,11 +51,9 @@
           targets = [ "aarch64-unknown-linux-musl" ];
         }
       ))
-      pwgen
       gnumake
       unzip
       anki-bin
-      q
       gdb
       fuzzel
       hugo
@@ -89,16 +82,13 @@
       jadx
       scrcpy
       syncthing
-      syncthingtray
       (with llvmPackages; [
         clangUseLLVM
         compiler-rt
         libllvm
       ])
       nix-output-monitor
-      pixelflasher
       cinny-desktop
-      freetube
       minio-client
       keepassxc
       ida-free
