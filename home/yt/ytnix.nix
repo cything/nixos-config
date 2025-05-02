@@ -154,6 +154,7 @@
       bat
       delta
       taplo
+      llvmPackages.clang-tools
     ];
   };
 
