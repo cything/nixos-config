@@ -87,7 +87,7 @@
     resolvconf.enable = true;
     firewall = {
       enable = true;
-      trustedInterfaces = [ "tailscale0" "virbr0" ];
+      trustedInterfaces = [ "tailscale0" "virbr0" "virbr1" ];
       # allowedTCPPorts = [
       #   8080 # mitmproxy
       #   22000 # syncthing
@@ -238,6 +238,7 @@
       "/home/yt/Games"
       "/home/yt/Videos"
       "/home/yt/.bitmonero"
+      "/home/yt/vms"
     ];
     repo = "yt";
     passFile = config.sops.secrets."borg/rsyncnet".path;

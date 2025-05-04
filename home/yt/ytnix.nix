@@ -93,6 +93,7 @@
       keepassxc
       ida-free
       jujutsu
+      ffmpeg
     ];
 
   home.sessionVariables = {
@@ -155,6 +156,7 @@
       delta
       taplo
       llvmPackages.clang-tools
+      pyright
     ];
   };
 

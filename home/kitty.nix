@@ -13,6 +13,7 @@
       # for confirmation
       confirm_os_window_close = 0;
       clear_all_shortcuts = true;
+      background_opacity = 0.85;
 
       # will probably lower this later but the max allowed is actually 4GB
       # this is NOT stored in memory and can only be viewed with scrollback_pager
