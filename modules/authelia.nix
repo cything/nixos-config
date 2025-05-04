@@ -68,6 +68,7 @@ in
             ];
             scopes = [ "openid" "profile" "email" ];
             userinfo_signed_response_alg = "none";
+            token_endpoint_auth_method = "client_secret_basic";
           }
           {
             client_id = "_kuUEYxyfXjInJCniwugpw2Qn6iI-YW24NOkHZG~63BAhnAACDZ.xsLqOdGghj2DNZxXR0sU";
