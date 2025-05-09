@@ -60,18 +60,9 @@
       ghidra
       sccache
       awscli2
-      (cutter.withPlugins (
-        p: with p; [
-          rz-ghidra
-          jsdec
-          sigdb
-        ]
-      ))
       p7zip
       qbittorrent
       android-tools
-      frida-tools
-      mitmproxy
       (python313.withPackages (
         p: with p; [
           python-lsp-server
@@ -79,7 +70,6 @@
           virtualenv
         ]
       ))
-      jadx
       scrcpy
       syncthing
       (with llvmPackages; [
@@ -91,9 +81,23 @@
       cinny-desktop
       minio-client
       keepassxc
-      ida-free
       jujutsu
       ffmpeg
+      typst
+
+      # reversing
+      radare2
+      ida-free
+      jadx
+      frida-tools
+      mitmproxy
+      (cutter.withPlugins (
+        p: with p; [
+          rz-ghidra
+          jsdec
+          sigdb
+        ]
+      ))
     ];
 
   home.sessionVariables = {
@@ -147,7 +151,7 @@
     vimAlias = true;
     extraPackages = with pkgs; [
       lua-language-server
-      nil
+      nixd
       rust-analyzer
       fzf
       fd
@@ -157,6 +161,9 @@
       taplo
       llvmPackages.clang-tools
       pyright
+      tree-sitter
+      nodejs
+      nixfmt-rfc-style
     ];
   };
 

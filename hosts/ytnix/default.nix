@@ -317,6 +317,7 @@
       xorg.libxshmfence
       xorg.libXxf86vm
       xorg.libSM
+      xorg.libICE
       gtk3
       pango
       gdk-pixbuf
