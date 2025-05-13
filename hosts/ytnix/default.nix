@@ -406,4 +406,11 @@
       wl-clipboard
     ];
   };
+
+  services.nfs.server = {
+    enable = true;
+    exports = ''
+      /nfsdata/users * (rw,no_root_squash)
+    '';
+  };
 }
