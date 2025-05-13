@@ -50,7 +50,7 @@ jobs:
       - name: cache
         run: |
           nix run \
-            github:cything/nixcp/test-in-ci -- push \
+            github:cything/nixcp -- push \
             --bucket nixcache \
             --endpoint $AWS_ENDPOINT_URL \
             --signing-key ${{ runner.temp }}/cache-priv-key.pem \
