@@ -87,7 +87,11 @@
     resolvconf.enable = true;
     firewall = {
       enable = true;
-      trustedInterfaces = [ "tailscale0" "virbr0" "virbr1" ];
+      trustedInterfaces = [
+        "tailscale0"
+        "virbr0"
+        "virbr1"
+      ];
       # allowedTCPPorts = [
       #   8080 # mitmproxy
       #   22000 # syncthing
@@ -213,10 +217,14 @@
   };
 
   fonts = {
-    packages = with pkgs; [
-      nerd-fonts.roboto-mono
-      ibm-plex
-    ];
+    packages =
+      (with pkgs; [
+        ibm-plex
+      ])
+      ++ (with pkgs.nerd-fonts; [
+        roboto-mono
+        jetbrains-mono
+      ]);
     enableDefaultPackages = true;
   };
 
