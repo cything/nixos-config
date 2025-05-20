@@ -56,6 +56,7 @@
       "nts.teambelgium.net"
       "c.st1.ntp.br"
     ];
+    nftables.enable = true;
   };
   services.chrony = {
     enable = true;
