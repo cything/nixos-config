@@ -84,6 +84,7 @@
       jujutsu
       ffmpeg
       typst
+      pavucontrol
 
       # reversing
       radare2
