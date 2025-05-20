@@ -127,18 +127,20 @@
     };
     # https://wiki.archlinux.org/title/Bluetooth_headset#Connecting_works,_sound_plays_fine_until_headphones_become_idle,_then_stutters
     wireplumber.extraConfig.disableSuspend = {
-      "monitor.bluez.rules" = {
-        matches = [
-          {
-            "node.name" = "bluez_output.*";
-          }
-        ];
-      };
-      actions = {
-        update-props = {
-          "session.suspend-timeout-seconds" = 0;
-        };
-      };
+      "monitor.bluez.rules" = [
+        {
+          matches = [
+            {
+              "node.name" = "bluez_output.*";
+            }
+          ];
+          actions = {
+            update-props = {
+              "session.suspend-timeout-seconds" = 0;
+            };
+          };
+        }
+      ];
     };
   };
 
