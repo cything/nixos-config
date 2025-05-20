@@ -69,7 +69,10 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = [
+        "tailscale0"
+        "podman1"
+      ];
       allowedTCPPorts = [
         22
         80

@@ -44,7 +44,7 @@
       efi.canTouchEfiVariables = true;
     };
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
     ];
@@ -109,8 +109,10 @@
     pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    wireplumber.extraConfig.bluetoothEnhancements = {
-      # https://julian.pages.freedesktop.org/wireplumber/daemon/configuration/bluetooth.html#bluetooth-configuration
+    wireplumber.extraConfig."10-bluetooth-enhancements" = {
+      "wireplumber.settings" = {
+        "bluetooth.autoswitch-to-headset-profile" = false;
+      };
       "monitor.bluez.properties" = {
         "bluez5.enable-sbc-xq" = true;
         "bluez5.enable-msbc" = true;
@@ -118,20 +120,18 @@
         "bluez5.roles" = [
           "a2dp_sink"
           "a2dp_source"
-          "hsp_hs"
-          "hsp_ag"
           "hfp_hf"
           "hfp_ag"
         ];
       };
     };
     # https://wiki.archlinux.org/title/Bluetooth_headset#Connecting_works,_sound_plays_fine_until_headphones_become_idle,_then_stutters
-    wireplumber.extraConfig.disableSuspend = {
+    wireplumber.extraConfig."11-disable-suspend" = {
       "monitor.bluez.rules" = [
         {
           matches = [
             {
-              "node.name" = "bluez_output.*";
+              "device.name" = "bluez_card.*";
             }
           ];
           actions = {
