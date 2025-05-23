@@ -48,6 +48,7 @@
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
     ];
+    kernelModules = [ "8821ce" ];
     kernelParams = [
       # see https://github.com/tomaspinho/rtl8821ce#pcie-active-state-power-management
       "pcie_aspm=off"
@@ -90,7 +91,6 @@
       trustedInterfaces = [
         "tailscale0"
         "virbr0"
-        "virbr1"
       ];
       # allowedTCPPorts = [
       #   8080 # mitmproxy
@@ -276,6 +276,10 @@
   virtualisation.libvirtd = {
     enable = true;
     qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+  };
+  virtualisation.vmware.host = {
+    enable = true;
+    package = pkgs.vmware-workstation;
   };
   programs.virt-manager.enable = true;
   my.containerization.enable = true;
