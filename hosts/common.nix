@@ -39,7 +39,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "America/New_York";
   networking = {
-    firewall.logRefusedConnections = false;
+    firewall.logRefusedConnections = true;
     nameservers = [
       # quad9 (unfiltered)
       "2620:fe::10"

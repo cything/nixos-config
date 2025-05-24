@@ -61,7 +61,10 @@
       enable = true;
       pkiBundle = "/var/lib/sbctl";
     };
-    kernel.sysctl."kernel.sysrq" = 1;
+    kernel.sysctl = {
+      "kernel.sysrq" = 1;
+      # "net.ipv4.ip_forward" = 1;
+    };
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
@@ -90,13 +93,7 @@
       enable = true;
       trustedInterfaces = [
         "tailscale0"
-        "virbr0"
       ];
-      # allowedTCPPorts = [
-      #   8080 # mitmproxy
-      #   22000 # syncthing
-      #   3003 # immich-ml
-      # ];
     };
     hosts = {
       "100.122.132.30" = [ "s3.cy7.sh" ];
@@ -277,10 +274,10 @@
     enable = true;
     qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
   };
-  virtualisation.vmware.host = {
-    enable = true;
-    package = pkgs.vmware-workstation;
-  };
+  # virtualisation.vmware.host = {
+  #   enable = true;
+  #   package = pkgs.vmware-workstation;
+  # };
   programs.virt-manager.enable = true;
   my.containerization.enable = true;
 
