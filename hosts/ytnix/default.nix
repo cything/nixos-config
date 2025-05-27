@@ -417,4 +417,11 @@
       wl-clipboard
     ];
   };
+
+  programs.ghidra = {
+    enable = true;
+    package = pkgs.ghidra.withExtensions (p: with p; [
+      findcrypt
+    ]);
+  };
 }
