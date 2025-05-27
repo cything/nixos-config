@@ -57,7 +57,6 @@
       gdb
       fuzzel
       hugo
-      ghidra
       sccache
       awscli2
       p7zip

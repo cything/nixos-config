@@ -94,6 +94,9 @@
       trustedInterfaces = [
         "tailscale0"
       ];
+      extraInputRules = ''
+        ip saddr 192.168.100.0/24 tcp dport 9234 accept
+      '';
     };
     hosts = {
       "100.122.132.30" = [ "s3.cy7.sh" ];
@@ -416,5 +419,13 @@
       waybar
       wl-clipboard
     ];
+  };
+
+  programs.ghidra = {
+    enable = true;
+    package = pkgs.ghidra.withExtensions (p: with p; [
+      findcrypt
+      ret-sync
+    ]);
   };
 }
