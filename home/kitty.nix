@@ -21,7 +21,7 @@
       # see https://github.com/sharkdp/bat/issues/1077#issuecomment-652785399
       "scrollback_pager" = "bat --pager='less -FR +G'";
       # "scrollback_lines" = 20000;
-      wheel_scroll_multiplier = 50;
+      # wheel_scroll_multiplier = 50;
     };
     keybindings = {
       # kitty_mod is ctrl+shift by default
