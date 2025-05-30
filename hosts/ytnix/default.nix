@@ -44,7 +44,7 @@
       efi.canTouchEfiVariables = true;
     };
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_14;
     extraModulePackages = with config.boot.kernelPackages; [
       rtl8821ce
     ];

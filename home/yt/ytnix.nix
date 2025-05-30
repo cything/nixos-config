@@ -87,7 +87,6 @@
 
       # reversing
       radare2
-      ida-free
       jadx
       frida-tools
       mitmproxy
