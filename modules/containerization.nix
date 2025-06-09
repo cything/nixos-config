@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -34,6 +35,7 @@ in
           enable = true;
           dates = "daily";
         };
+        extraPackages = with pkgs; [ docker-compose ];
       };
       docker.enable = lib.mkIf (!cfg.usePodman) true;
       oci-containers.backend = lib.mkIf (!cfg.usePodman) "docker";
