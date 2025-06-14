@@ -13,8 +13,6 @@
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     nix-ld.url = "github:nix-community/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
-    nil.url = "github:oxalica/nil";
-    nil.inputs.nixpkgs.follows = "nixpkgs";
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions/";
     vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";

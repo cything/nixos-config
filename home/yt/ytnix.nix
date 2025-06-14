@@ -176,15 +176,6 @@
 
   programs.firefox.enable = true;
 
-  programs.emacs = {
-    enable = true;
-    extraPackages = _: with pkgs; [
-      rust-analyzer
-      nil
-      ispell
-    ];
-  };
-
   gtk = {
     enable = true;
     theme.package = pkgs.gnome-themes-extra;
