@@ -84,6 +84,9 @@
       ffmpeg
       typst
       pavucontrol
+      (ungoogled-chromium.override {
+        enableWideVine = true;
+      })
 
       # reversing
       radare2
