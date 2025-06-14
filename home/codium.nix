@@ -89,7 +89,7 @@
 
           "markdown-preview-enhanced.previewTheme" = "github-dark.css";
           "nix.enableLanguageServer" = true;
-          "nix.serverPath" = "${lib.getExe pkgs.nil}";
+          "nix.serverPath" = "${lib.getExe pkgs.nixd}";
           "bookmarks.saveBookmarksInProject" = true;
 
           "cSpell.enabledFileTypes" = {
