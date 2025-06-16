@@ -197,6 +197,7 @@
           pkgs.gamemode
         ];
       })
+      restic
     ];
 
   environment.sessionVariables = {

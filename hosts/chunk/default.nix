@@ -83,26 +83,13 @@
       ];
     };
     interfaces.ens18 = {
+      useDHCP = true;
       ipv6.addresses = [
         {
           address = "2a0f:85c1:840:2bfb::1";
           prefixLength = 64;
         }
       ];
-      ipv4.addresses = [
-        {
-          address = "31.59.129.225";
-          prefixLength = 24;
-        }
-      ];
-    };
-    defaultGateway6 = {
-      address = "2a0f:85c1:840::1";
-      interface = "ens18";
-    };
-    defaultGateway = {
-      address = "31.59.129.1";
-      interface = "ens18";
     };
   };
 

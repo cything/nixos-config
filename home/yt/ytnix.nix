@@ -166,6 +166,8 @@
       tree-sitter
       nodejs
       nixfmt-rfc-style
+      vscode-langservers-extracted
+      typescript-language-server
     ];
   };
 
