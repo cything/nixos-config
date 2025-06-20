@@ -41,7 +41,7 @@
       reverse_proxy localhost:3903
     '';
     "*.web.cy7.sh" = {
-      serverAliases = [ "nixcache.cy7.sh" "staging.cy7.sh" ];
+      serverAliases = [ "nixcache.cy7.sh" "staging.cy7.sh" "dl.cy7.sh" ];
       extraConfig = ''
         import common
         @plain {
