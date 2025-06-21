@@ -12,11 +12,11 @@
       ];
       extra-trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8="
+        # "nixcache.cy7.sh:DN3d1dt0wnXfTH03oVmTee4KgmdNdB0NY3SuzA8Fwx8="
       ];
       extra-substituters = [
         "https://nix-community.cachix.org"
-        "https://nixcache.cy7.sh"
+        # "https://nixcache.cy7.sh"
       ];
       secret-key-files = [
         config.sops.secrets.cache-priv-key.path
