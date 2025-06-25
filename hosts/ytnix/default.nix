@@ -198,6 +198,7 @@
         ];
       })
       restic
+      android-udev-rules
     ];
 
   environment.sessionVariables = {
@@ -284,6 +285,7 @@
   # };
   programs.virt-manager.enable = true;
   my.containerization.enable = true;
+  # virtualisation.waydroid.enable = true;
 
   services.usbmuxd.enable = true;
   programs.nix-ld.dev = {
