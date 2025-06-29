@@ -406,6 +406,7 @@
   nix.settings.sandbox = true;
 
   programs.ssh.startAgent = true;
+  services.gnome.gcr-ssh-agent.enable = false;
 
   programs.sway = {
     enable = true;
