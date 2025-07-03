@@ -91,6 +91,10 @@
         }
       ];
     };
+    defaultGateway6 = {
+      address = "2a0f:85c1:840::1";
+      interface = "ens18";
+    };
   };
 
   users.users.yt = {
