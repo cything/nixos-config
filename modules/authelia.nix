@@ -40,10 +40,12 @@ in
             }
           ];
         };
-        session.cookies = [{
-          domain = "cy7.sh";
-          authelia_url = "https://${domain}";
-        }];
+        session.cookies = [
+          {
+            domain = "cy7.sh";
+            authelia_url = "https://${domain}";
+          }
+        ];
         storage.local.path = "${varPath}/db.sqlite3";
         notifier.filesystem.filename = "${varPath}/notifications.txt";
         webauthn = {
@@ -66,7 +68,11 @@ in
               "https://photos.cy7.sh/user-settings"
               "app.immich:///oauth-callback"
             ];
-            scopes = [ "openid" "profile" "email" ];
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+            ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_basic";
           }
@@ -79,7 +85,11 @@ in
             redirect_uris = [
               "https://git.cy7.sh/user/oauth2/authelia/callback"
             ];
-            scopes = [ "openid" "profile" "email" ];
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+            ];
             userinfo_signed_response_alg = "none";
             token_endpoint_auth_method = "client_secret_basic";
           }
@@ -92,12 +102,23 @@ in
             redirect_uris = [
               "https://pad.cy7.sh/auth/oauth2/callback"
             ];
-            scopes = [ "openid" "profile" "email" ];
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+            ];
             userinfo_signed_response_alg = "none";
-            grant_types = [ "refresh_token" "authorization_code" ];
+            grant_types = [
+              "refresh_token"
+              "authorization_code"
+            ];
             response_types = [ "code" ];
-            response_modes = [ "form_post" "query" "fragment" ];
-            audience = [];
+            response_modes = [
+              "form_post"
+              "query"
+              "fragment"
+            ];
+            audience = [ ];
             token_endpoint_auth_method = "client_secret_post";
           }
           {
@@ -107,9 +128,34 @@ in
             public = false;
             authorization_policy = "two_factor";
             redirect_uris = [ "https://keep.cy7.sh/api/auth/callback/custom" ];
-            scopes = [ "openid" "profile" "email" ];
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+            ];
             userinfo_signed_response_alg = "none";
             claims_policy = "karakeep";
+          }
+          {
+            client_id = "Qvd9R2C1PHFJaeVKZceqlFFM8L5dhznqTyCvEtpY6jSgLQjVssubKNRjt0FTY4Fs";
+            client_name = "Actual";
+            client_secret = "$argon2id$v=19$m=65536,t=3,p=4$ir+4QuLRwx5X8kERgQuBog$Q3376fn1YvGDjsXFLDk5iuvENxRwMQQqBSOyinyqC8o";
+            public = false;
+            authorization_policy = "two_factor";
+            require_pkce = false;
+            pkce_challenge_method = "";
+            redirect_uris = [ "https://actual.cy7.sh/openid/callback" ];
+            scopes = [
+              "openid"
+              "profile"
+              "groups"
+              "email"
+            ];
+            response_types = [ "code" ];
+            grant_types = [ "authorization_code" ];
+            access_token_signed_response_alg = "none";
+            userinfo_signed_response_alg = "none";
+            token_endpoint_auth_method = "client_secret_basic";
           }
         ];
       };

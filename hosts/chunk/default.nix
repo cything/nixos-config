@@ -53,6 +53,9 @@
     "karakeep/env" = {
       sopsFile = ../../secrets/services/karakeep.yaml;
     };
+    "actual/env" = {
+      sopsFile = ../../secrets/services/actual.yaml;
+    };
   };
 
   boot = {
@@ -156,4 +159,5 @@
     dataDir = "/opt/karakeep";
   };
   my.roundcube.enable = true;
+  my.actual.enable = true;
 }

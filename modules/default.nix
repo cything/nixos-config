@@ -11,5 +11,6 @@
     ./attic.nix
     ./authelia.nix
     ./karakeep.nix
+    ./actual.nix
   ];
 }

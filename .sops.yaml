@@ -141,4 +141,11 @@ creation_rules:
           - *yt
           - *cy
           - *chunk
+  - path_regex: secrets/services/actual.yaml
+    key_groups:
+      - age:
+          - *yt
+          - *cy
+          - *chunk
+
 
