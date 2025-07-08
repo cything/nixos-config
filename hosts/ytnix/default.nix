@@ -96,6 +96,8 @@
       ];
       extraInputRules = ''
         ip saddr 192.168.100.0/24 tcp dport 9234 accept
+        # calibre
+        ip saddr 10.0.0.0/24 tcp dport 9090 accept
       '';
     };
     hosts = {
