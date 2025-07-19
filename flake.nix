@@ -39,68 +39,68 @@
       home-manager,
       ...
     }@inputs:
-      let
-        pkgs = import nixpkgs {
-          config.allowUnfree = true;
-          system = "x86_64-linux";
-          overlays = [
-            inputs.rust-overlay.overlays.default
-            inputs.vscode-extensions.overlays.default
-          ] ++ (import ./overlay { inherit inputs; });
-        };
-      in
-      {
-        nixosConfigurations =
-          let
-            lib = nixpkgs.lib;
-          in
-          {
-            ytnix = lib.nixosSystem {
-              specialArgs = { inherit inputs; };
-              modules = [
-                {
-                  nixpkgs = { inherit pkgs; };
-                }
-                ./hosts/ytnix
-                ./modules
-                inputs.sops-nix.nixosModules.sops
-                inputs.lanzaboote.nixosModules.lanzaboote
-                inputs.nix-ld.nixosModules.nix-ld
-              ];
-            };
-            chunk = lib.nixosSystem {
-              specialArgs = { inherit inputs; };
-              modules = [
-                {
-                  nixpkgs = { inherit pkgs; };
-                }
-                ./hosts/chunk
-                ./modules
-                inputs.sops-nix.nixosModules.sops
-              ];
-            };
-          };
-        homeConfigurations =
-          let
-            lib = home-manager.lib;
-          in
-          {
-            "yt@ytnix" = lib.homeManagerConfiguration {
-              inherit pkgs;
-              extraSpecialArgs = { inherit inputs; };
-              modules = [
-                ./home/yt/ytnix.nix
-                inputs.nix-index-database.hmModules.nix-index
-              ];
-            };
-
-            "yt@chunk" = lib.homeManagerConfiguration {
-              inherit pkgs;
-              extraSpecialArgs = { inherit inputs; };
-              modules = [
-                ./home/yt/chunk.nix
-              ];
-            };
-          };
+    let
+      pkgs = import nixpkgs {
+        config.allowUnfree = true;
+        system = "x86_64-linux";
+        overlays = [
+          inputs.rust-overlay.overlays.default
+          inputs.vscode-extensions.overlays.default
+        ] ++ (import ./overlay { inherit inputs; });
       };
+    in
+    {
+      nixosConfigurations =
+        let
+          lib = nixpkgs.lib;
+        in
+        {
+          ytnix = lib.nixosSystem {
+            specialArgs = { inherit inputs; };
+            modules = [
+              {
+                nixpkgs = { inherit pkgs; };
+              }
+              ./hosts/ytnix
+              ./modules
+              inputs.sops-nix.nixosModules.sops
+              inputs.lanzaboote.nixosModules.lanzaboote
+              inputs.nix-ld.nixosModules.nix-ld
+            ];
+          };
+          chunk = lib.nixosSystem {
+            specialArgs = { inherit inputs; };
+            modules = [
+              {
+                nixpkgs = { inherit pkgs; };
+              }
+              ./hosts/chunk
+              ./modules
+              inputs.sops-nix.nixosModules.sops
+            ];
+          };
+        };
+      homeConfigurations =
+        let
+          lib = home-manager.lib;
+        in
+        {
+          "yt@ytnix" = lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = { inherit inputs; };
+            modules = [
+              ./home/yt/ytnix.nix
+              inputs.nix-index-database.hmModules.nix-index
+            ];
+          };
+
+          "yt@chunk" = lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = { inherit inputs; };
+            modules = [
+              ./home/yt/chunk.nix
+            ];
+          };
+        };
+    };
 }
