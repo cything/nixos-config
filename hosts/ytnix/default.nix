@@ -93,6 +93,7 @@
       enable = true;
       trustedInterfaces = [
         "tailscale0"
+        "virbr1"
       ];
       extraInputRules = ''
         ip saddr 192.168.100.0/24 tcp dport 9234 accept
