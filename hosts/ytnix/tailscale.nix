@@ -6,6 +6,7 @@
     openFirewall = true;
     useRoutingFeatures = "client";
     extraUpFlags = [
+      "--reset"
       "--exit-node=chunk"
       "--accept-dns=false"
       "--operator=yt"
