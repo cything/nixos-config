@@ -77,7 +77,6 @@
         libllvm
       ])
       nix-output-monitor
-      cinny-desktop
       minio-client
       keepassxc
       jujutsu
