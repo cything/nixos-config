@@ -55,7 +55,6 @@
       unzip
       anki-bin
       gdb
-      fuzzel
       hugo
       # sccache
       awscli2

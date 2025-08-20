@@ -68,6 +68,17 @@
               inputs.nix-ld.nixosModules.nix-ld
             ];
           };
+          thunkpad = lib.nixosSystem {
+            specialArgs = { inherit inputs; };
+            modules = [
+              {
+                nixpkgs = { inherit pkgs; };
+              }
+              ./hosts/thunkpad
+              ./modules
+              inputs.sops-nix.nixosModules.sops
+            ];
+          };
           chunk = lib.nixosSystem {
             specialArgs = { inherit inputs; };
             modules = [
@@ -91,6 +102,14 @@
             modules = [
               ./home/yt/ytnix.nix
               inputs.nix-index-database.hmModules.nix-index
+            ];
+          };
+
+          "yt@thunkpad" = lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = { inherit inputs; };
+            modules = [
+              ./home/yt/thunkpad.nix
             ];
           };
 

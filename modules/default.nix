@@ -12,5 +12,6 @@
     ./authelia.nix
     ./karakeep.nix
     ./actual.nix
+    ./sway.nix
   ];
 }

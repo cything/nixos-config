@@ -3,7 +3,7 @@
   nix = {
     package = pkgs.lix;
     settings = {
-      experimental-features = "nix-command flakes";
+      experimental-features = "nix-command flakes ca-derivations";
       auto-optimise-store = true;
       flake-registry = "";
       trusted-users = [
@@ -18,9 +18,9 @@
         "https://nix-community.cachix.org"
         "https://nixcache.cy7.sh"
       ];
-      secret-key-files = [
-        config.sops.secrets.cache-priv-key.path
-      ];
+      # secret-key-files = [
+      #   config.sops.secrets.cache-priv-key.path
+      # ];
     };
     channel.enable = false;
     optimise = {
@@ -80,10 +80,10 @@
   services.thermald.enable = true;
   environment.enableAllTerminfo = true;
 
-  sops.secrets.cache-priv-key = {
-    format = "binary";
-    sopsFile = ../secrets/cache-priv-key.pem;
-    mode = "0440";
-    group = "users";
-  };
+  # sops.secrets.cache-priv-key = {
+  #   format = "binary";
+  #   sopsFile = ../secrets/cache-priv-key.pem;
+  #   mode = "0440";
+  #   group = "users";
+  # };
 }

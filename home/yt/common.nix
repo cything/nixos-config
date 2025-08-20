@@ -14,7 +14,6 @@
     man-pages-posix
     man
     man-db
-    attic-client
     bottom
     btop
   ];
@@ -60,7 +59,7 @@
       url = {
         "ssh://git@github.com/" = {
           insteadOf = [
-            "https://github.com/"
+            # "https://github.com/"
             "github:"
             "gh:"
           ];

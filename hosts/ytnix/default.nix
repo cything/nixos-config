@@ -211,16 +211,7 @@
 
   programs.gnupg.agent.enable = true;
 
-  services.displayManager = {
-    enable = true;
-    autoLogin.user = "yt";
-    defaultSession = "sway";
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-      autoNumlock = true;
-    };
-  };
+  my.sway.enable = true;
 
   fonts = {
     packages =
@@ -409,23 +400,6 @@
 
   programs.ssh.startAgent = true;
   services.gnome.gcr-ssh-agent.enable = false;
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-    extraPackages = with pkgs; [
-      rofi-wayland
-      cliphist
-      rofimoji
-      grim
-      slurp
-      swaylock
-      swayidle
-      brightnessctl
-      waybar
-      wl-clipboard
-    ];
-  };
 
   programs.ghidra = {
     enable = true;
