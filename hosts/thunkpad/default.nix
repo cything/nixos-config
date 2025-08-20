@@ -68,5 +68,10 @@
   programs.ssh.startAgent = true;
 
   my.sway.enable = true;
+
+  services.logind = {
+    lidSwitch = "suspend";
+    powerKey = "hibernate";
+  };
 }
 

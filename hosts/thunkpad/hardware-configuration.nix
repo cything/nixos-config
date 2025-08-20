@@ -35,6 +35,9 @@
   boot.initrd.luks.devices."cryptroot".device =
     "/dev/disk/by-uuid/563a97fb-ad95-4ac9-ab87-4c4add8b06ec";
 
+  boot.resumeDevice = "/dev/disk/by-uuid/b333f147-1127-494e-b891-f995eebad250";
+  boot.kernelParams = [ "resume_offset=6903314" ];
+
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/b333f147-1127-494e-b891-f995eebad250";
     fsType = "btrfs";
