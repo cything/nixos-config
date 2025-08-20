@@ -24,35 +24,44 @@
     x11.enable = true;
   };
 
-  home.packages = with pkgs; lib.flatten [
-    bitwarden-desktop
-    fastfetch
-    mpv
-    signal-desktop
-    btop
-    jq
-    usbutils
-    calibre
-    tor-browser
-    wtype
-    rclone
-    gnumake
-    unzip
-    anki-bin
-    gdb
-    qbittorrent
-    minio-client
-    jujutsu
-    keepassxc
-    (ungoogled-chromium.override {
+  home.packages =
+    with pkgs;
+    lib.flatten [
+      bitwarden-desktop
+      fastfetch
+      mpv
+      signal-desktop
+      btop
+      jq
+      usbutils
+      calibre
+      tor-browser
+      wtype
+      rclone
+      gnumake
+      unzip
+      anki-bin
+      gdb
+      qbittorrent
+      minio-client
+      jujutsu
+      keepassxc
+      (ungoogled-chromium.override {
         enableWideVine = true;
       })
-    (with llvmPackages; [
+      (with llvmPackages; [
         clangUseLLVM
         compiler-rt
         libllvm
       ])
-  ];
+      (python313.withPackages (
+        p: with p; [
+          python-lsp-server
+          pip
+          virtualenv
+        ]
+      ))
+    ];
 
   home.sessionVariables = {
     # to make ghidra work on xwayland
@@ -89,4 +98,8 @@
   };
 
   programs.firefox.enable = true;
+
+  xdg.configFile = {
+    mpv.source = ../mpv;
+  };
 }

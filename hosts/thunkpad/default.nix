@@ -48,6 +48,7 @@
     kitty
     foot
     restic
+    steam-run-free # steam-run without steam
   ];
 
   fonts = {
@@ -111,4 +112,11 @@
   };
 
   my.libvirt.enable = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  programs.fuse.userAllowOther = true;
 }
