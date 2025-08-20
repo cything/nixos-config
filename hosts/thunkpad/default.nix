@@ -109,4 +109,6 @@
       ExecStart = "${lib.getExe' pkgs.kmod "modprobe"} ath11k_pci";
     };
   };
+
+  my.libvirt.enable = true;
 }

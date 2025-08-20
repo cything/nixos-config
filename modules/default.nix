@@ -13,5 +13,6 @@
     ./karakeep.nix
     ./actual.nix
     ./sway.nix
+    ./libvirt.nix
   ];
 }

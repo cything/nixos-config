@@ -150,7 +150,6 @@
 
   users.users.yt.extraGroups = [
     "wheel"
-    "libvirtd"
     "docker"
     "disk"
     "adbusers"
@@ -268,15 +267,7 @@
     "image/*" = "gwenview.desktop";
   };
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
-  };
-  # virtualisation.vmware.host = {
-  #   enable = true;
-  #   package = pkgs.vmware-workstation;
-  # };
-  programs.virt-manager.enable = true;
+  my.libvirt.enable = true;
   my.containerization.enable = true;
   # virtualisation.waydroid.enable = true;
 
