@@ -28,7 +28,7 @@ in
         waybar
         wl-clipboard
         fuzzel
-        nautilus
+        kdePackages.dolphin
       ];
     };
 
