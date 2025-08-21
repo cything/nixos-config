@@ -19,6 +19,7 @@ jobs:
         machine:
           - chunk
           - ytnix
+          - thunkpad
         os:
           - ubuntu-latest
     runs-on: ${{ matrix.os }}
@@ -78,6 +79,7 @@ jobs:
         home:
           - yt@ytnix
           - yt@chunk
+          - yt@thunkpad
         os:
           - ubuntu-latest
     runs-on: ${{ matrix.os }}
