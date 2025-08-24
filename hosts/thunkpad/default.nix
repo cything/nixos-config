@@ -49,6 +49,11 @@
     foot
     restic
     steam-run-free # steam-run without steam
+    borgbackup
+    killall
+    sops
+    lsof
+    file
   ];
 
   fonts = {

@@ -61,6 +61,10 @@
           virtualenv
         ]
       ))
+      (with kdePackages; [
+        gwenview
+        okular
+      ])
     ];
 
   home.sessionVariables = {
