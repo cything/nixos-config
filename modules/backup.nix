@@ -85,7 +85,7 @@ in
       };
       environment = {
         BORG_RSH = "ssh -i ${cfg.sshKeyFile}";
-        BORG_REMOTE_PATH = "borg1";
+        BORG_REMOTE_PATH = "borg14";
         BORG_EXIT_CODES = "modern";
         BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes";
       };
