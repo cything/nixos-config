@@ -55,7 +55,7 @@ in
       };
       remoteUser = mkOption {
         type = types.nonEmptyStr;
-        default = "zh5061.rsync.net";
+        default = "zh5061";
       };
       startAt = mkOption {
         type = types.str;
@@ -80,7 +80,7 @@ in
 
     services.restic.backups."${config.networking.hostName}-${cfg.remote}" = {
       timerConfig = {
-        onCalendar = cfg.startAt;
+        OnCalendar = cfg.startAt;
         Persistent = true;
       };
       paths = defaultPaths ++ cfg.paths;
@@ -97,7 +97,7 @@ in
           );
         in
         [
-          "sftp.command='ssh ${cfg.remoteUser}@${cfg.remote} -i ${cfg.sshKeyFile}' -o UserKnownHostsFile=${knownHost}"
+          "sftp.command='ssh ${cfg.remoteUser}@${cfg.remote} -i ${cfg.sshKeyFile} -o UserKnownHostsFile=${knownHost} -s sftp'"
         ];
 
       extraBackupArgs = [

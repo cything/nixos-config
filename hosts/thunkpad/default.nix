@@ -12,6 +12,12 @@
     ../zsh.nix
   ];
 
+  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
+  sops.secrets = {
+    "restic/zh5061".sopsFile = ../../secrets/restic/yt.yaml;
+    "rsyncnet/id_ed25519".sopsFile = ../../secrets/zh5061/yt.yaml;
+  };
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -124,4 +130,14 @@
   };
 
   programs.fuse.userAllowOther = true;
+
+  my.backup = {
+    enable = true;
+    exclude = [
+      "/home/**/Downloads"
+    ];
+    repo = "yt";
+    passFile = config.sops.secrets."restic/zh5061".path;
+    sshKeyFile = config.sops.secrets."rsyncnet/id_ed25519".path;
+  };
 }
