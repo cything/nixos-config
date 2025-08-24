@@ -49,6 +49,7 @@
     foot
     restic
     steam-run-free # steam-run without steam
+    borgbackup
   ];
 
   fonts = {
