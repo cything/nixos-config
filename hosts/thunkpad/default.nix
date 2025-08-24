@@ -18,8 +18,12 @@
     "rsyncnet/id_ed25519".sopsFile = ../../secrets/zh5061/yt.yaml;
   };
 
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.limine = {
+    enable = true;
+    maxGenerations = 50;
+    enableEditor = true; # FDE anyway
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -60,6 +64,7 @@
     sops
     lsof
     file
+    efibootmgr
   ];
 
   fonts = {
