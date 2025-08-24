@@ -64,6 +64,7 @@
       (with kdePackages; [
         gwenview
         okular
+        kservice
       ])
     ];
 
@@ -105,5 +106,17 @@
 
   xdg.configFile = {
     mpv.source = ../mpv;
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = [ "okular.desktop" ];
+      "image/*" = [ "gwenview.desktop" ];
+      "video/*" = [ "mpv" ];
+      "text/html" = [ "chromium-browser.desktop" ];
+      "x-scheme-handler/http" = [ "chromium-browser.desktop" ];
+      "x-scheme-handler/https" = [ "chromium-browser.desktop" ];
+    };
   };
 }

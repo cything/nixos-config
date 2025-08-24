@@ -159,4 +159,7 @@
         echo off > /sys/class/sound/ctl-led/mic/mode
       '';
     };
+
+  # fix dolphin not miming
+  environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 }
