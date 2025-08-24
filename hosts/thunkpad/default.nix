@@ -140,4 +140,18 @@
     passFile = config.sops.secrets."restic/zh5061".path;
     sshKeyFile = config.sops.secrets."rsyncnet/id_ed25519".path;
   };
+
+  # fix mic led indicator
+  systemd.services.turn-off-mic-led =
+    let
+      device = "sys-devices-pci0000:00-0000:00:08.1-0000:07:00.1-sound-card0-controlC0.device";
+    in
+    {
+      wantedBy = [ device ];
+      requiredBy = [ device ];
+      serviceConfig.Type = "oneshot";
+      script = ''
+        echo off > /sys/class/sound/ctl-led/mic/mode
+      '';
+    };
 }
