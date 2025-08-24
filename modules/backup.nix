@@ -29,80 +29,83 @@ let
   ];
 in
 {
-  options.my.backup = {
-    enable = lib.mkEnableOption "backup";
-    paths = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-      description = "Paths to backup. Appended to the list of defaultPaths";
+  options.my.backup =
+    let
+      inherit (lib) mkOption types;
+    in
+    {
+      enable = lib.mkEnableOption "backup";
+      paths = mkOption {
+        type = types.listOf lib.types.str;
+        default = [ ];
+        description = "Paths to backup. Appended to the list of defaultPaths";
+      };
+      exclude = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = "Paths to exclude. Appended to the list of defaultExclude";
+      };
+      repo = mkOption {
+        type = types.nonEmptyStr;
+        default = "${config.networking.hostName}-backup";
+      };
+      remote = mkOption {
+        type = types.nonEmptyStr;
+        default = "zh5061.rsync.net";
+      };
+      remoteUser = mkOption {
+        type = types.nonEmptyStr;
+        default = "zh5061.rsync.net";
+      };
+      startAt = mkOption {
+        type = types.str;
+        default = "daily";
+        description = "see systemd.timer(5)";
+      };
+      passFile = mkOption {
+        type = types.str;
+        description = "Path to the file containing the encryption passphrase";
+      };
+      sshKeyFile = mkOption {
+        type = types.str;
+        description = "Path to the file containing the SSH identity key";
+      };
+      host = mkOption {
+        type = types.nonEmptyStr;
+        default = config.networking.hostName;
+      };
     };
-    exclude = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-      description = "Paths to exclude. Appended to the list of defaultExclude";
-    };
-    repo = lib.mkOption {
-      type = lib.types.str;
-      description = "Borg repository to backup to. This is appended to `zh5061@zh5061.rsync.net:borg/`.";
-    };
-    startAt = lib.mkOption {
-      type = lib.types.str;
-      default = "daily";
-      description = "see systemd.timer(5)";
-    };
-    jobName = lib.mkOption {
-      type = lib.types.str;
-      description = "Name of the job to run as. Archives created are prefixed with hostName-jobName";
-    };
-    passFile = lib.mkOption {
-      type = lib.types.str;
-      description = "Path to the file containing the encryption passphrase";
-    };
-    sshKeyFile = lib.mkOption {
-      type = lib.types.str;
-      description = "Path to the file containing the SSH identity key";
-    };
-  };
 
   config = lib.mkIf cfg.enable {
-    programs.ssh.knownHostsFiles = [
-      (pkgs.writeText "rsyncnet-keys" ''
-        zh5061.rsync.net ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJtclizeBy1Uo3D86HpgD3LONGVH0CJ0NT+YfZlldAJd
-      '')
-    ]; # needs to be a list
 
-    services.borgbackup.jobs.${cfg.jobName} = {
-      inherit (cfg) startAt;
-
-      # systemd.timer(5)
-      persistentTimer = true;
+    services.restic.backups."${config.networking.hostName}-${cfg.remote}" = {
+      timerConfig = {
+        onCalendar = cfg.startAt;
+        Persistent = true;
+      };
       paths = defaultPaths ++ cfg.paths;
       exclude = defaultExclude ++ cfg.exclude;
-      repo = "zh5061@zh5061.rsync.net:borg/" + cfg.repo;
-      encryption = {
-        mode = "repokey-blake2";
-        passCommand = "cat ${cfg.passFile}";
-      };
-      environment = {
-        BORG_RSH = "ssh -i ${cfg.sshKeyFile}";
-        BORG_REMOTE_PATH = "borg14";
-        BORG_EXIT_CODES = "modern";
-        BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes";
-      };
-      compression = "auto,zstd,8";
-      extraCreateArgs = [
-        "--stats"
-        "-x"
-      ];
-      # warnings are often not that serious
-      failOnWarnings = false;
+      repository = "sftp:${cfg.remoteUser}@${cfg.remote}:restic-repos/${cfg.repo}";
+      passwordFile = cfg.passFile;
 
-      prune.keep = {
-        daily = 7;
-        weekly = 12;
-        monthly = -1;
-      };
-      extraPruneArgs = [ "--stats" ];
+      extraOptions =
+        let
+          knownHost = (
+            pkgs.writeText "rsyncnet-keys" ''
+              zh5061.rsync.net ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJtclizeBy1Uo3D86HpgD3LONGVH0CJ0NT+YfZlldAJd
+            ''
+          );
+        in
+        [
+          "sftp.command='ssh ${cfg.remoteUser}@${cfg.remote} -i ${cfg.sshKeyFile}' -o UserKnownHostsFile=${knownHost}"
+        ];
+
+      extraBackupArgs = [
+        "--compression=max"
+        "--pack-size=128"
+        "--read-concurrency=8"
+        "--host=${cfg.host}"
+      ];
     };
   };
 }
