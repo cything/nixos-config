@@ -56,6 +56,7 @@
     "actual/env" = {
       sopsFile = ../../secrets/services/actual.yaml;
     };
+    "restic/zh5061".sopsFile = ../../secrets/restic/chunk.yaml;
   };
 
   boot = {
