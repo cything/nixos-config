@@ -16,6 +16,7 @@
   sops.secrets = {
     "restic/zh5061".sopsFile = ../../secrets/restic/yt.yaml;
     "rsyncnet/id_ed25519".sopsFile = ../../secrets/zh5061/yt.yaml;
+    "tailscale/auth".sopsFile = ../../secrets/services/tailscale.yaml;
   };
 
   boot.loader.efi.canTouchEfiVariables = true;
@@ -161,5 +162,22 @@
     };
 
   # fix dolphin not miming
-  environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+  environment.etc."xdg/menus/applications.menu".source =
+    "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+
+  services.tailscale = {
+    enable = true;
+    authKeyFile = config.sops.secrets."tailscale/auth".path;
+    openFirewall = true;
+    useRoutingFeatures = "client";
+    extraUpFlags = [
+      # "--exit-node=chunk"
+      "--accept-dns=false"
+      "--operator=yt"
+      "--exit-node-allow-lan-access"
+    ];
+    extraDaemonFlags = [
+      "--no-logs-no-support"
+    ];
+  };
 }
