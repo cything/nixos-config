@@ -48,6 +48,10 @@
       keepassxc
       (ungoogled-chromium.override {
         enableWideVine = true;
+        commandLineArgs = [
+          "--ozone-platform-hint=auto"
+          "--enable-features=TouchpadOverscrollHistoryNavigation"
+        ];
       })
       (with llvmPackages; [
         clangUseLLVM
