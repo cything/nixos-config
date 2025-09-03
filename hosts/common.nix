@@ -3,7 +3,7 @@
   nix = {
     package = pkgs.lix;
     settings = {
-      experimental-features = "nix-command flakes ca-derivations";
+      experimental-features = "nix-command flakes";
       auto-optimise-store = true;
       flake-registry = "";
       trusted-users = [
