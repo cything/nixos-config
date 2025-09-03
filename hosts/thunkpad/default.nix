@@ -180,4 +180,6 @@
       "--no-logs-no-support"
     ];
   };
+
+  my.containerization.enable = true;
 }
