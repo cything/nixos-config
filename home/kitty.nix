@@ -16,7 +16,7 @@
       background_opacity = 0.9;
 
       # first layout will be the default
-      enabled_layouts = lib.concatStringsSep "," [ "tall" "stack" ];
+      enabled_layouts = lib.concatStringsSep "," [ "fat" "tall" "horizontal" "stack" ];
 
       # will probably lower this later but the max allowed is actually 4GB
       # this is NOT stored in memory and can only be viewed with scrollback_pager

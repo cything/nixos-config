@@ -103,7 +103,9 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    matchBlocks."*" = {
+      addKeysToAgent= "yes";
+    };
   };
 
   programs.firefox.enable = true;
