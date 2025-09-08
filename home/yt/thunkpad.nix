@@ -70,6 +70,7 @@
         okular
         kservice
       ])
+      spotify
     ];
 
   home.sessionVariables = {

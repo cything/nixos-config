@@ -66,6 +66,7 @@
     lsof
     file
     efibootmgr
+    pavucontrol
   ];
 
   fonts = {
