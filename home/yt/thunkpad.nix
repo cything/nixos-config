@@ -71,6 +71,12 @@
         kservice
       ])
       spotify
+
+      (texliveSmall.withPackages (
+        ps: with ps; [
+          xcolor
+        ]
+      ))
     ];
 
   home.sessionVariables = {
@@ -125,5 +131,15 @@
       "x-scheme-handler/http" = [ "chromium-browser.desktop" ];
       "x-scheme-handler/https" = [ "chromium-browser.desktop" ];
     };
+  };
+
+  programs.pandoc = {
+    enable = true;
+    defaults.pdf-engine = "xelatex";
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 }
