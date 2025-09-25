@@ -17,7 +17,7 @@ in
       enable = true;
       wrapperFeatures.gtk = true;
       extraPackages = with pkgs; [
-        rofi-wayland
+        rofi
         cliphist
         rofimoji
         grim
