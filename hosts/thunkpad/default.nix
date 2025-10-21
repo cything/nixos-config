@@ -75,6 +75,7 @@
     file
     efibootmgr
     pavucontrol
+    jmtpfs
   ];
 
   fonts = {
