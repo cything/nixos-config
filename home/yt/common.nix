@@ -27,16 +27,9 @@
   programs.eza.enable = true;
   programs.git = {
     enable = true;
-    userName = "cy";
-    userEmail = "cy@cy7.sh";
-    delta = {
-      enable = false;
-      options = {
-        navigate = true;
-      };
-    };
-    difftastic.enable = true;
-    extraConfig = {
+    settings = {
+      user.name = "cy";
+      user.email = "cy@cy7.sh";
       init.defaultBranch = "main";
       push.autoSetupRemote = true; # assume -u on first push
       pull = {
@@ -67,6 +60,11 @@
       };
     };
   };
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
+  };
+
   programs.ripgrep.enable = true;
   # programs.man.generateCaches = true; # slows down eval
   programs.fd.enable = true;
