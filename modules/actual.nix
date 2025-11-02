@@ -25,6 +25,7 @@ in
 
   config = lib.mkIf cfg.enable {
     services.actual = {
+      inherit (cfg) environmentFile;
       enable = true;
       settings = {
         allowedLoginMethods = [ "openid" ];
@@ -38,7 +39,6 @@ in
         };
       };
     };
-    systemd.services.actual.serviceConfig.EnvironmentFile = cfg.environmentFile;
 
     services.caddy.virtualHosts.${cfg.domain}.extraConfig = ''
       import common
