@@ -17,8 +17,7 @@
     vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    garage.url = "github:deuxfleurs-org/garage";
-    garage.inputs.nixpkgs.follows = "nixpkgs";
+    garage.url = "github:deuxfleurs-org/garage?ref=main-v1";
   };
 
   nixConfig = {
