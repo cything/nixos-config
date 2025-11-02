@@ -6,7 +6,7 @@
     config = {
       PORT = 8080;
       BASE_URL = "https://rss.cy7.sh";
-      FORCE_REFRESH_INTERVAL = 0; # don't rate limit me
+      FORCE_REFRESH_INTERVAL = 1; # don't rate limit me
     };
   };
 

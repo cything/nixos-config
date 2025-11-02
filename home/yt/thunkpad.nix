@@ -40,7 +40,7 @@
       rclone
       gnumake
       unzip
-      anki-bin
+      anki
       gdb
       qbittorrent
       minio-client
@@ -71,12 +71,15 @@
         kservice
       ])
       spotify
-
       (texliveSmall.withPackages (
         ps: with ps; [
           xcolor
         ]
       ))
+      gimp
+      (monero-gui.override {
+        trezorSupport = true;
+      })
     ];
 
   home.sessionVariables = {
