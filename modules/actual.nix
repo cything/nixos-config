@@ -17,15 +17,10 @@ in
       default = "actual.cy7.sh";
       type = lib.types.str;
     };
-    environmentFile = lib.mkOption {
-      default = config.sops.secrets."actual/env".path;
-      type = lib.types.path;
-    };
   };
 
   config = lib.mkIf cfg.enable {
     services.actual = {
-      inherit (cfg) environmentFile;
       enable = true;
       settings = {
         allowedLoginMethods = [ "openid" ];
@@ -34,6 +29,7 @@ in
         openId = {
           discoveryURL = "https://auth.cy7.sh";
           client_id = "Qvd9R2C1PHFJaeVKZceqlFFM8L5dhznqTyCvEtpY6jSgLQjVssubKNRjt0FTY4Fs";
+          client_secret._secret = config.sops.secrets."actual/client_secret".path;
           server_hostname = "https://${cfg.domain}";
           authMethod = "oauth2";
         };

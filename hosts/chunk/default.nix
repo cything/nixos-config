@@ -53,7 +53,7 @@
     "karakeep/env" = {
       sopsFile = ../../secrets/services/karakeep.yaml;
     };
-    "actual/env" = {
+    "actual/client_secret" = {
       sopsFile = ../../secrets/services/actual.yaml;
     };
     "restic/zh5061".sopsFile = ../../secrets/restic/chunk.yaml;
