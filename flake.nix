@@ -18,6 +18,8 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     garage.url = "github:deuxfleurs-org/garage?ref=main-v2";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   nixConfig = {
@@ -33,7 +35,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       ...
@@ -45,7 +46,8 @@
         overlays = [
           inputs.rust-overlay.overlays.default
           inputs.vscode-extensions.overlays.default
-        ] ++ (import ./overlay { inherit inputs; });
+        ]
+        ++ (import ./overlay { inherit inputs; });
       };
     in
     {
@@ -86,6 +88,18 @@
               }
               ./hosts/chunk
               ./modules
+              inputs.sops-nix.nixosModules.sops
+            ];
+          };
+          fent = lib.nixosSystem {
+            specialArgs = { inherit inputs; };
+            modules = [
+              {
+                nixpkgs = { inherit pkgs; };
+              }
+              ./hosts/fent
+              ./modules
+              inputs.disko.nixosModules.disko
               inputs.sops-nix.nixosModules.sops
             ];
           };
