@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   nix = {
     package = pkgs.lix;
@@ -18,9 +18,6 @@
         "https://nix-community.cachix.org"
         "https://nixcache.cy7.sh"
       ];
-      # secret-key-files = [
-      #   config.sops.secrets.cache-priv-key.path
-      # ];
     };
     channel.enable = false;
     optimise = {
@@ -58,32 +55,10 @@
     ];
     nftables.enable = true;
   };
-  services.chrony = {
-    enable = true;
-    enableNTS = true;
-    enableMemoryLocking = true;
-    extraConfig = ''
-      # Expedited Forwarding
-      dscp 46
-      # disable command port
-      cmdport 0
-      # only allow NTS
-      authselectmode require
-      # update the clock only when at least 3 sources agree on the correct time
-      minsources 3
-    '';
-  };
 
   # see journald.conf(5)
-  services.journald.extraConfig = "MaxRetentionSec=2d";
+  services.journald.extraConfig = "MaxRetentionSec=7d";
 
   services.thermald.enable = true;
   environment.enableAllTerminfo = true;
-
-  # sops.secrets.cache-priv-key = {
-  #   format = "binary";
-  #   sopsFile = ../secrets/cache-priv-key.pem;
-  #   mode = "0440";
-  #   group = "users";
-  # };
 }
