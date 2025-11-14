@@ -12,6 +12,7 @@
     ./disk-config.nix
     ./rclone.nix
     ./garage.nix
+    ./immich.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -48,6 +49,7 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
+      trustedInterfaces = [ "podman1" ];
       allowedTCPPorts = [
         22
         80
@@ -81,4 +83,5 @@
   ];
 
   my.caddy.enable = true;
+  my.containerization.enable = true;
 }
