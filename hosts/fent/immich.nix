@@ -32,6 +32,7 @@ in
       dependsOn = [
         "immich-db"
         "immich-redis"
+        "immich-ml"
       ];
     };
 
@@ -70,6 +71,27 @@ in
       ];
       networks = [ "immich-net" ];
     };
+
+    immich-ml =
+      let
+        modelCache = "/opt/immich-ml";
+      in
+      {
+        image = "ghcr.io/immich-app/immich-machine-learning:release";
+        autoStart = true;
+        pull = "newer";
+        ports = [ "3003:3003" ];
+        environment = {
+          REDIS_HOSTNAME = "immich-redis";
+          DB_HOSTNAME = "immich-db";
+        };
+        volumes = [ "${modelCache}:/cache" ];
+        networks = [ "immich-net" ];
+        dependsOn = [
+          "immich-db"
+          "immich-redis"
+        ];
+      };
   };
 
   systemd.services.create-immich-net = rec {
