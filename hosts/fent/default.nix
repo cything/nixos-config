@@ -13,6 +13,7 @@
     ./rclone.nix
     ./garage.nix
     ./immich.nix
+    ./redlib.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -32,6 +33,7 @@
     "tailscale/auth" = {
       sopsFile = ../../secrets/services/tailscale.yaml;
     };
+    "restic/zh5061".sopsFile = ../../secrets/restic/fent.yaml;
   };
 
   boot.loader.grub = {
@@ -100,6 +102,15 @@
     ];
     useRoutingFeatures = "server";
     openFirewall = true;
+  };
+
+  my.backup = {
+    enable = true;
+    paths = [
+      "/var/backup"
+    ];
+    passFile = config.sops.secrets."restic/zh5061".path;
+    sshKeyFile = config.sops.secrets."rsyncnet/id_ed25519".path;
   };
 
   my.caddy.enable = true;
