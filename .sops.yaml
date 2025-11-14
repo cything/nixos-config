@@ -118,6 +118,7 @@ creation_rules:
           - *yt
           - *cy
           - *chunk
+          - *fent
   - path_regex: secrets/services/karakeep.yaml
     key_groups:
       - age:

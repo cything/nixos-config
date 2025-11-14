@@ -104,4 +104,5 @@
 
   my.caddy.enable = true;
   my.containerization.enable = true;
+  my.authelia.enable = true;
 }
