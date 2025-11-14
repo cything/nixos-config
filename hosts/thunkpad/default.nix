@@ -15,7 +15,7 @@
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
     "restic/zh5061".sopsFile = ../../secrets/restic/yt.yaml;
-    "rsyncnet/id_ed25519".sopsFile = ../../secrets/zh5061/yt.yaml;
+    "rsyncnet/id_ed25519".sopsFile = ../../secrets/zh5061/id_ed25519.yaml;
     "tailscale/auth".sopsFile = ../../secrets/services/tailscale.yaml;
   };
 

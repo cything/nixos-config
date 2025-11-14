@@ -42,7 +42,7 @@
       sopsFile = ../../secrets/services/miniflux.yaml;
     };
     "rsyncnet/id_ed25519" = {
-      sopsFile = ../../secrets/zh5061/chunk.yaml;
+      sopsFile = ../../secrets/zh5061/id_ed25519.yaml;
     };
     "garage/env" = {
       sopsFile = ../../secrets/services/garage.yaml;
