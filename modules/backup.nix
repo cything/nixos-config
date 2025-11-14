@@ -47,7 +47,7 @@ in
       };
       repo = mkOption {
         type = types.nonEmptyStr;
-        default = "${config.networking.hostName}-backup";
+        default = "${config.networking.hostName}";
       };
       remote = mkOption {
         type = types.nonEmptyStr;

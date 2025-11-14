@@ -145,3 +145,10 @@ creation_rules:
         - *yt
         - *chunk
         - *fent
+
+  - path_regex: secrets/restic/fent.yaml
+    key_groups:
+      - age:
+          - *yt
+          - *cy
+          - *fent
