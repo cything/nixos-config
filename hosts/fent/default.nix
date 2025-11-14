@@ -1,7 +1,7 @@
 {
   modulesPath,
-  lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -29,6 +29,9 @@
     "garage/env" = {
       sopsFile = ../../secrets/services/garage.yaml;
     };
+    "tailscale/auth" = {
+      sopsFile = ../../secrets/services/tailscale.yaml;
+    };
   };
 
   boot.loader.grub = {
@@ -49,7 +52,10 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      trustedInterfaces = [ "podman1" ];
+      trustedInterfaces = [
+        "podman1"
+        "tailscale0"
+      ];
       allowedTCPPorts = [
         22
         80
@@ -81,6 +87,20 @@
     fastfetch
     btop
   ];
+
+  services.tailscale = {
+    enable = true;
+    authKeyFile = config.sops.secrets."tailscale/auth".path;
+    extraUpFlags = [
+      "--advertise-exit-node"
+      "--accept-dns=false"
+    ];
+    extraDaemonFlags = [
+      "--no-logs-no-support"
+    ];
+    useRoutingFeatures = "server";
+    openFirewall = true;
+  };
 
   my.caddy.enable = true;
   my.containerization.enable = true;
