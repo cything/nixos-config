@@ -9,6 +9,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ../common.nix
+    ../zsh.nix
     ./disk-config.nix
     ./rclone.nix
     ./garage.nix
@@ -43,11 +44,27 @@
 
   system.stateVersion = "25.05";
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+  };
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOfubDWr0kRm2o4DqaK6l1s4NCdTkljXZWKWCiF5nX+6 "
   ];
+
+  users.users.yt = {
+    extraGroups = [
+      "wheel"
+      "podman"
+    ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOfubDWr0kRm2o4DqaK6l1s4NCdTkljXZWKWCiF5nX+6 "
+    ];
+  };
+
+  security.sudo.enable = true;
+  security.sudo.wheelNeedsPassword = false;
 
   networking = {
     hostName = "fent";
