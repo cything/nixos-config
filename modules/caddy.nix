@@ -19,9 +19,9 @@ in
         plugins = [
           # error message will tell you the correct version tag to use
           # (still need the @ to pass nix config check)
-          "github.com/caddy-dns/cloudflare@v0.2.2-0.20250506153119-35fb8474f57d"
+          "github.com/caddy-dns/cloudflare@v0.2.2"
         ];
-        hash = "sha256-eXlOk3PMRW4QuRhqFW4QxodPwdr0YNS/itbRY4GmnKA=";
+        hash = "sha256-RLOwzx7+SH9sWVlr+gTOp5VKlS1YhoTXHV4k6r5BJ3U=";
       };
       logFormat = lib.mkForce "level INFO";
       acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
