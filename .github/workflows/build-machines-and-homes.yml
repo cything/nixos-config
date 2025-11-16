@@ -20,6 +20,7 @@ jobs:
           - chunk
           - ytnix
           - thunkpad
+          - fent
         os:
           - ubuntu-latest
     runs-on: ${{ matrix.os }}
