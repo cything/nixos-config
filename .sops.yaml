@@ -50,7 +50,7 @@ creation_rules:
   - path_regex: secrets/services/miniflux.yaml
     key_groups:
       - age:
-          - *chunk
+          - *fent
           - *cy
   - path_regex: secrets/services/gitlab.yaml
     key_groups:
@@ -65,7 +65,6 @@ creation_rules:
   - path_regex: secrets/rclone.yaml
     key_groups:
       - age:
-          - *chunk
           - *yt
           - *fent
           - *cy
@@ -82,7 +81,6 @@ creation_rules:
   - path_regex: secrets/services/garage.yaml
     key_groups:
       - age:
-          - *chunk
           - *cy
           - *fent
   - path_regex: secrets/services/tailscale.yaml

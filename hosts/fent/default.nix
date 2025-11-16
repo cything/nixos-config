@@ -15,26 +15,18 @@
     ./garage.nix
     ./immich.nix
     ./redlib.nix
+    ./miniflux.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
   sops.secrets = {
-    "rclone/config" = {
-      sopsFile = ../../secrets/rclone.yaml;
-    };
-    "rsyncnet/id_ed25519" = {
-      sopsFile = ../../secrets/zh5061/id_ed25519.yaml;
-    };
-    "caddy/env" = {
-      sopsFile = ../../secrets/services/caddy.yaml;
-    };
-    "garage/env" = {
-      sopsFile = ../../secrets/services/garage.yaml;
-    };
-    "tailscale/auth" = {
-      sopsFile = ../../secrets/services/tailscale.yaml;
-    };
+    "rclone/config".sopsFile = ../../secrets/rclone.yaml;
+    "rsyncnet/id_ed25519".sopsFile = ../../secrets/zh5061/id_ed25519.yaml;
+    "caddy/env".sopsFile = ../../secrets/services/caddy.yaml;
+    "garage/env".sopsFile = ../../secrets/services/garage.yaml;
+    "tailscale/auth".sopsFile = ../../secrets/services/tailscale.yaml;
     "restic/zh5061".sopsFile = ../../secrets/restic/fent.yaml;
+    "miniflux/env".sopsFile = ../../secrets/services/miniflux.yaml;
   };
 
   boot.loader.grub = {
@@ -102,10 +94,26 @@
     curl
     git
     vim
+    neovim
     age
     fastfetch
     btop
+    killall
+    tree
+    file
+    sops
+    age
+    man-pages
+    man-pages-posix
+    man
+    man-db
+    bottom
   ];
+
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
 
   services.tailscale = {
     enable = true;
@@ -120,6 +128,13 @@
     useRoutingFeatures = "server";
     openFirewall = true;
   };
+
+  services.postgresql = {
+    enable = true;
+    settings.port = 5432;
+    package = pkgs.postgresql_17;
+  };
+  services.postgresqlBackup.enable = true;
 
   my.backup = {
     enable = true;

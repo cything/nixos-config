@@ -8,16 +8,12 @@
     ../zsh.nix
     ./hardware-configuration.nix
     ./backup.nix
-    ./rclone.nix
     ./postgres.nix
     ./hedgedoc.nix
     ./miniflux.nix
-    ./redlib.nix
     ./vaultwarden.nix
     ./grafana.nix
-    ./immich.nix
     ./forgejo.nix
-    ./garage.nix
     ./tailscale.nix
   ];
 
@@ -25,9 +21,6 @@
   sops.secrets = {
     "borg/rsyncnet" = {
       sopsFile = ../../secrets/borg/chunk.yaml;
-    };
-    "rclone/config" = {
-      sopsFile = ../../secrets/rclone.yaml;
     };
     "vaultwarden/env" = {
       sopsFile = ../../secrets/services/vaultwarden.yaml;
@@ -38,14 +31,8 @@
     "hedgedoc/env" = {
       sopsFile = ../../secrets/services/hedgedoc.yaml;
     };
-    "miniflux/env" = {
-      sopsFile = ../../secrets/services/miniflux.yaml;
-    };
     "rsyncnet/id_ed25519" = {
       sopsFile = ../../secrets/zh5061/id_ed25519.yaml;
-    };
-    "garage/env" = {
-      sopsFile = ../../secrets/services/garage.yaml;
     };
     "tailscale/auth" = {
       sopsFile = ../../secrets/services/tailscale.yaml;
