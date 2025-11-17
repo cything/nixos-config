@@ -20,10 +20,15 @@ in
           # error message will tell you the correct version tag to use
           # (still need the @ to pass nix config check)
           "github.com/caddy-dns/cloudflare@v0.2.2"
+          "github.com/caddyserver/transform-encoder@v0.0.0-20251120152632-39872643592b"
         ];
-        hash = "sha256-RLOwzx7+SH9sWVlr+gTOp5VKlS1YhoTXHV4k6r5BJ3U=";
+        hash = "sha256-X2FFLVyAUcJe3bTnulG9YHFL9e6hLxgN9OxGWmIkYjQ=";
       };
-      logFormat = lib.mkForce "level INFO";
+      logFormat = lib.mkForce ''
+      {
+        format transform "{common_log}"
+      }
+        '';
       acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
       extraConfig = ''
         (common) {

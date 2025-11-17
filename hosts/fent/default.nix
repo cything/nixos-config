@@ -110,6 +110,8 @@
     man-db
     bottom
     wget
+    restic
+    rclone
   ];
 
   environment.variables = {
@@ -153,4 +155,10 @@
     usePodman = false;
   };
   my.authelia.enable = true;
+
+  services.fail2ban = {
+    enable = true;
+    banaction = config.services.fail2ban.banaction-allports;
+    bantime-increment.enable = true;
+  };
 }

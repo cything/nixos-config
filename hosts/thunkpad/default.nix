@@ -200,4 +200,6 @@
     enable = true;
     binfmt = true;
   };
+
+  programs.steam.enable = true;
 }

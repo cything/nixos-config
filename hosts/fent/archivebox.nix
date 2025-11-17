@@ -27,6 +27,8 @@ in
         SEARCH_BACKEND_ENGINE = "sonic";
         SEARCH_BACKEND_HOST_NAME = "sonic";
         SEARCH_BACKEND_PASSWORD = "secret1234";
+        SAVE_ARCHIVE_DOT_ORG = "False";
+        SAVE_MEDIA = "False";
       };
       networks = [ "pihole-net" ];
       extraOptions = [ "--dns=${piholeAddr}" ];
@@ -45,6 +47,7 @@ in
       volumes = [
         "${dataDir}/data/sonic:/var/lib/sonic/store"
       ];
+      networks = [ "pihole-net" ];
       extraOptions = [
         "--expose=1491"
       ];
