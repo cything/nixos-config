@@ -37,7 +37,13 @@ in
         };
         extraPackages = with pkgs; [ docker-compose ];
       };
-      docker.enable = lib.mkIf (!cfg.usePodman) true;
+      docker = {
+        enable = lib.mkIf (!cfg.usePodman) true;
+        autoPrune = {
+          enable = true;
+          dates = "daily";
+        };
+      };
       oci-containers.backend = lib.mkIf (!cfg.usePodman) "docker";
     };
   };

@@ -17,7 +17,7 @@ in
       image = "ghcr.io/immich-app/immich-server:release";
       autoStart = true;
       ports = [ "127.0.0.1:2283:2283" ];
-      pull = "newer";
+      pull = "always";
       volumes = [
         "${uploadLocation}:/usr/src/app/upload"
         # "${thumbsLocation}:/usr/src/app/upload/thumbs"
@@ -39,14 +39,14 @@ in
     immich-redis = {
       image = "redis:6.2-alpine";
       autoStart = true;
-      pull = "newer";
+      pull = "always";
       networks = [ "immich-net" ];
     };
 
     immich-db = {
       image = "tensorchord/pgvecto-rs:pg14-v0.2.0";
       autoStart = true;
-      pull = "newer";
+      pull = "always";
       environment = {
         POSTGRES_PASSWORD = "postgres";
         POSTGRES_USER = "postgres";
@@ -79,7 +79,7 @@ in
       {
         image = "ghcr.io/immich-app/immich-machine-learning:release";
         autoStart = true;
-        pull = "newer";
+        pull = "always";
         ports = [ "3003:3003" ];
         environment = {
           REDIS_HOSTNAME = "immich-redis";
@@ -94,20 +94,26 @@ in
       };
   };
 
-  systemd.services.create-immich-net = rec {
-    serviceConfig.Type = "oneshot";
-    requiredBy = with config.virtualisation.oci-containers; [
-      "${backend}-immich.service"
-      "${backend}-immich-db.service"
-      "${backend}-immich-redis.service"
-      # "${backend}-immich-ml.service"
-    ];
-    before = requiredBy;
-    script = ''
-      ${lib.getExe pkgs.podman} network exists immich-net || \
-      ${lib.getExe pkgs.podman} network create immich-net
-    '';
-  };
+  systemd.services.create-immich-net =
+    let
+      containers = [
+        "immich-server"
+        "immich-db"
+        "immich-redis"
+        "immich-ml"
+      ];
+      backend = config.virtualisation.oci-containers.backend;
+    in
+    {
+      serviceConfig.Type = "oneshot";
+      requiredBy = map (
+        x: "${backend}-" + x + ".service"
+      ) containers;
+      script = ''
+        ${lib.getExe pkgs."${backend}"} network inspect immich-net || \
+        ${lib.getExe pkgs."${backend}"} network create immich-net
+      '';
+    };
 
   services.caddy.virtualHosts."photos.cy7.sh".extraConfig = ''
     import common

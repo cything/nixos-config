@@ -16,6 +16,7 @@
     ./immich.nix
     ./redlib.nix
     ./miniflux.nix
+    ./archivebox.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
@@ -147,6 +148,9 @@
   };
 
   my.caddy.enable = true;
-  my.containerization.enable = true;
+  my.containerization = {
+    enable = true;
+    usePodman = false;
+  };
   my.authelia.enable = true;
 }
