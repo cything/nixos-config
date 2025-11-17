@@ -108,6 +108,7 @@
     man
     man-db
     bottom
+    wget
   ];
 
   environment.variables = {
