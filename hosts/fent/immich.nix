@@ -80,7 +80,6 @@ in
         image = "ghcr.io/immich-app/immich-machine-learning:release";
         autoStart = true;
         pull = "always";
-        ports = [ "3003:3003" ];
         environment = {
           REDIS_HOSTNAME = "immich-redis";
           DB_HOSTNAME = "immich-db";

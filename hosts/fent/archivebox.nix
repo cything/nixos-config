@@ -53,7 +53,7 @@ in
     pihole = {
       image = "docker.io/pihole/pihole:latest";
       pull = "always";
-      ports = [ "8090:80" ];
+      ports = [ "127.0.0.1:8090:80" ];
       environment = {
         FTLCONF_webserver_api_password = "secret1234";
         DNSMASQ_LISTENING = "all";

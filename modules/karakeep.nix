@@ -29,7 +29,7 @@ in
         image = "ghcr.io/karakeep-app/karakeep:release";
         pull = "newer";
         volumes = [ "${cfg.dataDir}:/data" ];
-        ports = [ "${toString cfg.port}:3000"];
+        ports = [ "127.0.0.1:${toString cfg.port}:3000"];
         dependsOn = [
           "karakeep-chrome"
           "karakeep-meilisearch"

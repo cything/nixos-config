@@ -10,7 +10,6 @@
     ../common.nix
     ../zsh.nix
     ./tailscale.nix
-    ./containers.nix
   ];
 
   sops.age.keyFile = "/root/.config/sops/age/keys.txt";
