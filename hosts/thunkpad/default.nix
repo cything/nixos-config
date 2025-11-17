@@ -193,4 +193,11 @@
   };
 
   my.containerization.enable = true;
+
+  programs.gnupg.agent.enable = true;
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 }
